@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  juniors-bootcamp-database:
+    image: mongo:latest
+    restart: always
+    container_name: juniors-bootcamp-database
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+    ports:
+      - 27018:27017
+    volumes:
+      - type: bind
+        source: ./data/mongo
+        target: /data/db
+
+  juniors-bootcamp-postgres:
+    image: postgres:latest
+    restart: always
+    container_name: juniors-bootcamp-postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: juniors-bootcamp
+    volumes:
+      - type: bind
+        source: ./data/postgres
+        target: /data/db
+
+  juniors-bootcamp-pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: juniors-bootcamp-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - /var/lib/pgadmin
+    ports:
+      - '5051:80'
+
+  juniors-bootcamp-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: juniors-bootcamp-service
+    environment:
+      - JWT_SECRET=qwertyuiopasdfghjklzxcvbnm123456
+      - PORT=${PORT}
+      - SERVER_URL=http://localhost:3001/
+      - DATABASE_URL=mongodb://admin:1234@juniors-bootcamp-database:27017
+      - SQL_DATABASE_URL=postgresql://admin:1234@juniors-bootcamp-postgres:5432/juniors-bootcamp?schema=public
+    ports:
+      - '3001:3001'
+    depends_on:
+      - juniors-bootcamp-database

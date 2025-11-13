@@ -1,0 +1,941 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type BaseResponse {
+  reason: String
+  success: Boolean!
+}
+
+enum BodyType {
+  CABRIOLET
+  COUPE
+  HATCHBACK
+  SEDAN
+  SUV
+}
+
+type BookedDateRange {
+  endDate: Float!
+  startDate: Float!
+}
+
+enum Brand {
+  GARDEN_CAR
+  GEELY
+  GROCERY_CART
+  HAIER
+  HAVAL
+  HYUNDAI
+  INVALID
+  KIA
+  MERCEDES
+  VOLKSWAGEN
+}
+
+input CalculateDeliveryPackageDto {
+  height: Float!
+  length: Float!
+  weight: Float!
+  width: Float!
+}
+
+input CalculateDeliveryPointDto {
+  latitude: Float!
+  longitude: Float!
+}
+
+type CalculateDeliveryResponse {
+  options: [DeliveryOption!]!
+  reason: String
+  success: Boolean!
+}
+
+type Car {
+  bodyType: BodyType!
+  brand: Brand!
+  color: Color!
+  id: String!
+  location: String!
+  media: [Media!]!
+  name: String!
+  price: Float!
+  steering: String!
+  transmission: Transmission!
+}
+
+type CarRent {
+  _id: String!
+  birthDate: String!
+  carInfo: Car!
+  comment: String
+  email: String!
+  endDate: Float!
+  firstName: String!
+  lastName: String!
+  middleName: String
+  phone: String!
+  pickupLocation: String!
+  returnLocation: String!
+  startDate: Float!
+  status: CarRentStatus!
+  totalPrice: Float!
+}
+
+type CarRentResponse {
+  reason: String
+  rent: CarRent!
+  success: Boolean!
+}
+
+enum CarRentStatus {
+  BOOKED
+  CANCELLED
+}
+
+type CarRentsResponse {
+  reason: String
+  rents: [CarRent!]!
+  success: Boolean!
+}
+
+type CarResponse {
+  data: CarWithRents!
+  reason: String
+  success: Boolean!
+}
+
+type CarWithRents {
+  bodyType: BodyType!
+  brand: Brand!
+  color: Color!
+  id: String!
+  location: String!
+  media: [Media!]!
+  name: String!
+  price: Float!
+  rents: [BookedDateRange!]!
+  steering: String!
+  transmission: Transmission!
+}
+
+type CarsPaginatedResponse {
+  data: [Car!]!
+  meta: PaginationMeta!
+  reason: String
+  success: Boolean!
+}
+
+type CinemaOrder {
+  _id: String!
+  film: Film!
+  orderNumber: Float!
+  person: FilmPerson!
+  status: CinemaOrderStatus!
+  tickets: [CinemaTicket!]!
+}
+
+input CinemaOrderInput {
+  _id: String!
+  film: FilmInput!
+  orderNumber: Float!
+  person: FilmPersonInput!
+  status: CinemaOrderStatus!
+  tickets: [CinemaTicketInput!]!
+}
+
+enum CinemaOrderStatus {
+  CANCELED
+  PAYED
+}
+
+type CinemaOrdersResponse {
+  orders: [CinemaOrder!]!
+  reason: String
+  success: Boolean!
+}
+
+type CinemaTicket {
+  _id: String!
+  column: Float!
+  filmId: String!
+  orderId: String!
+  phone: String!
+  row: Float!
+  seance: CinemaTicketSeance!
+  status: CinemaTicketStatus!
+}
+
+input CinemaTicketInput {
+  _id: String!
+  column: Float!
+  filmId: String!
+  orderId: String!
+  phone: String!
+  row: Float!
+  seance: CinemaTicketSeanceInput!
+  status: CinemaTicketStatus!
+}
+
+type CinemaTicketSeance {
+  date: String!
+  time: String!
+}
+
+input CinemaTicketSeanceInput {
+  date: String!
+  time: String!
+}
+
+enum CinemaTicketStatus {
+  CANCELED
+  PAYED
+}
+
+enum Color {
+  BLACK
+  BLUE
+  GREY
+  ORANGE
+  RED
+  SILVER
+  WHITE
+}
+
+type Country {
+  code: String!
+  code2: String!
+  id: Float!
+  name: String!
+}
+
+input CountryInput {
+  code: String!
+  code2: String!
+  id: Float!
+  name: String!
+}
+
+input CreateDeliveryOrderPersonDto {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+input CreateDeliveryOrderReceiverAddressDto {
+  apartment: String!
+  comment: String
+  house: String!
+  isNonContact: Boolean
+  street: String!
+}
+
+input CreateDeliveryOrderSenderAddressDto {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+input CreatePaymentDebitCardDto {
+  cvv: String!
+  expireDate: String!
+  pan: String!
+}
+
+input CreatePaymentPersonDto {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+input CreatePaymentSeanceDto {
+  date: String!
+  time: String!
+}
+
+input CreatePaymentTicketsDto {
+  column: Float!
+  row: Float!
+}
+
+input CreatePizzaPaymentAddressDto {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+input CreatePizzaPaymentDebitCardDto {
+  cvv: String!
+  expireDate: String!
+  pan: String!
+}
+
+input CreatePizzaPaymentPersonDto {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+type DeliverResponse {
+  order: DeliveryOrder!
+  reason: String
+  success: Boolean!
+}
+
+type DeliveryOption {
+  days: Float!
+  id: String!
+  name: String!
+  price: Float!
+  type: DeliveryOptionType!
+}
+
+enum DeliveryOptionType {
+  DEFAULT
+  EXPRESS
+}
+
+input DeliveryOpttionInput {
+  days: Float!
+  id: String!
+  name: String!
+  price: Float!
+  type: DeliveryOptionType!
+}
+
+type DeliveryOrder {
+  _id: String!
+  cancellable: Boolean!
+  option: DeliveryOptionType!
+  package: DeliveryPackageType!
+  payer: Payer!
+  price: Float!
+  receiver: DeliveryPerson!
+  receiverAddress: DeliveryReceiverAddress!
+  receiverPoint: DeliveryPoint!
+  sender: DeliveryPerson!
+  senderAddress: DeliverySenderAddress!
+  senderPoint: DeliveryPoint!
+  status: DeliveryStatus!
+}
+
+input DeliveryOrderInput {
+  _id: String!
+  cancellable: Boolean!
+  option: DeliveryOptionType!
+  package: DeliveryPackageTypeInput!
+  payer: Payer!
+  price: Float!
+  receiver: DeliveryPersonInput!
+  receiverAddress: DeliveryReceiverAddressInput!
+  receiverPoint: DeliveryPointInput!
+  sender: DeliveryPersonInput!
+  senderAddress: DeliverySenderAddressInput!
+  senderPoint: DeliveryPointInput!
+  status: DeliveryStatus!
+}
+
+type DeliveryOrderResponse {
+  order: DeliveryOrder!
+  reason: String
+  success: Boolean!
+}
+
+type DeliveryOrdersResponse {
+  orders: [DeliveryOrder!]!
+  reason: String
+  success: Boolean!
+}
+
+type DeliveryPackageType {
+  height: Float!
+  id: String!
+  length: Float!
+  name: String!
+  weight: Float!
+  width: Float!
+}
+
+input DeliveryPackageTypeInput {
+  height: Float!
+  id: String!
+  length: Float!
+  name: String!
+  weight: Float!
+  width: Float!
+}
+
+type DeliveryPackageTypesResponse {
+  packages: [DeliveryPackageType!]!
+  reason: String
+  success: Boolean!
+}
+
+type DeliveryPerson {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+input DeliveryPersonInput {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+type DeliveryPoint {
+  id: String!
+  latitude: Float!
+  longitude: Float!
+  name: String!
+}
+
+input DeliveryPointInput {
+  id: String!
+  latitude: Float!
+  longitude: Float!
+  name: String!
+}
+
+type DeliveryPointsResponse {
+  points: [DeliveryPoint!]!
+  reason: String
+  success: Boolean!
+}
+
+type DeliveryReceiverAddress {
+  apartment: String!
+  comment: String
+  house: String!
+  isNonContact: Boolean
+  street: String!
+}
+
+input DeliveryReceiverAddressInput {
+  apartment: String!
+  comment: String
+  house: String!
+  isNonContact: Boolean
+  street: String!
+}
+
+type DeliverySenderAddress {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+input DeliverySenderAddressInput {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+enum DeliveryStatus {
+  CANCELED
+  IN_PROCESSING
+  ON_MY_WAY
+  SUCCESS
+  WAITING_COURIER
+}
+
+enum Dough {
+  THICK
+  THIN
+}
+
+type Film {
+  actors: [FilmStaff!]!
+  ageRating: Rating!
+  country: Country
+  description: String!
+  directors: [FilmStaff!]!
+  genres: [String!]!
+  id: String!
+  img: String!
+  name: String!
+  originalName: String!
+  releaseDate: String!
+  runtime: Float!
+  userRatings: FilmUserRating!
+}
+
+type FilmHall {
+  name: String!
+  places: [[FilmHallCell!]!]!
+}
+
+type FilmHallCell {
+  price: Float!
+  type: FilmHallCellType!
+}
+
+input FilmHallCellInput {
+  price: Float!
+  type: FilmHallCellType!
+}
+
+enum FilmHallCellType {
+  BLOCKED
+  COMFORT
+  ECONOM
+  PAYED
+}
+
+input FilmHallInput {
+  name: String!
+  places: [[FilmHallCellInput!]!]!
+}
+
+input FilmInput {
+  actors: [FilmStaffInput!]! = []
+  ageRating: Rating!
+  country: CountryInput
+  description: String!
+  directors: [FilmStaffInput!]! = []
+  genres: [String!]! = []
+  id: String!
+  img: String!
+  name: String!
+  originalName: String!
+  releaseDate: String!
+  runtime: Float!
+  userRatings: FilmUserRatingInput!
+}
+
+type FilmPerson {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+input FilmPersonInput {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+type FilmResponse {
+  film: Film!
+  reason: String
+  success: Boolean!
+}
+
+type FilmSchedule {
+  date: String!
+  seances: [FilmScheduleSeance!]!
+}
+
+input FilmScheduleInput {
+  date: String!
+  seances: [FilmScheduleSeanceInput!]!
+}
+
+type FilmScheduleSeance {
+  hall: FilmHall!
+  time: String!
+}
+
+input FilmScheduleSeanceInput {
+  hall: FilmHallInput!
+  time: String!
+}
+
+type FilmStaff {
+  fullName: String!
+  id: String!
+  professions: [Profession!]!
+}
+
+input FilmStaffInput {
+  fullName: String!
+  id: String!
+  professions: [Profession!]!
+}
+
+type FilmUserRating {
+  imdb: String!
+  kinopoisk: String!
+}
+
+input FilmUserRatingInput {
+  imdb: String!
+  kinopoisk: String!
+}
+
+type FilmsResponse {
+  films: [Film!]!
+  reason: String
+  success: Boolean!
+}
+
+enum Ingredient {
+  BACON
+  BASIL
+  CHEDDAR
+  CHICKEN_FILLET
+  CHILE
+  FETA
+  GREEN_PEPPER
+  HAM
+  MEATBALLS
+  MOZZARELLA
+  MUSHROOMS
+  ONION
+  PARMESAN
+  PEPERONI
+  PICKLE
+  PINEAPPLE
+  SHRIMPS
+  TOMATO
+}
+
+type Media {
+  isCover: Boolean!
+  url: String!
+}
+
+type Mutation {
+  calculateDelivery(package: CalculateDeliveryPackageDto!, receiverPoint: CalculateDeliveryPointDto!, senderPoint: CalculateDeliveryPointDto!): CalculateDeliveryResponse!
+  cancelCarRent(carRentId: String!): BaseResponse!
+  cancelCinemaOrder(orderId: String!): BaseResponse!
+  cancelDeliveryOrder(orderId: String!): BaseResponse!
+  cancelPizzaOrder(orderId: String!): BaseResponse!
+  createCarRent(birthDate: String!, carId: String!, comment: String, email: String!, endDate: Float!, firstName: String!, lastName: String!, middleName: String!, phone: String!, pickupLocation: String!, returnLocation: String!, startDate: Float!): CarRentResponse!
+  createCinemaPayment(debitCard: CreatePaymentDebitCardDto!, filmId: String!, person: CreatePaymentPersonDto!, seance: CreatePaymentSeanceDto!, tickets: [CreatePaymentTicketsDto!]!): PaymentResponse!
+  createDeliveryOrder(optionType: DeliveryOptionType!, packageId: String!, payer: Payer!, receiver: CreateDeliveryOrderPersonDto!, receiverAddress: CreateDeliveryOrderReceiverAddressDto!, receiverPointId: String!, sender: CreateDeliveryOrderPersonDto!, senderAddress: CreateDeliveryOrderSenderAddressDto!, senderPointId: String!): DeliverResponse!
+  createOtp(phone: String!): OtpResponse!
+  createPizzaPayment(debitCard: CreatePizzaPaymentDebitCardDto!, person: CreatePizzaPaymentPersonDto!, pizzas: [OrderedPizzaInput!]!, receiverAddress: CreatePizzaPaymentAddressDto!): PizzaPaymentResponse!
+  signin(code: Float!, phone: String!): SignInResponse!
+  updateProfile(phone: String!, profile: UpdateProfileProfileDto!): UpdateProfileResponse!
+}
+
+input OrderedPizzaInput {
+  dough: Dough!
+  id: String!
+  size: Size!
+  toppings: [Ingredient!]!
+}
+
+type Otp {
+  _id: String!
+  code: Float!
+  created: String!
+  phone: String!
+  retryDelay: Float!
+}
+
+input OtpInput {
+  _id: String!
+  code: Float!
+  created: String!
+  phone: String!
+  retryDelay: Float!
+}
+
+type OtpResponse {
+  reason: String
+  retryDelay: Float!
+  success: Boolean!
+}
+
+type PaginationMeta {
+  limit: Float!
+  page: Float!
+  total: Float!
+  totalPages: Float!
+}
+
+enum Payer {
+  RECEIVER
+  SENDER
+}
+
+type PaymentResponse {
+  order: CinemaOrder!
+  reason: String
+  success: Boolean!
+}
+
+type Pizza {
+  allergens: [String!]!
+  calories: Float!
+  carbohydrates: String!
+  description: String!
+  doughs: [PizzaDough!]!
+  id: String!
+  img: String!
+  ingredients: [PizzaIngredient!]!
+  isGlutenFree: Boolean!
+  isHit: Boolean!
+  isNew: Boolean!
+  isVegetarian: Boolean!
+  name: String!
+  protein: String!
+  sizes: [PizzaSize!]!
+  sodium: String!
+  toppings: [PizzaIngredient!]!
+  totalFat: String!
+}
+
+type PizzaAddress {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+input PizzaAddressInput {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+type PizzaDough {
+  price: Float!
+  type: Dough!
+}
+
+input PizzaDoughInput {
+  price: Float!
+  type: Dough!
+}
+
+type PizzaIngredient {
+  img: String!
+  price: Float!
+  type: Ingredient!
+}
+
+input PizzaIngredientInput {
+  img: String!
+  price: Float!
+  type: Ingredient!
+}
+
+input PizzaInput {
+  allergens: [String!]!
+  calories: Float!
+  carbohydrates: String!
+  description: String!
+  doughs: [PizzaDoughInput!]!
+  id: String!
+  img: String!
+  ingredients: [PizzaIngredientInput!]!
+  isGlutenFree: Boolean!
+  isHit: Boolean!
+  isNew: Boolean!
+  isVegetarian: Boolean!
+  name: String!
+  protein: String!
+  sizes: [PizzaSizeInput!]!
+  sodium: String!
+  toppings: [PizzaIngredientInput!]!
+  totalFat: String!
+}
+
+type PizzaOrder {
+  _id: String!
+  cancellable: Boolean!
+  person: PizzaPerson!
+  pizzas: [Pizza!]!
+  receiverAddress: PizzaAddress!
+  status: PizzaStatus!
+  totalPrice: Float!
+}
+
+input PizzaOrderInput {
+  _id: String!
+  cancellable: Boolean!
+  person: PizzaPersonInput!
+  pizzas: [PizzaInput!]!
+  receiverAddress: PizzaAddressInput!
+  status: PizzaStatus!
+  totalPrice: Float!
+}
+
+type PizzaOrderResponse {
+  order: PizzaOrder!
+  reason: String
+  success: Boolean!
+}
+
+type PizzaOrdersResponse {
+  orders: [PizzaOrder!]!
+  reason: String
+  success: Boolean!
+}
+
+type PizzaPaymentResponse {
+  order: PizzaOrder!
+  reason: String
+  success: Boolean!
+}
+
+type PizzaPerson {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+input PizzaPersonInput {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+type PizzaSize {
+  price: Float!
+  type: Size!
+}
+
+input PizzaSizeInput {
+  price: Float!
+  type: Size!
+}
+
+enum PizzaStatus {
+  CANCELED
+  IN_PROCESSING
+  ON_MY_WAY
+  SUCCESS
+  WAITING_COURIER
+}
+
+type PizzasResponse {
+  catalog: [Pizza!]!
+  reason: String
+  success: Boolean!
+}
+
+enum Profession {
+  ACTOR
+  DIRECTOR
+}
+
+type Query {
+  getCar(carId: String!): CarResponse!
+  getCarRent(carRentId: String!): CarResponse!
+  getCarRents: CarRentsResponse!
+  getCars(
+    bodyType: [BodyType!]
+    brand: [Brand!]
+    color: [Color!]
+
+    """Дата окончания аренды (timestamp в миллисекундах)"""
+    endDate: Float
+    limit: Float
+    maxPrice: Float
+    minPrice: Float
+    page: Float
+    search: String
+
+    """Дата начала аренды (timestamp в миллисекундах)"""
+    startDate: Float
+    steering: [Steering!]
+    transmission: [Transmission!]
+  ): CarsPaginatedResponse!
+  getCinemaOrders(token: String!): CinemaOrdersResponse!
+  getCinemaToday: FilmsResponse!
+  getDeliveryOrder(orderId: String!): DeliveryOrderResponse!
+  getDeliveryOrders: DeliveryOrdersResponse!
+  getDeliveryPackageTypes: DeliveryPackageTypesResponse!
+  getDeliveryPoints: DeliveryPointsResponse!
+  getFilm(filmId: String!): FilmResponse!
+  getFilmSchedule(filmId: String!): ScheduleResponse!
+  getPizzaOrder(orderId: String!): PizzaOrderResponse!
+  getPizzaOrders: PizzaOrdersResponse!
+  getPizzasCatalog: PizzasResponse!
+  session: SessionResponse!
+}
+
+enum Rating {
+  G
+  NC17
+  PG
+  PG13
+  R
+}
+
+type ScheduleResponse {
+  reason: String
+  schedules: FilmSchedule!
+  success: Boolean!
+}
+
+type SessionResponse {
+  reason: String
+  success: Boolean!
+  user: User!
+}
+
+type SignInResponse {
+  reason: String
+  success: Boolean!
+  token: String!
+  user: User!
+}
+
+enum Size {
+  LARGE
+  MEDIUM
+  SMALL
+}
+
+enum Steering {
+  LEFT
+  RIGHT
+}
+
+enum Transmission {
+  AUTOMATIC
+  MANUAL
+}
+
+input UpdateProfileProfileDto {
+  city: String
+  email: String
+  firstname: String
+  lastname: String
+  middlename: String
+}
+
+type UpdateProfileResponse {
+  reason: String
+  success: Boolean!
+  user: User!
+}
+
+type User {
+  _id: String!
+  city: String
+  email: String
+  firstname: String
+  lastname: String
+  middlename: String
+  phone: String!
+}
+
+input UserInput {
+  _id: String!
+  city: String
+  email: String
+  firstname: String
+  lastname: String
+  middlename: String
+  phone: String!
+}
