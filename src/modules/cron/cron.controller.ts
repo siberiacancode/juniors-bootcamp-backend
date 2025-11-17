@@ -4,7 +4,7 @@ import { Cron } from '@nestjs/schedule';
 import { CarRentService, CarRentStatus } from '@/modules/cars/modules/car-rent';
 import { DeliveryOrderService, DeliveryStatus } from '@/modules/delivery/modules/delivery-order';
 import { PizzaOrderService, PizzaStatus } from '@/modules/pizza/modules/pizza-order';
-import { BaseResolver, PrismaService } from '@/utils/services';
+import { BaseResolver } from '@/utils/services';
 
 import { OTP_EXPIRED_TIME, OtpsService } from '../otps';
 
@@ -14,7 +14,6 @@ export class CronController extends BaseResolver {
     private readonly deliveryOrderService: DeliveryOrderService,
     private readonly pizzaOrderService: PizzaOrderService,
     private readonly otpsService: OtpsService,
-    private readonly prismaService: PrismaService,
     private readonly carRentService: CarRentService
   ) {
     super();
@@ -23,26 +22,14 @@ export class CronController extends BaseResolver {
   @Cron('* * * * *')
   async handleOtpCron() {
     const mongoOtps = await this.otpsService.find();
-    const postgresOtps = await this.prismaService.otp.findMany();
 
-    const mongoExpiredOtpsIds = mongoOtps
+    const expiredOtpsIds = mongoOtps
       .filter((otp) => new Date(otp.created).getTime() + OTP_EXPIRED_TIME < new Date().getTime())
       .map((otp) => otp._id);
 
-    const postgresExpiredOtpsIds = postgresOtps
-      .filter((otp) => new Date(otp.createdAt).getTime() + OTP_EXPIRED_TIME < new Date().getTime())
-      .map((otp) => otp.id);
+    await this.otpsService.delete({ _id: { $in: expiredOtpsIds } });
 
-    await Promise.all([
-      this.otpsService.delete({ _id: { $in: mongoExpiredOtpsIds } }),
-      this.prismaService.otp.deleteMany({
-        where: {
-          id: { in: postgresExpiredOtpsIds }
-        }
-      })
-    ]);
-
-    console.log('OTP CRON:', new Date(), 'deleted', mongoExpiredOtpsIds.length);
+    console.log('OTP CRON:', new Date(), 'deleted', expiredOtpsIds.length);
   }
 
   @Cron('*/20 * * * *')
