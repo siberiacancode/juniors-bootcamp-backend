@@ -57,7 +57,7 @@ pipeline {
                     sh 'scp -o "StrictHostKeyChecking=no" docker-compose.yml $SSH_USERNAME@$IP:~/'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "docker-compose down && \
+                        "docker compose down && \
                         env DATABASE_USERNAME=$DATABASE_USERNAME \
                         DATABASE_PASSWORD=$DATABASE_PASSWORD \
                         DATABASE_PORT=$DATABASE_PORT \
@@ -69,7 +69,7 @@ pipeline {
                         VOLUME_NAME=$VOLUME_NAME \
                         CONTAINER_DB_NAME=$CONTAINER_DB_NAME \
                         CONTAINER_SERVICE_NAME=$CONTAINER_SERVICE_NAME \
-                        docker-compose up -d --build"'
+                        docker compose up -d --build"'
                 }
             }
         }

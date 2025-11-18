@@ -34,7 +34,6 @@ services:
       - PORT=${PORT}
       - SERVER_URL=${SERVER_URL}
       - DATABASE_URL=mongodb://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@juniors-bootcamp-database:27017/${DATABASE_NAME}
-      - SQL_DATABASE_URL=postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@juniors-bootcamp-postgres:${POSTGRES_PORT}/${POSTGRES_DATABASE}?schema=public
     ports:
       - '${PORT}:${PORT}'
     depends_on:
