@@ -1,5 +1,3 @@
-version: '3.8'
-
 networks:
   juniors-bootcamp:
     driver: bridge
@@ -25,9 +23,7 @@ services:
       - juniors-bootcamp
 
   juniors-bootcamp-service:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/siberiacancode/juniors-bootcamp-backend:latest
     container_name: juniors-bootcamp-service
     environment:
       - JWT_SECRET=${JWT_SECRET}

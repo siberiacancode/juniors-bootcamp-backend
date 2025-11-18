@@ -55,10 +55,16 @@ pipeline {
                     sh 'cp -i $SSH_PRIVATE_KEY ~/.ssh/id_rsa'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "mkdir -p /tmp/app_deploy_${BUILD_NUMBER}"'
+                    
+                    sh 'scp -o "StrictHostKeyChecking=no" docker-compose.yml $SSH_USERNAME@$IP:/tmp/app_deploy_${BUILD_NUMBER}/'
+                    
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "docker compose -p juniors-bootcamp-backend down || true"'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "DATABASE_USERNAME=$DATABASE_USERNAME \
+                        "cd /tmp/app_deploy_${BUILD_NUMBER} && \
+                        DATABASE_USERNAME=$DATABASE_USERNAME \
                         DATABASE_PASSWORD=$DATABASE_PASSWORD \
                         DATABASE_PORT=$DATABASE_PORT \
                         DATABASE_NAME=$DATABASE_NAME \
@@ -69,7 +75,12 @@ pipeline {
                         VOLUME_NAME=$VOLUME_NAME \
                         CONTAINER_DB_NAME=$CONTAINER_DB_NAME \
                         CONTAINER_SERVICE_NAME=$CONTAINER_SERVICE_NAME \
-                        docker compose -f https://raw.githubusercontent.com/siberiacancode/juniors-bootcamp-backend/main/docker-compose.yml -p juniors-bootcamp-backend up -d --build"'
+                        docker compose -p juniors-bootcamp-backend pull && \
+                        docker compose -p juniors-bootcamp-backend up -d"'
+                    
+                    // Cleanup temporary directory
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "rm -rf /tmp/app_deploy_${BUILD_NUMBER}"'
                 }
             }
         }
