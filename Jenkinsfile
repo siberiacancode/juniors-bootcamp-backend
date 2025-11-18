@@ -54,11 +54,11 @@ pipeline {
                     sh 'rm ~/.ssh/id_rsa'
                     sh 'cp -i $SSH_PRIVATE_KEY ~/.ssh/id_rsa'
                     
-                    sh 'scp -o "StrictHostKeyChecking=no" docker-compose.yml $SSH_USERNAME@$IP:~/'
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "docker compose -p juniors-bootcamp-backend down || true"'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "docker compose down && \
-                        env DATABASE_USERNAME=$DATABASE_USERNAME \
+                        "DATABASE_USERNAME=$DATABASE_USERNAME \
                         DATABASE_PASSWORD=$DATABASE_PASSWORD \
                         DATABASE_PORT=$DATABASE_PORT \
                         DATABASE_NAME=$DATABASE_NAME \
@@ -69,7 +69,7 @@ pipeline {
                         VOLUME_NAME=$VOLUME_NAME \
                         CONTAINER_DB_NAME=$CONTAINER_DB_NAME \
                         CONTAINER_SERVICE_NAME=$CONTAINER_SERVICE_NAME \
-                        docker compose up -d --build"'
+                        docker compose -f https://raw.githubusercontent.com/siberiacancode/juniors-bootcamp-backend/main/docker-compose.yml -p juniors-bootcamp-backend up -d --build"'
                 }
             }
         }
