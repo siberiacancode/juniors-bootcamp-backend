@@ -10,7 +10,6 @@
     "dev-debug": "nest start --debug --watch",
     "prod": "node dist/main",
     "lint": "eslint . --fix",
-    "stylelint": "stylelint \"src/static/**/*.css\" --fix",
     "format": "prettier --write \"**/*.(ts|js)\"",
     "pretty": "yarn format && yarn lint",
     "lint-inspector": "npx @eslint/config-inspector",

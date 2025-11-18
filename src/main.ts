@@ -8,7 +8,6 @@ import { join } from 'node:path';
 
 import { AppModule } from './app.module';
 import { AndroidSampleModule } from './modules/android-sample';
-import { TesterModule } from './modules/tester';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
 
 async function bootstrap() {
@@ -51,28 +50,6 @@ async function bootstrap() {
 
   app.setBaseViewsDir(join(__dirname, 'static/views'));
   app.setViewEngine('hbs');
-
-  const testerConfig = new DocumentBuilder()
-    .setTitle('juniors bootcamp tester 🧪')
-    .setDescription('Апи для тестирования')
-    .setVersion('1.0')
-    .addServer(process.env.SERVER_URL)
-    .addBearerAuth({
-      type: 'http',
-      scheme: 'bearer',
-      bearerFormat: 'JWT'
-    })
-    .build();
-
-  const testerDocument = SwaggerModule.createDocument(app, testerConfig, {
-    include: [TesterModule]
-  });
-  app.use(
-    withBaseUrl('/tester-docs'),
-    apiReference({
-      content: testerDocument
-    })
-  );
 
   const androidSampleConfig = new DocumentBuilder()
     .setTitle('android sample 🤖')

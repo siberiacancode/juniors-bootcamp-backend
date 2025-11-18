@@ -15,7 +15,6 @@ import { CinemaModule } from '@/modules/cinema/cinema.module';
 import { DeliveryModule } from '@/modules/delivery/delivery.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
 import { PizzaModule } from '@/modules/pizza/pizza.module';
-import { TesterModule } from '@/modules/tester/tester.module';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
@@ -59,7 +58,6 @@ import { withBaseUrl } from './utils/helpers';
       rootPath: path.join(__dirname, 'static')
     }),
     AndroidSampleModule,
-    TesterModule,
     OtpsModule,
     UsersModule,
     CinemaModule,
