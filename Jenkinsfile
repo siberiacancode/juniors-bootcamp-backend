@@ -2,24 +2,15 @@ pipeline {
     agent any
     environment {
         GITHUB_TOKEN=credentials('github-container')
+        DATABASE_URL=credentials('database-url')
+        SQL_DATABASE_URL=credentials('sql-database-url')
         IP=credentials('yandex-apps-ip')
 
         IMAGE_NAME='siberiacancode/juniors-bootcamp-backend'
         IMAGE_VERSION='latest'
-
-        DATABASE_USERNAME=credentials('database-username')
-        DATABASE_PASSWORD=credentials('database-password')
-        DATABASE_PORT='27019'
-        DATABASE_NAME='juniors-bootcamp'
+        PORT='3003'
         
         JWT_SECRET=credentials('jwt-secret')
-        PORT='3003'
-        SERVER_URL='https://juniors-bootcamp.ru/'
-        
-        NETWORK_NAME='juniors-bootcamp'
-        VOLUME_NAME='juniors-bootcamp-data'
-        CONTAINER_DB_NAME='juniors-bootcamp-database'
-        CONTAINER_SERVICE_NAME='juniors-bootcamp-service'
     }
     stages {
         stage('cleanup') {
@@ -53,26 +44,11 @@ pipeline {
                     sh 'install -m 600 -D /dev/null ~/.ssh/id_rsa'
                     sh 'rm ~/.ssh/id_rsa'
                     sh 'cp -i $SSH_PRIVATE_KEY ~/.ssh/id_rsa'
-                    
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "mkdir -p /tmp/app_deploy_${BUILD_NUMBER}"'
-                    
-                    sh 'scp -o "StrictHostKeyChecking=no" docker-compose.yml $SSH_USERNAME@$IP:/tmp/app_deploy_${BUILD_NUMBER}/'
-                    
-                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "sudo docker login ghcr.io -u $GITHUB_TOKEN_USR --password $GITHUB_TOKEN_PSW"'
-                    
-                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "sudo docker compose -p juniors-bootcamp-backend down || true"'
-                    
-                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "cd /tmp/app_deploy_${BUILD_NUMBER} && \
-                        export DATABASE_USERNAME=$DATABASE_USERNAME DATABASE_PASSWORD=$DATABASE_PASSWORD DATABASE_PORT=$DATABASE_PORT DATABASE_NAME=$DATABASE_NAME JWT_SECRET=$JWT_SECRET PORT=$PORT SERVER_URL=$SERVER_URL NETWORK_NAME=$NETWORK_NAME VOLUME_NAME=$VOLUME_NAME CONTAINER_DB_NAME=$CONTAINER_DB_NAME CONTAINER_SERVICE_NAME=$CONTAINER_SERVICE_NAME && \
-                        sudo -E docker compose -p juniors-bootcamp-backend pull && \
-                        sudo -E docker compose -p juniors-bootcamp-backend up -d"'
-                    
-                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "rm -rf /tmp/app_deploy_${BUILD_NUMBER}"'
+                        "sudo docker login ghcr.io -u $GITHUB_TOKEN_USR --password $GITHUB_TOKEN_PSW &&\
+                        sudo docker rm -f juniors-bootcamp-backend &&\
+                        sudo docker pull ghcr.io/siberiacancode/juniors-bootcamp-backend:latest &&\
+                        sudo docker run --restart=always --name juniors-bootcamp-backend -d -p $PORT:$PORT -e PORT=$PORT -e SERVER_URL=$SERVER_URL -e DATABASE_URL=$DATABASE_URL -e SQL_DATABASE_URL=$SQL_DATABASE_URL -e JWT_SECRET=$JWT_SECRET --network juniors-bootcamp ghcr.io/siberiacancode/juniors-bootcamp-backend:latest"'
                 }
             }
         }
