@@ -47,6 +47,32 @@ pipeline {
                 sh 'docker push ghcr.io/$IMAGE_NAME:$IMAGE_VERSION'
             }
         }
+        stage('deploy') {
+            steps {
+                withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'yandex-apps-container', keyFileVariable: 'SSH_PRIVATE_KEY', usernameVariable: 'SSH_USERNAME')]) {
+                    sh 'install -m 600 -D /dev/null ~/.ssh/id_rsa'
+                    sh 'rm ~/.ssh/id_rsa'
+                    sh 'cp -i $SSH_PRIVATE_KEY ~/.ssh/id_rsa'
+                    
+                    sh 'scp -o "StrictHostKeyChecking=no" docker-compose.yml $SSH_USERNAME@$IP:~/'
+                    
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "docker-compose down && \
+                        env DATABASE_USERNAME=$DATABASE_USERNAME \
+                        DATABASE_PASSWORD=$DATABASE_PASSWORD \
+                        DATABASE_PORT=$DATABASE_PORT \
+                        DATABASE_NAME=$DATABASE_NAME \
+                        JWT_SECRET=$JWT_SECRET \
+                        PORT=$PORT \
+                        SERVER_URL=$SERVER_URL \
+                        NETWORK_NAME=$NETWORK_NAME \
+                        VOLUME_NAME=$VOLUME_NAME \
+                        CONTAINER_DB_NAME=$CONTAINER_DB_NAME \
+                        CONTAINER_SERVICE_NAME=$CONTAINER_SERVICE_NAME \
+                        docker-compose up -d --build"'
+                }
+            }
+        }
     }
     post {
         always {
