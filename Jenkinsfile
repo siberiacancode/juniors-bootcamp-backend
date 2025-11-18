@@ -67,21 +67,9 @@ pipeline {
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "cd /tmp/app_deploy_${BUILD_NUMBER} && \
-                        sudo docker compose -p juniors-bootcamp-backend pull && \
-                        sudo docker compose \
-                        -p juniors-bootcamp-backend \
-                        -e DATABASE_USERNAME=$DATABASE_USERNAME \
-                        -e DATABASE_PASSWORD=$DATABASE_PASSWORD \
-                        -e DATABASE_PORT=$DATABASE_PORT \
-                        -e DATABASE_NAME=$DATABASE_NAME \
-                        -e JWT_SECRET=$JWT_SECRET \
-                        -e PORT=$PORT \
-                        -e SERVER_URL=$SERVER_URL \
-                        -e NETWORK_NAME=$NETWORK_NAME \
-                        -e VOLUME_NAME=$VOLUME_NAME \
-                        -e CONTAINER_DB_NAME=$CONTAINER_DB_NAME \
-                        -e CONTAINER_SERVICE_NAME=$CONTAINER_SERVICE_NAME \
-                        up -d"'
+                        export DATABASE_USERNAME=$DATABASE_USERNAME DATABASE_PASSWORD=$DATABASE_PASSWORD DATABASE_PORT=$DATABASE_PORT DATABASE_NAME=$DATABASE_NAME JWT_SECRET=$JWT_SECRET PORT=$PORT SERVER_URL=$SERVER_URL NETWORK_NAME=$NETWORK_NAME VOLUME_NAME=$VOLUME_NAME CONTAINER_DB_NAME=$CONTAINER_DB_NAME CONTAINER_SERVICE_NAME=$CONTAINER_SERVICE_NAME && \
+                        sudo -E docker compose -p juniors-bootcamp-backend pull && \
+                        sudo -E docker compose -p juniors-bootcamp-backend up -d"'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "rm -rf /tmp/app_deploy_${BUILD_NUMBER}"'
