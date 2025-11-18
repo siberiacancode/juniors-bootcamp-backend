@@ -9,7 +9,7 @@ pipeline {
 
         DATABASE_USERNAME=credentials('database-username')
         DATABASE_PASSWORD=credentials('database-password')
-        DATABASE_PORT='27018'
+        DATABASE_PORT='27019'
         DATABASE_NAME='juniors-bootcamp'
         
         JWT_SECRET=credentials('jwt-secret')
