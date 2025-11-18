@@ -60,6 +60,9 @@ pipeline {
                     sh 'scp -o "StrictHostKeyChecking=no" docker-compose.yml $SSH_USERNAME@$IP:/tmp/app_deploy_${BUILD_NUMBER}/'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "docker login ghcr.io -u $GITHUB_TOKEN_USR --password $GITHUB_TOKEN_PSW"'
+                    
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "docker compose -p juniors-bootcamp-backend down || true"'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
