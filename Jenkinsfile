@@ -60,10 +60,10 @@ pipeline {
                     sh 'scp -o "StrictHostKeyChecking=no" docker-compose.yml $SSH_USERNAME@$IP:/tmp/app_deploy_${BUILD_NUMBER}/'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "docker login ghcr.io -u $GITHUB_TOKEN_USR --password $GITHUB_TOKEN_PSW"'
+                        "sudo docker login ghcr.io -u $GITHUB_TOKEN_USR --password $GITHUB_TOKEN_PSW"'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "docker compose -p juniors-bootcamp-backend down || true"'
+                        "sudo docker compose -p juniors-bootcamp-backend down || true"'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "cd /tmp/app_deploy_${BUILD_NUMBER} && \
@@ -78,10 +78,9 @@ pipeline {
                         VOLUME_NAME=$VOLUME_NAME \
                         CONTAINER_DB_NAME=$CONTAINER_DB_NAME \
                         CONTAINER_SERVICE_NAME=$CONTAINER_SERVICE_NAME \
-                        docker compose -p juniors-bootcamp-backend pull && \
-                        docker compose -p juniors-bootcamp-backend up -d"'
+                        sudo docker compose -p juniors-bootcamp-backend pull && \
+                        sudo docker compose -p juniors-bootcamp-backend up -d"'
                     
-                    // Cleanup temporary directory
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "rm -rf /tmp/app_deploy_${BUILD_NUMBER}"'
                 }
