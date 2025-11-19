@@ -11,7 +11,6 @@ pipeline {
         
         NETWORK_NAME = 'juniors-bootcamp'
         VOLUME_NAME = 'juniors-bootcamp-data'
-        CONTAINER_DB_NAME = 'juniors-bootcamp-database'
     }
     
     stages {
@@ -32,7 +31,7 @@ pipeline {
                         "sudo docker network create $NETWORK_NAME || true"'
                     
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "sudo docker run --restart=always --name $CONTAINER_DB_NAME -d \
+                        "sudo docker run --restart=always --name juniors-bootcamp-database -d \
                         -p $DATABASE_PORT:27017 \
                         -e MONGO_INITDB_ROOT_USERNAME=$DATABASE_USERNAME \
                         -e MONGO_INITDB_ROOT_PASSWORD=$DATABASE_PASSWORD \

@@ -11,6 +11,8 @@ pipeline {
         PORT='3003'
         
         JWT_SECRET=credentials('jwt-secret')
+
+        NETWORK_NAME='juniors-bootcamp'
     }
     stages {
         stage('cleanup') {
@@ -44,6 +46,10 @@ pipeline {
                     sh 'install -m 600 -D /dev/null ~/.ssh/id_rsa'
                     sh 'rm ~/.ssh/id_rsa'
                     sh 'cp -i $SSH_PRIVATE_KEY ~/.ssh/id_rsa'
+
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "sudo docker network create $NETWORK_NAME || true"'
+                        
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "sudo docker login ghcr.io -u $GITHUB_TOKEN_USR --password $GITHUB_TOKEN_PSW &&\
                         sudo docker rm -f juniors-bootcamp-backend &&\
