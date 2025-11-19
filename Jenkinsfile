@@ -8,7 +8,7 @@ pipeline {
 
         IMAGE_NAME='siberiacancode/juniors-bootcamp-backend'
         IMAGE_VERSION='latest'
-        PORT='3003'
+        PORT='3010'
         
         JWT_SECRET=credentials('jwt-secret')
 
