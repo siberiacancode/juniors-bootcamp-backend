@@ -3,7 +3,6 @@ pipeline {
     environment {
         GITHUB_TOKEN=credentials('github-container')
         DATABASE_URL=credentials('database-url')
-        SQL_DATABASE_URL=credentials('sql-database-url')
         IP=credentials('yandex-apps-ip')
 
         IMAGE_NAME='siberiacancode/juniors-bootcamp-backend'
