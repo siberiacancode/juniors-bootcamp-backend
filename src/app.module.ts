@@ -18,7 +18,6 @@ import { PizzaModule } from '@/modules/pizza/pizza.module';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
-import { AndroidSampleModule } from './modules/android-sample';
 import { CronModule } from './modules/cron';
 import { withBaseUrl } from './utils/helpers';
 
@@ -57,7 +56,6 @@ import { withBaseUrl } from './utils/helpers';
       serveRoot: withBaseUrl('/static'),
       rootPath: path.join(__dirname, 'static')
     }),
-    AndroidSampleModule,
     OtpsModule,
     UsersModule,
     CinemaModule,

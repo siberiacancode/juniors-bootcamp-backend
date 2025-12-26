@@ -7,7 +7,6 @@ import { apiReference } from '@scalar/nestjs-api-reference';
 import { join } from 'node:path';
 
 import { AppModule } from './app.module';
-import { AndroidSampleModule } from './modules/android-sample';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
 
 async function bootstrap() {
@@ -50,23 +49,6 @@ async function bootstrap() {
 
   app.setBaseViewsDir(join(__dirname, 'static/views'));
   app.setViewEngine('hbs');
-
-  const androidSampleConfig = new DocumentBuilder()
-    .setTitle('android sample 🤖')
-    .setDescription('Апи для android sample')
-    .setVersion('1.0')
-    .addServer(process.env.SERVER_URL)
-    .build();
-
-  const androidSampleDocument = SwaggerModule.createDocument(app, androidSampleConfig, {
-    include: [AndroidSampleModule]
-  });
-  app.use(
-    withBaseUrl('/android-sample'),
-    apiReference({
-      content: androidSampleDocument
-    })
-  );
 
   const port = process.env.PORT ?? 3000;
   await app.listen(port);
