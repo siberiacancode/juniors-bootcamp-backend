@@ -8,18 +8,6 @@ import { OTP_EXPIRED_TIME, OtpsService } from './modules/otps';
 export class AppController {
   constructor(private readonly otpsService: OtpsService) {}
 
-  @Get('/')
-  @ApiOperation({ summary: 'главная страница' })
-  @Render('main.hbs')
-  async main() {
-    return {
-      graphql: '/api/graphql',
-      rest: '/api/rest',
-      otps: '/api/otps',
-      tester: '/api/tester-docs'
-    };
-  }
-
   @Get('/otps')
   @ApiOperation({ summary: 'страница с отп кодами' })
   @Render('otps.hbs')
