@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+
+    environment {
+        IP = credentials('yandex-apps-ip')
+
+        NETWORK_NAME = 'juniors-bootcamp'
+        PROMETHEUS_PORT = '9090'
+        GRAFANA_PORT = '3030'
+        BACKEND_PORT = '3010'
+        VOLUME_PROMETHEUS = 'juniors-bootcamp-prometheus-data'
+        VOLUME_GRAFANA = 'juniors-bootcamp-grafana-data'
+    }
+
+    stages {
+        stage('cleanup') {
+            steps {
+                sh 'docker system prune -a --volumes --force'
+            }
+        }
+
+        stage('deploy metrics') {
+            steps {
+                withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'yandex-apps-container', keyFileVariable: 'SSH_PRIVATE_KEY', usernameVariable: 'SSH_USERNAME')]) {
+                    sh 'install -m 600 -D /dev/null ~/.ssh/id_rsa'
+                    sh 'rm ~/.ssh/id_rsa'
+                    sh 'cp -i $SSH_PRIVATE_KEY ~/.ssh/id_rsa'
+
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "sudo docker network create $NETWORK_NAME || true"'
+
+                    sh 'scp -o "StrictHostKeyChecking=no" metrics/prometheus.yml $SSH_USERNAME@$IP:/tmp/juniors-bootcamp-prometheus.yml'
+
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "sudo docker rm -f juniors-bootcamp-prometheus 2>/dev/null || true;\
+                        sudo docker run --restart=always --name juniors-bootcamp-prometheus -d \
+                        -p $PROMETHEUS_PORT:9090 \
+                        -v /tmp/juniors-bootcamp-prometheus.yml:/etc/prometheus/prometheus.yml \
+                        -v $VOLUME_PROMETHEUS:/prometheus \
+                        --network $NETWORK_NAME \
+                        prom/prometheus:latest -config.file=/etc/prometheus/prometheus.yml -storage.path=/prometheus || true"'
+
+                    sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
+                        "sudo docker rm -f juniors-bootcamp-grafana 2>/dev/null || true;\
+                        sudo docker run --restart=always --name juniors-bootcamp-grafana -d \
+                        -p $GRAFANA_PORT:3000 \
+                        -v $VOLUME_GRAFANA:/var/lib/grafana \
+                        -e GF_SECURITY_ADMIN_PASSWORD=admin \
+                        -e GF_USERS_ALLOW_SIGN_UP=false \
+                        --network $NETWORK_NAME \
+                        grafana/grafana:latest || true"'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            sh 'docker logout'
+        }
+    }
+}

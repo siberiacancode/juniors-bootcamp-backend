@@ -5,13 +5,54 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { apiReference } from '@scalar/nestjs-api-reference';
 import { join } from 'node:path';
+import * as client from 'prom-client';
 
 import { AppModule } from './app.module';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
 
+const register = new client.Registry();
+client.collectDefaultMetrics({ register });
+
+const httpRequestsTotal = new client.Counter({
+  name: 'http_requests_total',
+  help: 'Total HTTP requests',
+  labelNames: ['method', 'route', 'status_code'],
+  registers: [register]
+});
+
+const httpRequestDuration = new client.Histogram({
+  name: 'http_request_duration_seconds',
+  help: 'Duration of HTTP requests in seconds',
+  labelNames: ['method', 'route', 'status_code'],
+  buckets: [0.05, 0.1, 0.3, 0.5, 1, 2, 5],
+  registers: [register]
+});
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: { origin: '*' }
+  });
+
+  app.use((req, res, next) => {
+    const end = httpRequestDuration.startTimer();
+
+    res.on('finish', () => {
+      const route = req.route?.path ?? req.path ?? 'unknown';
+
+      httpRequestsTotal.inc({
+        method: req.method,
+        route,
+        status_code: String(res.statusCode)
+      });
+
+      end({
+        method: req.method,
+        route,
+        status_code: String(res.statusCode)
+      });
+    });
+
+    next();
   });
 
   app.setGlobalPrefix(BASE_URL);
@@ -25,6 +66,11 @@ async function bootstrap() {
 
   app.use(withBaseUrl('/health'), (_req, res) => {
     res.json({ status: true });
+  });
+
+  app.use(withBaseUrl('/metrics'), async (_req, res) => {
+    res.set('Content-Type', register.contentType);
+    res.end(await register.metrics());
   });
 
   const restConfig = new DocumentBuilder()
