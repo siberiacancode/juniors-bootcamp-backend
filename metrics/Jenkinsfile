@@ -33,13 +33,15 @@ pipeline {
                     sh 'scp -o "StrictHostKeyChecking=no" metrics/prometheus.yml $SSH_USERNAME@$IP:/tmp/juniors-bootcamp-prometheus.yml'
 
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
-                        "sudo docker rm -f juniors-bootcamp-prometheus 2>/dev/null || true;\
+                        "sudo docker rm -f juniors-bootcamp-prometheus 2>/dev/null || true; \
                         sudo docker run --restart=always --name juniors-bootcamp-prometheus -d \
                         -p $PROMETHEUS_PORT:9090 \
                         -v /tmp/juniors-bootcamp-prometheus.yml:/etc/prometheus/prometheus.yml \
                         -v $VOLUME_PROMETHEUS:/prometheus \
                         --network $NETWORK_NAME \
-                        prom/prometheus:latest -config.file=/etc/prometheus/prometheus.yml -storage.path=/prometheus || true"'
+                        prom/prometheus:latest \
+                        --config.file=/etc/prometheus/prometheus.yml \
+                        --storage.tsdb.path=/prometheus || true"'
 
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "sudo docker rm -f juniors-bootcamp-grafana 2>/dev/null || true;\
