@@ -3,9 +3,8 @@ pipeline {
     
     environment {
         IP = credentials('yandex-apps-ip')
-        
-        DATABASE_USERNAME = credentials('database-username')
-        DATABASE_PASSWORD = credentials('database-password')
+        DATABASE_ADMIN = credentials('database-admin')
+
         DATABASE_PORT = '27018'
         DATABASE_NAME = 'juniors-bootcamp'
         
@@ -33,8 +32,8 @@ pipeline {
                     sh 'ssh -o "StrictHostKeyChecking=no" $SSH_USERNAME@$IP \
                         "sudo docker run --restart=always --name juniors-bootcamp-database -d \
                         -p $DATABASE_PORT:27017 \
-                        -e MONGO_INITDB_ROOT_USERNAME=$DATABASE_USERNAME \
-                        -e MONGO_INITDB_ROOT_PASSWORD=$DATABASE_PASSWORD \
+                        -e MONGO_INITDB_ROOT_USERNAME=$DATABASE_ADMIN_USR \
+                        -e MONGO_INITDB_ROOT_PASSWORD=$DATABASE_ADMIN_PSW \
                         -v $VOLUME_NAME:/data/db \
                         --network $NETWORK_NAME \
                         mongo:latest || true"'
