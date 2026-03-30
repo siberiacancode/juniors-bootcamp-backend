@@ -13,6 +13,7 @@ import * as path from 'node:path';
 import { CarsModule } from '@/modules/cars/cars.module';
 import { CinemaModule } from '@/modules/cinema/cinema.module';
 import { DeliveryModule } from '@/modules/delivery/delivery.module';
+import { GamesModule } from '@/modules/games/games.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
 import { PizzaModule } from '@/modules/pizza/pizza.module';
 import { UsersModule } from '@/modules/users/users.module';
@@ -61,6 +62,7 @@ import { withBaseUrl } from './utils/helpers';
     CinemaModule,
     DeliveryModule,
     CarsModule,
+    GamesModule,
     PizzaModule,
     CronModule
   ],
