@@ -10,6 +10,6 @@ export class PizzaService {
   }
 
   getPizza(pizzaId: string): Pizza {
-    return PIZZAS.find((pizza) => pizza.id === pizzaId);
+    return PIZZAS.find((pizza) => pizza.id === pizzaId)!;
   }
 }

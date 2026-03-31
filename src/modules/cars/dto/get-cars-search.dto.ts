@@ -8,7 +8,7 @@ import { BodyType, Brand, Color, Steering, Transmission } from '../constants/enu
 import { TimestampValidator } from './create-rent.dto';
 
 @ArgsType()
-export class GetCarsFilterDto {
+export class GetCarsSearchDto {
   @IsOptional()
   @IsNumber()
   @Validate(TimestampValidator)

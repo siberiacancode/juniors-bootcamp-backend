@@ -121,9 +121,16 @@ type CarWithRents {
 
 type CarsPaginatedResponse {
   data: [Car!]!
-  meta: PaginationMeta!
+  meta: CarsPaginationMeta!
   reason: String
   success: Boolean!
+}
+
+type CarsPaginationMeta {
+  limit: Float!
+  page: Float!
+  total: Float!
+  totalPages: Float!
 }
 
 type CinemaOrder {
@@ -236,6 +243,20 @@ input CreateDeliveryOrderSenderAddressDto {
   comment: String
   house: String!
   street: String!
+}
+
+input CreateGameOrderPersonDto {
+  email: String
+  firstName: String!
+  lastName: String!
+  middleName: String
+  phone: String!
+}
+
+type CreateGameOrderResponse {
+  order: GameOrder!
+  reason: String
+  success: Boolean!
 }
 
 input CreatePaymentDebitCardDto {
@@ -580,6 +601,125 @@ type FilmsResponse {
   success: Boolean!
 }
 
+type Game {
+  description: String!
+  externalId: String!
+  genres: [GameGenre!]!
+  id: String!
+  image: String!
+  name: String!
+  oldPrice: Float
+  price: Float!
+  rating: Float
+  slug: String!
+  year: Float!
+}
+
+enum GameGenre {
+  ACTION
+  ADVENTURE
+  HORROR
+  INDIE
+  RACING
+  RPG
+  SHOOTER
+  SIMULATION
+  SPORTS
+  STRATEGY
+  SURVIVAL
+}
+
+type GameOrder {
+  _id: String!
+  gameKey: String!
+  gameSnapshot: GameOrderSnapshot!
+  person: GameOrderPerson!
+  status: GameOrderStatus!
+}
+
+input GameOrderInput {
+  _id: String!
+  gameKey: String!
+  gameSnapshot: GameOrderSnapshotInput!
+  person: GameOrderPersonInput!
+  status: GameOrderStatus!
+}
+
+type GameOrderPerson {
+  email: String
+  firstName: String!
+  lastName: String!
+  middleName: String
+  phone: String!
+}
+
+input GameOrderPersonInput {
+  email: String
+  firstName: String!
+  lastName: String!
+  middleName: String
+  phone: String!
+}
+
+type GameOrderResponse {
+  order: GameOrder!
+  reason: String
+  success: Boolean!
+}
+
+type GameOrderSnapshot {
+  externalId: String!
+  gameId: String!
+  image: String!
+  name: String!
+  price: Float!
+}
+
+input GameOrderSnapshotInput {
+  externalId: String!
+  gameId: String!
+  image: String!
+  name: String!
+  price: Float!
+}
+
+enum GameOrderStatus {
+  CANCELED
+  PAID
+}
+
+type GameOrdersResponse {
+  orders: [GameOrder!]!
+  reason: String
+  success: Boolean!
+}
+
+type GameResponse {
+  data: Game!
+  reason: String
+  success: Boolean!
+}
+
+type GameSearchResponse {
+  data: [Game!]!
+  reason: String
+  success: Boolean!
+}
+
+type GamesPaginatedResponse {
+  data: [Game!]!
+  meta: GamesPaginationMeta!
+  reason: String
+  success: Boolean!
+}
+
+type GamesPaginationMeta {
+  limit: Float!
+  page: Float!
+  total: Float!
+  totalPages: Float!
+}
+
 enum Ingredient {
   BACON
   BASIL
@@ -615,6 +755,7 @@ type Mutation {
   createCarRent(birthDate: String!, carId: String!, comment: String, email: String!, endDate: Float!, firstName: String!, lastName: String!, middleName: String!, phone: String!, pickupLocation: String!, returnLocation: String!, startDate: Float!): CarRentResponse!
   createCinemaPayment(debitCard: CreatePaymentDebitCardDto!, filmId: String!, person: CreatePaymentPersonDto!, seance: CreatePaymentSeanceDto!, tickets: [CreatePaymentTicketsDto!]!): PaymentResponse!
   createDeliveryOrder(optionType: DeliveryOptionType!, packageId: String!, payer: Payer!, receiver: CreateDeliveryOrderPersonDto!, receiverAddress: CreateDeliveryOrderReceiverAddressDto!, receiverPointId: String!, sender: CreateDeliveryOrderPersonDto!, senderAddress: CreateDeliveryOrderSenderAddressDto!, senderPointId: String!): DeliverResponse!
+  createGameOrder(debitCard: String!, gameId: String!, person: CreateGameOrderPersonDto!): CreateGameOrderResponse!
   createOtp(phone: String!): OtpResponse!
   createPizzaPayment(debitCard: CreatePizzaPaymentDebitCardDto!, person: CreatePizzaPaymentPersonDto!, pizzas: [OrderedPizzaInput!]!, receiverAddress: CreatePizzaPaymentAddressDto!): PizzaPaymentResponse!
   signin(code: Float!, phone: String!): SignInResponse!
@@ -648,13 +789,6 @@ type OtpResponse {
   reason: String
   retryDelay: Float!
   success: Boolean!
-}
-
-type PaginationMeta {
-  limit: Float!
-  page: Float!
-  total: Float!
-  totalPages: Float!
 }
 
 enum Payer {
@@ -857,9 +991,14 @@ type Query {
   getDeliveryPoints: DeliveryPointsResponse!
   getFilm(filmId: String!): FilmResponse!
   getFilmSchedule(filmId: String!): ScheduleResponse!
+  getGame(gameId: String!): GameResponse!
+  getGameOrder(orderId: String!): GameOrderResponse!
+  getGameOrders: GameOrdersResponse!
+  getGames(genre: [GameGenre!], limit: Float, page: Float, search: String, year: [Float!]): GamesPaginatedResponse!
   getPizzaOrder(orderId: String!): PizzaOrderResponse!
   getPizzaOrders: PizzaOrdersResponse!
   getPizzasCatalog: PizzasResponse!
+  searchGames(limit: Float, search: String!): GameSearchResponse!
   session: SessionResponse!
 }
 

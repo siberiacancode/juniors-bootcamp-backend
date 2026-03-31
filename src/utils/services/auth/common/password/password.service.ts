@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
+import { createHash } from 'node:crypto';
 
 @Injectable()
 export class PasswordService {
@@ -11,10 +11,10 @@ export class PasswordService {
   }
 
   async validatePassword(password: string, hash: string) {
-    return bcrypt.compare(password, hash);
+    return createHash('sha256').update(password).digest('hex') === hash;
   }
 
   async hashPassword(password: string) {
-    return bcrypt.hash(password, 10);
+    return createHash('sha256').update(password).digest('hex');
   }
 }
