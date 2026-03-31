@@ -615,18 +615,6 @@ type Game {
   year: Float!
 }
 
-type GameAutocompleteResponse {
-  data: [Game!]!
-  reason: String
-  success: Boolean!
-}
-
-type GameBuyResponse {
-  order: GameOrder!
-  reason: String
-  success: Boolean!
-}
-
 enum GameGenre {
   ACTION
   ADVENTURE
@@ -712,6 +700,12 @@ type GameResponse {
   success: Boolean!
 }
 
+type GameSearchResponse {
+  data: [Game!]!
+  reason: String
+  success: Boolean!
+}
+
 type GamesPaginatedResponse {
   data: [Game!]!
   meta: GamesPaginationMeta!
@@ -753,7 +747,6 @@ type Media {
 }
 
 type Mutation {
-  buyGame(gameId: String!, person: CreateGameOrderPersonDto!): GameBuyResponse! @deprecated(reason: "Use createGameOrder instead")
   calculateDelivery(package: CalculateDeliveryPackageDto!, receiverPoint: CalculateDeliveryPointDto!, senderPoint: CalculateDeliveryPointDto!): CalculateDeliveryResponse!
   cancelCarRent(carRentId: String!): BaseResponse!
   cancelCinemaOrder(orderId: String!): BaseResponse!
@@ -762,7 +755,7 @@ type Mutation {
   createCarRent(birthDate: String!, carId: String!, comment: String, email: String!, endDate: Float!, firstName: String!, lastName: String!, middleName: String!, phone: String!, pickupLocation: String!, returnLocation: String!, startDate: Float!): CarRentResponse!
   createCinemaPayment(debitCard: CreatePaymentDebitCardDto!, filmId: String!, person: CreatePaymentPersonDto!, seance: CreatePaymentSeanceDto!, tickets: [CreatePaymentTicketsDto!]!): PaymentResponse!
   createDeliveryOrder(optionType: DeliveryOptionType!, packageId: String!, payer: Payer!, receiver: CreateDeliveryOrderPersonDto!, receiverAddress: CreateDeliveryOrderReceiverAddressDto!, receiverPointId: String!, sender: CreateDeliveryOrderPersonDto!, senderAddress: CreateDeliveryOrderSenderAddressDto!, senderPointId: String!): DeliverResponse!
-  createGameOrder(gameId: String!, person: CreateGameOrderPersonDto!): CreateGameOrderResponse!
+  createGameOrder(debitCard: String!, gameId: String!, person: CreateGameOrderPersonDto!): CreateGameOrderResponse!
   createOtp(phone: String!): OtpResponse!
   createPizzaPayment(debitCard: CreatePizzaPaymentDebitCardDto!, person: CreatePizzaPaymentPersonDto!, pizzas: [OrderedPizzaInput!]!, receiverAddress: CreatePizzaPaymentAddressDto!): PizzaPaymentResponse!
   signin(code: Float!, phone: String!): SignInResponse!
@@ -1001,11 +994,11 @@ type Query {
   getGame(gameId: String!): GameResponse!
   getGameOrder(orderId: String!): GameOrderResponse!
   getGameOrders: GameOrdersResponse!
-  getGames(genre: [GameGenre!], limit: Float, page: Float, search: String, year: Float): GamesPaginatedResponse!
-  getGamesAutocomplete(limit: Float, search: String!): GameAutocompleteResponse!
+  getGames(genre: [GameGenre!], limit: Float, page: Float, search: String, year: [Float!]): GamesPaginatedResponse!
   getPizzaOrder(orderId: String!): PizzaOrderResponse!
   getPizzaOrders: PizzaOrdersResponse!
   getPizzasCatalog: PizzasResponse!
+  searchGames(limit: Float, search: String!): GameSearchResponse!
   session: SessionResponse!
 }
 

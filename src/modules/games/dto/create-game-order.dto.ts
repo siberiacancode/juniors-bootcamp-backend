@@ -55,4 +55,10 @@ export class CreateGameOrderDto {
   @Field(() => CreateGameOrderPersonDto)
   @ApiProperty({ description: 'Данные покупателя', type: CreateGameOrderPersonDto })
   person: CreateGameOrderPersonDto;
+
+  @IsString()
+  @IsNotEmpty()
+  @Field(() => String)
+  @ApiProperty({ example: '2202 2063 8908 5954', description: 'Дебетовая карта для оплаты' })
+  debitCard: string;
 }

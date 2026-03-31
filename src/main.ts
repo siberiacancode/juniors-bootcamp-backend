@@ -110,7 +110,13 @@ async function bootstrap() {
     app.use(
       withBaseUrl(`/rest/${moduleDoc.name}`),
       apiReference({
-        content: moduleDocument
+        content: moduleDocument,
+        agent: {
+          disabled: true
+        },
+        mcp: {
+          disabled: true
+        }
       })
     );
   }
@@ -119,7 +125,13 @@ async function bootstrap() {
   app.use(
     withBaseUrl('/rest'),
     apiReference({
-      content: document
+      content: document,
+      agent: {
+        disabled: true
+      },
+      mcp: {
+        disabled: true
+      }
     })
   );
 

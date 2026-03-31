@@ -33,11 +33,10 @@ import {
 } from './dto';
 import {
   CreateGameOrderResponse,
-  GameAutocompleteResponse,
-  GameBuyResponse,
   GameOrderResponse,
   GameOrdersResponse,
   GameResponse,
+  GameSearchResponse,
   GamesPaginatedResponse
 } from './games.model';
 import { GamesService } from './games.service';
@@ -58,7 +57,13 @@ export class GamesController extends BaseResolver {
   @Get('/info')
   @ApiOperation({ summary: 'Получить игры' })
   @ApiResponse({ status: 200, type: GamesPaginatedResponse })
-  @ApiQuery({ name: 'year', required: false, type: Number, description: 'Год релиза' })
+  @ApiQuery({
+    name: 'year',
+    required: false,
+    type: Number,
+    isArray: true,
+    description: 'Год релиза'
+  })
   @ApiQuery({
     name: 'genre',
     required: false,
@@ -80,18 +85,18 @@ export class GamesController extends BaseResolver {
     return this.wrapSuccess(paginatedGames);
   }
 
-  @Get('/autocomplete')
-  @ApiOperation({ summary: 'Автокомплит игр' })
-  @ApiResponse({ status: 200, type: GameAutocompleteResponse })
+  @Get('/search')
+  @ApiOperation({ summary: 'Поиск по играм' })
+  @ApiResponse({ status: 200, type: GameSearchResponse })
   @ApiQuery({ name: 'search', required: true, type: String, description: 'Строка поиска' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Лимит' })
-  getAutocomplete(@Query() searchGamesDto: SearchGamesDto): GameAutocompleteResponse {
+  searchGames(@Query() searchGamesDto: SearchGamesDto): GameSearchResponse {
     const data = this.gamesService.searchAutocomplete(searchGamesDto);
     return this.wrapSuccess({ data });
   }
 
   @Get('/info/:gameId')
-  @ApiOperation({ summary: 'Получить игру по id' })
+  @ApiOperation({ summary: 'Получить игру' })
   @ApiResponse({ status: 200, type: GameResponse })
   getGame(@Param() getGameDto: GetGameDto): GameResponse {
     const game = this.gamesService.getGame(getGameDto.gameId);
@@ -104,11 +109,9 @@ export class GamesController extends BaseResolver {
   }
 
   @Post('/order')
-  @ApiOperation({ summary: 'Создать заказ на игру и получить ключ' })
+  @ApiOperation({ summary: 'Купить игру и получить ключ' })
   @ApiResponse({ status: 200, type: CreateGameOrderResponse })
-  async createGameOrder(
-    @Body() createGameOrderDto: CreateGameOrderDto
-  ): Promise<CreateGameOrderResponse> {
+  async buyGame(@Body() createGameOrderDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
     const game = this.gamesService.getGame(createGameOrderDto.gameId);
 
     if (!game) {
@@ -147,13 +150,6 @@ export class GamesController extends BaseResolver {
     });
 
     return this.wrapSuccess({ order });
-  }
-
-  @Post('/buy')
-  @ApiOperation({ summary: 'Устаревший метод: используйте /games/order' })
-  @ApiResponse({ status: 200, type: GameBuyResponse })
-  async buyGame(@Body() buyGameDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
-    return this.createGameOrder(buyGameDto);
   }
 
   @ApiAuthorizedOnly()

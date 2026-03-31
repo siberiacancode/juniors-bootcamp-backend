@@ -25,9 +25,9 @@ export class GameResponse extends BaseResponse {
 }
 
 @ObjectType()
-export class GameAutocompleteResponse extends BaseResponse {
+export class GameSearchResponse extends BaseResponse {
   @Field(() => [Game])
-  @ApiProperty({ description: 'Результаты автокомплита', type: [Game] })
+  @ApiProperty({ description: 'Результаты поиска игр', type: [Game] })
   data: Game[];
 }
 
@@ -37,9 +37,6 @@ export class CreateGameOrderResponse extends BaseResponse {
   @ApiProperty({ description: 'Заказ на игру', type: GameOrder })
   order: GameOrder;
 }
-
-@ObjectType()
-export class GameBuyResponse extends CreateGameOrderResponse {}
 
 @ObjectType()
 export class GameOrdersResponse extends BaseResponse {

@@ -28,8 +28,8 @@ export class GamesService {
   getFilteredGames(filters: GetGamesSearchDto) {
     let filteredGames = this.getGames();
 
-    if (typeof filters.year === 'number') {
-      filteredGames = filteredGames.filter((game) => game.year === filters.year);
+    if (filters.year?.length) {
+      filteredGames = filteredGames.filter((game) => filters.year.includes(game.year));
     }
 
     if (filters.genre?.length) {

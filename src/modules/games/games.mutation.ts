@@ -5,7 +5,7 @@ import { UsersService } from '@/modules/users';
 import { BaseResolver } from '@/utils/services';
 
 import { CreateGameOrderDto } from './dto';
-import { CreateGameOrderResponse, GameBuyResponse } from './games.model';
+import { CreateGameOrderResponse } from './games.model';
 import { GamesService } from './games.service';
 import { GameOrderService, GameOrderStatus } from './modules';
 
@@ -62,13 +62,6 @@ export class GamesMutation extends BaseResolver {
     });
 
     return this.wrapSuccess({ order });
-  }
-
-  @Mutation(() => GameBuyResponse, {
-    deprecationReason: 'Use createGameOrder instead'
-  })
-  async buyGame(@Args() buyGameDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
-    return this.createGameOrder(buyGameDto);
   }
 
   private generateGameKey(): string {

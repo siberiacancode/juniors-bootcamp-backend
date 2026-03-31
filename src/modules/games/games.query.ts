@@ -10,10 +10,10 @@ import { AuthService, BaseResolver } from '@/utils/services';
 
 import { GetGameDto, GetGameOrderDto, GetGamesSearchDto, SearchGamesDto } from './dto';
 import {
-  GameAutocompleteResponse,
   GameOrderResponse,
   GameOrdersResponse,
   GameResponse,
+  GameSearchResponse,
   GamesPaginatedResponse
 } from './games.model';
 import { GamesService } from './games.service';
@@ -53,8 +53,8 @@ export class GamesQuery extends BaseResolver {
     return this.wrapSuccess({ data: game });
   }
 
-  @Query(() => GameAutocompleteResponse)
-  getGamesAutocomplete(@Args() searchGamesDto: SearchGamesDto): GameAutocompleteResponse {
+  @Query(() => GameSearchResponse)
+  searchGames(@Args() searchGamesDto: SearchGamesDto): GameSearchResponse {
     const data = this.gamesService.searchAutocomplete(searchGamesDto);
     return this.wrapSuccess({ data });
   }
