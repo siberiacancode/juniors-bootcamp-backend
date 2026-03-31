@@ -8,7 +8,7 @@ import type { User } from '@/modules/users';
 import { GqlAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver } from '@/utils/services';
 
-import { GetGameDto, GetGameOrderDto, GetGamesFiltersDto, SearchGamesDto } from './dto';
+import { GetGameDto, GetGameOrderDto, GetGamesSearchDto, SearchGamesDto } from './dto';
 import {
   GameAutocompleteResponse,
   GameOrderResponse,
@@ -31,12 +31,12 @@ export class GamesQuery extends BaseResolver {
   }
 
   @Query(() => GamesPaginatedResponse)
-  getGames(@Args() getGamesFiltersDto: GetGamesFiltersDto): GamesPaginatedResponse {
-    const games = this.gamesService.getFilteredGames(getGamesFiltersDto);
+  getGames(@Args() getGamesSearchDto: GetGamesSearchDto): GamesPaginatedResponse {
+    const games = this.gamesService.getFilteredGames(getGamesSearchDto);
     const paginatedGames = this.gamesService.getPagination({
       items: games,
-      page: getGamesFiltersDto.page,
-      limit: getGamesFiltersDto.limit
+      page: getGamesSearchDto.page,
+      limit: getGamesSearchDto.limit
     });
 
     return this.wrapSuccess(paginatedGames);

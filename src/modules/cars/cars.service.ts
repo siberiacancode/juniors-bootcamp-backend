@@ -2,11 +2,12 @@ import { Injectable } from '@nestjs/common';
 
 import { CARS } from './constants';
 import { BodyType, Brand, Color, Steering, Transmission } from './constants/enums';
-import { GetCarsFilterDto } from './dto';
+import { GetCarsSearchDto } from './dto';
+import { CarsPaginationMeta } from './entities';
 import { CarRentService, CarRentStatus } from './modules';
 
 interface GetFilteredCarsParams {
-  filters: GetCarsFilterDto;
+  filters: GetCarsSearchDto;
 }
 
 interface GetPaginationParams<Car> {
@@ -15,16 +16,9 @@ interface GetPaginationParams<Car> {
   page?: number;
 }
 
-interface PaginationMeta {
-  limit: number;
-  page: number;
-  total: number;
-  totalPages: number;
-}
-
 interface PaginationResult<Car> {
   data: Car[];
-  meta: PaginationMeta;
+  meta: CarsPaginationMeta;
 }
 
 @Injectable()
@@ -98,7 +92,7 @@ export class CarsService {
     if (filters.startDate && filters.endDate) {
       filteredCars = filteredCars.filter(async (car) => {
         const overlappingRents = await this.carRentService.find({
-          carId: car.id,
+          'carInfo.id': car.id,
           status: CarRentStatus.BOOKED,
           startDate: { $lt: filters.endDate },
           endDate: { $gt: filters.startDate }

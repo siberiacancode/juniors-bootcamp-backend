@@ -33,6 +33,8 @@ export class CarsMutation extends BaseResolver {
 
     startDate.setHours(0, 0, 0, 0);
     endDate.setHours(0, 0, 0, 0);
+    const startTimestamp = startDate.getTime();
+    const endTimestamp = endDate.getTime();
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -57,10 +59,10 @@ export class CarsMutation extends BaseResolver {
     }
 
     const overlappingRents = await this.carRentService.find({
-      carId: createCarRentDto.carId,
+      'carInfo.id': createCarRentDto.carId,
       status: CarRentStatus.BOOKED,
-      startDate: { $lte: endDate },
-      endDate: { $gte: startDate }
+      startDate: { $lte: endTimestamp },
+      endDate: { $gte: startTimestamp }
     });
 
     if (overlappingRents.length) {
@@ -98,7 +100,6 @@ export class CarsMutation extends BaseResolver {
 
     const rent = await this.carRentService.create({
       ...createCarRentDto,
-      carId: undefined,
       status: CarRentStatus.BOOKED,
       totalPrice: rentalDays * car.price,
       carInfo: car

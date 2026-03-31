@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class BaseResolver {
-  protected wrapSuccess<T>(data?: T) {
+  protected wrapSuccess<Data>(data?: Data) {
     return {
       success: true,
       ...data
     };
   }
 
-  protected wrapFail<T>(reason?: string, data?: T) {
+  protected wrapFail<Data>(reason?: string, data?: Data) {
     return {
       success: false,
       reason,

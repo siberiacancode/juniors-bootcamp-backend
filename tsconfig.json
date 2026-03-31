@@ -1,18 +1,19 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "incremental": true,
     "target": "es2017",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "baseUrl": "./src",
     "module": "commonjs",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     },
     "declaration": true,
     "outDir": "./dist",
     "removeComments": true,
     "sourceMap": true,
+
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },

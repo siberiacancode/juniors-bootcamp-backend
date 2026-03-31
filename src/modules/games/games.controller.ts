@@ -24,8 +24,15 @@ import { UsersService } from '@/modules/users';
 import { ApiAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver } from '@/utils/services';
 
-import { BuyGameDto, GetGameDto, GetGameOrderDto, GetGamesFiltersDto, SearchGamesDto } from './dto';
 import {
+  CreateGameOrderDto,
+  GetGameDto,
+  GetGameOrderDto,
+  GetGamesSearchDto,
+  SearchGamesDto
+} from './dto';
+import {
+  CreateGameOrderResponse,
   GameAutocompleteResponse,
   GameBuyResponse,
   GameOrderResponse,
@@ -62,12 +69,12 @@ export class GamesController extends BaseResolver {
   @ApiQuery({ name: 'search', required: false, type: String, description: 'Поиск' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Страница' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Лимит' })
-  getGames(@Query() getGamesFiltersDto: GetGamesFiltersDto): GamesPaginatedResponse {
-    const games = this.gamesService.getFilteredGames(getGamesFiltersDto);
+  getGames(@Query() getGamesSearchDto: GetGamesSearchDto): GamesPaginatedResponse {
+    const games = this.gamesService.getFilteredGames(getGamesSearchDto);
     const paginatedGames = this.gamesService.getPagination({
       items: games,
-      page: getGamesFiltersDto.page,
-      limit: getGamesFiltersDto.limit
+      page: getGamesSearchDto.page,
+      limit: getGamesSearchDto.limit
     });
 
     return this.wrapSuccess(paginatedGames);
@@ -96,36 +103,38 @@ export class GamesController extends BaseResolver {
     return this.wrapSuccess({ data: game });
   }
 
-  @Post('/buy')
-  @ApiOperation({ summary: 'Купить игру и получить ключ' })
-  @ApiResponse({ status: 200, type: GameBuyResponse })
-  async buyGame(@Body() buyGameDto: BuyGameDto): Promise<GameBuyResponse> {
-    const game = this.gamesService.getGame(buyGameDto.gameId);
+  @Post('/order')
+  @ApiOperation({ summary: 'Создать заказ на игру и получить ключ' })
+  @ApiResponse({ status: 200, type: CreateGameOrderResponse })
+  async createGameOrder(
+    @Body() createGameOrderDto: CreateGameOrderDto
+  ): Promise<CreateGameOrderResponse> {
+    const game = this.gamesService.getGame(createGameOrderDto.gameId);
 
     if (!game) {
       throw new BadRequestException(this.wrapFail('Игра не найдена'));
     }
 
-    let user = await this.usersService.findOne({ phone: buyGameDto.person.phone });
+    let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
 
     if (!user) {
-      user = await this.usersService.create({ phone: buyGameDto.person.phone });
+      user = await this.usersService.create({ phone: createGameOrderDto.person.phone });
     }
 
     await this.usersService.findOneAndUpdate(
       { phone: user.phone },
       {
         $set: {
-          firstname: buyGameDto.person.firstName,
-          lastname: buyGameDto.person.lastName,
-          middlename: buyGameDto.person.middleName,
-          email: buyGameDto.person.email
+          firstname: createGameOrderDto.person.firstName,
+          lastname: createGameOrderDto.person.lastName,
+          middlename: createGameOrderDto.person.middleName,
+          email: createGameOrderDto.person.email
         }
       }
     );
 
     const order = await this.gameOrderService.create({
-      person: buyGameDto.person,
+      person: createGameOrderDto.person,
       gameSnapshot: {
         gameId: game.id,
         name: game.name,
@@ -138,6 +147,13 @@ export class GamesController extends BaseResolver {
     });
 
     return this.wrapSuccess({ order });
+  }
+
+  @Post('/buy')
+  @ApiOperation({ summary: 'Устаревший метод: используйте /games/order' })
+  @ApiResponse({ status: 200, type: GameBuyResponse })
+  async buyGame(@Body() buyGameDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
+    return this.createGameOrder(buyGameDto);
   }
 
   @ApiAuthorizedOnly()

@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 import { GAMES } from './constants';
-import { GetGamesFiltersDto, SearchGamesDto } from './dto';
+import { GetGamesSearchDto, SearchGamesDto } from './dto';
+import { GamesPaginationMeta } from './entities';
 
 interface GetPaginationParams<Item> {
   items: Item[];
@@ -9,16 +10,9 @@ interface GetPaginationParams<Item> {
   page?: number;
 }
 
-interface PaginationMeta {
-  limit: number;
-  page: number;
-  total: number;
-  totalPages: number;
-}
-
 interface PaginationResult<Item> {
   data: Item[];
-  meta: PaginationMeta;
+  meta: GamesPaginationMeta;
 }
 
 @Injectable()
@@ -31,7 +25,7 @@ export class GamesService {
     return this.getGames().find((game) => game.id === id);
   }
 
-  getFilteredGames(filters: GetGamesFiltersDto) {
+  getFilteredGames(filters: GetGamesSearchDto) {
     let filteredGames = this.getGames();
 
     if (typeof filters.year === 'number') {

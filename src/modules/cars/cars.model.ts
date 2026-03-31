@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { BaseResponse } from '@/utils/services';
 
-import { Car, PaginationMeta } from './entities';
+import { Car, CarsPaginationMeta } from './entities';
 import { CarRent } from './modules';
 
 @ObjectType()
@@ -12,12 +12,12 @@ export class CarsPaginatedResponse extends BaseResponse {
   @ApiProperty({ description: 'Массив автомобилей с информацией', type: [Car] })
   data: Car[];
 
-  @Field(() => PaginationMeta)
+  @Field(() => CarsPaginationMeta)
   @ApiProperty({
     description: 'Метаданные пагинации (общее количество, текущая страница и т.д.)',
-    type: PaginationMeta
+    type: CarsPaginationMeta
   })
-  meta: PaginationMeta;
+  meta: CarsPaginationMeta;
 }
 
 @ObjectType()

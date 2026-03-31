@@ -17,7 +17,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         ...payload
       });
     } catch (err) {
-      throw new UnauthorizedException('Unauthorized', err.message);
+      throw new UnauthorizedException(
+        'Unauthorized',
+        err instanceof Error ? err.message : 'Unknown error'
+      );
     }
   }
 }

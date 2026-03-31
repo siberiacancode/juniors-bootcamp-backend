@@ -7,6 +7,14 @@ import { apiReference } from '@scalar/nestjs-api-reference';
 import { join } from 'node:path';
 import * as client from 'prom-client';
 
+import { CarsModule } from '@/modules/cars/cars.module';
+import { CinemaModule } from '@/modules/cinema/cinema.module';
+import { DeliveryModule } from '@/modules/delivery/delivery.module';
+import { GamesModule } from '@/modules/games/games.module';
+import { OtpsModule } from '@/modules/otps/otps.module';
+import { PizzaModule } from '@/modules/pizza/pizza.module';
+import { UsersModule } from '@/modules/users/users.module';
+
 import { AppModule } from './app.module';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
 
@@ -73,6 +81,14 @@ async function bootstrap() {
     res.end(await register.metrics());
   });
 
+  const moduleDocs = [
+    { name: 'cars', module: CarsModule },
+    { name: 'cinema', module: CinemaModule },
+    { name: 'delivery', module: DeliveryModule },
+    { name: 'games', module: GamesModule },
+    { name: 'pizza', module: PizzaModule }
+  ] as const;
+
   const restConfig = new DocumentBuilder()
     .setTitle('juniors bootcamp backend 🔥')
     .setDescription('Апи для выполнения индивидуальных заданий')
@@ -84,6 +100,20 @@ async function bootstrap() {
       bearerFormat: 'JWT'
     })
     .build();
+
+  for (const moduleDoc of moduleDocs) {
+    const includeModules = [UsersModule, OtpsModule, moduleDoc.module];
+    const moduleDocument = SwaggerModule.createDocument(app, restConfig, {
+      include: includeModules
+    });
+
+    app.use(
+      withBaseUrl(`/rest/${moduleDoc.name}`),
+      apiReference({
+        content: moduleDocument
+      })
+    );
+  }
 
   const document = SwaggerModule.createDocument(app, restConfig);
   app.use(

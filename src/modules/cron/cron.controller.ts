@@ -24,7 +24,7 @@ export class CronController extends BaseResolver {
     const mongoOtps = await this.otpsService.find();
 
     const expiredOtpsIds = mongoOtps
-      .filter((otp) => new Date(otp.created).getTime() + OTP_EXPIRED_TIME < new Date().getTime())
+      .filter((otp) => new Date(otp.created).getTime() + OTP_EXPIRED_TIME < Date.now())
       .map((otp) => otp._id);
 
     await this.otpsService.delete({ _id: { $in: expiredOtpsIds } });
@@ -73,10 +73,10 @@ export class CronController extends BaseResolver {
 
   @Cron('0 0 * * *')
   async handleCarsCron() {
-    const dateNow = new Date();
+    const dateNow = Date.now();
 
     const rents = await this.carRentService.find({
-      $and: [{ status: { $ne: CarRentStatus.CANCELLED }, endDate: { $gt: dateNow.toISOString() } }]
+      $and: [{ status: { $ne: CarRentStatus.CANCELLED }, endDate: { $gt: dateNow } }]
     });
 
     if (!rents.length) return;

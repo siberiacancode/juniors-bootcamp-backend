@@ -3,7 +3,7 @@ import type { Document } from 'mongoose';
 import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { Schema as MongooseSchema } from 'mongoose';
+import { Types } from 'mongoose';
 
 import {
   DeliveryOptionType,
@@ -43,9 +43,9 @@ registerEnumType(DeliveryStatus, {
 })
 export class DeliveryOrder {
   @Field(() => String)
-  @Prop({ type: MongooseSchema.Types.ObjectId })
+  @Prop({ type: Types.ObjectId })
   @ApiProperty({ description: 'ID заказа', type: String })
-  _id: MongooseSchema.Types.ObjectId;
+  _id: Types.ObjectId;
 
   @Field(() => Number)
   @Prop({ required: true })

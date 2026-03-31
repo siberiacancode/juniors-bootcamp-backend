@@ -3,8 +3,8 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { GameGenre } from '../constants';
 
-@ObjectType()
-export class PaginationMeta {
+@ObjectType('GamesPaginationMeta')
+export class GamesPaginationMeta {
   @Field(() => Number)
   @ApiProperty({ example: 30, description: 'Общее количество элементов' })
   total: number;
@@ -53,7 +53,7 @@ export class Game {
   description: string;
 
   @Field(() => String)
-  @ApiProperty({ example: '/static/images/pizza/1.webp', description: 'Изображение игры' })
+  @ApiProperty({ example: '/static/images/games/cs2.webp', description: 'Изображение игры' })
   image: string;
 
   @Field(() => Number)

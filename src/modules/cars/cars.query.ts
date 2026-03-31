@@ -10,7 +10,7 @@ import type { User } from '../users';
 import { UsersService } from '../users';
 import { CarRentsResponse, CarResponse, CarsPaginatedResponse } from './cars.model';
 import { CarsService } from './cars.service';
-import { GetCarDto, GetCarRentDto, GetCarsFilterDto } from './dto';
+import { GetCarDto, GetCarRentDto, GetCarsSearchDto } from './dto';
 import { CarRentService, CarRentStatus } from './modules';
 
 @Resolver('🏎️ cars query')
@@ -25,7 +25,7 @@ export class CarsQuery extends BaseResolver {
   }
 
   @Query(() => CarsPaginatedResponse)
-  getCars(@Args() getCarsQuery: GetCarsFilterDto): CarsPaginatedResponse {
+  getCars(@Args() getCarsQuery: GetCarsSearchDto): CarsPaginatedResponse {
     const filteredCars = this.carsService.getFilteredCars({ filters: getCarsQuery });
     const paginatedCars = this.carsService.getPagination({
       items: filteredCars,
@@ -45,7 +45,7 @@ export class CarsQuery extends BaseResolver {
     }
 
     const carRents = await this.carRentService.find({
-      carId: getCarDto.carId,
+      'carInfo.id': getCarDto.carId,
       status: CarRentStatus.BOOKED
     });
 

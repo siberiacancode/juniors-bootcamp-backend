@@ -4,8 +4,8 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UsersService } from '@/modules/users';
 import { BaseResolver } from '@/utils/services';
 
-import { BuyGameDto } from './dto';
-import { GameBuyResponse } from './games.model';
+import { CreateGameOrderDto } from './dto';
+import { CreateGameOrderResponse, GameBuyResponse } from './games.model';
 import { GamesService } from './games.service';
 import { GameOrderService, GameOrderStatus } from './modules';
 
@@ -20,34 +20,36 @@ export class GamesMutation extends BaseResolver {
     super();
   }
 
-  @Mutation(() => GameBuyResponse)
-  async buyGame(@Args() buyGameDto: BuyGameDto): Promise<GameBuyResponse> {
-    const game = this.gamesService.getGame(buyGameDto.gameId);
+  @Mutation(() => CreateGameOrderResponse)
+  async createGameOrder(
+    @Args() createGameOrderDto: CreateGameOrderDto
+  ): Promise<CreateGameOrderResponse> {
+    const game = this.gamesService.getGame(createGameOrderDto.gameId);
 
     if (!game) {
       throw new BadRequestException(this.wrapFail('Игра не найдена'));
     }
 
-    let user = await this.usersService.findOne({ phone: buyGameDto.person.phone });
+    let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
 
     if (!user) {
-      user = await this.usersService.create({ phone: buyGameDto.person.phone });
+      user = await this.usersService.create({ phone: createGameOrderDto.person.phone });
     }
 
     await this.usersService.findOneAndUpdate(
       { phone: user.phone },
       {
         $set: {
-          firstname: buyGameDto.person.firstName,
-          lastname: buyGameDto.person.lastName,
-          middlename: buyGameDto.person.middleName,
-          email: buyGameDto.person.email
+          firstname: createGameOrderDto.person.firstName,
+          lastname: createGameOrderDto.person.lastName,
+          middlename: createGameOrderDto.person.middleName,
+          email: createGameOrderDto.person.email
         }
       }
     );
 
     const order = await this.gameOrderService.create({
-      person: buyGameDto.person,
+      person: createGameOrderDto.person,
       gameSnapshot: {
         gameId: game.id,
         name: game.name,
@@ -60,6 +62,13 @@ export class GamesMutation extends BaseResolver {
     });
 
     return this.wrapSuccess({ order });
+  }
+
+  @Mutation(() => GameBuyResponse, {
+    deprecationReason: 'Use createGameOrder instead'
+  })
+  async buyGame(@Args() buyGameDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
+    return this.createGameOrder(buyGameDto);
   }
 
   private generateGameKey(): string {

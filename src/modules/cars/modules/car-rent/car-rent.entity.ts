@@ -3,7 +3,7 @@ import type { Document } from 'mongoose';
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { Schema as MongooseSchema } from 'mongoose';
+import { Types } from 'mongoose';
 
 import { BodyType, Brand, Color, Steering, Transmission } from '../../constants/enums';
 import { Car } from '../../entities';
@@ -26,7 +26,7 @@ registerEnumType(CarRentStatus, {
 export class CarRent {
   @Field(() => String)
   @ApiProperty({ description: 'ID заказа', type: String })
-  _id: MongooseSchema.Types.ObjectId;
+  _id: Types.ObjectId;
 
   @Field(() => Car)
   @Prop({ required: true })

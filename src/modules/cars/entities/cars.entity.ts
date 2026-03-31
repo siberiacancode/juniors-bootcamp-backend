@@ -66,8 +66,8 @@ export class Car {
   steering: Steering;
 }
 
-@ObjectType('PaginationMeta')
-export class PaginationMeta {
+@ObjectType('CarsPaginationMeta')
+export class CarsPaginationMeta {
   @Field(() => Number)
   @ApiProperty({
     example: 100,

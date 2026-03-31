@@ -3,7 +3,7 @@ import type { Document } from 'mongoose';
 import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { Schema as MongooseSchema } from 'mongoose';
+import { Types } from 'mongoose';
 
 export enum CinemaTicketStatus {
   PAYED = 'PAYED',
@@ -37,7 +37,7 @@ export class CinemaTicketSeance {
 export class CinemaTicket {
   @Field(() => String)
   @ApiProperty({ description: 'ID билета', type: String })
-  _id: MongooseSchema.Types.ObjectId;
+  _id: Types.ObjectId;
 
   @Field(() => String)
   @Prop({ required: true })

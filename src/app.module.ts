@@ -55,7 +55,7 @@ import { withBaseUrl } from './utils/helpers';
     }),
     ServeStaticModule.forRoot({
       serveRoot: withBaseUrl('/static'),
-      rootPath: path.join(__dirname, 'static')
+      rootPath: path.join(__dirname, '/static')
     }),
     OtpsModule,
     UsersModule,

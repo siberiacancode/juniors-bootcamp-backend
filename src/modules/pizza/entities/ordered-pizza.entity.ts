@@ -22,6 +22,7 @@ export class OrderedPizza {
     example: ['PINEAPPLE', 'CHEDDAR'],
     description: 'Топпинги',
     enum: Ingredient,
+    enumName: 'Ingredient',
     type: [Ingredient]
   })
   toppings: Ingredient[];

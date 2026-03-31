@@ -10,8 +10,8 @@ import {
   ValidateNested
 } from 'class-validator';
 
-@InputType('BuyGamePersonDto')
-export class BuyGamePersonDto {
+@InputType('CreateGameOrderPersonDto')
+export class CreateGameOrderPersonDto {
   @IsString()
   @IsNotEmpty()
   @Field(() => String)
@@ -43,7 +43,7 @@ export class BuyGamePersonDto {
 }
 
 @ArgsType()
-export class BuyGameDto {
+export class CreateGameOrderDto {
   @IsString()
   @IsNotEmpty()
   @Field(() => String)
@@ -51,8 +51,8 @@ export class BuyGameDto {
   gameId: string;
 
   @ValidateNested()
-  @Type(() => BuyGamePersonDto)
-  @Field(() => BuyGamePersonDto)
-  @ApiProperty({ description: 'Данные покупателя', type: BuyGamePersonDto })
-  person: BuyGamePersonDto;
+  @Type(() => CreateGameOrderPersonDto)
+  @Field(() => CreateGameOrderPersonDto)
+  @ApiProperty({ description: 'Данные покупателя', type: CreateGameOrderPersonDto })
+  person: CreateGameOrderPersonDto;
 }

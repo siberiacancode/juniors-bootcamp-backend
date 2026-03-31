@@ -33,7 +33,7 @@ import {
 } from './cars.model';
 import { CarsService } from './cars.service';
 import { BodyType, Brand, Color, Transmission } from './constants/enums';
-import { CancelCarRentDto, CreateRentDto, GetCarDto, GetCarRentDto, GetCarsFilterDto } from './dto';
+import { CancelCarRentDto, CreateRentDto, GetCarDto, GetCarRentDto, GetCarsSearchDto } from './dto';
 import { CarRent, CarRentService, CarRentStatus } from './modules';
 
 @ApiTags('🏎️ cars')
@@ -108,7 +108,7 @@ export class CarsController extends BaseResolver {
     type: String,
     description: 'Поиск'
   })
-  getCars(@Query() getCarsQuery: GetCarsFilterDto): CarsPaginatedResponse {
+  getCars(@Query() getCarsQuery: GetCarsSearchDto): CarsPaginatedResponse {
     const filteredCars = this.carsService.getFilteredCars({ filters: getCarsQuery });
     const paginatedCars = this.carsService.getPagination({
       items: filteredCars,
@@ -134,7 +134,7 @@ export class CarsController extends BaseResolver {
     }
 
     const carRents = await this.carRentService.find({
-      carId: params.carId,
+      'carInfo.id': params.carId,
       status: CarRentStatus.BOOKED
     });
 
@@ -187,10 +187,10 @@ export class CarsController extends BaseResolver {
     }
 
     const overlappingRents = await this.carRentService.find({
-      carId: createCarRentDto.carId,
+      'carInfo.id': createCarRentDto.carId,
       status: CarRentStatus.BOOKED,
-      startDate: { $lte: endDate },
-      endDate: { $gte: startDate }
+      startDate: { $lte: endDate.getTime() },
+      endDate: { $gte: startDate.getTime() }
     });
 
     if (overlappingRents.length) {
@@ -228,7 +228,6 @@ export class CarsController extends BaseResolver {
 
     const rent = await this.carRentService.create({
       ...createCarRentDto,
-      carId: undefined,
       status: CarRentStatus.BOOKED,
       totalPrice: rentalDays * car.price,
       carInfo: car

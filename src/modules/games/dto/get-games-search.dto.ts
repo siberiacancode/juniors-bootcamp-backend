@@ -8,7 +8,7 @@ import { transformSearchParam } from '@/utils/helpers';
 import { GameGenre } from '../constants';
 
 @ArgsType()
-export class GetGamesFiltersDto {
+export class GetGamesSearchDto {
   @IsOptional()
   @Transform(({ value }) => Number.parseInt(value, 10))
   @IsNumber()

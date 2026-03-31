@@ -14,7 +14,8 @@ export class FilmHall {
   @ApiProperty({
     example: [[{ type: FilmHallCellType.ECONOM, price: 100 }]],
     description: 'Места в зале',
-    type: [[FilmHallCell]]
+    type: [[FilmHallCell]],
+    enumName: 'FilmHallCell'
   })
   places: FilmHallCell[][];
 }

@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { BaseResponse } from '@/utils/services';
 
-import { Game, PaginationMeta } from './entities';
+import { Game, GamesPaginationMeta } from './entities';
 import { GameOrder } from './modules';
 
 @ObjectType()
@@ -12,9 +12,9 @@ export class GamesPaginatedResponse extends BaseResponse {
   @ApiProperty({ description: 'Список игр', type: [Game] })
   data: Game[];
 
-  @Field(() => PaginationMeta)
-  @ApiProperty({ description: 'Пагинация', type: PaginationMeta })
-  meta: PaginationMeta;
+  @Field(() => GamesPaginationMeta)
+  @ApiProperty({ description: 'Пагинация', type: GamesPaginationMeta })
+  meta: GamesPaginationMeta;
 }
 
 @ObjectType()
@@ -32,11 +32,14 @@ export class GameAutocompleteResponse extends BaseResponse {
 }
 
 @ObjectType()
-export class GameBuyResponse extends BaseResponse {
+export class CreateGameOrderResponse extends BaseResponse {
   @Field(() => GameOrder)
   @ApiProperty({ description: 'Заказ на игру', type: GameOrder })
   order: GameOrder;
 }
+
+@ObjectType()
+export class GameBuyResponse extends CreateGameOrderResponse {}
 
 @ObjectType()
 export class GameOrdersResponse extends BaseResponse {
