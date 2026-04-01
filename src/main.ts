@@ -107,6 +107,10 @@ async function bootstrap() {
       include: includeModules
     });
 
+    app.use(withBaseUrl(`/rest/${moduleDoc.name}.json`), (_req, res) => {
+      res.json(moduleDocument);
+    });
+
     app.use(
       withBaseUrl(`/rest/${moduleDoc.name}`),
       apiReference({
@@ -122,6 +126,10 @@ async function bootstrap() {
   }
 
   const document = SwaggerModule.createDocument(app, restConfig);
+  app.use(withBaseUrl('/rest.json'), (_req, res) => {
+    res.json(document);
+  });
+
   app.use(
     withBaseUrl('/rest'),
     apiReference({
