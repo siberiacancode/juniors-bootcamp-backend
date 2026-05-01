@@ -5,78 +5,59 @@ import { Profession, Rating } from '../entities';
 export const FILMS: Film[] = [
   {
     id: '1',
-    name: 'Зеленая миля',
-    originalName: 'The Green Mile',
+    name: 'Варкрафт',
+    originalName: 'Warcraft',
     description:
-      'Пол Эджкомб — начальник блока смертников в тюрьме «Холодная гора», каждый из узников которого однажды проходит «зеленую милю» по пути к месту казни. Пол повидал много заключённых и надзирателей за время работы. Однако гигант Джон Коффи, обвинённый в страшном преступлении, стал одним из самых необычных обитателей блока.',
-    releaseDate: '6 декабря 1999',
+      'Мир Азерота оказывается на грани войны, когда через портал в него приходят орки, ищущие новый дом для своего народа.',
+    releaseDate: '25 мая 2016',
     actors: [
       {
         id: '1',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Том Хэнкс'
+        professions: [Profession.ACTOR],
+        fullName: 'Трэвис Фиммел',
+        photo: '/static/images/cinema/actors/travis-fimmel.webp'
       },
       {
         id: '2',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Дэвид Морс'
+        professions: [Profession.ACTOR],
+        fullName: 'Пола Пэттон',
+        photo: '/static/images/cinema/actors/paula-patton.webp'
       },
       {
         id: '3',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Бонни Хант'
+        professions: [Profession.ACTOR],
+        fullName: 'Бен Фостер',
+        photo: '/static/images/cinema/actors/ben-foster.webp'
       },
       {
         id: '4',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Майкл Кларк Дункан'
+        professions: [Profession.ACTOR],
+        fullName: 'Доминик Купер',
+        photo: '/static/images/cinema/actors/dominic-cooper.webp'
       },
       {
         id: '5',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Джеймс Кромуэлл'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Майкл Джитер'
-      },
-      {
-        id: '7',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Грэм Грин'
-      },
-      {
-        id: '8',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Даг Хатчисон'
-      },
-      {
-        id: '9',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Сэм Рокуэлл'
-      },
-      {
-        id: '10',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Барри Пеппер'
+        professions: [Profession.ACTOR],
+        fullName: 'Тоби Кеббелл',
+        photo: '/static/images/cinema/actors/toby-kebbell.webp'
       }
     ],
     directors: [
       {
         id: '1',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Фрэнк Дарабонт'
+        professions: [Profession.DIRECTOR],
+        fullName: 'Дункан Джонс',
+        photo: '/static/images/cinema/directors/duncan-jones.webp'
       }
     ],
-    runtime: 189,
-    ageRating: Rating.R,
-    genres: ['драма', 'фэнтези', 'криминал'],
+    runtime: 123,
+    ageRating: Rating.PG13,
+    genres: ['фэнтези', 'боевик', 'приключения'],
     userRatings: {
-      kinopoisk: '9.1',
-      imdb: '8.6'
+      kinopoisk: '7.6',
+      imdb: '6.7'
     },
-    img: '/static/images/cinema/film_1.webp',
+    img: '/static/images/cinema/films/warcraft.webp',
     country: {
       id: 1,
       code: 'USA',
@@ -86,149 +67,121 @@ export const FILMS: Film[] = [
   },
   {
     id: '2',
-    name: 'Голова',
-    originalName: 'Голова',
+    name: 'Один дома',
+    originalName: 'Home Alone',
     description:
-      'Новому русскому достается в наследство голова. Вопреки ожиданиям отсутствие тела не мешает голове нормально существовать и даже давать новому русскому мудрые советы. Новый русский следует ее советам беспрекословно.',
-    releaseDate: '1 января 2004',
+      'Восьмилетний Кевин случайно остается дома один на Рождество и вынужден защищать дом от двух незадачливых грабителей.',
+    releaseDate: '10 ноября 1990',
     actors: [
       {
         id: '1',
         professions: [Profession.ACTOR],
-        fullName: 'Александр Маслаев'
+        fullName: 'Маколей Калкин',
+        photo: '/static/images/cinema/actors/macaulay-culkin.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Сергей Пахомов'
+        fullName: 'Джо Пеши',
+        photo: '/static/images/cinema/actors/joe-pesci.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'Анатолий Осмоловский'
+        fullName: 'Дэниел Стерн',
+        photo: '/static/images/cinema/actors/daniel-stern.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Денис Геймур'
+        fullName: "Кэтрин О'Хара",
+        photo: '/static/images/cinema/actors/catherine-ohara.webp'
       },
       {
         id: '5',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Леонид Машинский'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Рустам Мосафир'
-      },
-      {
-        id: '7',
         professions: [Profession.ACTOR],
-        fullName: 'Георгий Острецов'
-      },
-      {
-        id: '8',
-        professions: [Profession.ACTOR],
-        fullName: 'Данила Константинов'
+        fullName: 'Джон Хёрд',
+        photo: '/static/images/cinema/actors/john-heard.webp'
       }
     ],
     directors: [
       {
         id: '1',
         professions: [Profession.DIRECTOR],
-        fullName: 'Светлана Баскова'
+        fullName: 'Крис Коламбус',
+        photo: '/static/images/cinema/directors/chris-columbus.webp'
       }
     ],
-    runtime: 90,
-    ageRating: Rating.NC17,
-    genres: ['драма', 'комедия', 'фэнтези'],
+    runtime: 103,
+    ageRating: Rating.PG,
+    genres: ['комедия', 'семейный'],
     userRatings: {
-      kinopoisk: '5.1',
-      imdb: '4.9'
+      kinopoisk: '8.3',
+      imdb: '7.7'
     },
-    img: '/static/images/cinema/film_2.webp',
+    img: '/static/images/cinema/films/home-alone.webp',
     country: {
       id: 2,
-      code: 'RUS',
-      code2: 'RU',
-      name: 'Россия'
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
     }
   },
   {
     id: '3',
-    name: 'Горбатая гора',
-    originalName: 'Brokeback Mountain',
+    name: 'Остров проклятых',
+    originalName: 'Shutter Island',
     description:
-      'На фоне живописных просторов штата Вайоминг разворачивается история сложных взаимоотношений двух молодых людей – помощника владельца ранчо и ковбоя родео. Герои случайно встречаются и скоро понимают, что не могут жить друг без друга. Однако судьба упрямо испытывает их на прочность.',
-    releaseDate: '2 сентября 2005',
+      'Два федеральных маршала прибывают на изолированный остров, чтобы расследовать исчезновение пациентки психиатрической клиники.',
+    releaseDate: '13 февраля 2010',
     actors: [
       {
         id: '1',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Хит Леджер'
+        professions: [Profession.ACTOR],
+        fullName: 'Леонардо ДиКаприо',
+        photo: '/static/images/cinema/actors/leonardo-dicaprio.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Джейк Джилленхол'
+        fullName: 'Марк Руффало',
+        photo: '/static/images/cinema/actors/mark-ruffalo.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'Рэнди Куэйд'
+        fullName: 'Бен Кингсли',
+        photo: '/static/images/cinema/actors/ben-kingsley.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Мишель Уильямс'
+        fullName: 'Мишель Уильямс',
+        photo: '/static/images/cinema/actors/michelle-williams.webp'
       },
       {
         id: '5',
         professions: [Profession.ACTOR],
-        fullName: 'Энн Хэтэуэй'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR],
-        fullName: 'Линда Карделлини'
-      },
-      {
-        id: '7',
-        professions: [Profession.ACTOR],
-        fullName: 'Анна Фэрис'
-      },
-      {
-        id: '8',
-        professions: [Profession.ACTOR],
-        fullName: 'Дэвид Харбор'
-      },
-      {
-        id: '9',
-        professions: [Profession.ACTOR],
-        fullName: 'Кейт Мара'
-      },
-      {
-        id: '10',
-        professions: [Profession.ACTOR],
-        fullName: 'Грэм Беккел'
+        fullName: 'Макс фон Сюдов',
+        photo: '/static/images/cinema/actors/max-von-sydow.webp'
       }
     ],
     directors: [
       {
         id: '1',
         professions: [Profession.DIRECTOR],
-        fullName: 'Энг Ли'
+        fullName: 'Мартин Скорсезе',
+        photo: '/static/images/cinema/directors/martin-scorsese.webp'
       }
     ],
-    runtime: 134,
+    runtime: 138,
     ageRating: Rating.R,
-    genres: ['вестерн', 'мелодрама', 'драма'],
+    genres: ['триллер', 'детектив', 'драма'],
     userRatings: {
-      kinopoisk: '7.6',
-      imdb: '7.7'
+      kinopoisk: '8.5',
+      imdb: '8.2'
     },
-    img: '/static/images/cinema/film_3.webp',
+    img: '/static/images/cinema/films/shutter-island.webp',
     country: {
       id: 3,
       code: 'USA',
@@ -238,164 +191,121 @@ export const FILMS: Film[] = [
   },
   {
     id: '4',
-    name: 'Я люблю тебя, Филлип Моррис',
-    originalName: 'I Love You Phillip Morris',
+    name: 'Хроники Риддика',
+    originalName: 'The Chronicles of Riddick',
     description:
-      'Стивен Расселл — образцовый отец семейства — в результате дерзкой аферы оказывается в техасской тюрьме. Там он без памяти влюбляется в другого заключенного, Филлипа Морриса.',
-    releaseDate: '18 января 2009',
+      'Беглец Риддик оказывается втянут в войну с безжалостной армией некромонгеров, покоряющей планеты одну за другой.',
+    releaseDate: '11 июня 2004',
     actors: [
       {
         id: '1',
         professions: [Profession.ACTOR],
-        fullName: 'Джим Керри'
+        fullName: 'Вин Дизель',
+        photo: '/static/images/cinema/actors/vin-diesel.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Юэн Макгрегор'
+        fullName: 'Колм Фиор',
+        photo: '/static/images/cinema/actors/colm-feore.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'Лесли Манн'
+        fullName: 'Тэнди Ньютон',
+        photo: '/static/images/cinema/actors/thandiwe-newton.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Родриго Санторо'
+        fullName: 'Джуди Денч',
+        photo: '/static/images/cinema/actors/judi-dench.webp'
       },
       {
         id: '5',
         professions: [Profession.ACTOR],
-        fullName: 'Энтони Короне'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR],
-        fullName: 'Майкл Манделл'
-      },
-      {
-        id: '7',
-        professions: [Profession.ACTOR],
-        fullName: 'Энни Голден'
-      },
-      {
-        id: '8',
-        professions: [Profession.ACTOR],
-        fullName: 'Мэрилуиз Бёрк'
-      },
-      {
-        id: '9',
-        professions: [Profession.ACTOR],
-        fullName: 'Бреннан Браун'
-      },
-      {
-        id: '10',
-        professions: [Profession.ACTOR],
-        fullName: 'Дэвид Дженсен'
+        fullName: 'Карл Урбан',
+        photo: '/static/images/cinema/actors/karl-urban.webp'
       }
     ],
     directors: [
       {
         id: '1',
         professions: [Profession.DIRECTOR],
-        fullName: 'Гленн Фикарра'
-      },
-      {
-        id: '2',
-        professions: [Profession.DIRECTOR],
-        fullName: 'Джон Рекуа'
+        fullName: 'Дэвид Туи',
+        photo: '/static/images/cinema/directors/david-twohy.webp'
       }
     ],
-    runtime: 102,
-    ageRating: Rating.R,
-    genres: ['драма', 'мелодрама', 'комедия', 'криминал', 'биография'],
+    runtime: 119,
+    ageRating: Rating.PG13,
+    genres: ['фантастика', 'боевик', 'приключения'],
     userRatings: {
-      kinopoisk: '6.9',
+      kinopoisk: '7.2',
       imdb: '6.6'
     },
-    img: '/static/images/cinema/film_4.webp',
+    img: '/static/images/cinema/films/the-chronicles-of-riddick.webp',
     country: {
       id: 4,
-      code: 'FRA',
-      code2: 'FR',
-      name: 'Франция'
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
     }
   },
   {
     id: '5',
-    name: 'Бруно',
-    originalName: 'Brüno',
+    name: 'Маска',
+    originalName: 'The Mask',
     description:
-      'Неудачливый ведущий передачи о моде, австрийский гей Бруно, едет за славой в Америку.',
-    releaseDate: '25 июня 2009',
+      'Скромный банковский служащий находит древнюю маску, которая превращает его в харизматичного и хаотичного героя.',
+    releaseDate: '29 июля 1994',
     actors: [
       {
         id: '1',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Саша Барон Коэн'
+        professions: [Profession.ACTOR],
+        fullName: 'Джим Керри',
+        photo: '/static/images/cinema/actors/jim-carrey.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Густаф Хаммарстен'
+        fullName: 'Кэмерон Диас',
+        photo: '/static/images/cinema/actors/cameron-diaz.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'Клиффорд Бэнэгейл'
+        fullName: 'Питер Ригерт',
+        photo: '/static/images/cinema/actors/peter-riegert.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Чибунду Оруквову'
+        fullName: 'Питер Грин',
+        photo: '/static/images/cinema/actors/peter-greene.webp'
       },
       {
         id: '5',
         professions: [Profession.ACTOR],
-        fullName: 'Чигози Оруквову'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR],
-        fullName: 'Джош Мейерс'
-      },
-      {
-        id: '7',
-        professions: [Profession.ACTOR],
-        fullName: 'Тоби Холгин'
-      },
-      {
-        id: '8',
-        professions: [Profession.ACTOR],
-        fullName: 'Роберт Уэрта'
-      },
-      {
-        id: '9',
-        professions: [Profession.ACTOR],
-        fullName: 'Гилберт Розалес'
-      },
-      {
-        id: '10',
-        professions: [Profession.ACTOR],
-        fullName: 'Томас Розалес мл.'
+        fullName: 'Эми Ясбек',
+        photo: '/static/images/cinema/actors/amy-yasbeck.webp'
       }
     ],
     directors: [
       {
         id: '1',
         professions: [Profession.DIRECTOR],
-        fullName: 'Ларри Чарльз'
+        fullName: 'Чак Рассел',
+        photo: '/static/images/cinema/directors/chuck-russell.webp'
       }
     ],
-    runtime: 81,
-    ageRating: Rating.R,
-    genres: ['комедия'],
+    runtime: 101,
+    ageRating: Rating.PG13,
+    genres: ['комедия', 'фэнтези'],
     userRatings: {
-      kinopoisk: '5.8',
-      imdb: '5.9'
+      kinopoisk: '7.8',
+      imdb: '6.9'
     },
-    img: '/static/images/cinema/film_5.webp',
+    img: '/static/images/cinema/films/the-mask.webp',
     country: {
       id: 5,
       code: 'USA',
@@ -405,354 +315,805 @@ export const FILMS: Film[] = [
   },
   {
     id: '6',
-    name: 'Олдбой',
-    originalName: 'Oldeuboi',
+    name: 'Молчание ягнят',
+    originalName: 'The Silence of the Lambs',
     description:
-      '1988 год. Обыкновенный и ничем непримечательный бизнесмен О Дэ-cу в день трёхлетия дочери по пути домой напивается, начинает хулиганить и закономерно попадает в полицейский участок. Из участка его под своё поручительство забирает друг детства. Пока тот звонит жене незадачливого пьяницы, О Дэ-су пропадает. Неизвестные похищают его и помещают в комнату без окон на 15 лет.',
-    releaseDate: '21 ноября 2003',
+      'Молодая агентка ФБР обращается за помощью к заключённому психиатру и каннибалу Ганнибалу Лектеру, чтобы поймать серийного убийцу.',
+    releaseDate: '30 января 1991',
     actors: [
       {
         id: '1',
         professions: [Profession.ACTOR],
-        fullName: 'Чхве Мин-сик'
+        fullName: 'Джоди Фостер',
+        photo: '/static/images/cinema/actors/jodie-foster.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Ю Джи-тхэ'
+        fullName: 'Энтони Хопкинс',
+        photo: '/static/images/cinema/actors/anthony-hopkins.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'Кан Хе-джон'
+        fullName: 'Скотт Гленн',
+        photo: '/static/images/cinema/actors/scott-glenn.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Ким Бён-ок'
+        fullName: 'Тед Ливайн',
+        photo: '/static/images/cinema/actors/ted-levine.webp'
       },
       {
         id: '5',
         professions: [Profession.ACTOR],
-        fullName: 'О Даль-су'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR],
-        fullName: 'Чи Дэ-хан'
-      },
-      {
-        id: '7',
-        professions: [Profession.ACTOR],
-        fullName: 'Ли Сын-щин'
-      },
-      {
-        id: '8',
-        professions: [Profession.ACTOR],
-        fullName: 'Юн Джин-со'
-      },
-      {
-        id: '9',
-        professions: [Profession.ACTOR],
-        fullName: 'Ли Дэ-ён'
-      },
-      {
-        id: '10',
-        professions: [Profession.ACTOR],
-        fullName: 'О Гван-нок'
+        fullName: 'Энтони Хилд',
+        photo: '/static/images/cinema/actors/anthony-heald.webp'
       }
     ],
     directors: [
       {
         id: '1',
         professions: [Profession.DIRECTOR],
-        fullName: 'Пак Чхан-ук'
+        fullName: 'Джонатан Демми',
+        photo: '/static/images/cinema/directors/jonathan-demme.webp'
       }
     ],
-    runtime: 120,
+    runtime: 118,
     ageRating: Rating.R,
-    genres: ['триллер', 'детектив', 'драма', 'боевик', 'криминал'],
+    genres: ['триллер', 'детектив', 'криминал'],
     userRatings: {
-      kinopoisk: '8.1',
-      imdb: '8.4'
+      kinopoisk: '8.3',
+      imdb: '8.6'
     },
-    img: '/static/images/cinema/film_6.webp',
+    img: '/static/images/cinema/films/the-silence-of-the-lambs.webp',
     country: {
       id: 6,
-      code: 'KOR',
-      code2: 'KR',
-      name: 'Южная Корея'
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
     }
   },
   {
     id: '7',
-    name: 'Пять бутылок водки',
-    originalName: 'Пять бутылок водки',
+    name: 'Интерстеллар',
+    originalName: 'Interstellar',
     description:
-      'Фильм о закулисной жизни обычного московского бара, где отношения между хозяином, «крышей» и работниками очень напоминают семейные. Однако в отличие от семьи этих людей связывает совместное дело, роли в котором далеко не равноценны. Отношения подчинения и угнетения пронизывают собой всю жизнь героев этого фильма.',
-    releaseDate: '2002',
+      'Группа исследователей отправляется через червоточину в поисках нового дома для человечества.',
+    releaseDate: '26 октября 2014',
     actors: [
       {
         id: '1',
         professions: [Profession.ACTOR],
-        fullName: 'Александр Маслаев'
+        fullName: 'Мэттью Макконахи',
+        photo: '/static/images/cinema/actors/matthew-mcconaughey.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Денис Васильев'
+        fullName: 'Энн Хэтэуэй',
+        photo: '/static/images/cinema/actors/anne-hathaway.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'Сергей Пахомов'
+        fullName: 'Джессика Честейн',
+        photo: '/static/images/cinema/actors/jessica-chastain.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Владимир Епифанцев'
+        fullName: 'Майкл Кейн',
+        photo: '/static/images/cinema/actors/michael-caine.webp'
       },
       {
         id: '5',
         professions: [Profession.ACTOR],
-        fullName: 'Диллон Олойеде'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Мария Болтнева'
+        fullName: 'Маккензи Фой',
+        photo: '/static/images/cinema/actors/mackenzie-foy.webp'
       }
     ],
     directors: [
       {
         id: '1',
         professions: [Profession.DIRECTOR],
-        fullName: 'Светлана Баскова'
+        fullName: 'Кристофер Нолан',
+        photo: '/static/images/cinema/directors/christopher-nolan.webp'
       }
     ],
-    runtime: 90,
-    ageRating: Rating.NC17,
-    genres: ['драма', 'комедия'],
+    runtime: 169,
+    ageRating: Rating.PG13,
+    genres: ['фантастика', 'драма', 'приключения'],
     userRatings: {
-      kinopoisk: '6.1',
-      imdb: '6.0'
+      kinopoisk: '8.7',
+      imdb: '8.7'
     },
-    img: '/static/images/cinema/film_7.webp',
+    img: '/static/images/cinema/films/interstellar.webp',
     country: {
       id: 7,
-      code: 'RUS',
-      code2: 'RU',
-      name: 'Россия'
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
     }
   },
   {
     id: '8',
-    name: 'Зелёный слоник',
-    originalName: 'Зелёный слоник',
+    name: 'Очень страшное кино',
+    originalName: 'Scary Movie',
     description:
-      'Два младших офицера, сидя в одной камере на гауптвахте, вынуждены решать острые социальные и психологические вопросы в небольшом пространстве.',
-    releaseDate: '1999',
+      'Пародийная комедия, высмеивающая популярные ужастики и подростковые слэшеры конца девяностых.',
+    releaseDate: '7 июля 2000',
     actors: [
       {
         id: '1',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Владимир Епифанцев'
+        professions: [Profession.ACTOR],
+        fullName: 'Анна Фэрис',
+        photo: '/static/images/cinema/actors/anna-faris.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Сергей Пахомов'
+        fullName: 'Джон Абрахамс',
+        photo: '/static/images/cinema/actors/jon-abrahams.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'Александр Маслаев'
+        fullName: 'Марлон Уайанс',
+        photo: '/static/images/cinema/actors/marlon-wayans.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Анатолий Осмоловский'
+        fullName: 'Шон Уайанс',
+        photo: '/static/images/cinema/actors/shawn-wayans.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Шэннон Элизабет',
+        photo: '/static/images/cinema/actors/shannon-elizabeth.webp'
       }
     ],
     directors: [
       {
         id: '1',
         professions: [Profession.DIRECTOR],
-        fullName: 'Светлана Баскова'
+        fullName: 'Кинен Айвори Уайанс',
+        photo: '/static/images/cinema/directors/keenen-ivory-wayans.webp'
       }
     ],
-    runtime: 86,
-    ageRating: Rating.NC17,
-    genres: ['ужасы', 'триллер'],
+    runtime: 88,
+    ageRating: Rating.R,
+    genres: ['комедия', 'ужасы'],
     userRatings: {
-      kinopoisk: '5.6',
-      imdb: '5.3'
+      kinopoisk: '7.0',
+      imdb: '6.3'
     },
-    img: '/static/images/cinema/film_8.webp',
+    img: '/static/images/cinema/films/scary-movie.webp',
     country: {
       id: 8,
-      code: 'RUS',
-      code2: 'RU',
-      name: 'Россия'
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
     }
   },
   {
     id: '9',
-    name: 'Человеческая многоножка',
-    originalName: 'The Human Centipede III (Final Sequence)',
+    name: 'Великий уравнитель',
+    originalName: 'The Equalizer',
     description:
-      'Надзиратель американской тюрьмы, у которого не получается заслужить уважение заключенных и губернатора штата, решается на внедрение революционного наказания, способного не только навести порядок, но и сэкономить миллионы долларов, — в буквальном смысле поставить заключенных на колени, сшив их в гигантскую многоножку из 500 человек.',
-    releaseDate: '22 мая 2015',
+      'Бывший агент спецслужб пытается начать спокойную жизнь, но снова берётся за оружие, чтобы защитить беззащитных.',
+    releaseDate: '7 сентября 2014',
     actors: [
       {
         id: '1',
         professions: [Profession.ACTOR],
-        fullName: 'Дитер Лазер'
+        fullName: 'Дензел Вашингтон',
+        photo: '/static/images/cinema/actors/denzel-washington.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Лоуренс Р. Харви'
+        fullName: 'Мартон Чокаш',
+        photo: '/static/images/cinema/actors/marton-csokas.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'Эрик Робертс'
+        fullName: 'Хлоя Грейс Морец',
+        photo: '/static/images/cinema/actors/chloe-grace-moretz.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Роберт ЛаСардо'
+        fullName: 'Дэвид Харбор',
+        photo: '/static/images/cinema/actors/david-harbour.webp'
       },
       {
         id: '5',
         professions: [Profession.ACTOR],
-        fullName: 'Том ’Тайни’ Листер мл.'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR],
-        fullName: 'Джей Таваре'
-      },
-      {
-        id: '7',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Клэйтон Ронер'
-      },
-      {
-        id: '8',
-        professions: [Profession.ACTOR],
-        fullName: 'Бри Олсон'
-      },
-      {
-        id: '9',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Акихиро Китамура'
-      },
-      {
-        id: '10',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Билл Хатченс'
+        fullName: 'Билл Пуллман',
+        photo: '/static/images/cinema/actors/bill-pullman.webp'
       }
     ],
     directors: [
       {
         id: '1',
         professions: [Profession.DIRECTOR],
-        fullName: 'Том Сикс'
+        fullName: 'Антуан Фукуа',
+        photo: '/static/images/cinema/directors/antoine-fuqua.webp'
       }
     ],
-    runtime: 102,
-    ageRating: Rating.NC17,
-    genres: ['ужасы', 'комедия', 'криминал'],
+    runtime: 132,
+    ageRating: Rating.R,
+    genres: ['боевик', 'триллер', 'криминал'],
     userRatings: {
-      kinopoisk: '3.9',
-      imdb: '2.8'
+      kinopoisk: '7.3',
+      imdb: '7.2'
     },
-    img: '/static/images/cinema/film_9.webp',
+    img: '/static/images/cinema/films/the-equalizer.webp',
     country: {
       id: 9,
-      code: 'NLD',
-      code2: 'NL',
-      name: 'Нидерланды'
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
     }
   },
   {
     id: '10',
-    name: 'Кокаиновый медведь',
-    originalName: 'Cocaine Bear',
+    name: 'Сонная Лощина',
+    originalName: 'Sleepy Hollow',
     description:
-      '1985 год. Из пролетающего над лесами штата Джорджия самолёта наркокурьер выбрасывает несколько пакетов кокаина, часть из них находит барибал и съедает содержимое. Животное приходит в неистовство, и теперь всем туристам, рейнджерам и случайно попавшимся ему на пути бедолагам сильно не поздоровится.',
-    releaseDate: '22 февраля 2023',
+      'Констебль Икабод Крейн прибывает в деревню Сонная Лощина, где жители гибнут от рук загадочного всадника без головы.',
+    releaseDate: '17 ноября 1999',
     actors: [
       {
         id: '1',
         professions: [Profession.ACTOR],
-        fullName: 'Кери Рассел'
+        fullName: 'Джонни Депп',
+        photo: '/static/images/cinema/actors/johnny-depp.webp'
       },
       {
         id: '2',
         professions: [Profession.ACTOR],
-        fullName: 'Олден Эренрайк'
+        fullName: 'Кристина Риччи',
+        photo: '/static/images/cinema/actors/christina-ricci.webp'
       },
       {
         id: '3',
         professions: [Profession.ACTOR],
-        fullName: 'О’Ши Джексон мл.'
+        fullName: 'Миранда Ричардсон',
+        photo: '/static/images/cinema/actors/miranda-richardson.webp'
       },
       {
         id: '4',
         professions: [Profession.ACTOR],
-        fullName: 'Рэй Лиотта'
+        fullName: 'Майкл Гэмбон',
+        photo: '/static/images/cinema/actors/michael-gambon.webp'
       },
       {
         id: '5',
         professions: [Profession.ACTOR],
-        fullName: 'Исайя Уитлок мл.'
-      },
-      {
-        id: '6',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Бруклин Принс'
-      },
-      {
-        id: '7',
-        professions: [Profession.ACTOR],
-        fullName: 'Кристиан Конвери'
-      },
-      {
-        id: '8',
-        professions: [Profession.ACTOR],
-        fullName: 'Марго Мартиндейл'
-      },
-      {
-        id: '9',
-        professions: [Profession.ACTOR],
-        fullName: 'Джесси Тайлер Фергюсон'
-      },
-      {
-        id: '10',
-        professions: [Profession.ACTOR],
-        fullName: 'Ханна Хукстра'
+        fullName: 'Кристофер Уокен',
+        photo: '/static/images/cinema/actors/christopher-walken.webp'
       }
     ],
     directors: [
       {
         id: '1',
-        professions: [Profession.ACTOR, Profession.DIRECTOR],
-        fullName: 'Элизабет Бэнкс'
+        professions: [Profession.DIRECTOR],
+        fullName: 'Тим Бёртон',
+        photo: '/static/images/cinema/directors/tim-burton.webp'
+      }
+    ],
+    runtime: 105,
+    ageRating: Rating.R,
+    genres: ['ужасы', 'фэнтези', 'детектив'],
+    userRatings: {
+      kinopoisk: '7.7',
+      imdb: '7.3'
+    },
+    img: '/static/images/cinema/films/sleepy-hollow.webp',
+    country: {
+      id: 10,
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
+    }
+  },
+  {
+    id: '11',
+    name: 'Назад в будущее',
+    originalName: 'Back to the Future',
+    description:
+      'Подросток Марти Макфлай случайно отправляется в прошлое на машине времени и должен исправить ход событий, чтобы вернуться домой.',
+    releaseDate: '3 июля 1985',
+    actors: [
+      {
+        id: '1',
+        professions: [Profession.ACTOR],
+        fullName: 'Майкл Джей Фокс',
+        photo: '/static/images/cinema/actors/michael-j-fox.webp'
+      },
+      {
+        id: '2',
+        professions: [Profession.ACTOR],
+        fullName: 'Кристофер Ллойд',
+        photo: '/static/images/cinema/actors/christopher-lloyd.webp'
+      },
+      {
+        id: '3',
+        professions: [Profession.ACTOR],
+        fullName: 'Лиа Томпсон',
+        photo: '/static/images/cinema/actors/lea-thompson.webp'
+      },
+      {
+        id: '4',
+        professions: [Profession.ACTOR],
+        fullName: 'Криспин Гловер',
+        photo: '/static/images/cinema/actors/crispin-glover.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Томас Ф. Уилсон',
+        photo: '/static/images/cinema/actors/thomas-f-wilson.webp'
+      }
+    ],
+    directors: [
+      {
+        id: '1',
+        professions: [Profession.DIRECTOR],
+        fullName: 'Роберт Земекис',
+        photo: '/static/images/cinema/directors/robert-zemeckis.webp'
+      }
+    ],
+    runtime: 116,
+    ageRating: Rating.PG,
+    genres: ['фантастика', 'комедия', 'приключения'],
+    userRatings: {
+      kinopoisk: '8.6',
+      imdb: '8.5'
+    },
+    img: '/static/images/cinema/films/back-to-the-future.webp',
+    country: {
+      id: 11,
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
+    }
+  },
+  {
+    id: '12',
+    name: 'Сайлент Хилл',
+    originalName: 'Silent Hill',
+    description:
+      'Мать отправляется в заброшенный город Сайлент Хилл, чтобы найти пропавшую дочь, и сталкивается с кошмарами, ожившими из тумана.',
+    releaseDate: '21 апреля 2006',
+    actors: [
+      {
+        id: '1',
+        professions: [Profession.ACTOR],
+        fullName: 'Рада Митчелл',
+        photo: '/static/images/cinema/actors/radha-mitchell.webp'
+      },
+      {
+        id: '2',
+        professions: [Profession.ACTOR],
+        fullName: 'Шон Бин',
+        photo: '/static/images/cinema/actors/sean-bean.webp'
+      },
+      {
+        id: '3',
+        professions: [Profession.ACTOR],
+        fullName: 'Лори Холден',
+        photo: '/static/images/cinema/actors/laurie-holden.webp'
+      },
+      {
+        id: '4',
+        professions: [Profession.ACTOR],
+        fullName: 'Дебора Кара Ангер',
+        photo: '/static/images/cinema/actors/deborah-kara-unger.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Джодель Ферланд',
+        photo: '/static/images/cinema/actors/jodelle-ferland.webp'
+      }
+    ],
+    directors: [
+      {
+        id: '1',
+        professions: [Profession.DIRECTOR],
+        fullName: 'Кристоф Ган',
+        photo: '/static/images/cinema/directors/christophe-gans.webp'
+      }
+    ],
+    runtime: 125,
+    ageRating: Rating.R,
+    genres: ['ужасы', 'детектив'],
+    userRatings: {
+      kinopoisk: '7.2',
+      imdb: '6.5'
+    },
+    img: '/static/images/cinema/films/silent-hill.webp',
+    country: {
+      id: 12,
+      code: 'CAN',
+      code2: 'CA',
+      name: 'Канада'
+    }
+  },
+  {
+    id: '13',
+    name: 'Пятница 13-е',
+    originalName: 'Friday the 13th',
+    description:
+      'Группа молодых людей приезжает в лагерь у Хрустального озера и сталкивается с кровавой легендой этого места.',
+    releaseDate: '9 мая 1980',
+    actors: [
+      {
+        id: '1',
+        professions: [Profession.ACTOR],
+        fullName: 'Бетси Палмер',
+        photo: '/static/images/cinema/actors/betsy-palmer.webp'
+      },
+      {
+        id: '2',
+        professions: [Profession.ACTOR],
+        fullName: 'Эдриэнн Кинг',
+        photo: '/static/images/cinema/actors/adrienne-king.webp'
+      },
+      {
+        id: '3',
+        professions: [Profession.ACTOR],
+        fullName: 'Гарри Кросби',
+        photo: '/static/images/cinema/actors/harry-crosby.webp'
+      },
+      {
+        id: '4',
+        professions: [Profession.ACTOR],
+        fullName: 'Лори Бартрам',
+        photo: '/static/images/cinema/actors/laurie-bartram.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Кевин Бейкон',
+        photo: '/static/images/cinema/actors/kevin-bacon.webp'
+      }
+    ],
+    directors: [
+      {
+        id: '1',
+        professions: [Profession.DIRECTOR],
+        fullName: 'Шон С. Каннингем',
+        photo: '/static/images/cinema/directors/sean-s-cunningham.webp'
       }
     ],
     runtime: 95,
     ageRating: Rating.R,
-    genres: ['триллер', 'комедия'],
+    genres: ['ужасы', 'триллер'],
     userRatings: {
-      kinopoisk: '5.9',
-      imdb: '6.0'
+      kinopoisk: '6.3',
+      imdb: '6.4'
     },
-    img: '/static/images/cinema/film_10.webp',
+    img: '/static/images/cinema/films/friday-the-13th.webp',
     country: {
-      id: 10,
+      id: 13,
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
+    }
+  },
+  {
+    id: '14',
+    name: 'День сурка',
+    originalName: 'Groundhog Day',
+    description:
+      'Телеведущий Фил Коннорс снова и снова проживает один и тот же день, постепенно меняя себя и своё отношение к жизни.',
+    releaseDate: '12 февраля 1993',
+    actors: [
+      {
+        id: '1',
+        professions: [Profession.ACTOR],
+        fullName: 'Билл Мюррей',
+        photo: '/static/images/cinema/actors/bill-murray.webp'
+      },
+      {
+        id: '2',
+        professions: [Profession.ACTOR],
+        fullName: 'Энди Макдауэлл',
+        photo: '/static/images/cinema/actors/andie-macdowell.webp'
+      },
+      {
+        id: '3',
+        professions: [Profession.ACTOR],
+        fullName: 'Крис Эллиотт',
+        photo: '/static/images/cinema/actors/chris-elliott.webp'
+      },
+      {
+        id: '4',
+        professions: [Profession.ACTOR],
+        fullName: 'Стивен Тоболовски',
+        photo: '/static/images/cinema/actors/stephen-tobolowsky.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Брайан Дойл-Мюррей',
+        photo: '/static/images/cinema/actors/brian-doyle-murray.webp'
+      }
+    ],
+    directors: [
+      {
+        id: '1',
+        professions: [Profession.DIRECTOR, Profession.ACTOR],
+        fullName: 'Гарольд Рамис',
+        photo: '/static/images/cinema/directors/harold-ramis.webp'
+      }
+    ],
+    runtime: 101,
+    ageRating: Rating.PG,
+    genres: ['комедия', 'фэнтези', 'мелодрама'],
+    userRatings: {
+      kinopoisk: '8.1',
+      imdb: '8.0'
+    },
+    img: '/static/images/cinema/films/groundhog-day.webp',
+    country: {
+      id: 14,
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
+    }
+  },
+  {
+    id: '15',
+    name: 'Чужой',
+    originalName: 'Alien',
+    description:
+      'Экипаж космического буксира «Ностромо» принимает сигнал бедствия и сталкивается с неизвестной смертоносной формой жизни.',
+    releaseDate: '25 мая 1979',
+    actors: [
+      {
+        id: '1',
+        professions: [Profession.ACTOR],
+        fullName: 'Сигурни Уивер',
+        photo: '/static/images/cinema/actors/sigourney-weaver.webp'
+      },
+      {
+        id: '2',
+        professions: [Profession.ACTOR],
+        fullName: 'Том Скеррит',
+        photo: '/static/images/cinema/actors/tom-skerritt.webp'
+      },
+      {
+        id: '3',
+        professions: [Profession.ACTOR],
+        fullName: 'Вероника Картрайт',
+        photo: '/static/images/cinema/actors/veronica-cartwright.webp'
+      },
+      {
+        id: '4',
+        professions: [Profession.ACTOR],
+        fullName: 'Гарри Дин Стэнтон',
+        photo: '/static/images/cinema/actors/harry-dean-stanton.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Иэн Холм',
+        photo: '/static/images/cinema/actors/ian-holm.webp'
+      }
+    ],
+    directors: [
+      {
+        id: '1',
+        professions: [Profession.DIRECTOR],
+        fullName: 'Ридли Скотт',
+        photo: '/static/images/cinema/directors/ridley-scott.webp'
+      }
+    ],
+    runtime: 117,
+    ageRating: Rating.R,
+    genres: ['ужасы', 'фантастика', 'триллер'],
+    userRatings: {
+      kinopoisk: '8.1',
+      imdb: '8.5'
+    },
+    img: '/static/images/cinema/films/alien.webp',
+    country: {
+      id: 15,
+      code: 'GBR',
+      code2: 'GB',
+      name: 'Великобритания'
+    }
+  },
+  {
+    id: '16',
+    name: 'Хэллоуин',
+    originalName: 'Halloween',
+    description:
+      'Маньяк Майкл Майерс сбегает из лечебницы и возвращается в родной город, где начинает преследовать подростков.',
+    releaseDate: '25 октября 1978',
+    actors: [
+      {
+        id: '1',
+        professions: [Profession.ACTOR],
+        fullName: 'Дональд Плезенс',
+        photo: '/static/images/cinema/actors/donald-pleasence.webp'
+      },
+      {
+        id: '2',
+        professions: [Profession.ACTOR],
+        fullName: 'Джейми Ли Кёртис',
+        photo: '/static/images/cinema/actors/jamie-lee-curtis.webp'
+      },
+      {
+        id: '3',
+        professions: [Profession.ACTOR],
+        fullName: 'Нэнси Кайс',
+        photo: '/static/images/cinema/actors/nancy-kyes.webp'
+      },
+      {
+        id: '4',
+        professions: [Profession.ACTOR],
+        fullName: 'Пи Джей Соулс',
+        photo: '/static/images/cinema/actors/pj-soles.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Ник Касл',
+        photo: '/static/images/cinema/actors/nick-castle.webp'
+      }
+    ],
+    directors: [
+      {
+        id: '1',
+        professions: [Profession.DIRECTOR],
+        fullName: 'Джон Карпентер',
+        photo: '/static/images/cinema/directors/john-carpenter.webp'
+      }
+    ],
+    runtime: 91,
+    ageRating: Rating.R,
+    genres: ['ужасы', 'триллер'],
+    userRatings: {
+      kinopoisk: '7.1',
+      imdb: '7.7'
+    },
+    img: '/static/images/cinema/films/halloween.webp',
+    country: {
+      id: 16,
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
+    }
+  },
+  {
+    id: '17',
+    name: 'Техасская резня бензопилой',
+    originalName: 'The Texas Chain Saw Massacre',
+    description:
+      'Компания друзей оказывается в техасской глубинке, где сталкивается с безумной семьёй и её самым страшным представителем.',
+    releaseDate: '1 октября 1974',
+    actors: [
+      {
+        id: '1',
+        professions: [Profession.ACTOR],
+        fullName: 'Мэрилин Бёрнс',
+        photo: '/static/images/cinema/actors/marilyn-burns.webp'
+      },
+      {
+        id: '2',
+        professions: [Profession.ACTOR],
+        fullName: 'Пол А. Партейн',
+        photo: '/static/images/cinema/actors/paul-a-partain.webp'
+      },
+      {
+        id: '3',
+        professions: [Profession.ACTOR],
+        fullName: 'Эдвин Нил',
+        photo: '/static/images/cinema/actors/edwin-neal.webp'
+      },
+      {
+        id: '4',
+        professions: [Profession.ACTOR],
+        fullName: 'Джим Сидоу',
+        photo: '/static/images/cinema/actors/jim-siedow.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Гуннар Хансен',
+        photo: '/static/images/cinema/actors/gunnar-hansen.webp'
+      }
+    ],
+    directors: [
+      {
+        id: '1',
+        professions: [Profession.DIRECTOR],
+        fullName: 'Тоуб Хупер',
+        photo: '/static/images/cinema/directors/tobe-hooper.webp'
+      }
+    ],
+    runtime: 83,
+    ageRating: Rating.R,
+    genres: ['ужасы'],
+    userRatings: {
+      kinopoisk: '6.7',
+      imdb: '7.4'
+    },
+    img: '/static/images/cinema/films/the-texas-chain-saw-massacre.webp',
+    country: {
+      id: 17,
+      code: 'USA',
+      code2: 'US',
+      name: 'США'
+    }
+  },
+  {
+    id: '18',
+    name: 'Мальчишник в Вегасе',
+    originalName: 'The Hangover',
+    description:
+      'После бурной ночи в Лас-Вегасе трое друзей пытаются восстановить события вчерашнего вечера и найти пропавшего жениха.',
+    releaseDate: '30 мая 2009',
+    actors: [
+      {
+        id: '1',
+        professions: [Profession.ACTOR],
+        fullName: 'Брэдли Купер',
+        photo: '/static/images/cinema/actors/bradley-cooper.webp'
+      },
+      {
+        id: '2',
+        professions: [Profession.ACTOR],
+        fullName: 'Эд Хелмс',
+        photo: '/static/images/cinema/actors/ed-helms.webp'
+      },
+      {
+        id: '3',
+        professions: [Profession.ACTOR],
+        fullName: 'Зак Галифианакис',
+        photo: '/static/images/cinema/actors/zach-galifianakis.webp'
+      },
+      {
+        id: '4',
+        professions: [Profession.ACTOR],
+        fullName: 'Джастин Барта',
+        photo: '/static/images/cinema/actors/justin-bartha.webp'
+      },
+      {
+        id: '5',
+        professions: [Profession.ACTOR],
+        fullName: 'Хизер Грэм',
+        photo: '/static/images/cinema/actors/heather-graham.webp'
+      }
+    ],
+    directors: [
+      {
+        id: '1',
+        professions: [Profession.DIRECTOR],
+        fullName: 'Тодд Филлипс',
+        photo: '/static/images/cinema/directors/todd-phillips.webp'
+      }
+    ],
+    runtime: 100,
+    ageRating: Rating.R,
+    genres: ['комедия'],
+    userRatings: {
+      kinopoisk: '7.8',
+      imdb: '7.7'
+    },
+    img: '/static/images/cinema/films/the-hangover.webp',
+    country: {
+      id: 18,
       code: 'USA',
       code2: 'US',
       name: 'США'

@@ -24,4 +24,8 @@ export class FilmStaff {
   @Field(() => String)
   @ApiProperty({ description: 'Полное имя персоны' })
   fullName: string;
+
+  @Field(() => String, { nullable: true })
+  @ApiProperty({ description: 'Фото персоны', nullable: true, required: false })
+  photo?: string;
 }

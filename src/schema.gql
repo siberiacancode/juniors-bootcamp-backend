@@ -576,12 +576,14 @@ input FilmScheduleSeanceInput {
 type FilmStaff {
   fullName: String!
   id: String!
+  photo: String
   professions: [Profession!]!
 }
 
 input FilmStaffInput {
   fullName: String!
   id: String!
+  photo: String
   professions: [Profession!]!
 }
 
