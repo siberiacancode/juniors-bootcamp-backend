@@ -43,7 +43,6 @@ registerEnumType(DeliveryStatus, {
 })
 export class DeliveryOrder {
   @Field(() => String)
-  @Prop({ type: Types.ObjectId })
   @ApiProperty({ description: 'ID заказа', type: String })
   _id: Types.ObjectId;
 
