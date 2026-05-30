@@ -89,6 +89,7 @@ type CarRentResponse {
 }
 
 enum CarRentStatus {
+  ACTIVE
   BOOKED
   CANCELLED
 }
@@ -576,14 +577,14 @@ input FilmScheduleSeanceInput {
 type FilmStaff {
   fullName: String!
   id: String!
-  photo: String
+  photo: String!
   professions: [Profession!]!
 }
 
 input FilmStaffInput {
   fullName: String!
   id: String!
-  photo: String
+  photo: String!
   professions: [Profession!]!
 }
 
@@ -615,6 +616,12 @@ type Game {
   rating: Float
   slug: String!
   year: Float!
+}
+
+type GameFilters {
+  genres: [GameGenre!]!
+  maxYear: Float!
+  minYear: Float!
 }
 
 enum GameGenre {
@@ -993,10 +1000,11 @@ type Query {
   getDeliveryPoints: DeliveryPointsResponse!
   getFilm(filmId: String!): FilmResponse!
   getFilmSchedule(filmId: String!): ScheduleResponse!
+  getFilters: GamesPaginatedResponse!
   getGame(gameId: String!): GameResponse!
   getGameOrder(orderId: String!): GameOrderResponse!
   getGameOrders: GameOrdersResponse!
-  getGames(genre: [GameGenre!], limit: Float, page: Float, search: String, year: [Float!]): GamesPaginatedResponse!
+  getGames(genre: [GameGenre!], limit: Float, maxYear: Float, minYear: Float, page: Float, search: String): GamesPaginatedResponse!
   getPizzaOrder(orderId: String!): PizzaOrderResponse!
   getPizzaOrders: PizzaOrdersResponse!
   getPizzasCatalog: PizzasResponse!
