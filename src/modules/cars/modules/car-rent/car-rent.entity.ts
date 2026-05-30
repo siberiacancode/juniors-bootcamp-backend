@@ -9,8 +9,9 @@ import { BodyType, Brand, Color, Steering, Transmission } from '../../constants/
 import { Car } from '../../entities';
 
 export enum CarRentStatus {
-  BOOKED,
-  CANCELLED
+  ACTIVE = 'active',
+  BOOKED = 'booked',
+  CANCELLED = 'cancelled'
 }
 registerEnumType(CarRentStatus, {
   name: 'CarRentStatus'
@@ -49,7 +50,7 @@ export class CarRent {
 
   @Field(() => CarRentStatus)
   @Prop({ required: true, default: CarRentStatus.BOOKED })
-  @ApiProperty({ example: '0', description: 'Статус брони', enum: CarRentStatus })
+  @ApiProperty({ example: 'booked', description: 'Статус брони', enum: CarRentStatus })
   status: CarRentStatus;
 
   @Field(() => String)
