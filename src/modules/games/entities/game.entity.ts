@@ -68,3 +68,18 @@ export class Game {
   @ApiProperty({ example: 57.78, description: 'Рейтинг положительных отзывов', required: false })
   rating?: number;
 }
+
+@ObjectType('GameFilters')
+export class GameFilters {
+  @Field(() => [GameGenre])
+  @ApiProperty({ enum: GameGenre, isArray: true, description: 'Жанры игр' })
+  genres: GameGenre[];
+
+  @Field(() => Number)
+  @ApiProperty({ example: 2003, description: 'Минимальный год релиза' })
+  minYear: number;
+
+  @Field(() => Number)
+  @ApiProperty({ example: 2021, description: 'Максимальный год релиза' })
+  maxYear: number;
+}

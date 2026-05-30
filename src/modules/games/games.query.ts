@@ -10,6 +10,7 @@ import { AuthService, BaseResolver } from '@/utils/services';
 
 import { GetGameDto, GetGameOrderDto, GetGamesSearchDto, SearchGamesDto } from './dto';
 import {
+  GameFiltersResponse,
   GameOrderResponse,
   GameOrdersResponse,
   GameResponse,
@@ -40,6 +41,13 @@ export class GamesQuery extends BaseResolver {
     });
 
     return this.wrapSuccess(paginatedGames);
+  }
+
+  @Query(() => GamesPaginatedResponse)
+  getFilters(): GameFiltersResponse {
+    const data = this.gamesService.getFilters();
+
+    return this.wrapSuccess({ data });
   }
 
   @Query(() => GameResponse)
