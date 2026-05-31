@@ -37,8 +37,11 @@ export class GamesService {
   getFilteredGames(filters: GetGamesSearchDto) {
     let filteredGames = this.getGames();
 
-    if (filters.year?.length) {
-      filteredGames = filteredGames.filter((game) => filters.year.includes(game.year));
+    if (!!filters.minYear || !!filters.maxYear) {
+      const minYear = filters.minYear ?? -Infinity;
+      const maxYear = filters.maxYear ?? Infinity;
+
+      filteredGames = filteredGames.filter((game) => game.year >= minYear && game.year <= maxYear);
     }
 
     if (filters.genre?.length) {

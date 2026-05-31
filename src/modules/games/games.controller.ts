@@ -24,6 +24,7 @@ import { UsersService } from '@/modules/users';
 import { ApiAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver } from '@/utils/services';
 
+import { GameGenre } from './constants';
 import {
   CreateGameOrderDto,
   GetGameDto,
@@ -59,16 +60,21 @@ export class GamesController extends BaseResolver {
   @ApiOperation({ summary: 'Получить игры' })
   @ApiResponse({ status: 200, type: GamesPaginatedResponse })
   @ApiQuery({
-    name: 'year',
+    name: 'minYear',
     required: false,
     type: Number,
-    isArray: true,
-    description: 'Год релиза'
+    description: 'Минимальный год релиза'
+  })
+  @ApiQuery({
+    name: 'maxYear',
+    required: false,
+    type: Number,
+    description: 'Максимальный год релиза'
   })
   @ApiQuery({
     name: 'genre',
     required: false,
-    enum: ['action'],
+    enum: GameGenre,
     isArray: true,
     description: 'Жанр'
   })

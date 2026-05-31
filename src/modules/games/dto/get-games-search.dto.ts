@@ -10,19 +10,30 @@ import { GameGenre } from '../constants';
 @ArgsType()
 export class GetGamesSearchDto {
   @IsOptional()
-  @Transform(transformSearchParam)
-  @IsArray()
-  @IsNumber({}, { each: true })
-  @Min(1990, { each: true })
-  @Max(2100, { each: true })
-  @Field(() => [Number], { nullable: true })
+  @Transform(({ value }) => Number.parseInt(value, 10))
+  @IsNumber()
+  @Min(1990)
+  @Max(2100)
+  @Field(() => Number, { nullable: true })
   @ApiProperty({
     required: false,
-    example: [2024, 2025],
-    isArray: true,
-    description: 'Фильтр по годам релиза'
+    example: 2003,
+    description: 'Минимальный год релиза'
   })
-  year?: number[];
+  minYear?: number;
+
+  @IsOptional()
+  @Transform(({ value }) => Number.parseInt(value, 10))
+  @IsNumber()
+  @Min(1990)
+  @Max(2100)
+  @Field(() => Number, { nullable: true })
+  @ApiProperty({
+    required: false,
+    example: 2021,
+    description: 'Максимальный год релиза'
+  })
+  maxYear?: number;
 
   @IsOptional()
   @Transform(transformSearchParam)
