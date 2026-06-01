@@ -1,17 +1,17 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum GameGenre {
-  ACTION = 'action',
-  ADVENTURE = 'adventure',
-  RPG = 'rpg',
-  STRATEGY = 'strategy',
-  SHOOTER = 'shooter',
-  SIMULATION = 'simulation',
-  SURVIVAL = 'survival',
-  SPORTS = 'sports',
-  RACING = 'racing',
-  INDIE = 'indie',
-  HORROR = 'horror'
+  ACTION = 'ACTION',
+  ADVENTURE = 'ADVENTURE',
+  RPG = 'RPG',
+  STRATEGY = 'STRATEGY',
+  SHOOTER = 'SHOOTER',
+  SIMULATION = 'SIMULATION',
+  SURVIVAL = 'SURVIVAL',
+  SPORTS = 'SPORTS',
+  RACING = 'RACING',
+  INDIE = 'INDIE',
+  HORROR = 'HORROR'
 }
 
 registerEnumType(GameGenre, {

@@ -23,11 +23,11 @@ registerEnumType(Payer, {
 });
 
 export enum DeliveryStatus {
-  IN_PROCESSING,
-  WAITING_COURIER,
-  ON_MY_WAY,
-  SUCCESS,
-  CANCELED
+  IN_PROCESSING = 'IN_PROCESSING',
+  WAITING_COURIER = 'WAITING_COURIER',
+  ON_MY_WAY = 'ON_MY_WAY',
+  SUCCESS = 'SUCCESS',
+  CANCELED = 'CANCELED'
 }
 registerEnumType(DeliveryStatus, {
   name: 'DeliveryStatus'

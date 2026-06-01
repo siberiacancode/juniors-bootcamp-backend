@@ -8,11 +8,11 @@ import { Types } from 'mongoose';
 import { Pizza, PizzaAddress, PizzaPerson } from '../../entities';
 
 export enum PizzaStatus {
-  IN_PROCESSING,
-  WAITING_COURIER,
-  ON_MY_WAY,
-  SUCCESS,
-  CANCELED
+  IN_PROCESSING = 'IN_PROCESSING',
+  WAITING_COURIER = 'WAITING_COURIER',
+  ON_MY_WAY = 'ON_MY_WAY',
+  SUCCESS = 'SUCCESS',
+  CANCELED = 'CANCELED'
 }
 registerEnumType(PizzaStatus, {
   name: 'PizzaStatus'
