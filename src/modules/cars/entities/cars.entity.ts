@@ -26,7 +26,9 @@ export class Car {
 
   @Field(() => Brand)
   @ApiProperty({
-    enum: Object.values(Brand),
+    enum: Brand,
+    example: Brand.HAVAL,
+    enumName: 'Brand',
     description: 'Марка автомобиля'
   })
   brand: Brand;
@@ -37,7 +39,9 @@ export class Car {
 
   @Field(() => Transmission)
   @ApiProperty({
-    enum: Object.values(Transmission),
+    enum: Transmission,
+    example: Transmission.AUTOMATIC,
+    enumName: 'Transmission',
     description: 'Тип коробки передач'
   })
   transmission: Transmission;
@@ -51,16 +55,28 @@ export class Car {
   location: string;
 
   @Field(() => Color)
-  @ApiProperty({ enum: Color, description: 'Цвет автомобиля' })
+  @ApiProperty({
+    enum: Color,
+    example: Color.BLACK,
+    enumName: 'Color',
+    description: 'Цвет автомобиля'
+  })
   color: Color;
 
   @Field(() => BodyType)
-  @ApiProperty({ enum: BodyType, description: 'Тип кузова' })
+  @ApiProperty({
+    enum: BodyType,
+    example: BodyType.SEDAN,
+    enumName: 'BodyType',
+    description: 'Тип кузова'
+  })
   bodyType: BodyType;
 
-  @Field(() => String)
+  @Field(() => Steering)
   @ApiProperty({
     enum: Steering,
+    enumName: 'Steering',
+    example: Steering.LEFT,
     description: 'Расположение руля'
   })
   steering: Steering;

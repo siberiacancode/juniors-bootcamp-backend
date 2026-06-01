@@ -49,7 +49,7 @@ export class CarsController extends BaseResolver {
   }
 
   @Get('/info')
-  @ApiOperation({ summary: 'Получить все автомобили' })
+  @ApiOperation({ summary: 'Получить автомобили' })
   @ApiResponse({
     status: 200,
     type: CarsPaginatedResponse
@@ -70,24 +70,32 @@ export class CarsController extends BaseResolver {
     name: 'color',
     required: false,
     enum: Color,
+    example: Color.BLACK,
+    enumName: 'Color',
     description: 'Цвет автомобиля'
   })
   @ApiQuery({
     name: 'brand',
     required: false,
     enum: Brand,
+    example: Brand.HAVAL,
+    enumName: 'Brand',
     description: 'Марка автомобиля'
   })
   @ApiQuery({
     name: 'bodyType',
     required: false,
     enum: BodyType,
+    example: BodyType.SEDAN,
+    enumName: 'BodyType',
     description: 'Тип кузова автомобиля'
   })
   @ApiQuery({
     name: 'transmission',
     required: false,
     enum: Transmission,
+    example: Transmission.AUTOMATIC,
+    enumName: 'Transmission',
     description: 'Тип трансмиссии'
   })
   @ApiQuery({

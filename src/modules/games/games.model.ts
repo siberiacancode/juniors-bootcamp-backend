@@ -28,7 +28,7 @@ export class GameResponse extends BaseResponse {
 export class GameFiltersResponse extends BaseResponse {
   @Field(() => [GameFilters])
   @ApiProperty({ description: 'Фильтры игр', type: [GameFilters] })
-  data: GameFilters;
+  filters: GameFilters;
 }
 
 @ObjectType()

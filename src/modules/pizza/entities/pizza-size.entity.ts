@@ -1,23 +1,20 @@
-import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNumber } from 'class-validator';
 
-export enum Size {
-  SMALL = 'SMALL',
-  MEDIUM = 'MEDIUM',
-  LARGE = 'LARGE'
-}
-
-registerEnumType(Size, {
-  name: 'Size'
-});
+import { Size } from '../constants/enums';
 
 @InputType('PizzaSizeInput')
 @ObjectType()
 export class PizzaSize {
   @IsEnum(Size)
   @Field(() => Size)
-  @ApiProperty({ enum: Size, description: 'Идентификатор размера пиццы' })
+  @ApiProperty({
+    enum: Size,
+    example: Size.SMALL,
+    enumName: 'Size',
+    description: 'Идентификатор размера пиццы'
+  })
   type: Size;
 
   @IsNumber()

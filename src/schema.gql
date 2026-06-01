@@ -60,7 +60,7 @@ type Car {
   media: [Media!]!
   name: String!
   price: Float!
-  steering: String!
+  steering: Steering!
   transmission: Transmission!
 }
 
@@ -116,7 +116,7 @@ type CarWithRents {
   name: String!
   price: Float!
   rents: [BookedDateRange!]!
-  steering: String!
+  steering: Steering!
   transmission: Transmission!
 }
 
@@ -154,7 +154,7 @@ input CinemaOrderInput {
 
 enum CinemaOrderStatus {
   CANCELED
-  PAYED
+  PAID
 }
 
 type CinemaOrdersResponse {
@@ -196,8 +196,8 @@ input CinemaTicketSeanceInput {
 }
 
 enum CinemaTicketStatus {
-  CANCELED
-  PAYED
+  CANCELLED
+  PAID
 }
 
 enum Color {
@@ -509,8 +509,8 @@ input FilmHallCellInput {
 enum FilmHallCellType {
   BLOCKED
   COMFORT
-  ECONOM
-  PAYED
+  ECONOMY
+  PAID
 }
 
 input FilmHallInput {
@@ -622,6 +622,12 @@ type GameFilters {
   genres: [GameGenre!]!
   maxYear: Float!
   minYear: Float!
+}
+
+type GameFiltersResponse {
+  filters: [GameFilters!]!
+  reason: String
+  success: Boolean!
 }
 
 enum GameGenre {
@@ -743,10 +749,10 @@ enum Ingredient {
   MUSHROOMS
   ONION
   PARMESAN
-  PEPERONI
+  PEPPERONI
   PICKLE
   PINEAPPLE
-  SHRIMPS
+  SHRIMP
   TOMATO
 }
 
@@ -1000,7 +1006,7 @@ type Query {
   getDeliveryPoints: DeliveryPointsResponse!
   getFilm(filmId: String!): FilmResponse!
   getFilmSchedule(filmId: String!): ScheduleResponse!
-  getFilters: GamesPaginatedResponse!
+  getFilters: GameFiltersResponse!
   getGame(gameId: String!): GameResponse!
   getGameOrder(orderId: String!): GameOrderResponse!
   getGameOrders: GameOrdersResponse!

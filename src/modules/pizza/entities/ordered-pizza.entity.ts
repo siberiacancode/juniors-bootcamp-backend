@@ -2,9 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
-import { Dough } from './pizza-dough.entity';
-import { Ingredient } from './pizza-ingredient.entity';
-import { Size } from './pizza-size.entity';
+import { Dough, Ingredient, Size } from '../constants';
 
 @InputType('OrderedPizzaInput')
 @ObjectType()
@@ -19,7 +17,7 @@ export class OrderedPizza {
   @IsEnum(Ingredient, { each: true })
   @Field(() => [Ingredient])
   @ApiProperty({
-    example: ['PINEAPPLE', 'CHEDDAR'],
+    example: [Ingredient.PINEAPPLE, Ingredient.CHILE],
     description: 'Топпинги',
     enum: Ingredient,
     enumName: 'Ingredient',
@@ -29,11 +27,11 @@ export class OrderedPizza {
 
   @IsEnum(Size)
   @Field(() => Size)
-  @ApiProperty({ example: 'SMALL', description: 'Размер пиццы', enum: Size })
+  @ApiProperty({ description: 'Размер пиццы', enum: Size, example: Size.SMALL, enumName: 'Size' })
   size: Size;
 
   @IsEnum(Dough)
   @Field(() => Dough)
-  @ApiProperty({ example: 'THIN', description: 'Тип теста', enum: Dough })
+  @ApiProperty({ description: 'Тип теста', enum: Dough, example: Dough.THIN, enumName: 'Dough' })
   dough: Dough;
 }

@@ -1,16 +1,16 @@
 import type { Pizza } from '../entities';
 
-import { Dough, Ingredient, Size } from '../entities';
+import { Dough, Ingredient, Size } from './enums';
 
 export const TOPPINGS = [
   { type: Ingredient.PINEAPPLE, price: 80, img: '/static/images/ingredient/pineapple.png' },
   { type: Ingredient.GREEN_PEPPER, price: 60, img: '/static/images/ingredient/green_pepper.png' },
   { type: Ingredient.MUSHROOMS, price: 80, img: '/static/images/ingredient/mushrooms.png' },
   { type: Ingredient.BACON, price: 80, img: '/static/images/ingredient/bacon.png' },
-  { type: Ingredient.SHRIMPS, price: 80, img: '/static/images/ingredient/shrimps.png' },
+  { type: Ingredient.SHRIMP, price: 80, img: '/static/images/ingredient/shrimps.png' },
   { type: Ingredient.HAM, price: 80, img: '/static/images/ingredient/ham.png' },
   { type: Ingredient.MOZZARELLA, price: 70, img: '/static/images/ingredient/mozzarella.png' },
-  { type: Ingredient.PEPERONI, price: 120, img: '/static/images/ingredient/peperoni.png' },
+  { type: Ingredient.PEPPERONI, price: 120, img: '/static/images/ingredient/peperoni.png' },
   {
     type: Ingredient.CHICKEN_FILLET,
     price: 80,
@@ -37,7 +37,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.PEPERONI,
+        type: Ingredient.PEPPERONI,
         price: 120,
         img: '/static/images/ingredient/peperoni.png'
       },
@@ -212,7 +212,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.PEPERONI,
+        type: Ingredient.PEPPERONI,
         price: 120,
         img: '/static/images/ingredient/peperoni.png'
       }
@@ -303,7 +303,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/bacon.png'
       },
       {
-        type: Ingredient.SHRIMPS,
+        type: Ingredient.SHRIMP,
         price: 120,
         img: '/static/images/ingredient/shrimps.png'
       }
@@ -474,7 +474,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.SHRIMPS,
+        type: Ingredient.SHRIMP,
         price: 180,
         img: '/static/images/ingredient/shrimps.png'
       }

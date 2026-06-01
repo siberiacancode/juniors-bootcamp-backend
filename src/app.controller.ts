@@ -3,7 +3,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { OTP_EXPIRED_TIME, OtpsService } from './modules/otps';
 
-@ApiTags('pages')
+@ApiTags('📃 pages')
 @Controller()
 export class AppController {
   constructor(private readonly otpsService: OtpsService) {}

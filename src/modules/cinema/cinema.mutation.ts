@@ -40,13 +40,13 @@ export class CinemaMutation extends BaseResolver {
       throw new BadRequestException(this.wrapFail('Заказ не найден'));
     }
 
-    if (order.status !== CinemaOrderStatus.PAYED) {
+    if (order.status !== CinemaOrderStatus.PAID) {
       throw new BadRequestException(this.wrapFail('Заказ нельзя отменить'));
     }
 
     await this.cinemaTicketService.updateMany(
       { _id: { $in: order.tickets.map((ticket) => ticket._id) } },
-      { $set: { status: CinemaTicketStatus.CANCELED } }
+      { $set: { status: CinemaTicketStatus.CANCELLED } }
     );
 
     const updatedTickets = await this.cinemaTicketService.find({
@@ -73,7 +73,7 @@ export class CinemaMutation extends BaseResolver {
       phone: createCinemaPaymentDto.person.phone,
       row: ticket.row,
       column: ticket.column,
-      status: CinemaTicketStatus.PAYED
+      status: CinemaTicketStatus.PAID
     }));
 
     const existedTickets = [];
@@ -123,7 +123,7 @@ export class CinemaMutation extends BaseResolver {
       orderNumber,
       tickets: [],
       person,
-      status: CinemaOrderStatus.PAYED
+      status: CinemaOrderStatus.PAID
     });
 
     const tickets = await this.cinemaTicketService.insertMany(

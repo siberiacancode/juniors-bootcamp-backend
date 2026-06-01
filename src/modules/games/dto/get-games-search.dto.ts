@@ -40,7 +40,14 @@ export class GetGamesSearchDto {
   @IsArray()
   @IsString({ each: true })
   @Field(() => [GameGenre], { nullable: true })
-  @ApiProperty({ required: false, enum: GameGenre, isArray: true, description: 'Фильтр по жанрам' })
+  @ApiProperty({
+    required: false,
+    enum: GameGenre,
+    example: [GameGenre.ACTION, GameGenre.RPG],
+    enumName: 'GameGenre',
+    isArray: true,
+    description: 'Фильтр по жанрам'
+  })
   genre?: GameGenre[];
 
   @IsOptional()

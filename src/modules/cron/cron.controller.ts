@@ -73,12 +73,12 @@ export class CronController extends BaseResolver {
 
   @Cron('0 0 * * *')
   async handleCarsCron() {
-    const startOfToday = new Date().setHours(0, 0, 0, 0);
+    const today = new Date().setHours(0, 0, 0, 0);
 
     const updatedResult = await this.carRentService.updateMany(
       {
         status: CarRentStatus.BOOKED,
-        startDate: { $gte: startOfToday }
+        startDate: { $gte: today }
       },
       { $set: { status: CarRentStatus.ACTIVE } }
     );

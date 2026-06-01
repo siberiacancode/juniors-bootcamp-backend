@@ -15,19 +15,19 @@ import {
 } from '../../entities';
 
 export enum Payer {
-  RECEIVER = 'RECEIVER',
-  SENDER = 'SENDER'
+  RECEIVER = 'receiver',
+  SENDER = 'sender'
 }
 registerEnumType(Payer, {
   name: 'Payer'
 });
 
 export enum DeliveryStatus {
-  IN_PROCESSING = 'IN_PROCESSING',
-  WAITING_COURIER = 'WAITING_COURIER',
-  ON_MY_WAY = 'ON_MY_WAY',
-  SUCCESS = 'SUCCESS',
-  CANCELED = 'CANCELED'
+  IN_PROCESSING = 'in_processing',
+  WAITING_COURIER = 'waiting_courier',
+  ON_MY_WAY = 'on_my_way',
+  SUCCESS = 'success',
+  CANCELED = 'canceled'
 }
 registerEnumType(DeliveryStatus, {
   name: 'DeliveryStatus'
@@ -58,7 +58,12 @@ export class DeliveryOrder {
 
   @Field(() => DeliveryOptionType)
   @Prop({ required: true })
-  @ApiProperty({ description: 'Тип доставки', enum: DeliveryOptionType })
+  @ApiProperty({
+    description: 'Тип доставки',
+    enum: DeliveryOptionType,
+    example: DeliveryOptionType.DEFAULT,
+    enumName: 'DeliveryOptionType'
+  })
   option: DeliveryOptionType;
 
   @Field(() => DeliveryPoint)
@@ -93,12 +98,22 @@ export class DeliveryOrder {
 
   @Field(() => Payer)
   @Prop({ required: true })
-  @ApiProperty({ description: 'Кто будет оплачивать', enum: Payer })
+  @ApiProperty({
+    description: 'Кто будет оплачивать',
+    enum: Payer,
+    enumName: 'Payer',
+    example: Payer.SENDER
+  })
   payer: Payer;
 
   @Field(() => DeliveryStatus)
   @Prop({ required: true, default: DeliveryStatus.IN_PROCESSING })
-  @ApiProperty({ description: 'Статус доставки', enum: DeliveryStatus })
+  @ApiProperty({
+    description: 'Статус доставки',
+    enum: DeliveryStatus,
+    enumName: 'DeliveryStatus',
+    example: DeliveryStatus.IN_PROCESSING
+  })
   status: DeliveryStatus;
 
   @Field(() => Boolean)

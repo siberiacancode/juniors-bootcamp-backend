@@ -41,7 +41,7 @@ export class CinemaController extends BaseResolver {
   }
 
   @Get('/films')
-  @ApiOperation({ summary: 'Получить список фильмов' })
+  @ApiOperation({ summary: 'Получить фильмы' })
   @ApiResponse({
     status: 200,
     description: 'films',
@@ -86,16 +86,16 @@ export class CinemaController extends BaseResolver {
 
         const seances = schedule.map((seance) => {
           const updatedPlaces = structuredClone(seance.hall.places);
-          const payedTickets = tickets.filter(
+          const paidTickets = tickets.filter(
             (ticket) =>
               ticket.seance.date === formattedDate &&
               ticket.seance.time === seance.time &&
               ticket.filmId === getScheduleDto.filmId
           );
 
-          if (payedTickets.length) {
-            payedTickets.forEach((ticket) => {
-              updatedPlaces[ticket.row - 1][ticket.column - 1].type = FilmHallCellType.PAYED;
+          if (paidTickets.length) {
+            paidTickets.forEach((ticket) => {
+              updatedPlaces[ticket.row - 1][ticket.column - 1].type = FilmHallCellType.PAID;
             });
           }
 
@@ -130,7 +130,7 @@ export class CinemaController extends BaseResolver {
       phone: createCinemaPaymentDto.person.phone,
       row: ticket.row,
       column: ticket.column,
-      status: CinemaTicketStatus.PAYED
+      status: CinemaTicketStatus.PAID
     }));
 
     const existedTickets = [];
@@ -180,7 +180,7 @@ export class CinemaController extends BaseResolver {
       orderNumber,
       tickets: [],
       person,
-      status: CinemaOrderStatus.PAYED
+      status: CinemaOrderStatus.PAID
     });
 
     const tickets = await this.cinemaTicketService.insertMany(
@@ -262,13 +262,13 @@ export class CinemaController extends BaseResolver {
       throw new BadRequestException(this.wrapFail('Заказ не найден'));
     }
 
-    if (order.status !== CinemaOrderStatus.PAYED) {
+    if (order.status !== CinemaOrderStatus.PAID) {
       throw new BadRequestException(this.wrapFail('Заказ нельзя отменить'));
     }
 
     await this.cinemaTicketService.updateMany(
       { _id: { $in: order.tickets.map((ticket) => ticket._id) } },
-      { $set: { status: CinemaTicketStatus.CANCELED } }
+      { $set: { status: CinemaTicketStatus.CANCELLED } }
     );
 
     const updatedTickets = await this.cinemaTicketService.find({

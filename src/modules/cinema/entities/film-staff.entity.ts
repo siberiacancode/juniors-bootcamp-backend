@@ -2,8 +2,8 @@ import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger';
 
 export enum Profession {
-  ACTOR = 'ACTOR',
-  DIRECTOR = 'DIRECTOR'
+  ACTOR = 'actor',
+  DIRECTOR = 'director'
 }
 
 registerEnumType(Profession, {
@@ -18,7 +18,13 @@ export class FilmStaff {
   id: string;
 
   @Field(() => [Profession])
-  @ApiProperty({ description: 'Список профессий', enum: Profession })
+  @ApiProperty({
+    description: 'Список профессий',
+    enum: Profession,
+    example: [Profession.ACTOR, Profession.DIRECTOR],
+    enumName: 'Profession',
+    isArray: true
+  })
   professions: Profession[];
 
   @Field(() => String)

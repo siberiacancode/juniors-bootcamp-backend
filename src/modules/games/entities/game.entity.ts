@@ -45,7 +45,13 @@ export class Game {
   year: number;
 
   @Field(() => [GameGenre])
-  @ApiProperty({ enum: GameGenre, isArray: true, description: 'Жанры игры' })
+  @ApiProperty({
+    enum: GameGenre,
+    enumName: 'GameGenre',
+    example: [GameGenre.ACTION, GameGenre.RPG],
+    isArray: true,
+    description: 'Жанры игры'
+  })
   genres: GameGenre[];
 
   @Field(() => String)
@@ -72,7 +78,13 @@ export class Game {
 @ObjectType('GameFilters')
 export class GameFilters {
   @Field(() => [GameGenre])
-  @ApiProperty({ enum: GameGenre, isArray: true, description: 'Жанры игр' })
+  @ApiProperty({
+    enum: GameGenre,
+    enumName: 'GameGenre',
+    example: [GameGenre.ACTION, GameGenre.RPG],
+    isArray: true,
+    description: 'Жанры игр'
+  })
   genres: GameGenre[];
 
   @Field(() => Number)

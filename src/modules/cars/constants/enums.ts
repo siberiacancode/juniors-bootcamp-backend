@@ -1,16 +1,16 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum Brand {
-  HAVAL = 'Haval',
-  HYUNDAI = 'Hyundai',
-  VOLKSWAGEN = 'Volkswagen',
-  KIA = 'Kia',
-  GEELY = 'Geely',
-  MERCEDES = 'Mercedes',
-  GARDEN_CAR = 'Garden car',
-  GROCERY_CART = 'Grocery cart',
-  HAIER = 'Haier',
-  INVALID = 'Invalid'
+  HAVAL = 'haval',
+  HYUNDAI = 'hyundai',
+  VOLKSWAGEN = 'volkswagen',
+  KIA = 'kia',
+  GEELY = 'geely',
+  MERCEDES = 'mercedes',
+  GARDEN_CAR = 'garden_car',
+  GROCERY_CART = 'grocery_cart',
+  HAIER = 'haier',
+  INVALID = 'invalid'
 }
 
 export enum BodyType {

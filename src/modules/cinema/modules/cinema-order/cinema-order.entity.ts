@@ -9,8 +9,8 @@ import { Film, FilmPerson } from '../../entities';
 import { CinemaTicket } from '../cinema-ticket';
 
 export enum CinemaOrderStatus {
-  PAYED = 'PAYED',
-  CANCELED = 'CANCELED'
+  PAID = 'paid',
+  CANCELED = 'canceled'
 }
 
 registerEnumType(CinemaOrderStatus, {
@@ -51,8 +51,13 @@ export class CinemaOrder {
   person: FilmPerson;
 
   @Field(() => CinemaOrderStatus)
-  @Prop({ required: true, default: CinemaOrderStatus.PAYED })
-  @ApiProperty({ description: 'Статус заказа', enum: CinemaOrderStatus })
+  @Prop({ required: true, default: CinemaOrderStatus.PAID })
+  @ApiProperty({
+    description: 'Статус заказа',
+    enum: CinemaOrderStatus,
+    example: CinemaOrderStatus.PAID,
+    enumName: 'CinemaOrderStatus'
+  })
   status: CinemaOrderStatus;
 }
 

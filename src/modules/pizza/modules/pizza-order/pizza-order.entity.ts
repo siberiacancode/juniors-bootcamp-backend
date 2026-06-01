@@ -8,11 +8,11 @@ import { Types } from 'mongoose';
 import { Pizza, PizzaAddress, PizzaPerson } from '../../entities';
 
 export enum PizzaStatus {
-  IN_PROCESSING = 'IN_PROCESSING',
-  WAITING_COURIER = 'WAITING_COURIER',
-  ON_MY_WAY = 'ON_MY_WAY',
-  SUCCESS = 'SUCCESS',
-  CANCELED = 'CANCELED'
+  IN_PROCESSING = 'in_processing',
+  WAITING_COURIER = 'waiting_courier',
+  ON_MY_WAY = 'on_my_way',
+  SUCCESS = 'success',
+  CANCELED = 'canceled'
 }
 registerEnumType(PizzaStatus, {
   name: 'PizzaStatus'
@@ -53,7 +53,12 @@ export class PizzaOrder {
 
   @Field(() => PizzaStatus)
   @Prop({ required: true, default: PizzaStatus.IN_PROCESSING })
-  @ApiProperty({ description: 'Статус доставки', enum: PizzaStatus })
+  @ApiProperty({
+    description: 'Статус доставки',
+    enum: PizzaStatus,
+    enumName: 'PizzaStatus',
+    example: PizzaStatus.IN_PROCESSING
+  })
   status: PizzaStatus;
 
   @Field(() => Boolean)

@@ -43,11 +43,11 @@ export class GamesQuery extends BaseResolver {
     return this.wrapSuccess(paginatedGames);
   }
 
-  @Query(() => GamesPaginatedResponse)
+  @Query(() => GameFiltersResponse)
   getFilters(): GameFiltersResponse {
-    const data = this.gamesService.getFilters();
+    const filters = this.gamesService.getFilters();
 
-    return this.wrapSuccess({ data });
+    return this.wrapSuccess({ filters });
   }
 
   @Query(() => GameResponse)
