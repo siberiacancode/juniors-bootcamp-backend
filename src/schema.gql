@@ -618,18 +618,6 @@ type Game {
   year: Float!
 }
 
-type GameFilters {
-  genres: [GameGenre!]!
-  maxYear: Float!
-  minYear: Float!
-}
-
-type GameFiltersResponse {
-  filters: [GameFilters!]!
-  reason: String
-  success: Boolean!
-}
-
 enum GameGenre {
   ACTION
   ADVENTURE
@@ -1006,7 +994,6 @@ type Query {
   getDeliveryPoints: DeliveryPointsResponse!
   getFilm(filmId: String!): FilmResponse!
   getFilmSchedule(filmId: String!): ScheduleResponse!
-  getFilters: GameFiltersResponse!
   getGame(gameId: String!): GameResponse!
   getGameOrder(orderId: String!): GameOrderResponse!
   getGameOrders: GameOrdersResponse!

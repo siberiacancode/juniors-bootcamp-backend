@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { BaseResponse } from '@/utils/services';
 
-import { Game, GameFilters, GamesPaginationMeta } from './entities';
+import { Game, GamesPaginationMeta } from './entities';
 import { GameOrder } from './modules';
 
 @ObjectType()
@@ -22,13 +22,6 @@ export class GameResponse extends BaseResponse {
   @Field(() => Game)
   @ApiProperty({ description: 'Игра', type: Game })
   data: Game;
-}
-
-@ObjectType()
-export class GameFiltersResponse extends BaseResponse {
-  @Field(() => [GameFilters])
-  @ApiProperty({ description: 'Фильтры игр', type: [GameFilters] })
-  filters: GameFilters;
 }
 
 @ObjectType()
