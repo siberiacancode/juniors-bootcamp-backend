@@ -9,9 +9,9 @@ import { BodyType, Brand, Color, Steering, Transmission } from '../../constants/
 import { Car } from '../../entities';
 
 export enum CarRentStatus {
-  ACTIVE = 'active',
-  BOOKED = 'booked',
-  CANCELLED = 'cancelled'
+  ACTIVE = 'ACTIVE',
+  BOOKED = 'BOOKED',
+  CANCELLED = 'CANCELLED'
 }
 registerEnumType(CarRentStatus, {
   name: 'CarRentStatus'
