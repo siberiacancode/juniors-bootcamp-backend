@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { GameGenre, GAMES } from './constants';
+import { GAMES } from './constants';
 import { GetGamesSearchDto, SearchGamesDto } from './dto';
 import { GamesPaginationMeta } from './entities';
 
@@ -19,15 +19,6 @@ interface PaginationResult<Item> {
 export class GamesService {
   getGames() {
     return GAMES;
-  }
-
-  getFilters() {
-    const years = this.getGames().map((game) => game.year);
-    return {
-      genres: Object.values(GameGenre),
-      minYear: Math.min(...years),
-      maxYear: Math.max(...years)
-    };
   }
 
   getGame(id: string) {

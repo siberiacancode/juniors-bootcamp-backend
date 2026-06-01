@@ -34,7 +34,6 @@ import {
 } from './dto';
 import {
   CreateGameOrderResponse,
-  GameFiltersResponse,
   GameOrderResponse,
   GameOrdersResponse,
   GameResponse,
@@ -102,14 +101,6 @@ export class GamesController extends BaseResolver {
   searchGames(@Query() searchGamesDto: SearchGamesDto): GameSearchResponse {
     const data = this.gamesService.searchAutocomplete(searchGamesDto);
     return this.wrapSuccess({ data });
-  }
-
-  @Get('/filters')
-  @ApiOperation({ summary: 'Получить фильтры для игр' })
-  @ApiResponse({ status: 200, type: GameFiltersResponse })
-  getFilters(): GameFiltersResponse {
-    const filters = this.gamesService.getFilters();
-    return this.wrapSuccess({ filters });
   }
 
   @Get('/info/:gameId')
