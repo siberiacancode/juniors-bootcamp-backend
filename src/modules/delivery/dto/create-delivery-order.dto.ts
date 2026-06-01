@@ -109,7 +109,12 @@ export class CreateDeliveryOrderDto {
   @IsEnum(DeliveryOptionType)
   @IsNotEmpty()
   @Field(() => DeliveryOptionType)
-  @ApiProperty({ description: 'Тип заказа', enum: DeliveryOptionType })
+  @ApiProperty({
+    description: 'Тип заказа',
+    enum: DeliveryOptionType,
+    example: DeliveryOptionType.DEFAULT,
+    enumName: 'DeliveryOptionType'
+  })
   optionType: DeliveryOptionType;
 
   @IsString()
@@ -149,6 +154,11 @@ export class CreateDeliveryOrderDto {
 
   @IsEnum(Payer)
   @Field(() => Payer)
-  @ApiProperty({ description: 'Кто будет оплачивать', enum: Payer })
+  @ApiProperty({
+    description: 'Кто будет оплачивать',
+    enum: Payer,
+    enumName: 'Payer',
+    example: Payer.SENDER
+  })
   payer: Payer;
 }

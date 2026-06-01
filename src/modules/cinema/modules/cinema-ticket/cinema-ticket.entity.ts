@@ -6,8 +6,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 export enum CinemaTicketStatus {
-  PAYED = 'PAYED',
-  CANCELED = 'CANCELED'
+  PAID = 'paid',
+  CANCELLED = 'cancelled'
 }
 
 registerEnumType(CinemaTicketStatus, {
@@ -71,7 +71,12 @@ export class CinemaTicket {
 
   @Field(() => CinemaTicketStatus)
   @Prop({ required: true })
-  @ApiProperty({ description: 'Статус билета', enum: CinemaTicketStatus })
+  @ApiProperty({
+    description: 'Статус билета',
+    enum: CinemaTicketStatus,
+    example: CinemaTicketStatus.PAID,
+    enumName: 'CinemaTicketStatus'
+  })
   status: string;
 }
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
 import { CARS } from './constants';
-import { BodyType, Brand, Color, Steering, Transmission } from './constants/enums';
 import { GetCarsSearchDto } from './dto';
 import { CarsPaginationMeta } from './entities';
 import { CarRentService, CarRentStatus } from './modules';
@@ -38,33 +37,23 @@ export class CarsService {
     let filteredCars = this.getCars();
 
     if (filters.brand?.length) {
-      filteredCars = filteredCars.filter((car) =>
-        filters.brand.includes(car.brand.toLowerCase() as Brand)
-      );
+      filteredCars = filteredCars.filter((car) => filters.brand.includes(car.brand));
     }
 
     if (filters.bodyType?.length) {
-      filteredCars = filteredCars.filter((car) =>
-        filters.bodyType.includes(car.bodyType.toLowerCase() as BodyType)
-      );
+      filteredCars = filteredCars.filter((car) => filters.bodyType.includes(car.bodyType));
     }
 
     if (filters.color?.length) {
-      filteredCars = filteredCars.filter((car) =>
-        filters.color.includes(car.color.toLowerCase() as Color)
-      );
+      filteredCars = filteredCars.filter((car) => filters.color.includes(car.color));
     }
 
     if (filters.transmission) {
-      filteredCars = filteredCars.filter((car) =>
-        filters.transmission.includes(car.transmission.toLowerCase() as Transmission)
-      );
+      filteredCars = filteredCars.filter((car) => filters.transmission.includes(car.transmission));
     }
 
     if (filters.steering) {
-      filteredCars = filteredCars.filter((car) =>
-        filters.steering.includes(car.steering.toLowerCase() as Steering)
-      );
+      filteredCars = filteredCars.filter((car) => filters.steering.includes(car.steering));
     }
 
     if (typeof filters.minPrice === 'number') {

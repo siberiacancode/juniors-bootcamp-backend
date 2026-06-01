@@ -75,7 +75,9 @@ export class GamesController extends BaseResolver {
     name: 'genre',
     required: false,
     enum: GameGenre,
+    enumName: 'GameGenre',
     isArray: true,
+    example: [GameGenre.ACTION, GameGenre.RPG],
     description: 'Жанр'
   })
   @ApiQuery({ name: 'search', required: false, type: String, description: 'Поиск' })
@@ -106,8 +108,8 @@ export class GamesController extends BaseResolver {
   @ApiOperation({ summary: 'Получить фильтры для игр' })
   @ApiResponse({ status: 200, type: GameFiltersResponse })
   getFilters(): GameFiltersResponse {
-    const data = this.gamesService.getFilters();
-    return this.wrapSuccess({ data });
+    const filters = this.gamesService.getFilters();
+    return this.wrapSuccess({ filters });
   }
 
   @Get('/info/:gameId')

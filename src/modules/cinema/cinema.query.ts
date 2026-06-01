@@ -54,16 +54,16 @@ export class CinemaQuery extends BaseResolver {
 
         const seances = schedule.map((seance) => {
           const updatedPlaces = structuredClone(seance.hall.places);
-          const payedTickets = tickets.filter(
+          const paidTickets = tickets.filter(
             (ticket) =>
               ticket.seance.date === formattedDate &&
               ticket.seance.time === seance.time &&
               ticket.filmId === getScheduleDto.filmId
           );
 
-          if (payedTickets.length) {
-            payedTickets.forEach((ticket) => {
-              updatedPlaces[ticket.row - 1][ticket.column - 1].type = FilmHallCellType.PAYED;
+          if (paidTickets.length) {
+            paidTickets.forEach((ticket) => {
+              updatedPlaces[ticket.row - 1][ticket.column - 1].type = FilmHallCellType.PAID;
             });
           }
 

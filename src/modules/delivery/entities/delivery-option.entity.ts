@@ -2,8 +2,8 @@ import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger';
 
 export enum DeliveryOptionType {
-  DEFAULT = 'DEFAULT',
-  EXPRESS = 'EXPRESS'
+  DEFAULT = 'default',
+  EXPRESS = 'express'
 }
 registerEnumType(DeliveryOptionType, {
   name: 'DeliveryOptionType'
@@ -29,6 +29,11 @@ export class DeliveryOption {
   name: string;
 
   @Field(() => DeliveryOptionType)
-  @ApiProperty({ example: 'type', description: 'Тип доставки', enum: DeliveryOptionType })
+  @ApiProperty({
+    example: DeliveryOptionType.DEFAULT,
+    description: 'Тип доставки',
+    enum: DeliveryOptionType,
+    enumName: 'DeliveryOptionType'
+  })
   type: DeliveryOptionType;
 }

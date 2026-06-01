@@ -2,8 +2,8 @@ import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger';
 
 export enum FilmHallCellStatus {
-  DEFAULT = 'DEFAULT',
-  PAYED = 'PAYED'
+  DEFAULT = 'default',
+  PAID = 'paid'
 }
 
 registerEnumType(FilmHallCellStatus, {
@@ -11,10 +11,10 @@ registerEnumType(FilmHallCellStatus, {
 });
 
 export enum FilmHallCellType {
-  ECONOM = 'ECONOM',
-  COMFORT = 'COMFORT',
-  BLOCKED = 'BLOCKED',
-  PAYED = 'PAYED'
+  ECONOMY = 'economy',
+  COMFORT = 'comfort',
+  BLOCKED = 'blocked',
+  PAID = 'paid'
 }
 
 registerEnumType(FilmHallCellType, {
@@ -26,9 +26,10 @@ registerEnumType(FilmHallCellType, {
 export class FilmHallCell {
   @Field(() => FilmHallCellType)
   @ApiProperty({
-    example: FilmHallCellType.ECONOM,
+    example: FilmHallCellType.ECONOMY,
     description: 'Тип места в зале',
-    enum: FilmHallCellType
+    enum: FilmHallCellType,
+    enumName: 'FilmHallCellType'
   })
   type: FilmHallCellType;
 

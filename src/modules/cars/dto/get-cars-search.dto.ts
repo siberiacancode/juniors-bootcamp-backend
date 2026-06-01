@@ -1,4 +1,5 @@
 import { ArgsType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsArray, IsNumber, IsOptional, IsString, Validate } from 'class-validator';
 
@@ -32,6 +33,14 @@ export class GetCarsSearchDto {
   @IsArray()
   @IsString({ each: true })
   @Field(() => [Brand], { nullable: true })
+  @ApiProperty({
+    required: false,
+    enum: Brand,
+    example: [Brand.HYUNDAI, Brand.KIA],
+    enumName: 'Brand',
+    isArray: true,
+    description: 'Фильтр по бренду автомобиля'
+  })
   brand?: Brand[];
 
   @IsOptional()
@@ -39,6 +48,14 @@ export class GetCarsSearchDto {
   @IsArray()
   @IsString({ each: true })
   @Field(() => [BodyType], { nullable: true })
+  @ApiProperty({
+    required: false,
+    enum: BodyType,
+    example: [BodyType.SEDAN, BodyType.SUV],
+    enumName: 'BodyType',
+    isArray: true,
+    description: 'Фильтр по типу кузова'
+  })
   bodyType?: BodyType[];
 
   @IsOptional()
@@ -46,6 +63,14 @@ export class GetCarsSearchDto {
   @IsArray()
   @IsString({ each: true })
   @Field(() => [Color], { nullable: true })
+  @ApiProperty({
+    required: false,
+    enum: Color,
+    example: [Color.BLACK, Color.WHITE],
+    enumName: 'Color',
+    isArray: true,
+    description: 'Фильтр по цвету автомобиля'
+  })
   color?: Color[];
 
   @IsOptional()
@@ -53,14 +78,30 @@ export class GetCarsSearchDto {
   @IsArray()
   @IsString({ each: true })
   @Field(() => [Steering], { nullable: true })
-  steering?: Steering;
+  @ApiProperty({
+    required: false,
+    enum: Steering,
+    example: [Steering.LEFT, Steering.RIGHT],
+    enumName: 'Steering',
+    isArray: true,
+    description: 'Фильтр по типу рулевого управления'
+  })
+  steering?: Steering[];
 
   @IsOptional()
   @Transform(transformSearchParam)
   @IsArray()
   @IsString({ each: true })
   @Field(() => [Transmission], { nullable: true })
-  transmission?: Transmission;
+  @ApiProperty({
+    required: false,
+    enum: Transmission,
+    example: [Transmission.AUTOMATIC, Transmission.MANUAL],
+    enumName: 'Transmission',
+    isArray: true,
+    description: 'Фильтр по типу коробки передач'
+  })
+  transmission?: Transmission[];
 
   @IsOptional()
   @Transform(({ value }) => Number.parseInt(value, 10))

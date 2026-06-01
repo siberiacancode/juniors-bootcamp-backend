@@ -92,7 +92,12 @@ export class GameOrder {
 
   @Field(() => GameOrderStatus)
   @Prop({ required: true, default: GameOrderStatus.PAID })
-  @ApiProperty({ enum: GameOrderStatus, description: 'Статус заказа' })
+  @ApiProperty({
+    enum: GameOrderStatus,
+    example: GameOrderStatus.PAID,
+    enumName: 'GameOrderStatus',
+    description: 'Статус заказа'
+  })
   status: GameOrderStatus;
 }
 
