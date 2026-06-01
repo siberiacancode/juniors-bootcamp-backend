@@ -50,7 +50,7 @@ export class CarRent {
 
   @Field(() => CarRentStatus)
   @Prop({ required: true, default: CarRentStatus.BOOKED })
-  @ApiProperty({ example: 'booked', description: 'Статус брони', enum: CarRentStatus })
+  @ApiProperty({ example: CarRentStatus.BOOKED, description: 'Статус брони', enum: CarRentStatus })
   status: CarRentStatus;
 
   @Field(() => String)
