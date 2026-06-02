@@ -509,7 +509,7 @@ input FilmHallCellInput {
 enum FilmHallCellType {
   BLOCKED
   COMFORT
-  ECONOMY
+  ECONOM
   PAID
 }
 

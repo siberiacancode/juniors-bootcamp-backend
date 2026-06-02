@@ -36,7 +36,6 @@ export class GamesService {
     }
 
     if (filters.genre?.length) {
-      console.log(filters.genre);
       filteredGames = filteredGames.filter((game) =>
         filters.genre.some((genre) => game.genres.includes(genre))
       );

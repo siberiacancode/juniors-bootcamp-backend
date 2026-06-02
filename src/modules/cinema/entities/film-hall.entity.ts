@@ -12,7 +12,7 @@ export class FilmHall {
 
   @Field(() => [[FilmHallCell]])
   @ApiProperty({
-    example: [[{ type: FilmHallCellType.ECONOMY, price: 100 }]],
+    example: [[{ type: FilmHallCellType.ECONOM, price: 100 }]],
     description: 'Места в зале',
     type: [[FilmHallCell]],
     enumName: 'FilmHallCell'
