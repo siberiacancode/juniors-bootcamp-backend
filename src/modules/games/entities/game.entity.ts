@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { GameGenre } from '../constants';
+import { DeliveryType, GameGenre, Region } from '../constants';
 
 @ObjectType('GamesPaginationMeta')
 export class GamesPaginationMeta {
@@ -22,27 +22,46 @@ export class GamesPaginationMeta {
   totalPages: number;
 }
 
+@ObjectType('PriceVariant')
+export class PriceVariant {
+  @Field(() => Region)
+  @ApiProperty({ example: Region.EUROPE, description: 'Регион' })
+  region: Region;
+
+  @Field(() => Number)
+  @ApiProperty({ example: 968, description: 'Текущая цена' })
+  price: number;
+
+  @Field(() => Number, { nullable: true })
+  @ApiProperty({ example: 2688, description: 'Старая цена', required: false })
+  oldPrice?: number;
+
+  @Field(() => DeliveryType)
+  @ApiProperty({ example: DeliveryType.STEAM_KEY, description: 'Способ получения' })
+  deliveryType: DeliveryType;
+
+  @Field(() => String)
+  @ApiProperty({ example: 'Deluxe edition', description: 'Издание' })
+  edition: string;
+}
+
 @ObjectType('Game')
 export class Game {
   @Field(() => String)
-  @ApiProperty({ example: '1', description: 'ID игры' })
-  id: string;
+  @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
+  slug: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'Battlefield 2042', description: 'Название игры' })
   name: string;
 
   @Field(() => String)
-  @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
-  slug: string;
-
-  @Field(() => String)
   @ApiProperty({ example: '1517290', description: 'Внешний ID (Steam/KupiKod)' })
   externalId: string;
 
   @Field(() => Number)
-  @ApiProperty({ example: 2021, description: 'Год релиза' })
-  year: number;
+  @ApiProperty({ example: 1637280000, description: 'Дата релиза' })
+  releaseDate: number;
 
   @Field(() => [GameGenre])
   @ApiProperty({
@@ -62,13 +81,9 @@ export class Game {
   @ApiProperty({ example: '/static/images/games/cs2.webp', description: 'Изображение игры' })
   image: string;
 
-  @Field(() => Number)
-  @ApiProperty({ example: 968, description: 'Текущая цена' })
-  price: number;
-
-  @Field(() => Number, { nullable: true })
-  @ApiProperty({ example: 2688, description: 'Старая цена', required: false })
-  oldPrice?: number;
+  @Field(() => [PriceVariant])
+  @ApiProperty({ description: 'Варианты цен' })
+  priceVariants: PriceVariant[];
 
   @Field(() => Number, { nullable: true })
   @ApiProperty({ example: 57.78, description: 'Рейтинг положительных отзывов', required: false })

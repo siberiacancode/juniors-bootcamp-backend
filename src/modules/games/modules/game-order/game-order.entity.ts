@@ -18,32 +18,20 @@ registerEnumType(GameOrderStatus, {
 @ObjectType()
 export class GameOrderPerson {
   @Field(() => String)
-  @ApiProperty({ example: 'Иван', description: 'Имя' })
-  firstName: string;
-
-  @Field(() => String)
-  @ApiProperty({ example: 'Иванов', description: 'Фамилия' })
-  lastName: string;
-
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'Иванович', description: 'Отчество', required: false })
-  middleName?: string;
-
-  @Field(() => String)
   @ApiProperty({ example: '79990001122', description: 'Телефон' })
   phone: string;
 
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'user@mail.com', description: 'Email', required: false })
-  email?: string;
+  @Field(() => String)
+  @ApiProperty({ example: 'user@mail.com', description: 'Email' })
+  email: string;
 }
 
 @InputType('GameOrderSnapshotInput')
 @ObjectType()
 export class GameOrderSnapshot {
   @Field(() => String)
-  @ApiProperty({ example: '1', description: 'ID игры' })
-  gameId: string;
+  @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
+  slug: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'Battlefield 2042', description: 'Название игры' })
