@@ -7,30 +7,30 @@ import { DeliveryType, GameGenre, Region } from '../constants';
 export class GamesPaginationMeta {
   @Field(() => Number)
   @ApiProperty({ example: 30, description: 'Общее количество элементов' })
-  total: number;
+  total!: number;
 
   @Field(() => Number)
   @ApiProperty({ example: 1, description: 'Текущая страница' })
-  page: number;
+  page!: number;
 
   @Field(() => Number)
   @ApiProperty({ example: 10, description: 'Элементов на странице' })
-  limit: number;
+  limit!: number;
 
   @Field(() => Number)
   @ApiProperty({ example: 3, description: 'Количество страниц' })
-  totalPages: number;
+  totalPages!: number;
 }
 
 @ObjectType('PriceVariant')
 export class PriceVariant {
   @Field(() => Region)
   @ApiProperty({ example: Region.EUROPE, description: 'Регион' })
-  region: Region;
+  region!: Region;
 
   @Field(() => Number)
   @ApiProperty({ example: 968, description: 'Текущая цена' })
-  price: number;
+  price!: number;
 
   @Field(() => Number, { nullable: true })
   @ApiProperty({ example: 2688, description: 'Старая цена', required: false })
@@ -38,30 +38,30 @@ export class PriceVariant {
 
   @Field(() => DeliveryType)
   @ApiProperty({ example: DeliveryType.STEAM_KEY, description: 'Способ получения' })
-  deliveryType: DeliveryType;
+  deliveryType!: DeliveryType;
 
   @Field(() => String)
   @ApiProperty({ example: 'Deluxe edition', description: 'Издание' })
-  edition: string;
+  edition!: string;
 }
 
 @ObjectType('Game')
 export class Game {
   @Field(() => String)
   @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
-  slug: string;
+  slug!: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'Battlefield 2042', description: 'Название игры' })
-  name: string;
+  name!: string;
 
   @Field(() => String)
   @ApiProperty({ example: '1517290', description: 'Внешний ID (Steam/KupiKod)' })
-  externalId: string;
+  externalId!: string;
 
   @Field(() => Number)
   @ApiProperty({ example: 1637280000, description: 'Дата релиза' })
-  releaseDate: number;
+  releaseDate!: number;
 
   @Field(() => [GameGenre])
   @ApiProperty({
@@ -71,19 +71,19 @@ export class Game {
     isArray: true,
     description: 'Жанры игры'
   })
-  genres: GameGenre[];
+  genres!: GameGenre[];
 
   @Field(() => String)
   @ApiProperty({ example: 'Онлайн-шутер с масштабными сражениями.', description: 'Описание игры' })
-  description: string;
+  description!: string;
 
   @Field(() => String)
   @ApiProperty({ example: '/static/images/games/cs2.webp', description: 'Изображение игры' })
-  image: string;
+  image!: string;
 
   @Field(() => [PriceVariant])
   @ApiProperty({ description: 'Варианты цен' })
-  priceVariants: PriceVariant[];
+  priceVariants!: PriceVariant[];
 
   @Field(() => Number, { nullable: true })
   @ApiProperty({ example: 57.78, description: 'Рейтинг положительных отзывов', required: false })

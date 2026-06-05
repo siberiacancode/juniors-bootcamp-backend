@@ -8,7 +8,7 @@ import { FilmHallCell, FilmHallCellType } from './film-hall-cell.entity';
 export class FilmHall {
   @Field(() => String)
   @ApiProperty({ example: 'red', description: 'Название зала' })
-  name: string;
+  name!: string;
 
   @Field(() => [[FilmHallCell]])
   @ApiProperty({
@@ -17,5 +17,5 @@ export class FilmHall {
     type: [[FilmHallCell]],
     enumName: 'FilmHallCell'
   })
-  places: FilmHallCell[][];
+  places!: FilmHallCell[][];
 }

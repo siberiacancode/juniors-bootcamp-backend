@@ -44,17 +44,17 @@ registerEnumType(DeliveryStatus, {
 export class DeliveryOrder {
   @Field(() => String)
   @ApiProperty({ description: 'ID заказа', type: String })
-  _id: Types.ObjectId;
+  _id!: Types.ObjectId;
 
   @Field(() => Number)
   @Prop({ required: true })
   @ApiProperty({ description: 'Цена доставки', type: Number })
-  price: number;
+  price!: number;
 
   @Field(() => DeliveryPackageType)
   @Prop({ required: true })
   @ApiProperty({ description: 'Тип посылки', type: DeliveryPackageType })
-  package: DeliveryPackageType;
+  package!: DeliveryPackageType;
 
   @Field(() => DeliveryOptionType)
   @Prop({ required: true })
@@ -64,37 +64,37 @@ export class DeliveryOrder {
     example: DeliveryOptionType.DEFAULT,
     enumName: 'DeliveryOptionType'
   })
-  option: DeliveryOptionType;
+  option!: DeliveryOptionType;
 
   @Field(() => DeliveryPoint)
   @Prop({ required: true })
   @ApiProperty({ description: 'Город отправки', type: DeliveryPoint })
-  senderPoint: DeliveryPoint;
+  senderPoint!: DeliveryPoint;
 
   @Field(() => DeliverySenderAddress)
   @Prop({ required: true })
   @ApiProperty({ description: 'Адрес отправителя', type: DeliverySenderAddress })
-  senderAddress: DeliverySenderAddress;
+  senderAddress!: DeliverySenderAddress;
 
   @Field(() => DeliveryPerson)
   @Prop({ required: true })
   @ApiProperty({ description: 'Отправитель', type: DeliveryPerson })
-  sender: DeliveryPerson;
+  sender!: DeliveryPerson;
 
   @Field(() => DeliveryPoint)
   @Prop({ required: true })
   @ApiProperty({ description: 'Город получения', type: DeliveryPoint })
-  receiverPoint: DeliveryPoint;
+  receiverPoint!: DeliveryPoint;
 
   @Field(() => DeliveryReceiverAddress)
   @Prop({ required: true })
   @ApiProperty({ description: 'Адрес получателя', type: DeliveryReceiverAddress })
-  receiverAddress: DeliveryReceiverAddress;
+  receiverAddress!: DeliveryReceiverAddress;
 
   @Field(() => DeliveryPerson)
   @Prop({ required: true })
   @ApiProperty({ description: 'Получатель', type: DeliveryPerson })
-  receiver: DeliveryPerson;
+  receiver!: DeliveryPerson;
 
   @Field(() => Payer)
   @Prop({ required: true })
@@ -104,7 +104,7 @@ export class DeliveryOrder {
     enumName: 'Payer',
     example: Payer.SENDER
   })
-  payer: Payer;
+  payer!: Payer;
 
   @Field(() => DeliveryStatus)
   @Prop({ required: true, default: DeliveryStatus.IN_PROCESSING })
@@ -114,12 +114,12 @@ export class DeliveryOrder {
     enumName: 'DeliveryStatus',
     example: DeliveryStatus.IN_PROCESSING
   })
-  status: DeliveryStatus;
+  status!: DeliveryStatus;
 
   @Field(() => Boolean)
   @Prop({ required: true, default: true })
   @ApiProperty({ description: 'Статус отмены', type: Boolean })
-  cancellable: boolean;
+  cancellable!: boolean;
 }
 
 export type DeliveryOrderDocument = DeliveryOrder & Document;

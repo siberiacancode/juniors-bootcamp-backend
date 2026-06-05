@@ -19,11 +19,11 @@ registerEnumType(CinemaTicketStatus, {
 export class CinemaTicketSeance {
   @Field(() => String)
   @ApiProperty({ example: '29.06.23', description: 'Дата сеанса' })
-  date: string;
+  date!: string;
 
   @Field(() => String)
   @ApiProperty({ example: '10:00', description: 'Время сеанса' })
-  time: string;
+  time!: string;
 }
 
 @InputType('CinemaTicketInput')
@@ -37,37 +37,37 @@ export class CinemaTicketSeance {
 export class CinemaTicket {
   @Field(() => String)
   @ApiProperty({ description: 'ID билета', type: String })
-  _id: Types.ObjectId;
+  _id!: Types.ObjectId;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ description: 'Идентификатор фильма' })
-  filmId: string;
+  filmId!: string;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ description: 'Идентификатор заказа' })
-  orderId: string;
+  orderId!: string;
 
   @Field(() => Number)
   @Prop({ required: true })
   @ApiProperty({ example: 1, description: 'Ряд' })
-  row: number;
+  row!: number;
 
   @Field(() => Number)
   @Prop({ required: true })
   @ApiProperty({ example: 1, description: 'Место' })
-  column: number;
+  column!: number;
 
   @Field(() => CinemaTicketSeance)
   @Prop({ required: true })
   @ApiProperty({ description: 'Сеанс фильма', type: CinemaTicketSeance })
-  seance: CinemaTicketSeance;
+  seance!: CinemaTicketSeance;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: '89990009999', description: 'Телефон' })
-  phone: string;
+  phone!: string;
 
   @Field(() => CinemaTicketStatus)
   @Prop({ required: true })
@@ -77,7 +77,7 @@ export class CinemaTicket {
     example: CinemaTicketStatus.PAID,
     enumName: 'CinemaTicketStatus'
   })
-  status: string;
+  status!: string;
 }
 
 export type CinemaTicketDocument = CinemaTicket & Document;

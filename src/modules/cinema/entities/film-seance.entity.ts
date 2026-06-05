@@ -8,9 +8,9 @@ import { FilmHall } from './film-hall.entity';
 export class FilmSeance {
   @Field(() => String)
   @ApiProperty({ description: 'Время сеанса' })
-  time: string;
+  time!: string;
 
   @Field(() => FilmHall)
   @ApiProperty({ description: 'Зал сеанса', type: FilmHall })
-  hall: FilmHall;
+  hall!: FilmHall;
 }

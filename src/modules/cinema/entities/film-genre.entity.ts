@@ -6,10 +6,10 @@ import { ApiProperty } from '@nestjs/swagger';
 export class FilmGenre {
   @Field(() => String)
   @ApiProperty({ example: '1', description: 'Идентификатор жанра' })
-  id: string;
+  id!: string;
 
   @ApiProperty()
   @Field(() => String)
   @ApiProperty({ example: 'genre', description: 'Название жанра' })
-  name: string;
+  name!: string;
 }

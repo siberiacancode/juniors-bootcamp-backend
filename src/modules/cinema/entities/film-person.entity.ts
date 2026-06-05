@@ -6,11 +6,11 @@ import { ApiProperty } from '@nestjs/swagger';
 export class FilmPerson {
   @Field(() => String)
   @ApiProperty({ example: 'firstname', description: 'Имя' })
-  firstname: string;
+  firstname!: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'lastname', description: 'Фамилия' })
-  lastname: string;
+  lastname!: string;
 
   @Field(() => String, { nullable: true })
   @ApiProperty({ example: 'middlename', description: 'Отчество' })
@@ -18,5 +18,5 @@ export class FilmPerson {
 
   @Field(() => String)
   @ApiProperty({ example: '89990009999', description: 'Телефон' })
-  phone: string;
+  phone!: string;
 }

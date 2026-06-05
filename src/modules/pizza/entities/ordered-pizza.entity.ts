@@ -11,7 +11,7 @@ export class OrderedPizza {
   @IsNotEmpty()
   @Field(() => String)
   @ApiProperty({ example: '1', description: 'Идентификатор пиццы' })
-  id: string;
+  id!: string;
 
   @IsArray()
   @IsEnum(Ingredient, { each: true })
@@ -23,15 +23,15 @@ export class OrderedPizza {
     enumName: 'Ingredient',
     type: [Ingredient]
   })
-  toppings: Ingredient[];
+  toppings!: Ingredient[];
 
   @IsEnum(Size)
   @Field(() => Size)
   @ApiProperty({ description: 'Размер пиццы', enum: Size, example: Size.SMALL, enumName: 'Size' })
-  size: Size;
+  size!: Size;
 
   @IsEnum(Dough)
   @Field(() => Dough)
   @ApiProperty({ description: 'Тип теста', enum: Dough, example: Dough.THIN, enumName: 'Dough' })
-  dough: Dough;
+  dough!: Dough;
 }

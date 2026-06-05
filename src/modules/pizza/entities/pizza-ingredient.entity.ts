@@ -13,13 +13,13 @@ export class PizzaIngredient {
     enumName: 'Ingredient',
     description: 'Идентификатор ингредиента'
   })
-  type: Ingredient;
+  type!: Ingredient;
 
   @Field(() => Number)
   @ApiProperty({ description: 'Цена ингредиента' })
-  price: number;
+  price!: number;
 
   @Field(() => String)
   @ApiProperty({ description: 'Изображение ингредиента' })
-  img: string;
+  img!: string;
 }

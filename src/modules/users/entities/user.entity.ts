@@ -15,12 +15,12 @@ import { Types } from 'mongoose';
 export class User {
   @Field(() => String)
   @ApiProperty({ description: 'ID пользователя', type: String })
-  _id: Types.ObjectId;
+  _id!: Types.ObjectId;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: '89990009999', description: 'Номер телефона' })
-  phone: string;
+  phone!: string;
 
   @Field(() => String, { nullable: true })
   @Prop()

@@ -19,11 +19,11 @@ registerEnumType(GameOrderStatus, {
 export class GameOrderPerson {
   @Field(() => String)
   @ApiProperty({ example: '79990001122', description: 'Телефон' })
-  phone: string;
+  phone!: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'user@mail.com', description: 'Email' })
-  email: string;
+  email!: string;
 }
 
 @InputType('GameOrderSnapshotInput')
@@ -31,23 +31,23 @@ export class GameOrderPerson {
 export class GameOrderSnapshot {
   @Field(() => String)
   @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
-  slug: string;
+  slug!: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'Battlefield 2042', description: 'Название игры' })
-  name: string;
+  name!: string;
 
   @Field(() => String)
   @ApiProperty({ example: '/static/images/pizza/1.webp', description: 'Картинка игры' })
-  image: string;
+  image!: string;
 
   @Field(() => Number)
   @ApiProperty({ example: 968, description: 'Цена на момент заказа' })
-  price: number;
+  price!: number;
 
   @Field(() => String)
   @ApiProperty({ example: '1517290', description: 'Внешний ID' })
-  externalId: string;
+  externalId!: string;
 }
 
 @InputType('GameOrderInput')
@@ -61,22 +61,22 @@ export class GameOrderSnapshot {
 export class GameOrder {
   @Field(() => String)
   @ApiProperty({ description: 'ID заказа', type: String })
-  _id: Types.ObjectId;
+  _id!: Types.ObjectId;
 
   @Field(() => GameOrderPerson)
   @Prop({ required: true })
   @ApiProperty({ description: 'Данные покупателя', type: GameOrderPerson })
-  person: GameOrderPerson;
+  person!: GameOrderPerson;
 
   @Field(() => GameOrderSnapshot)
   @Prop({ required: true })
   @ApiProperty({ description: 'Снимок игры на момент заказа', type: GameOrderSnapshot })
-  gameSnapshot: GameOrderSnapshot;
+  gameSnapshot!: GameOrderSnapshot;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: 'XXXX-YYYY-ZZZZ', description: 'Сгенерированный игровой ключ' })
-  gameKey: string;
+  gameKey!: string;
 
   @Field(() => GameOrderStatus)
   @Prop({ required: true, default: GameOrderStatus.PAID })
@@ -86,7 +86,7 @@ export class GameOrder {
     enumName: 'GameOrderStatus',
     description: 'Статус заказа'
   })
-  status: GameOrderStatus;
+  status!: GameOrderStatus;
 }
 
 export type GameOrderDocument = GameOrder & Document;

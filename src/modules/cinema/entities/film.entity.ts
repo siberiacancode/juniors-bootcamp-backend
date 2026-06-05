@@ -23,42 +23,42 @@ registerEnumType(Rating, {
 export class Film {
   @Field(() => String)
   @ApiProperty({ example: '1', description: 'Идентификатор фильма' })
-  id: string;
+  id!: string;
 
   @ApiProperty()
   @Field(() => String)
   @ApiProperty({ description: 'Название фильма' })
-  name: string;
+  name!: string;
 
   @ApiProperty()
   @Field(() => String)
   @ApiProperty({ description: 'Оригинальное название' })
-  originalName: string;
+  originalName!: string;
 
   @ApiProperty()
   @Field(() => String)
   @ApiProperty({ description: 'Описание фильма' })
-  description: string;
+  description!: string;
 
   @ApiProperty()
   @Field(() => String)
   @ApiProperty({ description: 'Дата выхода' })
-  releaseDate: string;
+  releaseDate!: string;
 
   @ApiProperty()
   @Field(() => [FilmStaff], { defaultValue: [] })
   @ApiProperty({ description: 'Актеры', type: [FilmStaff] })
-  actors: FilmStaff[];
+  actors!: FilmStaff[];
 
   @ApiProperty()
   @Field(() => [FilmStaff], { defaultValue: [] })
   @ApiProperty({ description: 'Режиссер', type: [FilmStaff] })
-  directors: FilmStaff[];
+  directors!: FilmStaff[];
 
   @ApiProperty()
   @Field(() => Number)
   @ApiProperty({ description: 'Продолжительность', type: Number })
-  runtime: number;
+  runtime!: number;
 
   @ApiProperty()
   @Field(() => Rating)
@@ -68,21 +68,21 @@ export class Film {
     example: Rating.G,
     enumName: 'Rating'
   })
-  ageRating: Rating;
+  ageRating!: Rating;
 
   @ApiProperty()
   @Field(() => [String], { defaultValue: [] })
-  genres: string[];
+  genres!: string[];
 
   @ApiProperty()
   @Field(() => FilmUserRating)
   @ApiProperty({ description: 'Рейтинг пользователей', type: FilmUserRating })
-  userRatings: FilmUserRating;
+  userRatings!: FilmUserRating;
 
   @ApiProperty()
   @Field(() => String)
   @ApiProperty({ description: 'Изображение фильма' })
-  img: string;
+  img!: string;
 
   @ApiProperty()
   @Field(() => Country, { nullable: true })

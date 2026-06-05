@@ -6,17 +6,17 @@ import { ApiProperty } from '@nestjs/swagger';
 export class Country {
   @ApiProperty()
   @Field(() => String)
-  name: string;
+  name!: string;
 
   @ApiProperty()
   @Field(() => String)
-  code: string;
+  code!: string;
 
   @ApiProperty()
   @Field(() => String)
-  code2: string;
+  code2!: string;
 
   @ApiProperty()
   @Field(() => Number)
-  id: number;
+  id!: number;
 }

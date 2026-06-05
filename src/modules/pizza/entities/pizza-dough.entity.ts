@@ -15,11 +15,11 @@ export class PizzaDough {
     enumName: 'Dough',
     description: 'Идентификатор типа теста'
   })
-  type: Dough;
+  type!: Dough;
 
   @IsNotEmpty()
   @IsNumber()
   @Field(() => Number)
   @ApiProperty({ description: 'Цена теста' })
-  price: number;
+  price!: number;
 }

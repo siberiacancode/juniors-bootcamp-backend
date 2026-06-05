@@ -15,10 +15,10 @@ export class PizzaSize {
     enumName: 'Size',
     description: 'Идентификатор размера пиццы'
   })
-  type: Size;
+  type!: Size;
 
   @IsNumber()
   @Field(() => Number)
   @ApiProperty({ description: 'Цена пиццы' })
-  price: number;
+  price!: number;
 }

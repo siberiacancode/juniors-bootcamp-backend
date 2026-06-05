@@ -29,27 +29,27 @@ registerEnumType(PizzaStatus, {
 export class PizzaOrder {
   @Field(() => String)
   @ApiProperty({ description: 'ID заказа', type: String })
-  _id: Types.ObjectId;
+  _id!: Types.ObjectId;
 
   @Field(() => [Pizza])
   @Prop({ required: true })
   @ApiProperty({ description: 'Пиццы', type: [Pizza] })
-  pizzas: Pizza[];
+  pizzas!: Pizza[];
 
   @Field(() => Number)
   @Prop({ required: true })
   @ApiProperty({ description: 'Сумма заказа', type: Number })
-  totalPrice: number;
+  totalPrice!: number;
 
   @Field(() => PizzaPerson)
   @Prop({ required: true })
   @ApiProperty({ description: 'Данные пользователя', type: PizzaPerson })
-  person: PizzaPerson;
+  person!: PizzaPerson;
 
   @Field(() => PizzaAddress)
   @Prop({ required: true })
   @ApiProperty({ description: 'Адрес доставки', type: PizzaAddress })
-  receiverAddress: PizzaAddress;
+  receiverAddress!: PizzaAddress;
 
   @Field(() => PizzaStatus)
   @Prop({ required: true, default: PizzaStatus.IN_PROCESSING })
@@ -59,12 +59,12 @@ export class PizzaOrder {
     enumName: 'PizzaStatus',
     example: PizzaStatus.IN_PROCESSING
   })
-  status: PizzaStatus;
+  status!: PizzaStatus;
 
   @Field(() => Boolean)
   @Prop({ required: true, default: true })
   @ApiProperty({ description: 'Статус отмены', type: Boolean })
-  cancellable: boolean;
+  cancellable!: boolean;
 }
 
 export type PizzaOrderDocument = PizzaOrder & Document;

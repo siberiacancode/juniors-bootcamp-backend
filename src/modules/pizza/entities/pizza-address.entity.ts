@@ -6,15 +6,15 @@ import { ApiProperty } from '@nestjs/swagger';
 export class PizzaAddress {
   @Field(() => String)
   @ApiProperty({ example: 'street', description: 'Улица' })
-  street: string;
+  street!: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'house', description: 'Номер дома' })
-  house: string;
+  house!: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'apartment', description: 'Номер квартиры' })
-  apartment: string;
+  apartment!: string;
 
   @Field(() => String, { nullable: true })
   @ApiProperty({ example: 'comment', description: 'Комментарий' })

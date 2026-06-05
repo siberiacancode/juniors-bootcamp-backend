@@ -6,25 +6,25 @@ import { ApiProperty } from '@nestjs/swagger';
 export class DeliveryPackageType {
   @Field(() => String)
   @ApiProperty({ example: 'envelope', description: 'Индентификатор типа посылки' })
-  id: string;
+  id!: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'name', description: 'Название типа посылки' })
-  name: string;
+  name!: string;
 
   @Field(() => Number)
   @ApiProperty({ example: 'length', description: 'Длина посылки' })
-  length: number;
+  length!: number;
 
   @Field(() => Number)
   @ApiProperty({ example: 'width', description: 'Ширина посылки' })
-  width: number;
+  width!: number;
 
   @Field(() => Number)
   @ApiProperty({ example: 'weight', description: 'Длина посылки' })
-  weight: number;
+  weight!: number;
 
   @Field(() => Number)
   @ApiProperty({ example: 'length', description: 'Высота посылки' })
-  height: number;
+  height!: number;
 }
