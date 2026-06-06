@@ -24,7 +24,7 @@ export class GamesMutation extends BaseResolver {
   async createGameOrder(
     @Args() createGameOrderDto: CreateGameOrderDto
   ): Promise<CreateGameOrderResponse> {
-    const game = this.gamesService.getGame(createGameOrderDto.gameId);
+    const game = this.gamesService.getGame(createGameOrderDto.gameSlug);
 
     if (!game) {
       throw new BadRequestException(this.wrapFail('Игра не найдена'));
@@ -40,9 +40,6 @@ export class GamesMutation extends BaseResolver {
       { phone: user.phone },
       {
         $set: {
-          firstname: createGameOrderDto.person.firstName,
-          lastname: createGameOrderDto.person.lastName,
-          middlename: createGameOrderDto.person.middleName,
           email: createGameOrderDto.person.email
         }
       }
@@ -51,10 +48,11 @@ export class GamesMutation extends BaseResolver {
     const order = await this.gameOrderService.create({
       person: createGameOrderDto.person,
       gameSnapshot: {
-        gameId: game.id,
+        priceVariant: game.priceVariants.find(
+          (variant) => variant.id === createGameOrderDto.priceVariantId
+        ),
         name: game.name,
         image: game.image,
-        price: game.price,
         externalId: game.externalId
       },
       gameKey: this.generateGameKey(),

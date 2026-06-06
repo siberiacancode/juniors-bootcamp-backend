@@ -24,8 +24,12 @@ export class GamesPaginationMeta {
 
 @ObjectType('PriceVariant')
 export class PriceVariant {
+  @Field(() => String)
+  @ApiProperty({ example: '1', description: 'ID варианта цены' })
+  id!: string;
+
   @Field(() => Region)
-  @ApiProperty({ example: Region.EUROPE, description: 'Регион' })
+  @ApiProperty({ enum: Region, enumName: 'Region', example: Region.EUROPE, description: 'Регион' })
   region!: Region;
 
   @Field(() => Number)
@@ -37,11 +41,16 @@ export class PriceVariant {
   oldPrice?: number;
 
   @Field(() => DeliveryType)
-  @ApiProperty({ example: DeliveryType.STEAM_KEY, description: 'Способ получения' })
+  @ApiProperty({
+    enum: DeliveryType,
+    enumName: 'DeliveryType',
+    example: DeliveryType.STEAM_KEY,
+    description: 'Способ получения'
+  })
   deliveryType!: DeliveryType;
 
   @Field(() => String)
-  @ApiProperty({ example: 'Deluxe edition', description: 'Издание' })
+  @ApiProperty({ example: 'Deluxe', description: 'Издание' })
   edition!: string;
 }
 
@@ -82,7 +91,7 @@ export class Game {
   image!: string;
 
   @Field(() => [PriceVariant])
-  @ApiProperty({ description: 'Варианты цен' })
+  @ApiProperty({ description: 'Варианты цен', type: [PriceVariant] })
   priceVariants!: PriceVariant[];
 
   @Field(() => Number, { nullable: true })

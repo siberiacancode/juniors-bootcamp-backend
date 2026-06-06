@@ -35,6 +35,14 @@ export enum Region {
   ASIA = 'asia'
 }
 
+registerEnumType(Region, {
+  name: 'Region'
+});
+
+registerEnumType(DeliveryType, {
+  name: 'DeliveryType'
+});
+
 registerEnumType(GameGenre, {
   name: 'GameGenre'
 });

@@ -21,8 +21,8 @@ export class GamesService {
     return GAMES;
   }
 
-  getGame(id: string) {
-    return this.getGames().find((game) => game.id === id);
+  getGame(slug: string) {
+    return this.getGames().find((game) => game.slug === slug);
   }
 
   getFilteredGames(filters: GetGamesSearchDto) {
@@ -32,12 +32,15 @@ export class GamesService {
       const minYear = filters.minYear ?? -Infinity;
       const maxYear = filters.maxYear ?? Infinity;
 
-      filteredGames = filteredGames.filter((game) => game.year >= minYear && game.year <= maxYear);
+      filteredGames = filteredGames.filter((game) => {
+        const timestamp = new Date(game.releaseDate, 0, 1).getTime();
+        return timestamp >= minYear && timestamp <= maxYear;
+      });
     }
 
     if (filters.genre?.length) {
       filteredGames = filteredGames.filter((game) =>
-        filters.genre.some((genre) => game.genres.includes(genre))
+        filters.genre!.some((genre) => game.genres.includes(genre))
       );
     }
 

@@ -248,9 +248,6 @@ input CreateDeliveryOrderSenderAddressDto {
 
 input CreateGameOrderPersonDto {
   email: String
-  firstName: String!
-  lastName: String!
-  middleName: String
   phone: String!
 }
 
@@ -470,6 +467,15 @@ enum DeliveryStatus {
   WAITING_COURIER
 }
 
+enum DeliveryType {
+  EPIC_KEY
+  NINTENDO_KEY
+  PLAYSTATION_KEY
+  STEAM_GIFT
+  STEAM_KEY
+  XBOX_KEY
+}
+
 enum Dough {
   THICK
   THIN
@@ -608,14 +614,12 @@ type Game {
   description: String!
   externalId: String!
   genres: [GameGenre!]!
-  id: String!
   image: String!
   name: String!
-  oldPrice: Float
-  price: Float!
+  priceVariants: [PriceVariant!]!
   rating: Float
+  releaseDate: Float!
   slug: String!
-  year: Float!
 }
 
 enum GameGenre {
@@ -649,18 +653,12 @@ input GameOrderInput {
 }
 
 type GameOrderPerson {
-  email: String
-  firstName: String!
-  lastName: String!
-  middleName: String
+  email: String!
   phone: String!
 }
 
 input GameOrderPersonInput {
-  email: String
-  firstName: String!
-  lastName: String!
-  middleName: String
+  email: String!
   phone: String!
 }
 
@@ -671,19 +669,25 @@ type GameOrderResponse {
 }
 
 type GameOrderSnapshot {
+  deliveryType: DeliveryType!
+  edition: String!
   externalId: String!
-  gameId: String!
   image: String!
   name: String!
   price: Float!
+  region: Region!
+  slug: String!
 }
 
 input GameOrderSnapshotInput {
+  deliveryType: DeliveryType!
+  edition: String!
   externalId: String!
-  gameId: String!
   image: String!
   name: String!
   price: Float!
+  region: Region!
+  slug: String!
 }
 
 enum GameOrderStatus {
@@ -758,7 +762,7 @@ type Mutation {
   createCarRent(birthDate: String!, carId: String!, comment: String, email: String!, endDate: Float!, firstName: String!, lastName: String!, middleName: String!, phone: String!, pickupLocation: String!, returnLocation: String!, startDate: Float!): CarRentResponse!
   createCinemaPayment(debitCard: CreatePaymentDebitCardDto!, filmId: String!, person: CreatePaymentPersonDto!, seance: CreatePaymentSeanceDto!, tickets: [CreatePaymentTicketsDto!]!): PaymentResponse!
   createDeliveryOrder(optionType: DeliveryOptionType!, packageId: String!, payer: Payer!, receiver: CreateDeliveryOrderPersonDto!, receiverAddress: CreateDeliveryOrderReceiverAddressDto!, receiverPointId: String!, sender: CreateDeliveryOrderPersonDto!, senderAddress: CreateDeliveryOrderSenderAddressDto!, senderPointId: String!): DeliverResponse!
-  createGameOrder(debitCard: String!, gameId: String!, person: CreateGameOrderPersonDto!): CreateGameOrderResponse!
+  createGameOrder(debitCard: String!, gameSlug: String!, person: CreateGameOrderPersonDto!, priceVariantId: String!): CreateGameOrderResponse!
   createOtp(phone: String!): OtpResponse!
   createPizzaPayment(debitCard: CreatePizzaPaymentDebitCardDto!, person: CreatePizzaPaymentPersonDto!, pizzas: [OrderedPizzaInput!]!, receiverAddress: CreatePizzaPaymentAddressDto!): PizzaPaymentResponse!
   signin(code: Float!, phone: String!): SignInResponse!
@@ -959,6 +963,15 @@ type PizzasResponse {
   success: Boolean!
 }
 
+type PriceVariant {
+  deliveryType: DeliveryType!
+  edition: String!
+  id: String!
+  oldPrice: Float
+  price: Float!
+  region: Region!
+}
+
 enum Profession {
   ACTOR
   DIRECTOR
@@ -994,7 +1007,7 @@ type Query {
   getDeliveryPoints: DeliveryPointsResponse!
   getFilm(filmId: String!): FilmResponse!
   getFilmSchedule(filmId: String!): ScheduleResponse!
-  getGame(gameId: String!): GameResponse!
+  getGame(slug: String!): GameResponse!
   getGameOrder(orderId: String!): GameOrderResponse!
   getGameOrders: GameOrdersResponse!
   getGames(genre: [GameGenre!], limit: Float, maxYear: Float, minYear: Float, page: Float, search: String): GamesPaginatedResponse!
@@ -1011,6 +1024,18 @@ enum Rating {
   PG
   PG13
   R
+}
+
+enum Region {
+  ALL_WORLD
+  ASIA
+  BY
+  EUROPE
+  KZ
+  PL
+  RU
+  TR
+  UA
 }
 
 type ScheduleResponse {

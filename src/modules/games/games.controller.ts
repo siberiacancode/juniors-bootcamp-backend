@@ -103,11 +103,11 @@ export class GamesController extends BaseResolver {
     return this.wrapSuccess({ data });
   }
 
-  @Get('/info/:gameId')
+  @Get('/info/:slug')
   @ApiOperation({ summary: 'Получить игру' })
   @ApiResponse({ status: 200, type: GameResponse })
   getGame(@Param() getGameDto: GetGameDto): GameResponse {
-    const game = this.gamesService.getGame(getGameDto.gameId);
+    const game = this.gamesService.getGame(getGameDto.slug);
 
     if (!game) {
       throw new BadRequestException(this.wrapFail('Игра не найдена'));
@@ -120,7 +120,7 @@ export class GamesController extends BaseResolver {
   @ApiOperation({ summary: 'Купить игру и получить ключ' })
   @ApiResponse({ status: 200, type: CreateGameOrderResponse })
   async buyGame(@Body() createGameOrderDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
-    const game = this.gamesService.getGame(createGameOrderDto.gameId);
+    const game = this.gamesService.getGame(createGameOrderDto.gameSlug);
 
     if (!game) {
       throw new BadRequestException(this.wrapFail('Игра не найдена'));
@@ -129,28 +129,38 @@ export class GamesController extends BaseResolver {
     let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
 
     if (!user) {
-      user = await this.usersService.create({ phone: createGameOrderDto.person.phone });
+      user = await this.usersService.create({
+        phone: createGameOrderDto.person.phone
+      });
     }
 
     await this.usersService.findOneAndUpdate(
       { phone: user.phone },
       {
         $set: {
-          firstname: createGameOrderDto.person.firstName,
-          lastname: createGameOrderDto.person.lastName,
-          middlename: createGameOrderDto.person.middleName,
           email: createGameOrderDto.person.email
         }
       }
     );
 
+    const priceVariant = game.priceVariants.find(
+      (variant) => variant.id === createGameOrderDto.priceVariantId
+    );
+
+    if (!priceVariant) {
+      throw new BadRequestException(this.wrapFail('Вариант цены не найден'));
+    }
+
     const order = await this.gameOrderService.create({
       person: createGameOrderDto.person,
       gameSnapshot: {
-        gameId: game.id,
+        deliveryType: priceVariant.deliveryType,
+        edition: priceVariant.edition,
+        price: priceVariant.price,
+        region: priceVariant.region,
+        slug: game.slug,
         name: game.name,
         image: game.image,
-        price: game.price,
         externalId: game.externalId
       },
       gameKey: this.generateGameKey(),

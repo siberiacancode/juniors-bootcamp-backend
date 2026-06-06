@@ -5,6 +5,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
+import { DeliveryType, Region } from '../../constants';
+
 export enum GameOrderStatus {
   PAID = 'paid',
   CANCELED = 'canceled'
@@ -41,9 +43,26 @@ export class GameOrderSnapshot {
   @ApiProperty({ example: '/static/images/pizza/1.webp', description: 'Картинка игры' })
   image!: string;
 
+  @Field(() => Region)
+  @ApiProperty({ enum: Region, enumName: 'Region', example: Region.EUROPE, description: 'Регион' })
+  region!: Region;
+
   @Field(() => Number)
-  @ApiProperty({ example: 968, description: 'Цена на момент заказа' })
+  @ApiProperty({ example: 968, description: 'Текущая цена' })
   price!: number;
+
+  @Field(() => DeliveryType)
+  @ApiProperty({
+    enum: DeliveryType,
+    enumName: 'DeliveryType',
+    example: DeliveryType.STEAM_KEY,
+    description: 'Способ получения'
+  })
+  deliveryType!: DeliveryType;
+
+  @Field(() => String)
+  @ApiProperty({ example: 'Deluxe', description: 'Издание' })
+  edition!: string;
 
   @Field(() => String)
   @ApiProperty({ example: '1517290', description: 'Внешний ID' })

@@ -44,7 +44,7 @@ export class GamesQuery extends BaseResolver {
 
   @Query(() => GameResponse)
   getGame(@Args() getGameDto: GetGameDto): GameResponse {
-    const game = this.gamesService.getGame(getGameDto.gameId);
+    const game = this.gamesService.getGame(getGameDto.slug);
 
     if (!game) {
       throw new BadRequestException(this.wrapFail('Игра не найдена'));
