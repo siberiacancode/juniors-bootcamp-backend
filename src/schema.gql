@@ -653,14 +653,14 @@ enum GameGenre {
 
 type GameOrder {
   _id: String!
-  gameKey: String!
+  gameKey: String
   gameSnapshot: GameOrderSnapshot!
   person: GameOrderPerson!
 }
 
 input GameOrderInput {
   _id: String!
-  gameKey: String!
+  gameKey: String
   gameSnapshot: GameOrderSnapshotInput!
   person: GameOrderPersonInput!
 }

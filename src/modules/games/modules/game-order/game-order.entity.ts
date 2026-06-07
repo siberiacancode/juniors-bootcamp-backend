@@ -87,10 +87,14 @@ export class GameOrder {
   @ApiProperty({ description: 'Снимок игры на момент заказа', type: GameOrderSnapshot })
   gameSnapshot: GameOrderSnapshot;
 
-  @Field(() => String)
-  @Prop({ required: true })
-  @ApiProperty({ example: 'XXXX-YYYY-ZZZZ', description: 'Сгенерированный игровой ключ' })
-  gameKey: string;
+  @Field(() => String, { nullable: true })
+  @Prop({ required: false })
+  @ApiProperty({
+    example: 'XXXX-YYYY-ZZZZ',
+    description: 'Сгенерированный игровой ключ',
+    required: false
+  })
+  gameKey?: string;
 }
 
 export type GameOrderDocument = GameOrder & Document;

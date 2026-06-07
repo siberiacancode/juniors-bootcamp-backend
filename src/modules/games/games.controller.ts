@@ -191,7 +191,9 @@ export class GamesController extends BaseResolver {
   @Post('/order')
   @ApiOperation({ summary: 'Купить игру и получить ключ' })
   @ApiResponse({ status: 200, type: CreateGameOrderResponse })
-  async buyGame(@Body() createGameOrderDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
+  async createGameOrder(
+    @Body() createGameOrderDto: CreateGameOrderDto
+  ): Promise<CreateGameOrderResponse> {
     const game = this.gamesService.findGame(createGameOrderDto.gameSlug);
 
     if (!game) {
@@ -222,6 +224,15 @@ export class GamesController extends BaseResolver {
         createGameOrderDto.region === variant.region
     );
 
+    if (
+      priceVariant.deliveryType === DeliveryType.STEAM_GIFT &&
+      !createGameOrderDto.person.inviteLink
+    ) {
+      throw new BadRequestException(
+        this.wrapFail('При заказе Steam Gift необходимо указать ссылку приглашения')
+      );
+    }
+
     if (!priceVariant) {
       throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
     }
@@ -236,9 +247,15 @@ export class GamesController extends BaseResolver {
         slug: game.slug,
         name: game.name,
         image: game.image
-      },
-      gameKey: this.gameOrderService.generateGameKey()
+      }
     });
+
+    if (priceVariant.deliveryType !== DeliveryType.STEAM_GIFT)
+      await order.updateOne({
+        $set: {
+          gameKey: this.gameOrderService.generateGameKey()
+        }
+      });
 
     return this.wrapSuccess({ order });
   }

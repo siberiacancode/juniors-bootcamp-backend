@@ -1,9 +1,10 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { UsersService } from '@/modules/users';
 import { BaseResolver } from '@/utils/services';
 
+import { DeliveryType } from './constants';
 import { CreateGameOrderDto } from './dto';
 import { CreateGameOrderResponse } from './games.model';
 import { GamesService } from './games.service';
@@ -54,6 +55,15 @@ export class GamesMutation extends BaseResolver {
         createGameOrderDto.region === variant.region
     );
 
+    if (
+      priceVariant.deliveryType === DeliveryType.STEAM_GIFT &&
+      !createGameOrderDto.person.inviteLink
+    ) {
+      throw new BadRequestException(
+        this.wrapFail('При заказе Steam Gift необходимо указать ссылку приглашения')
+      );
+    }
+
     if (!priceVariant) {
       throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
     }
@@ -68,9 +78,15 @@ export class GamesMutation extends BaseResolver {
         slug: game.slug,
         name: game.name,
         image: game.image
-      },
-      gameKey: this.gameOrderService.generateGameKey()
+      }
     });
+
+    if (priceVariant.deliveryType !== DeliveryType.STEAM_GIFT)
+      await order.updateOne({
+        $set: {
+          gameKey: this.gameOrderService.generateGameKey()
+        }
+      });
 
     return this.wrapSuccess({ order });
   }
