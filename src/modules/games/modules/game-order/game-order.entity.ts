@@ -62,10 +62,6 @@ export class GameOrderSnapshot {
   @Field(() => String)
   @ApiProperty({ example: 'Deluxe', description: 'Издание' })
   edition: string;
-
-  @Field(() => String)
-  @ApiProperty({ example: '1517290', description: 'Внешний ID' })
-  externalId: string;
 }
 
 @InputType('GameOrderInput')

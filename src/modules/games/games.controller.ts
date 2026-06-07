@@ -235,8 +235,7 @@ export class GamesController extends BaseResolver {
         region: priceVariant.region,
         slug: game.slug,
         name: game.name,
-        image: game.image,
-        externalId: game.externalId
+        image: game.image
       },
       gameKey: this.gameOrderService.generateGameKey()
     });

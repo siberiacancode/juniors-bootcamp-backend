@@ -686,7 +686,6 @@ type GameOrderResponse {
 type GameOrderSnapshot {
   deliveryType: DeliveryType!
   edition: String!
-  externalId: String!
   image: String!
   name: String!
   price: Float!
@@ -697,7 +696,6 @@ type GameOrderSnapshot {
 input GameOrderSnapshotInput {
   deliveryType: DeliveryType!
   edition: String!
-  externalId: String!
   image: String!
   name: String!
   price: Float!
