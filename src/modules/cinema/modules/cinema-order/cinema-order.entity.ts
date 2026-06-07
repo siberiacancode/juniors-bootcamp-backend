@@ -28,27 +28,27 @@ registerEnumType(CinemaOrderStatus, {
 export class CinemaOrder {
   @Field(() => String)
   @ApiProperty({ description: 'ID заказа', type: String })
-  _id!: Types.ObjectId;
+  _id: Types.ObjectId;
 
   @Field(() => Film)
   @Prop({ required: true })
   @ApiProperty({ description: 'Название фильма', type: Film })
-  film!: Film;
+  film: Film;
 
   @Field(() => Number)
   @Prop({ required: true })
   @ApiProperty({ description: 'Номер заказа' })
-  orderNumber!: number;
+  orderNumber: number;
 
   @Field(() => [CinemaTicket])
   @Prop({ required: true })
   @ApiProperty({ description: 'Билеты', type: [CinemaTicket] })
-  tickets!: CinemaTicket[];
+  tickets: CinemaTicket[];
 
   @Field(() => FilmPerson)
   @Prop({ required: true })
   @ApiProperty({ description: 'Данные пользователя', type: FilmPerson })
-  person!: FilmPerson;
+  person: FilmPerson;
 
   @Field(() => CinemaOrderStatus)
   @Prop({ required: true, default: CinemaOrderStatus.PAID })
@@ -58,7 +58,7 @@ export class CinemaOrder {
     example: CinemaOrderStatus.PAID,
     enumName: 'CinemaOrderStatus'
   })
-  status!: CinemaOrderStatus;
+  status: CinemaOrderStatus;
 }
 
 export type CinemaOrderDocument = CinemaOrder & Document;

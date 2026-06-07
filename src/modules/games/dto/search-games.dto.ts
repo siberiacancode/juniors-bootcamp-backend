@@ -1,11 +1,12 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 @ArgsType()
 export class SearchGamesDto {
   @IsString()
+  @IsNotEmpty()
   @Field(() => String)
   @ApiProperty({ description: 'Строка поиска для автокомплита' })
   search: string;

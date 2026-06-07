@@ -13,4 +13,9 @@ export class GameOrderService extends BaseService<GameOrderDocument> {
   constructor(@InjectModel(GameOrder.name) private GameOrderModel: Model<GameOrderDocument>) {
     super(GameOrderModel);
   }
+
+  generateGameKey(): string {
+    const randomChunk = () => Math.random().toString(36).slice(2, 6).toUpperCase();
+    return `${randomChunk()}-${randomChunk()}-${randomChunk()}-${randomChunk()}`;
+  }
 }

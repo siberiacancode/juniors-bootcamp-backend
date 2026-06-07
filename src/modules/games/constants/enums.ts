@@ -14,14 +14,22 @@ export enum GameGenre {
   HORROR = 'horror'
 }
 
+registerEnumType(GameGenre, {
+  name: 'GameGenre'
+});
+
 export enum DeliveryType {
   STEAM_KEY = 'steam_key',
-  EPIC_KEY = 'epic_key',
   STEAM_GIFT = 'steam_gift',
+  EPIC_KEY = 'epic_key',
   NINTENDO_KEY = 'nintendo_key',
   XBOX_KEY = 'xbox_key',
   PLAYSTATION_KEY = 'playstation_key'
 }
+
+registerEnumType(DeliveryType, {
+  name: 'DeliveryType'
+});
 
 export enum Region {
   RU = 'ru',
@@ -39,10 +47,29 @@ registerEnumType(Region, {
   name: 'Region'
 });
 
-registerEnumType(DeliveryType, {
-  name: 'DeliveryType'
+export enum GameView {
+  POPULAR = 'popular',
+  NEW = 'new'
+}
+
+registerEnumType(GameView, {
+  name: 'GameView'
 });
 
-registerEnumType(GameGenre, {
-  name: 'GameGenre'
+export enum GameFilter {
+  DLC = 'dlc',
+  DISCOUNT = 'discount'
+}
+
+registerEnumType(GameFilter, {
+  name: 'GameFilter'
+});
+
+export enum GameType {
+  GAME = 'game',
+  DLC = 'dlc'
+}
+
+registerEnumType(GameType, {
+  name: 'GameType'
 });

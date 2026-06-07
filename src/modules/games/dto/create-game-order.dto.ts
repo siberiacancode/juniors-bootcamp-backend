@@ -10,18 +10,28 @@ import {
   ValidateNested
 } from 'class-validator';
 
+import { DeliveryType, Region } from '../constants';
+
 @InputType('CreateGameOrderPersonDto')
 export class CreateGameOrderPersonDto {
   @IsPhoneNumber('RU')
   @Field(() => String)
   @ApiProperty({ example: '79990001122', description: 'Телефон пользователя' })
-  phone!: string;
+  phone: string;
 
   @IsEmail()
+  @Field(() => String)
+  @ApiProperty({ example: 'example@mail.com', description: 'Email пользователя' })
+  email: string;
+
   @IsOptional()
   @Field(() => String, { nullable: true })
-  @ApiProperty({ required: false, example: 'example@mail.com', description: 'Email пользователя' })
-  email!: string;
+  @ApiProperty({
+    required: false,
+    example: 'https://s.team/p/',
+    description: 'Ссылка на приглашение'
+  })
+  inviteLink?: string;
 }
 
 @ArgsType()
@@ -30,23 +40,40 @@ export class CreateGameOrderDto {
   @IsNotEmpty()
   @Field(() => String)
   @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
-  gameSlug!: string;
+  gameSlug: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Field(() => DeliveryType)
+  @ApiProperty({
+    description: 'Тип доставки',
+    enum: DeliveryType,
+    example: DeliveryType.STEAM_GIFT,
+    enumName: 'DeliveryType'
+  })
+  deliveryType: DeliveryType;
+
+  @IsString()
+  @IsNotEmpty()
+  @Field(() => Region)
+  @ApiProperty({ description: 'Регион', enum: Region, example: Region.RU, enumName: 'Region' })
+  region: Region;
 
   @IsString()
   @IsNotEmpty()
   @Field(() => String)
-  @ApiProperty({ example: 'bf2042-1', description: 'ID варианта цены' })
-  priceVariantId!: string;
+  @ApiProperty({ example: 'Deluxe', description: 'Издание' })
+  edition: string;
 
   @ValidateNested()
   @Type(() => CreateGameOrderPersonDto)
   @Field(() => CreateGameOrderPersonDto)
   @ApiProperty({ description: 'Данные покупателя', type: CreateGameOrderPersonDto })
-  person!: CreateGameOrderPersonDto;
+  person: CreateGameOrderPersonDto;
 
   @IsString()
   @IsNotEmpty()
   @Field(() => String)
   @ApiProperty({ example: '2202 2063 8908 5954', description: 'Дебетовая карта для оплаты' })
-  debitCard!: string;
+  debitCard: string;
 }

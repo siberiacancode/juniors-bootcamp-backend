@@ -247,7 +247,8 @@ input CreateDeliveryOrderSenderAddressDto {
 }
 
 input CreateGameOrderPersonDto {
-  email: String
+  email: String!
+  inviteLink: String
   phone: String!
 }
 
@@ -476,6 +477,17 @@ enum DeliveryType {
   XBOX_KEY
 }
 
+type DetailedGame {
+  deliveryTypes: [DeliveryType!]!
+  description: String!
+  developer: String!
+  externalId: String!
+  minimumSystemRequirements: SystemRequirements!
+  publisher: String!
+  recommendedSystemRequirements: SystemRequirements!
+  screenshots: [String!]!
+}
+
 enum Dough {
   THICK
   THIN
@@ -610,16 +622,14 @@ type FilmsResponse {
   success: Boolean!
 }
 
-type Game {
-  description: String!
-  externalId: String!
-  genres: [GameGenre!]!
-  image: String!
-  name: String!
-  priceVariants: [PriceVariant!]!
-  rating: Float
-  releaseDate: Float!
-  slug: String!
+type FilteredGame {
+  isPopular: Boolean!
+  priceVariant: PriceVariant!
+}
+
+enum GameFilter {
+  DISCOUNT
+  DLC
 }
 
 enum GameGenre {
@@ -641,7 +651,6 @@ type GameOrder {
   gameKey: String!
   gameSnapshot: GameOrderSnapshot!
   person: GameOrderPerson!
-  status: GameOrderStatus!
 }
 
 input GameOrderInput {
@@ -649,16 +658,17 @@ input GameOrderInput {
   gameKey: String!
   gameSnapshot: GameOrderSnapshotInput!
   person: GameOrderPersonInput!
-  status: GameOrderStatus!
 }
 
 type GameOrderPerson {
   email: String!
+  inviteLink: String
   phone: String!
 }
 
 input GameOrderPersonInput {
   email: String!
+  inviteLink: String
   phone: String!
 }
 
@@ -690,11 +700,6 @@ input GameOrderSnapshotInput {
   slug: String!
 }
 
-enum GameOrderStatus {
-  CANCELED
-  PAID
-}
-
 type GameOrdersResponse {
   orders: [GameOrder!]!
   reason: String
@@ -702,19 +707,24 @@ type GameOrdersResponse {
 }
 
 type GameResponse {
-  data: Game!
+  game: DetailedGame!
   reason: String
   success: Boolean!
 }
 
 type GameSearchResponse {
-  data: [Game!]!
+  games: [FilteredGame!]!
   reason: String
   success: Boolean!
 }
 
+enum GameView {
+  NEW
+  POPULAR
+}
+
 type GamesPaginatedResponse {
-  data: [Game!]!
+  games: [FilteredGame!]!
   meta: GamesPaginationMeta!
   reason: String
   success: Boolean!
@@ -762,7 +772,7 @@ type Mutation {
   createCarRent(birthDate: String!, carId: String!, comment: String, email: String!, endDate: Float!, firstName: String!, lastName: String!, middleName: String!, phone: String!, pickupLocation: String!, returnLocation: String!, startDate: Float!): CarRentResponse!
   createCinemaPayment(debitCard: CreatePaymentDebitCardDto!, filmId: String!, person: CreatePaymentPersonDto!, seance: CreatePaymentSeanceDto!, tickets: [CreatePaymentTicketsDto!]!): PaymentResponse!
   createDeliveryOrder(optionType: DeliveryOptionType!, packageId: String!, payer: Payer!, receiver: CreateDeliveryOrderPersonDto!, receiverAddress: CreateDeliveryOrderReceiverAddressDto!, receiverPointId: String!, sender: CreateDeliveryOrderPersonDto!, senderAddress: CreateDeliveryOrderSenderAddressDto!, senderPointId: String!): DeliverResponse!
-  createGameOrder(debitCard: String!, gameSlug: String!, person: CreateGameOrderPersonDto!, priceVariantId: String!): CreateGameOrderResponse!
+  createGameOrder(debitCard: String!, deliveryType: DeliveryType!, edition: String!, gameSlug: String!, person: CreateGameOrderPersonDto!, region: Region!): CreateGameOrderResponse!
   createOtp(phone: String!): OtpResponse!
   createPizzaPayment(debitCard: CreatePizzaPaymentDebitCardDto!, person: CreatePizzaPaymentPersonDto!, pizzas: [OrderedPizzaInput!]!, receiverAddress: CreatePizzaPaymentAddressDto!): PizzaPaymentResponse!
   signin(code: Float!, phone: String!): SignInResponse!
@@ -1010,7 +1020,7 @@ type Query {
   getGame(slug: String!): GameResponse!
   getGameOrder(orderId: String!): GameOrderResponse!
   getGameOrders: GameOrdersResponse!
-  getGames(genre: [GameGenre!], limit: Float, maxYear: Float, minYear: Float, page: Float, search: String): GamesPaginatedResponse!
+  getGames(filter: [GameFilter!], genre: [GameGenre!], limit: Float, page: Float, view: GameView): GamesPaginatedResponse!
   getPizzaOrder(orderId: String!): PizzaOrderResponse!
   getPizzaOrders: PizzaOrdersResponse!
   getPizzasCatalog: PizzasResponse!
@@ -1066,6 +1076,14 @@ enum Size {
 enum Steering {
   LEFT
   RIGHT
+}
+
+type SystemRequirements {
+  graphics: String
+  memory: String
+  oc: String
+  processor: String
+  storage: String
 }
 
 enum Transmission {

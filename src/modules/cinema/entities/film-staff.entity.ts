@@ -15,7 +15,7 @@ registerEnumType(Profession, {
 export class FilmStaff {
   @Field(() => String)
   @ApiProperty({ example: '1', description: 'Идентификатор персоны' })
-  id!: string;
+  id: string;
 
   @Field(() => [Profession])
   @ApiProperty({
@@ -25,13 +25,13 @@ export class FilmStaff {
     enumName: 'Profession',
     isArray: true
   })
-  professions!: Profession[];
+  professions: Profession[];
 
   @Field(() => String)
   @ApiProperty({ description: 'Полное имя персоны' })
-  fullName!: string;
+  fullName: string;
 
   @Field(() => String)
   @ApiProperty({ description: 'Фото персоны' })
-  photo!: string;
+  photo: string;
 }

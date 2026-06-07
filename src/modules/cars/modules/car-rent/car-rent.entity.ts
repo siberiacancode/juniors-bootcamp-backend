@@ -27,7 +27,7 @@ registerEnumType(CarRentStatus, {
 export class CarRent {
   @Field(() => String)
   @ApiProperty({ description: 'ID заказа', type: String })
-  _id!: Types.ObjectId;
+  _id: Types.ObjectId;
 
   @Field(() => Car)
   @Prop({ required: true })
@@ -46,7 +46,7 @@ export class CarRent {
     },
     description: 'Информация об автомобиле'
   })
-  carInfo!: Car;
+  carInfo: Car;
 
   @Field(() => CarRentStatus)
   @Prop({ required: true, default: CarRentStatus.BOOKED })
@@ -56,17 +56,17 @@ export class CarRent {
     enum: CarRentStatus,
     enumName: 'CarRentStatus'
   })
-  status!: CarRentStatus;
+  status: CarRentStatus;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: 'Москва, ул. Ленина, 1', description: 'Место получения автомобиля' })
-  pickupLocation!: string;
+  pickupLocation: string;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: 'Москва, ул. Тверская, 10', description: 'Место возврата автомобиля' })
-  returnLocation!: string;
+  returnLocation: string;
 
   @Field(() => Number)
   @Prop({ required: true })
@@ -74,7 +74,7 @@ export class CarRent {
     example: 1717236000000,
     description: 'Дата начала аренды (timestamp в миллисекундах)'
   })
-  startDate!: number;
+  startDate: number;
 
   @Field(() => Number)
   @Prop({ required: true })
@@ -82,22 +82,22 @@ export class CarRent {
     example: 1717610400000,
     description: 'Дата окончания аренды (timestamp в миллисекундах)'
   })
-  endDate!: number;
+  endDate: number;
 
   @Field(() => Number)
   @Prop({ required: true })
   @ApiProperty({ example: 25000, description: 'Общая сумма аренды' })
-  totalPrice!: number;
+  totalPrice: number;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: 'Иван', description: 'Имя арендатора' })
-  firstName!: string;
+  firstName: string;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: 'Иванов', description: 'Фамилия арендатора' })
-  lastName!: string;
+  lastName: string;
 
   @Field(() => String, { nullable: true })
   @Prop()
@@ -107,12 +107,12 @@ export class CarRent {
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: '1990-05-10', description: 'Дата рождения арендатора' })
-  birthDate!: string;
+  birthDate: string;
 
   @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({ example: 'ivan@example.com', description: 'Email арендатора' })
-  email!: string;
+  email: string;
 
   @Field(() => String)
   @Prop({ required: true })
@@ -120,7 +120,7 @@ export class CarRent {
     example: '79991234567',
     description: 'Телефон арендатора (совпадает с номером пользователя)'
   })
-  phone!: string;
+  phone: string;
 
   @Field(() => String, { nullable: true })
   @Prop()

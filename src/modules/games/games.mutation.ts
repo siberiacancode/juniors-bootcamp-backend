@@ -7,7 +7,7 @@ import { BaseResolver } from '@/utils/services';
 import { CreateGameOrderDto } from './dto';
 import { CreateGameOrderResponse } from './games.model';
 import { GamesService } from './games.service';
-import { GameOrderService, GameOrderStatus } from './modules';
+import { GameOrderService } from './modules';
 
 @Resolver('🎮 games mutation')
 @Resolver()
@@ -24,7 +24,9 @@ export class GamesMutation extends BaseResolver {
   async createGameOrder(
     @Args() createGameOrderDto: CreateGameOrderDto
   ): Promise<CreateGameOrderResponse> {
-    const game = this.gamesService.getGame(createGameOrderDto.gameSlug);
+    const game = this.gamesService
+      .getGames()
+      .find((game) => game.slug === createGameOrderDto.gameSlug);
 
     if (!game) {
       throw new BadRequestException(this.wrapFail('Игра не найдена'));
@@ -33,7 +35,9 @@ export class GamesMutation extends BaseResolver {
     let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
 
     if (!user) {
-      user = await this.usersService.create({ phone: createGameOrderDto.person.phone });
+      user = await this.usersService.create({
+        phone: createGameOrderDto.person.phone
+      });
     }
 
     await this.usersService.findOneAndUpdate(
@@ -45,25 +49,32 @@ export class GamesMutation extends BaseResolver {
       }
     );
 
+    const priceVariant = game.priceVariants.find(
+      (variant) =>
+        createGameOrderDto.deliveryType === variant.deliveryType &&
+        createGameOrderDto.edition === variant.edition &&
+        createGameOrderDto.region === variant.region
+    );
+
+    if (!priceVariant) {
+      throw new BadRequestException(this.wrapFail('Вариант цены не найден'));
+    }
+
     const order = await this.gameOrderService.create({
       person: createGameOrderDto.person,
       gameSnapshot: {
-        priceVariant: game.priceVariants.find(
-          (variant) => variant.id === createGameOrderDto.priceVariantId
-        ),
+        deliveryType: priceVariant.deliveryType,
+        edition: priceVariant.edition,
+        price: priceVariant.price,
+        region: priceVariant.region,
+        slug: game.slug,
         name: game.name,
         image: game.image,
         externalId: game.externalId
       },
-      gameKey: this.generateGameKey(),
-      status: GameOrderStatus.PAID
+      gameKey: this.gameOrderService.generateGameKey()
     });
 
     return this.wrapSuccess({ order });
-  }
-
-  private generateGameKey(): string {
-    const randomChunk = () => Math.random().toString(36).slice(2, 6).toUpperCase();
-    return `${randomChunk()}-${randomChunk()}-${randomChunk()}-${randomChunk()}`;
   }
 }

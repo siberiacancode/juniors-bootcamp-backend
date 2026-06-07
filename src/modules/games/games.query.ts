@@ -8,7 +8,7 @@ import type { User } from '@/modules/users';
 import { GqlAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver } from '@/utils/services';
 
-import { GetGameDto, GetGameOrderDto, GetGamesSearchDto, SearchGamesDto } from './dto';
+import { GetGameDto, GetGameOrderDto, GetGamesDto, SearchGamesDto } from './dto';
 import {
   GameOrderResponse,
   GameOrdersResponse,
@@ -31,7 +31,7 @@ export class GamesQuery extends BaseResolver {
   }
 
   @Query(() => GamesPaginatedResponse)
-  getGames(@Args() getGamesSearchDto: GetGamesSearchDto): GamesPaginatedResponse {
+  getGames(@Args() getGamesSearchDto: GetGamesDto): GamesPaginatedResponse {
     const games = this.gamesService.getFilteredGames(getGamesSearchDto);
     const paginatedGames = this.gamesService.getPagination({
       items: games,
@@ -50,13 +50,13 @@ export class GamesQuery extends BaseResolver {
       throw new BadRequestException(this.wrapFail('Игра не найдена'));
     }
 
-    return this.wrapSuccess({ data: game });
+    return this.wrapSuccess({ game });
   }
 
   @Query(() => GameSearchResponse)
   searchGames(@Args() searchGamesDto: SearchGamesDto): GameSearchResponse {
-    const data = this.gamesService.searchAutocomplete(searchGamesDto);
-    return this.wrapSuccess({ data });
+    const games = this.gamesService.searchAutocomplete(searchGamesDto);
+    return this.wrapSuccess({ games });
   }
 
   @GqlAuthorizedOnly()

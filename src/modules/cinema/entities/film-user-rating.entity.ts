@@ -7,10 +7,10 @@ export class FilmUserRating {
   @ApiProperty()
   @Field(() => String)
   @ApiProperty({ example: '10', description: 'Рейтинг кинопоиск' })
-  kinopoisk!: string;
+  kinopoisk: string;
 
   @ApiProperty()
   @Field(() => String)
   @ApiProperty({ example: '10', description: 'Рейтинг imdb' })
-  imdb!: string;
+  imdb: string;
 }

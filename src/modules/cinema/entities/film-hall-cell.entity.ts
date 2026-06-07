@@ -31,10 +31,10 @@ export class FilmHallCell {
     enum: FilmHallCellType,
     enumName: 'FilmHallCellType'
   })
-  type!: FilmHallCellType;
+  type: FilmHallCellType;
 
   @ApiProperty()
   @Field(() => Number)
   @ApiProperty({ example: 100, description: 'Цена места в зале' })
-  price!: number;
+  price: number;
 }

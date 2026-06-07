@@ -8,5 +8,5 @@ export class GetGameDto {
   @IsNotEmpty()
   @Field(() => String)
   @ApiProperty({ description: 'Slug игры' })
-  slug!: string;
+  slug: string;
 }

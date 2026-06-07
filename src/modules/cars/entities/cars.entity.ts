@@ -7,22 +7,22 @@ import { BodyType, Brand, Color, Steering, Transmission } from '../constants/enu
 export class Media {
   @Field(() => String)
   @ApiProperty({ example: '/static/images/cars/haval-jolion.webp' })
-  url!: string;
+  url: string;
 
   @Field(() => Boolean)
   @ApiProperty({ example: true })
-  isCover!: boolean;
+  isCover: boolean;
 }
 
 @ObjectType('Car')
 export class Car {
   @Field(() => String)
   @ApiProperty({ example: '1', description: 'ID автомобиля' })
-  id!: string;
+  id: string;
 
   @Field(() => String)
   @ApiProperty({ example: 'Model X', description: 'Название модели' })
-  name!: string;
+  name: string;
 
   @Field(() => Brand)
   @ApiProperty({
@@ -31,11 +31,11 @@ export class Car {
     enumName: 'Brand',
     description: 'Марка автомобиля'
   })
-  brand!: Brand;
+  brand: Brand;
 
   @Field(() => [Media])
   @ApiProperty({ type: [Media] })
-  media!: Media[];
+  media: Media[];
 
   @Field(() => Transmission)
   @ApiProperty({
@@ -44,15 +44,15 @@ export class Car {
     enumName: 'Transmission',
     description: 'Тип коробки передач'
   })
-  transmission!: Transmission;
+  transmission: Transmission;
 
   @Field(() => Number)
   @ApiProperty({ example: 15000, description: 'Цена аренды в сутки' })
-  price!: number;
+  price: number;
 
   @Field(() => String)
   @ApiProperty({ example: 'Москва, ул. Пушкина 10', description: 'Местоположение' })
-  location!: string;
+  location: string;
 
   @Field(() => Color)
   @ApiProperty({
@@ -61,7 +61,7 @@ export class Car {
     enumName: 'Color',
     description: 'Цвет автомобиля'
   })
-  color!: Color;
+  color: Color;
 
   @Field(() => BodyType)
   @ApiProperty({
@@ -70,7 +70,7 @@ export class Car {
     enumName: 'BodyType',
     description: 'Тип кузова'
   })
-  bodyType!: BodyType;
+  bodyType: BodyType;
 
   @Field(() => Steering)
   @ApiProperty({
@@ -79,7 +79,7 @@ export class Car {
     example: Steering.LEFT,
     description: 'Расположение руля'
   })
-  steering!: Steering;
+  steering: Steering;
 }
 
 @ObjectType('CarsPaginationMeta')
@@ -90,7 +90,7 @@ export class CarsPaginationMeta {
     description: 'Общее количество элементов во всех страницах',
     type: Number
   })
-  total!: number;
+  total: number;
 
   @Field(() => Number)
   @ApiProperty({
@@ -98,7 +98,7 @@ export class CarsPaginationMeta {
     description: 'Текущий номер страницы (по умолчанию 1)',
     type: Number
   })
-  page!: number;
+  page: number;
 
   @Field(() => Number)
   @ApiProperty({
@@ -106,7 +106,7 @@ export class CarsPaginationMeta {
     description: 'Количество элементов на странице (по умолчанию 10)',
     type: Number
   })
-  limit!: number;
+  limit: number;
 
   @Field(() => Number)
   @ApiProperty({
@@ -114,5 +114,5 @@ export class CarsPaginationMeta {
     description: 'Общее количество доступных страниц',
     type: Number
   })
-  totalPages!: number;
+  totalPages: number;
 }

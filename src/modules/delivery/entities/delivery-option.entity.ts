@@ -14,19 +14,19 @@ registerEnumType(DeliveryOptionType, {
 export class DeliveryOption {
   @Field(() => String)
   @ApiProperty({ example: '1', description: 'Индентификатор опции доставки' })
-  id!: string;
+  id: string;
 
   @Field(() => Number)
   @ApiProperty({ example: 10000, description: 'Цена доставки в копейках' })
-  price!: number;
+  price: number;
 
   @Field(() => Number)
   @ApiProperty({ example: 2, description: 'Количество дней доставки' })
-  days!: number;
+  days: number;
 
   @Field(() => String)
   @ApiProperty({ example: 'name', description: 'Название опции отправки' })
-  name!: string;
+  name: string;
 
   @Field(() => DeliveryOptionType)
   @ApiProperty({
@@ -35,5 +35,5 @@ export class DeliveryOption {
     enum: DeliveryOptionType,
     enumName: 'DeliveryOptionType'
   })
-  type!: DeliveryOptionType;
+  type: DeliveryOptionType;
 }
