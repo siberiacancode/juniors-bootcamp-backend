@@ -93,6 +93,7 @@ export class GamesController extends BaseResolver {
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Лимит' })
   getGames(@Query() getGamesSearchDto: GetGamesDto): GamesPaginatedResponse {
     const games = this.gamesService.getFilteredGames(getGamesSearchDto);
+
     const paginatedGames = this.gamesService.getPagination({
       items: games,
       page: getGamesSearchDto.page,
@@ -146,7 +147,7 @@ export class GamesController extends BaseResolver {
     const regions = this.gamesService.getRegions(getRegionsDto);
 
     if (!regions) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Регионы не найдены'));
     }
 
     return this.wrapSuccess({ regions });
@@ -181,7 +182,7 @@ export class GamesController extends BaseResolver {
     const editions = this.gamesService.getEditions(getEditionsDto);
 
     if (!editions) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Издания не найдены'));
     }
 
     return this.wrapSuccess({ editions });
@@ -191,12 +192,10 @@ export class GamesController extends BaseResolver {
   @ApiOperation({ summary: 'Купить игру и получить ключ' })
   @ApiResponse({ status: 200, type: CreateGameOrderResponse })
   async buyGame(@Body() createGameOrderDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
-    const game = this.gamesService
-      .getGames()
-      .find((game) => game.slug === createGameOrderDto.gameSlug);
+    const game = this.gamesService.findGame(createGameOrderDto.gameSlug);
 
     if (!game) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Игра не найдена'));
     }
 
     let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
@@ -224,7 +223,7 @@ export class GamesController extends BaseResolver {
     );
 
     if (!priceVariant) {
-      throw new BadRequestException(this.wrapFail('Вариант цены не найден'));
+      throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
     }
 
     const order = await this.gameOrderService.create({
@@ -289,7 +288,7 @@ export class GamesController extends BaseResolver {
     });
 
     if (!order) {
-      throw new BadRequestException(this.wrapFail('Заказ не найден'));
+      throw new NotFoundException(this.wrapFail('Заказ не найден'));
     }
 
     return this.wrapSuccess({ order });

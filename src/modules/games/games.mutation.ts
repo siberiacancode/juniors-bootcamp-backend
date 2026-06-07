@@ -1,4 +1,4 @@
-import { BadRequestException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { UsersService } from '@/modules/users';
@@ -24,12 +24,10 @@ export class GamesMutation extends BaseResolver {
   async createGameOrder(
     @Args() createGameOrderDto: CreateGameOrderDto
   ): Promise<CreateGameOrderResponse> {
-    const game = this.gamesService
-      .getGames()
-      .find((game) => game.slug === createGameOrderDto.gameSlug);
+    const game = this.gamesService.findGame(createGameOrderDto.gameSlug);
 
     if (!game) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Игра не найдена'));
     }
 
     let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
@@ -57,7 +55,7 @@ export class GamesMutation extends BaseResolver {
     );
 
     if (!priceVariant) {
-      throw new BadRequestException(this.wrapFail('Вариант цены не найден'));
+      throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
     }
 
     const order = await this.gameOrderService.create({

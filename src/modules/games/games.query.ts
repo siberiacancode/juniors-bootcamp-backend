@@ -73,7 +73,7 @@ export class GamesQuery extends BaseResolver {
     const regions = this.gamesService.getRegions(getRegionsDto);
 
     if (!regions) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Регионы не найдены'));
     }
 
     return this.wrapSuccess({ regions });
@@ -84,7 +84,7 @@ export class GamesQuery extends BaseResolver {
     const editions = this.gamesService.getEditions(getEditionsDto);
 
     if (!editions) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Издания не найдены'));
     }
 
     return this.wrapSuccess({ editions });
@@ -126,7 +126,7 @@ export class GamesQuery extends BaseResolver {
     });
 
     if (!order) {
-      throw new BadRequestException(this.wrapFail('Заказ не найден'));
+      throw new NotFoundException(this.wrapFail('Заказ не найден'));
     }
 
     return this.wrapSuccess({ order });

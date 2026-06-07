@@ -15,7 +15,7 @@ interface PaginationResult<Item> {
   meta: GamesPaginationMeta;
 }
 
-const POPULAR_TIME_RANGE = 60 * 60 * 24 * 365 * 3; // 3 года
+const THREE_YEARS_IN_MS = 3 * 365.25 * 24 * 3600 * 1000;
 
 @Injectable()
 export class GamesService {
@@ -23,8 +23,12 @@ export class GamesService {
     return GAMES;
   }
 
+  findGame(slug: string) {
+    return this.getGames().find((game) => game.slug === slug);
+  }
+
   getGame(slug: string): DetailedGame {
-    const game = this.getGames().find((game) => game.slug === slug);
+    const game = this.findGame(slug);
 
     if (!game) return undefined;
 
@@ -50,7 +54,7 @@ export class GamesService {
 
   getFilteredGames(dto: GetGamesDto): FilteredGame[] {
     const filteredGames = this.getGames().filter((game) => {
-      if (dto.filter.length) {
+      if (dto.filter?.length) {
         if (
           dto.filter.includes(GameFilter.DISCOUNT) &&
           !game.priceVariants.some((variant) => variant.oldPrice)
@@ -63,29 +67,32 @@ export class GamesService {
       if (dto.view) {
         if (dto.view === GameView.POPULAR && !game.isPopular) return false;
 
-        if (dto.view === GameView.NEW && game.releaseDate < Date.now() - POPULAR_TIME_RANGE)
+        if (dto.view === GameView.NEW && game.releaseDate < (Date.now() - THREE_YEARS_IN_MS) / 1000)
           return false;
       }
 
-      if (dto.genre.length && !dto.genre.some((genre) => game.genres.includes(genre))) return false;
+      if (dto.genre?.length && !dto.genre.some((genre) => game.genres.includes(genre)))
+        return false;
 
       return true;
     });
 
     return filteredGames.map((game) => {
-      const priceVariant = game.priceVariants.reduce(
-        (min, current) => (current.price < min.price ? current : min),
-        game.priceVariants[0]
-      );
+      let priceVariants = game.priceVariants;
+
+      if (dto.filter?.includes(GameFilter.DISCOUNT)) {
+        priceVariants = game.priceVariants.filter((v) => v.oldPrice);
+      }
+
+      const priceVariant = priceVariants.reduce((min, current) => {
+        if (dto.filter?.includes(GameFilter.DISCOUNT)) {
+          if (current.oldPrice && !min.oldPrice) return current;
+          if (!current.oldPrice && min.oldPrice) return min;
+        }
+        return current.price < min.price ? current : min;
+      }, priceVariants[0]);
       return {
-        priceVariant: {
-          id: priceVariant.id,
-          deliveryType: priceVariant.deliveryType,
-          edition: priceVariant.edition,
-          oldPrice: priceVariant.oldPrice,
-          price: priceVariant.price,
-          region: priceVariant.region
-        },
+        priceVariant,
         image: game.image,
         name: game.name,
         slug: game.slug,
@@ -115,14 +122,7 @@ export class GamesService {
           game.priceVariants[0]
         );
         return {
-          priceVariant: {
-            id: priceVariant.id,
-            deliveryType: priceVariant.deliveryType,
-            edition: priceVariant.edition,
-            oldPrice: priceVariant.oldPrice,
-            price: priceVariant.price,
-            region: priceVariant.region
-          },
+          priceVariant,
           image: game.image,
           name: game.name,
           slug: game.slug,
@@ -144,7 +144,7 @@ export class GamesService {
   }
 
   getRegions(dto: GetRegionsDto) {
-    const game = this.getGames().find((game) => game.slug === dto.slug);
+    const game = this.findGame(dto.slug);
 
     if (!game) return undefined;
 
@@ -154,7 +154,7 @@ export class GamesService {
   }
 
   getEditions(dto: GetEditionsDto) {
-    const game = this.getGames().find((game) => game.slug === dto.slug);
+    const game = this.findGame(dto.slug);
 
     if (!game) return undefined;
 

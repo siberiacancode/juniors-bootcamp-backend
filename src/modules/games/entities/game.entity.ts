@@ -57,10 +57,6 @@ export class SystemRequirements {
 
 @ObjectType('PriceVariant')
 export class PriceVariant {
-  @Field(() => String)
-  @ApiProperty({ example: '1', description: 'ID варианта цены' })
-  id: string;
-
   @Field(() => Region)
   @ApiProperty({ enum: Region, enumName: 'Region', example: Region.EUROPE, description: 'Регион' })
   region: Region;
