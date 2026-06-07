@@ -52,7 +52,6 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'bf2042-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 2688,
@@ -60,7 +59,6 @@ export const GAMES: Game[] = [
         region: Region.ALL_WORLD
       },
       {
-        id: 'bf2042-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 3299,
@@ -68,28 +66,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'bf2042-3',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Standard',
         price: 2799,
         region: Region.ALL_WORLD
       },
       {
-        id: 'bf2042-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 2499,
         region: Region.RU
       },
       {
-        id: 'bf2042-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 2399,
         region: Region.KZ
       },
       {
-        id: 'bf2042-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 2899,
@@ -126,14 +120,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'tf2-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'tf2-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 899,
@@ -141,28 +133,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'tf2-3',
         deliveryType: DeliveryType.EPIC_KEY,
         edition: 'Standard',
         price: 699,
         region: Region.ALL_WORLD
       },
       {
-        id: 'tf2-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 299,
         region: Region.RU
       },
       {
-        id: 'tf2-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 499,
         region: Region.KZ
       },
       {
-        id: 'tf2-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Collector',
         price: 1299,
@@ -199,14 +187,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'sot-1',
         deliveryType: DeliveryType.EPIC_KEY,
         edition: 'Standard',
         price: 1499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'sot-2',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Deluxe',
         price: 1999,
@@ -214,28 +200,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'sot-3',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Special',
         price: 1799,
         region: Region.ALL_WORLD
       },
       {
-        id: 'sot-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 899,
         region: Region.RU
       },
       {
-        id: 'sot-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 1099,
         region: Region.KZ
       },
       {
-        id: 'sot-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Anniversary',
         price: 1499,
@@ -272,14 +254,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'mk1-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 1999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'mk1-2',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Kollector Edition',
         price: 4999,
@@ -287,28 +267,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'mk1-3',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Deluxe',
         price: 2299,
         region: Region.ALL_WORLD
       },
       {
-        id: 'mk1-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 1699,
         region: Region.RU
       },
       {
-        id: 'mk1-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Kollector Edition',
         price: 4599,
         region: Region.KZ
       },
       {
-        id: 'mk1-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 2799,
@@ -345,14 +321,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'rem2-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 2499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'rem2-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 3299,
@@ -360,28 +334,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'rem2-3',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Collector',
         price: 4299,
         region: Region.ALL_WORLD
       },
       {
-        id: 'rem2-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 2199,
         region: Region.RU
       },
       {
-        id: 'rem2-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 2799,
         region: Region.KZ
       },
       {
-        id: 'rem2-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Collector',
         price: 3999,
@@ -418,14 +388,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'bg3-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 3299,
         region: Region.ALL_WORLD
       },
       {
-        id: 'bg3-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 3999,
@@ -433,28 +401,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'bg3-3',
         deliveryType: DeliveryType.EPIC_KEY,
         edition: 'Collector',
         price: 5999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'bg3-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 2799,
         region: Region.RU
       },
       {
-        id: 'bg3-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 3499,
         region: Region.KZ
       },
       {
-        id: 'bg3-6',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Collector',
         price: 6499,
@@ -491,42 +455,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'bb-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'bb-2',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Standard',
         price: 599,
         region: Region.ALL_WORLD
       },
       {
-        id: 'bb-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 399,
         region: Region.RU
       },
       {
-        id: 'bb-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 359,
         region: Region.KZ
       },
       {
-        id: 'bb-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 349,
         region: Region.BY
       },
       {
-        id: 'bb-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 799,
@@ -563,42 +521,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'ter-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 299,
         region: Region.ALL_WORLD
       },
       {
-        id: 'ter-2',
         deliveryType: DeliveryType.NINTENDO_KEY,
         edition: 'Switch Edition',
         price: 699,
         region: Region.ALL_WORLD
       },
       {
-        id: 'ter-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 249,
         region: Region.RU
       },
       {
-        id: 'ter-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 239,
         region: Region.KZ
       },
       {
-        id: 'ter-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 229,
         region: Region.BY
       },
       {
-        id: 'ter-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Anniversary',
         price: 499,
@@ -636,42 +588,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'gm-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 199,
         region: Region.ALL_WORLD
       },
       {
-        id: 'gm-2',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 149,
         region: Region.RU
       },
       {
-        id: 'gm-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 139,
         region: Region.KZ
       },
       {
-        id: 'gm-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 129,
         region: Region.BY
       },
       {
-        id: 'gm-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Community Pack',
         price: 299,
         region: Region.UA
       },
       {
-        id: 'gm-6',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Bundle',
         price: 399,
@@ -708,14 +654,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'rdr2-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 1699,
         region: Region.ALL_WORLD
       },
       {
-        id: 'rdr2-2',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Ultimate',
         price: 2499,
@@ -723,28 +667,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'rdr2-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 1499,
         region: Region.RU
       },
       {
-        id: 'rdr2-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Ultimate',
         price: 2299,
         region: Region.KZ
       },
       {
-        id: 'rdr2-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Premium',
         price: 2899,
         region: Region.BY
       },
       {
-        id: 'rdr2-6',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Standard',
         price: 1799,
@@ -781,14 +721,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'cp2077-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'cp2077-2',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Ultimate',
         price: 1999,
@@ -796,28 +734,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'cp2077-3',
         deliveryType: DeliveryType.EPIC_KEY,
         edition: 'Standard',
         price: 1099,
         region: Region.ALL_WORLD
       },
       {
-        id: 'cp2077-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 799,
         region: Region.RU
       },
       {
-        id: 'cp2077-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 1299,
         region: Region.KZ
       },
       {
-        id: 'cp2077-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Collector',
         price: 2499,
@@ -854,14 +788,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'elden-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 2499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'elden-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 3499,
@@ -869,28 +801,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'elden-3',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Collector',
         price: 4499,
         region: Region.EUROPE
       },
       {
-        id: 'elden-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 2199,
         region: Region.RU
       },
       {
-        id: 'elden-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 2999,
         region: Region.KZ
       },
       {
-        id: 'elden-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Collector',
         price: 3999,
@@ -927,42 +855,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'helld-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 1299,
         region: Region.ALL_WORLD
       },
       {
-        id: 'helld-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 1699,
         region: Region.EUROPE
       },
       {
-        id: 'helld-3',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Premium',
         price: 2199,
         region: Region.ALL_WORLD
       },
       {
-        id: 'helld-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 1099,
         region: Region.RU
       },
       {
-        id: 'helld-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 1699,
         region: Region.KZ
       },
       {
-        id: 'helld-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Premium',
         price: 1999,
@@ -999,42 +921,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'pal-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 1999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'pal-2',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Collector',
         price: 2499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'pal-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 1699,
         region: Region.RU
       },
       {
-        id: 'pal-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 2299,
         region: Region.KZ
       },
       {
-        id: 'pal-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Premium',
         price: 2799,
         region: Region.BY
       },
       {
-        id: 'pal-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 1599,
@@ -1071,42 +987,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'bmw-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 2799,
         region: Region.ALL_WORLD
       },
       {
-        id: 'bmw-2',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Collector',
         price: 4799,
         region: Region.EUROPE
       },
       {
-        id: 'bmw-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 2399,
         region: Region.RU
       },
       {
-        id: 'bmw-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 3299,
         region: Region.KZ
       },
       {
-        id: 'bmw-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Collector',
         price: 4499,
         region: Region.BY
       },
       {
-        id: 'bmw-6',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Premium',
         price: 3599,
@@ -1144,42 +1054,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'hades2-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 1499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'hades2-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 1799,
         region: Region.EUROPE
       },
       {
-        id: 'hades2-3',
         deliveryType: DeliveryType.NINTENDO_KEY,
         edition: 'Switch Edition',
         price: 1699,
         region: Region.ALL_WORLD
       },
       {
-        id: 'hades2-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 1299,
         region: Region.RU
       },
       {
-        id: 'hades2-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 1599,
         region: Region.KZ
       },
       {
-        id: 'hades2-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Indie Pack',
         price: 1999,
@@ -1217,42 +1121,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'sv-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 399,
         region: Region.ALL_WORLD
       },
       {
-        id: 'sv-2',
         deliveryType: DeliveryType.NINTENDO_KEY,
         edition: 'Switch Edition',
         price: 799,
         region: Region.EUROPE
       },
       {
-        id: 'sv-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 349,
         region: Region.RU
       },
       {
-        id: 'sv-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 329,
         region: Region.KZ
       },
       {
-        id: 'sv-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 599,
         region: Region.BY
       },
       {
-        id: 'sv-6',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Complete',
         price: 899,
@@ -1290,7 +1188,6 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'hog-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 2499,
@@ -1298,35 +1195,30 @@ export const GAMES: Game[] = [
         region: Region.ALL_WORLD
       },
       {
-        id: 'hog-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe Edition',
         price: 4299,
         region: Region.EUROPE
       },
       {
-        id: 'hog-3',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Collector',
         price: 4999,
         region: Region.EUROPE
       },
       {
-        id: 'hog-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 2199,
         region: Region.RU
       },
       {
-        id: 'hog-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe Edition',
         price: 3899,
         region: Region.KZ
       },
       {
-        id: 'hog-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Collector',
         price: 4599,
@@ -1364,42 +1256,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'lc-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 299,
         region: Region.ALL_WORLD
       },
       {
-        id: 'lc-2',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 249,
         region: Region.RU
       },
       {
-        id: 'lc-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 229,
         region: Region.KZ
       },
       {
-        id: 'lc-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Horror Pack',
         price: 499,
         region: Region.BY
       },
       {
-        id: 'lc-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Collector',
         price: 699,
         region: Region.UA
       },
       {
-        id: 'lc-6',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Bundle',
         price: 799,
@@ -1437,42 +1323,36 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'tf-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'tf-2',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Standard',
         price: 1099,
         region: Region.ALL_WORLD
       },
       {
-        id: 'tf-3',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 899,
         region: Region.RU
       },
       {
-        id: 'tf-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Founders Pack',
         price: 1299,
         region: Region.KZ
       },
       {
-        id: 'tf-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Founders Pack',
         price: 1499,
         region: Region.EUROPE
       },
       {
-        id: 'tf-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Exclusive',
         price: 1999,
@@ -1510,7 +1390,6 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'ea25-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 3999,
@@ -1518,35 +1397,30 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'ea25-2',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Ultimate',
         price: 6999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'ea25-3',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Deluxe',
         price: 4999,
         region: Region.EUROPE
       },
       {
-        id: 'ea25-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 3499,
         region: Region.RU
       },
       {
-        id: 'ea25-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 4499,
         region: Region.KZ
       },
       {
-        id: 'ea25-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Ultimate',
         price: 6499,
@@ -1584,14 +1458,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'fh5-1',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Standard',
         price: 1999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'fh5-2',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Deluxe',
         price: 3499,
@@ -1599,28 +1471,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'fh5-3',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Premium',
         price: 5999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'fh5-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 1799,
         region: Region.RU
       },
       {
-        id: 'fh5-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 3299,
         region: Region.KZ
       },
       {
-        id: 'fh5-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Premium',
         price: 4599,
@@ -1658,14 +1526,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'acs-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 2999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'acs-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 3799,
@@ -1673,28 +1539,24 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'acs-3',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Standard',
         price: 3499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'acs-4',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 2399,
         region: Region.RU
       },
       {
-        id: 'acs-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 2999,
         region: Region.KZ
       },
       {
-        id: 'acs-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Collector',
         price: 4499,
@@ -1732,14 +1594,12 @@ export const GAMES: Game[] = [
     },
     priceVariants: [
       {
-        id: 'gta6-1',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Standard',
         price: 3999,
         region: Region.ALL_WORLD
       },
       {
-        id: 'gta6-2',
         deliveryType: DeliveryType.STEAM_KEY,
         edition: 'Deluxe',
         price: 4999,
@@ -1747,35 +1607,30 @@ export const GAMES: Game[] = [
         region: Region.EUROPE
       },
       {
-        id: 'gta6-3',
         deliveryType: DeliveryType.XBOX_KEY,
         edition: 'Standard',
         price: 4499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'gta6-4',
         deliveryType: DeliveryType.PLAYSTATION_KEY,
         edition: 'Standard',
         price: 4499,
         region: Region.ALL_WORLD
       },
       {
-        id: 'gta6-5',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Standard',
         price: 3499,
         region: Region.RU
       },
       {
-        id: 'gta6-6',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Deluxe',
         price: 3999,
         region: Region.KZ
       },
       {
-        id: 'gta6-7',
         deliveryType: DeliveryType.STEAM_GIFT,
         edition: 'Premium',
         price: 5499,

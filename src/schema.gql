@@ -981,7 +981,6 @@ type PizzasResponse {
 type PriceVariant {
   deliveryType: DeliveryType!
   edition: String!
-  id: String!
   oldPrice: Float
   price: Float!
   region: Region!
