@@ -129,10 +129,6 @@ export class FilteredGame extends BaseGame {
   @Field(() => PriceVariant)
   @ApiProperty({ description: 'Наименьший вариант цены', type: PriceVariant })
   priceVariant: PriceVariant;
-
-  @Field(() => Boolean)
-  @ApiProperty({ example: true, description: 'Популярное' })
-  isPopular: boolean;
 }
 
 @ObjectType('DetailedGame')

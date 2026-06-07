@@ -493,6 +493,12 @@ enum Dough {
   THIN
 }
 
+type EditionsResponse {
+  editions: [String!]!
+  reason: String
+  success: Boolean!
+}
+
 type Film {
   actors: [FilmStaff!]!
   ageRating: Rating!
@@ -623,7 +629,6 @@ type FilmsResponse {
 }
 
 type FilteredGame {
-  isPopular: Boolean!
   priceVariant: PriceVariant!
 }
 
@@ -1015,6 +1020,7 @@ type Query {
   getDeliveryOrders: DeliveryOrdersResponse!
   getDeliveryPackageTypes: DeliveryPackageTypesResponse!
   getDeliveryPoints: DeliveryPointsResponse!
+  getEditions(deliveryType: DeliveryType!, region: Region!, slug: String!): EditionsResponse!
   getFilm(filmId: String!): FilmResponse!
   getFilmSchedule(filmId: String!): ScheduleResponse!
   getGame(slug: String!): GameResponse!
@@ -1024,6 +1030,7 @@ type Query {
   getPizzaOrder(orderId: String!): PizzaOrderResponse!
   getPizzaOrders: PizzaOrdersResponse!
   getPizzasCatalog: PizzasResponse!
+  getRegions(deliveryType: DeliveryType!, slug: String!): RegionsResponse!
   searchGames(limit: Float, search: String!): GameSearchResponse!
   session: SessionResponse!
 }
@@ -1046,6 +1053,12 @@ enum Region {
   RU
   TR
   UA
+}
+
+type RegionsResponse {
+  reason: String
+  regions: [Region!]!
+  success: Boolean!
 }
 
 type ScheduleResponse {

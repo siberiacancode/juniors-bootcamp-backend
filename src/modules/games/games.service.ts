@@ -91,7 +91,6 @@ export class GamesService {
         slug: game.slug,
         type: game.type,
         genres: game.genres,
-        isPopular: game.isPopular,
         releaseDate: game.releaseDate
       };
     });
@@ -129,7 +128,6 @@ export class GamesService {
           slug: game.slug,
           type: game.type,
           genres: game.genres,
-          isPopular: game.isPopular,
           releaseDate: game.releaseDate
         };
       })
