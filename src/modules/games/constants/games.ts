@@ -560,6 +560,60 @@ export const GAMES: Game[] = [
     ]
   },
   {
+    type: GameType.DLC,
+    name: 'Cyberpunk 2077: Призрачная свобода',
+    description: '«Призрачная свобода» — это дополнение, добавляющее элементы шпионского триллера.',
+    developer: 'CD PROJEKT RED',
+    publisher: 'CD PROJEKT RED',
+    image: PLACEHOLDER_IMAGE,
+    externalId: '2138330',
+    genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.SURVIVAL],
+    releaseDate: 1695686400,
+    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    slug: 'cyberpunk-2077-prizrachnaya-svoboda',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10/11 64-bit',
+      processor: 'Intel Core i5-6600K',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 1060',
+      storage: '50 GB'
+    },
+    recommendedSystemRequirements: {
+      graphics: 'NVIDIA GeForce GTX 1060',
+      oc: 'Windows 10/11 64-bit',
+      processor: 'Intel Core i5-6600K',
+      memory: '8 GB',
+      storage: '50 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 299,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 249,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 239,
+        region: Region.KZ
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 229,
+        region: Region.BY
+      }
+    ]
+  },
+  {
     screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
     type: GameType.GAME,
     name: "Garry's Mod",
