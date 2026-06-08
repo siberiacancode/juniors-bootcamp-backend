@@ -1,39 +1,40 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsArray, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
+import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
 import { transformSearchParam } from '@/utils/helpers';
 
-import { GameGenre } from '../constants';
+import { GameFilter, GameGenre, GameView } from '../constants';
 
 @ArgsType()
-export class GetGamesSearchDto {
+export class GetGamesDto {
   @IsOptional()
-  @Transform(({ value }) => Number.parseInt(value, 10))
-  @IsNumber()
-  @Min(1990)
-  @Max(2100)
-  @Field(() => Number, { nullable: true })
+  @Transform(transformSearchParam)
+  @IsArray()
+  @IsString({ each: true })
+  @Field(() => [GameFilter], { nullable: true })
   @ApiProperty({
     required: false,
-    example: 2003,
-    description: 'Минимальный год релиза'
+    enum: GameFilter,
+    example: [GameFilter.DISCOUNT, GameFilter.DLC],
+    enumName: 'GameFilter',
+    isArray: true,
+    description: 'Дополнительные фильтры'
   })
-  minYear?: number;
+  filter?: GameFilter[];
 
   @IsOptional()
-  @Transform(({ value }) => Number.parseInt(value, 10))
-  @IsNumber()
-  @Min(1990)
-  @Max(2100)
-  @Field(() => Number, { nullable: true })
+  @IsString()
+  @Field(() => GameView, { nullable: true })
   @ApiProperty({
     required: false,
-    example: 2021,
-    description: 'Максимальный год релиза'
+    enum: GameView,
+    example: GameView.POPULAR,
+    enumName: 'GameView',
+    description: 'Предустановленный вид выборки'
   })
-  maxYear?: number;
+  view?: GameView;
 
   @IsOptional()
   @Transform(transformSearchParam)
@@ -49,12 +50,6 @@ export class GetGamesSearchDto {
     description: 'Фильтр по жанрам'
   })
   genre?: GameGenre[];
-
-  @IsOptional()
-  @IsString()
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ required: false, description: 'Поиск по названию и описанию' })
-  search?: string;
 
   @IsOptional()
   @Transform(({ value }) => Number.parseInt(value, 10))

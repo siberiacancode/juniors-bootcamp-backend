@@ -247,10 +247,8 @@ input CreateDeliveryOrderSenderAddressDto {
 }
 
 input CreateGameOrderPersonDto {
-  email: String
-  firstName: String!
-  lastName: String!
-  middleName: String
+  email: String!
+  inviteLink: String
   phone: String!
 }
 
@@ -470,9 +468,35 @@ enum DeliveryStatus {
   WAITING_COURIER
 }
 
+enum DeliveryType {
+  EPIC_KEY
+  NINTENDO_KEY
+  PLAYSTATION_KEY
+  STEAM_GIFT
+  STEAM_KEY
+  XBOX_KEY
+}
+
+type DetailedGame {
+  deliveryTypes: [DeliveryType!]!
+  description: String!
+  developer: String!
+  externalId: String!
+  minimumSystemRequirements: SystemRequirements!
+  publisher: String!
+  recommendedSystemRequirements: SystemRequirements!
+  screenshots: [String!]!
+}
+
 enum Dough {
   THICK
   THIN
+}
+
+type EditionsResponse {
+  editions: [String!]!
+  reason: String
+  success: Boolean!
 }
 
 type Film {
@@ -604,18 +628,13 @@ type FilmsResponse {
   success: Boolean!
 }
 
-type Game {
-  description: String!
-  externalId: String!
-  genres: [GameGenre!]!
-  id: String!
-  image: String!
-  name: String!
-  oldPrice: Float
-  price: Float!
-  rating: Float
-  slug: String!
-  year: Float!
+type FilteredGame {
+  priceVariant: PriceVariant!
+}
+
+enum GameFilter {
+  DISCOUNT
+  DLC
 }
 
 enum GameGenre {
@@ -634,33 +653,27 @@ enum GameGenre {
 
 type GameOrder {
   _id: String!
-  gameKey: String!
+  gameKey: String
   gameSnapshot: GameOrderSnapshot!
   person: GameOrderPerson!
-  status: GameOrderStatus!
 }
 
 input GameOrderInput {
   _id: String!
-  gameKey: String!
+  gameKey: String
   gameSnapshot: GameOrderSnapshotInput!
   person: GameOrderPersonInput!
-  status: GameOrderStatus!
 }
 
 type GameOrderPerson {
-  email: String
-  firstName: String!
-  lastName: String!
-  middleName: String
+  email: String!
+  inviteLink: String
   phone: String!
 }
 
 input GameOrderPersonInput {
-  email: String
-  firstName: String!
-  lastName: String!
-  middleName: String
+  email: String!
+  inviteLink: String
   phone: String!
 }
 
@@ -671,24 +684,23 @@ type GameOrderResponse {
 }
 
 type GameOrderSnapshot {
-  externalId: String!
-  gameId: String!
+  deliveryType: DeliveryType!
+  edition: String!
   image: String!
   name: String!
   price: Float!
+  region: Region!
+  slug: String!
 }
 
 input GameOrderSnapshotInput {
-  externalId: String!
-  gameId: String!
+  deliveryType: DeliveryType!
+  edition: String!
   image: String!
   name: String!
   price: Float!
-}
-
-enum GameOrderStatus {
-  CANCELED
-  PAID
+  region: Region!
+  slug: String!
 }
 
 type GameOrdersResponse {
@@ -698,19 +710,24 @@ type GameOrdersResponse {
 }
 
 type GameResponse {
-  data: Game!
+  game: DetailedGame!
   reason: String
   success: Boolean!
 }
 
 type GameSearchResponse {
-  data: [Game!]!
+  games: [FilteredGame!]!
   reason: String
   success: Boolean!
 }
 
+enum GameView {
+  NEW
+  POPULAR
+}
+
 type GamesPaginatedResponse {
-  data: [Game!]!
+  games: [FilteredGame!]!
   meta: GamesPaginationMeta!
   reason: String
   success: Boolean!
@@ -758,7 +775,7 @@ type Mutation {
   createCarRent(birthDate: String!, carId: String!, comment: String, email: String!, endDate: Float!, firstName: String!, lastName: String!, middleName: String!, phone: String!, pickupLocation: String!, returnLocation: String!, startDate: Float!): CarRentResponse!
   createCinemaPayment(debitCard: CreatePaymentDebitCardDto!, filmId: String!, person: CreatePaymentPersonDto!, seance: CreatePaymentSeanceDto!, tickets: [CreatePaymentTicketsDto!]!): PaymentResponse!
   createDeliveryOrder(optionType: DeliveryOptionType!, packageId: String!, payer: Payer!, receiver: CreateDeliveryOrderPersonDto!, receiverAddress: CreateDeliveryOrderReceiverAddressDto!, receiverPointId: String!, sender: CreateDeliveryOrderPersonDto!, senderAddress: CreateDeliveryOrderSenderAddressDto!, senderPointId: String!): DeliverResponse!
-  createGameOrder(debitCard: String!, gameId: String!, person: CreateGameOrderPersonDto!): CreateGameOrderResponse!
+  createGameOrder(debitCard: String!, deliveryType: DeliveryType!, edition: String!, gameSlug: String!, person: CreateGameOrderPersonDto!, region: Region!): CreateGameOrderResponse!
   createOtp(phone: String!): OtpResponse!
   createPizzaPayment(debitCard: CreatePizzaPaymentDebitCardDto!, person: CreatePizzaPaymentPersonDto!, pizzas: [OrderedPizzaInput!]!, receiverAddress: CreatePizzaPaymentAddressDto!): PizzaPaymentResponse!
   signin(code: Float!, phone: String!): SignInResponse!
@@ -959,6 +976,14 @@ type PizzasResponse {
   success: Boolean!
 }
 
+type PriceVariant {
+  deliveryType: DeliveryType!
+  edition: String!
+  oldPrice: Float
+  price: Float!
+  region: Region!
+}
+
 enum Profession {
   ACTOR
   DIRECTOR
@@ -992,15 +1017,17 @@ type Query {
   getDeliveryOrders: DeliveryOrdersResponse!
   getDeliveryPackageTypes: DeliveryPackageTypesResponse!
   getDeliveryPoints: DeliveryPointsResponse!
+  getEditions(deliveryType: DeliveryType!, region: Region!, slug: String!): EditionsResponse!
   getFilm(filmId: String!): FilmResponse!
   getFilmSchedule(filmId: String!): ScheduleResponse!
-  getGame(gameId: String!): GameResponse!
+  getGame(slug: String!): GameResponse!
   getGameOrder(orderId: String!): GameOrderResponse!
   getGameOrders: GameOrdersResponse!
-  getGames(genre: [GameGenre!], limit: Float, maxYear: Float, minYear: Float, page: Float, search: String): GamesPaginatedResponse!
+  getGames(filter: [GameFilter!], genre: [GameGenre!], limit: Float, page: Float, view: GameView): GamesPaginatedResponse!
   getPizzaOrder(orderId: String!): PizzaOrderResponse!
   getPizzaOrders: PizzaOrdersResponse!
   getPizzasCatalog: PizzasResponse!
+  getRegions(deliveryType: DeliveryType!, slug: String!): RegionsResponse!
   searchGames(limit: Float, search: String!): GameSearchResponse!
   session: SessionResponse!
 }
@@ -1011,6 +1038,24 @@ enum Rating {
   PG
   PG13
   R
+}
+
+enum Region {
+  ALL_WORLD
+  ASIA
+  BY
+  EUROPE
+  KZ
+  PL
+  RU
+  TR
+  UA
+}
+
+type RegionsResponse {
+  reason: String
+  regions: [Region!]!
+  success: Boolean!
 }
 
 type ScheduleResponse {
@@ -1041,6 +1086,14 @@ enum Size {
 enum Steering {
   LEFT
   RIGHT
+}
+
+type SystemRequirements {
+  graphics: String
+  memory: String
+  oc: String
+  processor: String
+  storage: String
 }
 
 enum Transmission {

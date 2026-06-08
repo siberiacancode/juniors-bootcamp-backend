@@ -5,15 +5,15 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class BaseService<Doc extends Document> {
-  create!: Model<Doc>['create'];
-  insertMany!: Model<Doc>['insertMany'];
-  find!: Model<Doc>['find'];
-  findById!: Model<Doc>['findById'];
-  findOne!: Model<Doc>['findOne'];
-  updateOne!: Model<Doc>['updateOne'];
-  updateMany!: Model<Doc>['updateMany'];
-  findOneAndUpdate!: Model<Doc>['findOneAndUpdate'];
-  delete!: Model<Doc>['deleteOne'];
+  create: Model<Doc>['create'];
+  insertMany: Model<Doc>['insertMany'];
+  find: Model<Doc>['find'];
+  findById: Model<Doc>['findById'];
+  findOne: Model<Doc>['findOne'];
+  updateOne: Model<Doc>['updateOne'];
+  updateMany: Model<Doc>['updateMany'];
+  findOneAndUpdate: Model<Doc>['findOneAndUpdate'];
+  delete: Model<Doc>['deleteOne'];
 
   constructor(private readonly model: Model<Doc>) {
     this.create = this.model.create.bind(this.model);

@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class BaseResponse {
   @Field(() => Boolean)
   @ApiProperty({ description: 'Статус запроса' })
-  success!: boolean;
+  success: boolean;
 
   @Field(() => String, { nullable: true })
   @ApiProperty({ description: 'Причина ошибки', required: false })

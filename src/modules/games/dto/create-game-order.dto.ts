@@ -10,36 +10,28 @@ import {
   ValidateNested
 } from 'class-validator';
 
+import { DeliveryType, Region } from '../constants';
+
 @InputType('CreateGameOrderPersonDto')
 export class CreateGameOrderPersonDto {
-  @IsString()
-  @IsNotEmpty()
-  @Field(() => String)
-  @ApiProperty({ example: 'Иван', description: 'Имя пользователя' })
-  firstName: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @Field(() => String)
-  @ApiProperty({ example: 'Иванов', description: 'Фамилия пользователя' })
-  lastName: string;
-
-  @IsString()
-  @IsOptional()
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ required: false, example: 'Иванович', description: 'Отчество пользователя' })
-  middleName?: string;
-
   @IsPhoneNumber('RU')
   @Field(() => String)
   @ApiProperty({ example: '79990001122', description: 'Телефон пользователя' })
   phone: string;
 
   @IsEmail()
+  @Field(() => String)
+  @ApiProperty({ example: 'example@mail.com', description: 'Email пользователя' })
+  email: string;
+
   @IsOptional()
   @Field(() => String, { nullable: true })
-  @ApiProperty({ required: false, example: 'example@mail.com', description: 'Email пользователя' })
-  email?: string;
+  @ApiProperty({
+    required: false,
+    example: 'https://s.team/p/',
+    description: 'Ссылка на приглашение'
+  })
+  inviteLink?: string;
 }
 
 @ArgsType()
@@ -47,8 +39,31 @@ export class CreateGameOrderDto {
   @IsString()
   @IsNotEmpty()
   @Field(() => String)
-  @ApiProperty({ description: 'ID игры для покупки' })
-  gameId: string;
+  @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
+  gameSlug: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Field(() => DeliveryType)
+  @ApiProperty({
+    description: 'Тип доставки',
+    enum: DeliveryType,
+    example: DeliveryType.STEAM_GIFT,
+    enumName: 'DeliveryType'
+  })
+  deliveryType: DeliveryType;
+
+  @IsString()
+  @IsNotEmpty()
+  @Field(() => Region)
+  @ApiProperty({ description: 'Регион', enum: Region, example: Region.RU, enumName: 'Region' })
+  region: Region;
+
+  @IsString()
+  @IsNotEmpty()
+  @Field(() => String)
+  @ApiProperty({ example: 'Deluxe', description: 'Издание' })
+  edition: string;
 
   @ValidateNested()
   @Type(() => CreateGameOrderPersonDto)

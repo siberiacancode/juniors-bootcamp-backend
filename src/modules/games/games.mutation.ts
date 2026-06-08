@@ -1,13 +1,14 @@
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { UsersService } from '@/modules/users';
 import { BaseResolver } from '@/utils/services';
 
+import { DeliveryType } from './constants';
 import { CreateGameOrderDto } from './dto';
 import { CreateGameOrderResponse } from './games.model';
 import { GamesService } from './games.service';
-import { GameOrderService, GameOrderStatus } from './modules';
+import { GameOrderService } from './modules';
 
 @Resolver('🎮 games mutation')
 @Resolver()
@@ -24,48 +25,69 @@ export class GamesMutation extends BaseResolver {
   async createGameOrder(
     @Args() createGameOrderDto: CreateGameOrderDto
   ): Promise<CreateGameOrderResponse> {
-    const game = this.gamesService.getGame(createGameOrderDto.gameId);
+    const game = this.gamesService.findGame(createGameOrderDto.gameSlug);
 
     if (!game) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Игра не найдена'));
     }
 
     let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
 
     if (!user) {
-      user = await this.usersService.create({ phone: createGameOrderDto.person.phone });
+      user = await this.usersService.create({
+        phone: createGameOrderDto.person.phone
+      });
     }
 
     await this.usersService.findOneAndUpdate(
       { phone: user.phone },
       {
         $set: {
-          firstname: createGameOrderDto.person.firstName,
-          lastname: createGameOrderDto.person.lastName,
-          middlename: createGameOrderDto.person.middleName,
           email: createGameOrderDto.person.email
         }
       }
     );
 
+    const priceVariant = game.priceVariants.find(
+      (variant) =>
+        createGameOrderDto.deliveryType === variant.deliveryType &&
+        createGameOrderDto.edition === variant.edition &&
+        createGameOrderDto.region === variant.region
+    );
+
+    if (
+      priceVariant.deliveryType === DeliveryType.STEAM_GIFT &&
+      !createGameOrderDto.person.inviteLink
+    ) {
+      throw new BadRequestException(
+        this.wrapFail('При заказе Steam Gift необходимо указать ссылку приглашения')
+      );
+    }
+
+    if (!priceVariant) {
+      throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
+    }
+
     const order = await this.gameOrderService.create({
       person: createGameOrderDto.person,
       gameSnapshot: {
-        gameId: game.id,
+        deliveryType: priceVariant.deliveryType,
+        edition: priceVariant.edition,
+        price: priceVariant.price,
+        region: priceVariant.region,
+        slug: game.slug,
         name: game.name,
-        image: game.image,
-        price: game.price,
-        externalId: game.externalId
-      },
-      gameKey: this.generateGameKey(),
-      status: GameOrderStatus.PAID
+        image: game.image
+      }
     });
 
-    return this.wrapSuccess({ order });
-  }
+    if (priceVariant.deliveryType !== DeliveryType.STEAM_GIFT)
+      await order.updateOne({
+        $set: {
+          gameKey: this.gameOrderService.generateGameKey()
+        }
+      });
 
-  private generateGameKey(): string {
-    const randomChunk = () => Math.random().toString(36).slice(2, 6).toUpperCase();
-    return `${randomChunk()}-${randomChunk()}-${randomChunk()}-${randomChunk()}`;
+    return this.wrapSuccess({ order });
   }
 }

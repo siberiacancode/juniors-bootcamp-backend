@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  NotFoundException,
   Param,
   Post,
   Query,
@@ -24,24 +25,28 @@ import { UsersService } from '@/modules/users';
 import { ApiAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver } from '@/utils/services';
 
-import { GameGenre } from './constants';
+import { DeliveryType, GameFilter, GameGenre, GameView, Region } from './constants';
 import {
   CreateGameOrderDto,
+  GetEditionsDto,
   GetGameDto,
   GetGameOrderDto,
-  GetGamesSearchDto,
+  GetGamesDto,
+  GetRegionsDto,
   SearchGamesDto
 } from './dto';
 import {
   CreateGameOrderResponse,
+  EditionsResponse,
   GameOrderResponse,
   GameOrdersResponse,
   GameResponse,
   GameSearchResponse,
-  GamesPaginatedResponse
+  GamesPaginatedResponse,
+  RegionsResponse
 } from './games.model';
 import { GamesService } from './games.service';
-import { GameOrderService, GameOrderStatus } from './modules';
+import { GameOrderService } from './modules';
 
 @ApiTags('🎮 games')
 @Controller('/games')
@@ -59,16 +64,21 @@ export class GamesController extends BaseResolver {
   @ApiOperation({ summary: 'Получить игры' })
   @ApiResponse({ status: 200, type: GamesPaginatedResponse })
   @ApiQuery({
-    name: 'minYear',
+    name: 'filter',
     required: false,
-    type: Number,
-    description: 'Минимальный год релиза'
+    enum: GameFilter,
+    enumName: 'GameFilter',
+    isArray: true,
+    example: [GameFilter.DISCOUNT, GameFilter.DLC],
+    description: 'Дополнительные фильтры'
   })
   @ApiQuery({
-    name: 'maxYear',
     required: false,
-    type: Number,
-    description: 'Максимальный год релиза'
+    name: 'view',
+    enum: GameView,
+    example: GameView.POPULAR,
+    enumName: 'GameView',
+    description: 'Предустановленный вид выборки'
   })
   @ApiQuery({
     name: 'genre',
@@ -79,11 +89,11 @@ export class GamesController extends BaseResolver {
     example: [GameGenre.ACTION, GameGenre.RPG],
     description: 'Жанр'
   })
-  @ApiQuery({ name: 'search', required: false, type: String, description: 'Поиск' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Страница' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Лимит' })
-  getGames(@Query() getGamesSearchDto: GetGamesSearchDto): GamesPaginatedResponse {
+  getGames(@Query() getGamesSearchDto: GetGamesDto): GamesPaginatedResponse {
     const games = this.gamesService.getFilteredGames(getGamesSearchDto);
+
     const paginatedGames = this.gamesService.getPagination({
       items: games,
       page: getGamesSearchDto.page,
@@ -99,63 +109,153 @@ export class GamesController extends BaseResolver {
   @ApiQuery({ name: 'search', required: true, type: String, description: 'Строка поиска' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Лимит' })
   searchGames(@Query() searchGamesDto: SearchGamesDto): GameSearchResponse {
-    const data = this.gamesService.searchAutocomplete(searchGamesDto);
-    return this.wrapSuccess({ data });
+    const games = this.gamesService.searchAutocomplete(searchGamesDto);
+    return this.wrapSuccess({ games });
   }
 
-  @Get('/info/:gameId')
+  @Get('/info/:slug')
   @ApiOperation({ summary: 'Получить игру' })
   @ApiResponse({ status: 200, type: GameResponse })
   getGame(@Param() getGameDto: GetGameDto): GameResponse {
-    const game = this.gamesService.getGame(getGameDto.gameId);
+    const game = this.gamesService.getGame(getGameDto.slug);
 
     if (!game) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Игра не найдена'));
     }
 
-    return this.wrapSuccess({ data: game });
+    return this.wrapSuccess({ game });
+  }
+
+  @Get('/regions')
+  @ApiOperation({ summary: 'Получить регионы для способа получения' })
+  @ApiResponse({ status: 200, type: RegionsResponse })
+  @ApiQuery({
+    name: 'slug',
+    required: true,
+    type: String,
+    description: 'Slug игры'
+  })
+  @ApiQuery({
+    name: 'deliveryType',
+    required: true,
+    enum: DeliveryType,
+    example: DeliveryType.STEAM_GIFT,
+    enumName: 'DeliveryType',
+    description: 'Тип доставки'
+  })
+  getRegions(@Query() getRegionsDto: GetRegionsDto): RegionsResponse {
+    const regions = this.gamesService.getRegions(getRegionsDto);
+
+    if (!regions) {
+      throw new NotFoundException(this.wrapFail('Регионы не найдены'));
+    }
+
+    return this.wrapSuccess({ regions });
+  }
+
+  @Get('/editions')
+  @ApiOperation({ summary: 'Получить издания для региона' })
+  @ApiResponse({ status: 200, type: EditionsResponse })
+  @ApiQuery({
+    name: 'slug',
+    required: true,
+    type: String,
+    description: 'Slug игры'
+  })
+  @ApiQuery({
+    name: 'deliveryType',
+    required: true,
+    enum: DeliveryType,
+    example: DeliveryType.STEAM_GIFT,
+    enumName: 'DeliveryType',
+    description: 'Тип доставки'
+  })
+  @ApiQuery({
+    name: 'region',
+    required: true,
+    enum: Region,
+    example: Region.RU,
+    enumName: 'Region',
+    description: 'Регион'
+  })
+  getEditions(@Query() getEditionsDto: GetEditionsDto): EditionsResponse {
+    const editions = this.gamesService.getEditions(getEditionsDto);
+
+    if (!editions) {
+      throw new NotFoundException(this.wrapFail('Издания не найдены'));
+    }
+
+    return this.wrapSuccess({ editions });
   }
 
   @Post('/order')
   @ApiOperation({ summary: 'Купить игру и получить ключ' })
   @ApiResponse({ status: 200, type: CreateGameOrderResponse })
-  async buyGame(@Body() createGameOrderDto: CreateGameOrderDto): Promise<CreateGameOrderResponse> {
-    const game = this.gamesService.getGame(createGameOrderDto.gameId);
+  async createGameOrder(
+    @Body() createGameOrderDto: CreateGameOrderDto
+  ): Promise<CreateGameOrderResponse> {
+    const game = this.gamesService.findGame(createGameOrderDto.gameSlug);
 
     if (!game) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
+      throw new NotFoundException(this.wrapFail('Игра не найдена'));
     }
 
     let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
 
     if (!user) {
-      user = await this.usersService.create({ phone: createGameOrderDto.person.phone });
+      user = await this.usersService.create({
+        phone: createGameOrderDto.person.phone
+      });
     }
 
     await this.usersService.findOneAndUpdate(
       { phone: user.phone },
       {
         $set: {
-          firstname: createGameOrderDto.person.firstName,
-          lastname: createGameOrderDto.person.lastName,
-          middlename: createGameOrderDto.person.middleName,
           email: createGameOrderDto.person.email
         }
       }
     );
 
+    const priceVariant = game.priceVariants.find(
+      (variant) =>
+        createGameOrderDto.deliveryType === variant.deliveryType &&
+        createGameOrderDto.edition === variant.edition &&
+        createGameOrderDto.region === variant.region
+    );
+
+    if (
+      priceVariant.deliveryType === DeliveryType.STEAM_GIFT &&
+      !createGameOrderDto.person.inviteLink
+    ) {
+      throw new BadRequestException(
+        this.wrapFail('При заказе Steam Gift необходимо указать ссылку приглашения')
+      );
+    }
+
+    if (!priceVariant) {
+      throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
+    }
+
     const order = await this.gameOrderService.create({
       person: createGameOrderDto.person,
       gameSnapshot: {
-        gameId: game.id,
+        deliveryType: priceVariant.deliveryType,
+        edition: priceVariant.edition,
+        price: priceVariant.price,
+        region: priceVariant.region,
+        slug: game.slug,
         name: game.name,
-        image: game.image,
-        price: game.price,
-        externalId: game.externalId
-      },
-      gameKey: this.generateGameKey(),
-      status: GameOrderStatus.PAID
+        image: game.image
+      }
     });
+
+    if (priceVariant.deliveryType !== DeliveryType.STEAM_GIFT)
+      await order.updateOne({
+        $set: {
+          gameKey: this.gameOrderService.generateGameKey()
+        }
+      });
 
     return this.wrapSuccess({ order });
   }
@@ -204,14 +304,9 @@ export class GamesController extends BaseResolver {
     });
 
     if (!order) {
-      throw new BadRequestException(this.wrapFail('Заказ не найден'));
+      throw new NotFoundException(this.wrapFail('Заказ не найден'));
     }
 
     return this.wrapSuccess({ order });
-  }
-
-  private generateGameKey(): string {
-    const randomChunk = () => Math.random().toString(36).slice(2, 6).toUpperCase();
-    return `${randomChunk()}-${randomChunk()}-${randomChunk()}-${randomChunk()}`;
   }
 }

@@ -1,6 +1,6 @@
 import type { Request } from 'express';
 
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Args, Context, Query, Resolver } from '@nestjs/graphql';
 
 import type { User } from '@/modules/users';
@@ -8,13 +8,22 @@ import type { User } from '@/modules/users';
 import { GqlAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver } from '@/utils/services';
 
-import { GetGameDto, GetGameOrderDto, GetGamesSearchDto, SearchGamesDto } from './dto';
 import {
+  GetEditionsDto,
+  GetGameDto,
+  GetGameOrderDto,
+  GetGamesDto,
+  GetRegionsDto,
+  SearchGamesDto
+} from './dto';
+import {
+  EditionsResponse,
   GameOrderResponse,
   GameOrdersResponse,
   GameResponse,
   GameSearchResponse,
-  GamesPaginatedResponse
+  GamesPaginatedResponse,
+  RegionsResponse
 } from './games.model';
 import { GamesService } from './games.service';
 import { GameOrderService } from './modules';
@@ -31,7 +40,7 @@ export class GamesQuery extends BaseResolver {
   }
 
   @Query(() => GamesPaginatedResponse)
-  getGames(@Args() getGamesSearchDto: GetGamesSearchDto): GamesPaginatedResponse {
+  getGames(@Args() getGamesSearchDto: GetGamesDto): GamesPaginatedResponse {
     const games = this.gamesService.getFilteredGames(getGamesSearchDto);
     const paginatedGames = this.gamesService.getPagination({
       items: games,
@@ -42,21 +51,43 @@ export class GamesQuery extends BaseResolver {
     return this.wrapSuccess(paginatedGames);
   }
 
-  @Query(() => GameResponse)
-  getGame(@Args() getGameDto: GetGameDto): GameResponse {
-    const game = this.gamesService.getGame(getGameDto.gameId);
-
-    if (!game) {
-      throw new BadRequestException(this.wrapFail('Игра не найдена'));
-    }
-
-    return this.wrapSuccess({ data: game });
-  }
-
   @Query(() => GameSearchResponse)
   searchGames(@Args() searchGamesDto: SearchGamesDto): GameSearchResponse {
-    const data = this.gamesService.searchAutocomplete(searchGamesDto);
-    return this.wrapSuccess({ data });
+    const games = this.gamesService.searchAutocomplete(searchGamesDto);
+    return this.wrapSuccess({ games });
+  }
+
+  @Query(() => GameResponse)
+  getGame(@Args() getGameDto: GetGameDto): GameResponse {
+    const game = this.gamesService.getGame(getGameDto.slug);
+
+    if (!game) {
+      throw new NotFoundException(this.wrapFail('Игра не найдена'));
+    }
+
+    return this.wrapSuccess({ game });
+  }
+
+  @Query(() => RegionsResponse)
+  getRegions(@Args() getRegionsDto: GetRegionsDto): RegionsResponse {
+    const regions = this.gamesService.getRegions(getRegionsDto);
+
+    if (!regions) {
+      throw new NotFoundException(this.wrapFail('Регионы не найдены'));
+    }
+
+    return this.wrapSuccess({ regions });
+  }
+
+  @Query(() => EditionsResponse)
+  getEditions(@Args() getEditionsDto: GetEditionsDto): EditionsResponse {
+    const editions = this.gamesService.getEditions(getEditionsDto);
+
+    if (!editions) {
+      throw new NotFoundException(this.wrapFail('Издания не найдены'));
+    }
+
+    return this.wrapSuccess({ editions });
   }
 
   @GqlAuthorizedOnly()
@@ -95,7 +126,7 @@ export class GamesQuery extends BaseResolver {
     });
 
     if (!order) {
-      throw new BadRequestException(this.wrapFail('Заказ не найден'));
+      throw new NotFoundException(this.wrapFail('Заказ не найден'));
     }
 
     return this.wrapSuccess({ order });
