@@ -56,7 +56,7 @@ export class GamesMutation extends BaseResolver {
     );
 
     if (
-      priceVariant.deliveryType === DeliveryType.STEAM_GIFT &&
+      priceVariant?.deliveryType === DeliveryType.STEAM_GIFT &&
       !createGameOrderDto.person.inviteLink
     ) {
       throw new BadRequestException(
@@ -78,15 +78,11 @@ export class GamesMutation extends BaseResolver {
         slug: game.slug,
         name: game.name,
         image: game.image
-      }
+      },
+      ...(priceVariant.deliveryType !== DeliveryType.STEAM_GIFT && {
+        gameKey: this.gameOrderService.generateGameKey()
+      })
     });
-
-    if (priceVariant.deliveryType !== DeliveryType.STEAM_GIFT)
-      await order.updateOne({
-        $set: {
-          gameKey: this.gameOrderService.generateGameKey()
-        }
-      });
 
     return this.wrapSuccess({ order });
   }

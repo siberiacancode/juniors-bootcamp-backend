@@ -225,7 +225,7 @@ export class GamesController extends BaseResolver {
     );
 
     if (
-      priceVariant.deliveryType === DeliveryType.STEAM_GIFT &&
+      priceVariant?.deliveryType === DeliveryType.STEAM_GIFT &&
       !createGameOrderDto.person.inviteLink
     ) {
       throw new BadRequestException(
@@ -237,7 +237,7 @@ export class GamesController extends BaseResolver {
       throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
     }
 
-    let order = await this.gameOrderService.create({
+    const order = await this.gameOrderService.create({
       person: createGameOrderDto.person,
       gameSnapshot: {
         deliveryType: priceVariant.deliveryType,
@@ -247,15 +247,11 @@ export class GamesController extends BaseResolver {
         slug: game.slug,
         name: game.name,
         image: game.image
-      }
+      },
+      ...(priceVariant.deliveryType !== DeliveryType.STEAM_GIFT && {
+        gameKey: this.gameOrderService.generateGameKey()
+      })
     });
-
-    if (priceVariant.deliveryType !== DeliveryType.STEAM_GIFT)
-      order = await order.updateOne({
-        $set: {
-          gameKey: this.gameOrderService.generateGameKey()
-        }
-      });
 
     return this.wrapSuccess({ order });
   }
