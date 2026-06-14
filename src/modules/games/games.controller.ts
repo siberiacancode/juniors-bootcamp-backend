@@ -237,7 +237,7 @@ export class GamesController extends BaseResolver {
       throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
     }
 
-    const order = await this.gameOrderService.create({
+    let order = await this.gameOrderService.create({
       person: createGameOrderDto.person,
       gameSnapshot: {
         deliveryType: priceVariant.deliveryType,
@@ -251,7 +251,7 @@ export class GamesController extends BaseResolver {
     });
 
     if (priceVariant.deliveryType !== DeliveryType.STEAM_GIFT)
-      await order.updateOne({
+      order = await order.updateOne({
         $set: {
           gameKey: this.gameOrderService.generateGameKey()
         }
