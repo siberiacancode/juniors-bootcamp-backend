@@ -2,8 +2,6 @@ import type { PriceVariant, SystemRequirements } from '../entities';
 
 import { DeliveryType, GameGenre, GameType, Region } from './enums';
 
-const PLACEHOLDER_IMAGE = '/static/images/pizza/1.webp';
-
 export interface Game {
   description: string;
   developer: string;
@@ -24,7 +22,11 @@ export interface Game {
 
 export const GAMES: Game[] = [
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/battlefield-2042__screenshot-1.jpg',
+      '/static/images/games/battlefield-2042__screenshot-2.jpg',
+      '/static/images/games/battlefield-2042__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Battlefield 2042',
     slug: 'battlefield-2042',
@@ -32,7 +34,7 @@ export const GAMES: Game[] = [
     releaseDate: 1637280000,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
     description: 'Масштабный мультиплеерный шутер с современными картами и техникой.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/battlefield-2042__header.jpg',
     isPopular: true,
     developer: 'EA DICE',
     publisher: 'Electronic Arts',
@@ -92,7 +94,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/titanfall-2__screenshot-1.jpg',
+      '/static/images/games/titanfall-2__screenshot-2.jpg',
+      '/static/images/games/titanfall-2__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Titanfall 2',
     slug: 'titanfall-2',
@@ -100,7 +106,7 @@ export const GAMES: Game[] = [
     releaseDate: 1477612800,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
     description: 'Динамичный sci-fi шутер с паркуром и боями титанов.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/titanfall-2__header.jpg',
     developer: 'Respawn Entertainment',
     publisher: 'Electronic Arts',
     isPopular: true,
@@ -159,7 +165,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/sea-of-thieves__screenshot-1.jpg',
+      '/static/images/games/sea-of-thieves__screenshot-2.jpg',
+      '/static/images/games/sea-of-thieves__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Sea of Thieves',
     slug: 'sea-of-thieves',
@@ -167,7 +177,7 @@ export const GAMES: Game[] = [
     releaseDate: 1521504000,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE],
     description: 'Кооперативное пиратское приключение в открытом мире.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/sea-of-thieves__header.jpg',
     developer: 'Rare',
     publisher: 'Microsoft',
     isPopular: true,
@@ -226,7 +236,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/mortal-kombat-1__screenshot-1.jpg',
+      '/static/images/games/mortal-kombat-1__screenshot-2.jpg',
+      '/static/images/games/mortal-kombat-1__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Mortal Kombat 1',
     slug: 'mortal-kombat-1',
@@ -234,7 +248,7 @@ export const GAMES: Game[] = [
     releaseDate: 1695081600,
     genres: [GameGenre.ACTION],
     description: 'Файтинг с обновленной вселенной и зрелищными добиваниями.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/mortal-kombat-1__header.jpg',
     developer: 'NetherRealm Studios',
     publisher: 'Warner Bros. Games',
     isPopular: false,
@@ -293,7 +307,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/remnant-2__screenshot-1.jpg',
+      '/static/images/games/remnant-2__screenshot-2.jpg',
+      '/static/images/games/remnant-2__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'REMNANT II',
     slug: 'remnant-2',
@@ -301,7 +319,7 @@ export const GAMES: Game[] = [
     releaseDate: 1690243200,
     genres: [GameGenre.ACTION, GameGenre.RPG, GameGenre.SHOOTER],
     description: 'Кооперативный экшен-RPG с процедурной генерацией миров.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/remnant-2__header.jpg',
     developer: 'Gunfire Games',
     publisher: 'Gunfire Games',
     isPopular: true,
@@ -360,7 +378,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/baldurs-gate-3__screenshot-1.jpg',
+      '/static/images/games/baldurs-gate-3__screenshot-2.jpg',
+      '/static/images/games/baldurs-gate-3__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: "Baldur's Gate 3",
     slug: 'baldurs-gate-3',
@@ -368,7 +390,7 @@ export const GAMES: Game[] = [
     releaseDate: 1691020800,
     genres: [GameGenre.RPG, GameGenre.STRATEGY, GameGenre.ADVENTURE],
     description: 'Партийная RPG с глубоким сюжетом и пошаговыми боями.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/baldurs-gate-3__header.jpg',
     developer: 'Larian Studios',
     publisher: 'Larian Studios',
     isPopular: true,
@@ -427,7 +449,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/battlebit-remastered__screenshot-1.jpg',
+      '/static/images/games/battlebit-remastered__screenshot-2.jpg',
+      '/static/images/games/battlebit-remastered__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'BattleBit Remastered',
     slug: 'battlebit-remastered',
@@ -435,7 +461,7 @@ export const GAMES: Game[] = [
     releaseDate: 1686787200,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
     description: 'Массовые PvP-сражения в low-poly стилистике.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/battlebit-remastered__header.jpg',
     developer: 'StickyBomb Studio',
     publisher: 'StickyBomb Studio',
     isPopular: true,
@@ -493,7 +519,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/terraria__screenshot-1.jpg',
+      '/static/images/games/terraria__screenshot-2.jpg',
+      '/static/images/games/terraria__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Terraria',
     slug: 'terraria',
@@ -501,7 +531,7 @@ export const GAMES: Game[] = [
     releaseDate: 1305504000,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.INDIE, GameGenre.SURVIVAL],
     description: 'Песочница с исследованием, строительством и боссами.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/terraria__header.jpg',
     developer: 'Re-Logic',
     publisher: '505 Games',
     isPopular: true,
@@ -565,11 +595,15 @@ export const GAMES: Game[] = [
     description: '«Призрачная свобода» — это дополнение, добавляющее элементы шпионского триллера.',
     developer: 'CD PROJEKT RED',
     publisher: 'CD PROJEKT RED',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__header.jpg',
     externalId: '2138330',
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.SURVIVAL],
     releaseDate: 1695686400,
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-1.jpg',
+      '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-2.jpg',
+      '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-3.jpg'
+    ],
     slug: 'cyberpunk-2077-prizrachnaya-svoboda',
     isPopular: true,
     minimumSystemRequirements: {
@@ -614,7 +648,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/garrys-mod__screenshot-1.jpg',
+      '/static/images/games/garrys-mod__screenshot-2.jpg',
+      '/static/images/games/garrys-mod__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: "Garry's Mod",
     slug: 'garrys-mod',
@@ -622,7 +660,7 @@ export const GAMES: Game[] = [
     releaseDate: 1164758400,
     genres: [GameGenre.INDIE, GameGenre.SIMULATION],
     description: 'Песочница на Source для пользовательских режимов и модов.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/garrys-mod__header.jpg',
     developer: 'Facepunch Studios',
     publisher: 'Facepunch Studios',
     isPopular: true,
@@ -680,7 +718,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/red-dead-redemption-2__screenshot-1.jpg',
+      '/static/images/games/red-dead-redemption-2__screenshot-2.jpg',
+      '/static/images/games/red-dead-redemption-2__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Red Dead Redemption 2',
     slug: 'red-dead-redemption-2',
@@ -688,7 +730,7 @@ export const GAMES: Game[] = [
     releaseDate: 1540512000,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE],
     description: 'История банды на Диком Западе в большом открытом мире.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/red-dead-redemption-2__header.jpg',
     developer: 'Rockstar Games',
     publisher: 'Rockstar Games',
     isPopular: true,
@@ -747,7 +789,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/cyberpunk-2077__screenshot-1.jpg',
+      '/static/images/games/cyberpunk-2077__screenshot-2.jpg',
+      '/static/images/games/cyberpunk-2077__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Cyberpunk 2077',
     slug: 'cyberpunk-2077',
@@ -755,7 +801,7 @@ export const GAMES: Game[] = [
     releaseDate: 1607558400,
     genres: [GameGenre.ACTION, GameGenre.RPG],
     description: 'Ролевая игра в футуристическом Найт-Сити с нелинейными квестами.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/cyberpunk-2077__header.jpg',
     developer: 'CD Projekt Red',
     publisher: 'CD Projekt Red',
     isPopular: false,
@@ -814,7 +860,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/elden-ring__screenshot-1.jpg',
+      '/static/images/games/elden-ring__screenshot-2.jpg',
+      '/static/images/games/elden-ring__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Elden Ring',
     slug: 'elden-ring',
@@ -822,7 +872,7 @@ export const GAMES: Game[] = [
     releaseDate: 1645747200,
     genres: [GameGenre.ACTION, GameGenre.RPG],
     description: 'Soulslike с открытым миром и насыщенным исследованием.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/elden-ring__header.jpg',
     developer: 'FromSoftware',
     publisher: 'Bandai Namco Entertainment',
     isPopular: true,
@@ -881,7 +931,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/helldivers-2__screenshot-1.jpg',
+      '/static/images/games/helldivers-2__screenshot-2.jpg',
+      '/static/images/games/helldivers-2__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Helldivers 2',
     slug: 'helldivers-2',
@@ -889,7 +943,7 @@ export const GAMES: Game[] = [
     releaseDate: 1707350400,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
     description: 'Кооперативный PvE-шутер про межгалактическую демократию.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/helldivers-2__header.jpg',
     developer: 'Arrowhead Game Studios',
     publisher: 'Sony Interactive Entertainment',
     isPopular: true,
@@ -947,7 +1001,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/palworld__screenshot-1.jpg',
+      '/static/images/games/palworld__screenshot-2.jpg',
+      '/static/images/games/palworld__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Palworld',
     slug: 'palworld',
@@ -955,7 +1013,7 @@ export const GAMES: Game[] = [
     releaseDate: 1705622400,
     genres: [GameGenre.ADVENTURE, GameGenre.SURVIVAL],
     description: 'Выживание, крафт и коллекционирование существ в открытом мире.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/palworld__header.jpg',
     developer: 'Pocketpair',
     publisher: 'Pocketpair',
     isPopular: true,
@@ -1013,7 +1071,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/black-myth-wukong__screenshot-1.jpg',
+      '/static/images/games/black-myth-wukong__screenshot-2.jpg',
+      '/static/images/games/black-myth-wukong__screenshot-3.jpg'
+    ],
     type: GameType.GAME,
     name: 'Black Myth: Wukong',
     slug: 'black-myth-wukong',
@@ -1021,7 +1083,7 @@ export const GAMES: Game[] = [
     releaseDate: 1724112000,
     genres: [GameGenre.ACTION, GameGenre.RPG],
     description: 'Экшен по мотивам китайской мифологии с кинематографичными боями.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/black-myth-wukong__header.jpg',
     developer: 'Game Science',
     publisher: 'Game Science',
     isPopular: true,
@@ -1079,7 +1141,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/hades-2__screenshot-1.jpg',
+      '/static/images/games/hades-2__screenshot-2.jpg',
+      '/static/images/games/hades-2__screenshot-3.jpg'
+    ],
 
     type: GameType.GAME,
     name: 'Hades II',
@@ -1088,7 +1154,7 @@ export const GAMES: Game[] = [
     releaseDate: 1714953600,
     genres: [GameGenre.ACTION, GameGenre.INDIE],
     description: 'Рогалик с быстрым боем, билдостроением и сильным нарративом.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/hades-2__header.jpg',
     developer: 'Supergiant Games',
     publisher: 'Supergiant Games',
     isPopular: true,
@@ -1146,7 +1212,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/stardew-valley__screenshot-1.jpg',
+      '/static/images/games/stardew-valley__screenshot-2.jpg',
+      '/static/images/games/stardew-valley__screenshot-3.jpg'
+    ],
 
     type: GameType.GAME,
     name: 'Stardew Valley',
@@ -1155,7 +1225,7 @@ export const GAMES: Game[] = [
     releaseDate: 1456444800,
     genres: [GameGenre.INDIE, GameGenre.SIMULATION, GameGenre.RPG],
     description: 'Фермерский симулятор с прокачкой, отношениями и крафтом.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/stardew-valley__header.jpg',
     developer: 'ConcernedApe',
     publisher: 'ConcernedApe',
     isPopular: true,
@@ -1213,7 +1283,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/hogwarts-legacy__screenshot-1.jpg',
+      '/static/images/games/hogwarts-legacy__screenshot-2.jpg',
+      '/static/images/games/hogwarts-legacy__screenshot-3.jpg'
+    ],
 
     type: GameType.GAME,
     name: 'Hogwarts Legacy',
@@ -1222,7 +1296,7 @@ export const GAMES: Game[] = [
     releaseDate: 1675987200,
     genres: [GameGenre.ACTION, GameGenre.RPG, GameGenre.ADVENTURE],
     description: 'Открытый мир Хогвартса с магическими дуэлями и квестами.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/hogwarts-legacy__header.jpg',
     developer: 'Avalanche Software',
     publisher: 'Warner Bros. Games',
     isPopular: true,
@@ -1281,7 +1355,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/lethal-company__screenshot-1.jpg',
+      '/static/images/games/lethal-company__screenshot-2.jpg',
+      '/static/images/games/lethal-company__screenshot-3.jpg'
+    ],
 
     type: GameType.GAME,
     name: 'Lethal Company',
@@ -1290,7 +1368,7 @@ export const GAMES: Game[] = [
     releaseDate: 1698019200,
     genres: [GameGenre.HORROR, GameGenre.INDIE],
     description: 'Кооперативный хоррор про сбор лута на опасных локациях.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/lethal-company__header.jpg',
     developer: 'Zeekerss',
     publisher: 'Zeekerss',
     isPopular: false,
@@ -1348,7 +1426,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/the-finals__screenshot-1.jpg',
+      '/static/images/games/the-finals__screenshot-2.jpg',
+      '/static/images/games/the-finals__screenshot-3.jpg'
+    ],
 
     type: GameType.GAME,
     name: 'The Finals',
@@ -1357,7 +1439,7 @@ export const GAMES: Game[] = [
     releaseDate: 1701907200,
     genres: [GameGenre.SHOOTER, GameGenre.ACTION],
     description: 'Соревновательный шутер с разрушаемым окружением.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/the-finals__header.jpg',
     developer: 'Embark Studios',
     publisher: 'Embark Studios',
     isPopular: true,
@@ -1415,7 +1497,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/ea-sports-fc-25__screenshot-1.jpg',
+      '/static/images/games/ea-sports-fc-25__screenshot-2.jpg',
+      '/static/images/games/ea-sports-fc-25__screenshot-3.jpg'
+    ],
 
     type: GameType.GAME,
     name: 'EA SPORTS FC 25',
@@ -1424,7 +1510,7 @@ export const GAMES: Game[] = [
     releaseDate: 1727395200,
     genres: [GameGenre.SPORTS, GameGenre.SIMULATION],
     description: 'Футбольный симулятор с актуальными составами и онлайн-режимами.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/ea-sports-fc-25__header.jpg',
     developer: 'EA Sports',
     publisher: 'Electronic Arts',
     isPopular: false,
@@ -1483,7 +1569,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/forza-horizon-5__screenshot-1.jpg',
+      '/static/images/games/forza-horizon-5__screenshot-2.jpg',
+      '/static/images/games/forza-horizon-5__screenshot-3.jpg'
+    ],
 
     type: GameType.GAME,
     name: 'Forza Horizon 5',
@@ -1492,7 +1582,7 @@ export const GAMES: Game[] = [
     releaseDate: 1636416000,
     genres: [GameGenre.RACING, GameGenre.SIMULATION],
     description: 'Аркадные гонки в открытом мире Мексики.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/forza-horizon-5__header.jpg',
     developer: 'Playground Games',
     publisher: 'Microsoft',
     isPopular: true,
@@ -1551,7 +1641,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/assassins-creed-shadows__screenshot-1.jpg',
+      '/static/images/games/assassins-creed-shadows__screenshot-2.jpg',
+      '/static/images/games/assassins-creed-shadows__screenshot-3.jpg'
+    ],
 
     isPopular: false,
     type: GameType.GAME,
@@ -1561,7 +1655,7 @@ export const GAMES: Game[] = [
     releaseDate: 1742428800,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.RPG],
     description: 'Стелс-экшен в феодальной Японии с двумя протагонистами.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/assassins-creed-shadows__header.jpg',
     developer: 'Ubisoft Montpellier',
     publisher: 'Ubisoft',
     minimumSystemRequirements: {
@@ -1619,7 +1713,11 @@ export const GAMES: Game[] = [
     ]
   },
   {
-    screenshots: [PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE],
+    screenshots: [
+      '/static/images/games/gta-6__screenshot-1.jpg',
+      '/static/images/games/gta-6__screenshot-2.jpg',
+      '/static/images/games/gta-6__screenshot-3.jpg'
+    ],
 
     type: GameType.GAME,
     name: 'GTA VI',
@@ -1628,7 +1726,7 @@ export const GAMES: Game[] = [
     releaseDate: 1795046400,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE],
     description: 'Криминальный open-world экшен нового поколения.',
-    image: PLACEHOLDER_IMAGE,
+    image: '/static/images/games/gta-6__header.jpg',
     developer: 'Rockstar Games',
     publisher: 'Rockstar Games',
     isPopular: true,
