@@ -6,7 +6,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import * as path from 'node:path';
 
@@ -20,7 +19,6 @@ import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
 import { CronModule } from './modules/cron';
-import { withBaseUrl } from './utils/helpers';
 
 @Module({
   controllers: [AppController],
@@ -52,10 +50,6 @@ import { withBaseUrl } from './utils/helpers';
         return graphQLFormattedError;
       },
       context: ({ req, res }) => ({ req, res })
-    }),
-    ServeStaticModule.forRoot({
-      serveRoot: withBaseUrl('/static'),
-      rootPath: path.join(__dirname, '/static')
     }),
     OtpsModule,
     UsersModule,

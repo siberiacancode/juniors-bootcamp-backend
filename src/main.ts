@@ -1,9 +1,11 @@
-import type { NestExpressApplication } from '@nestjs/platform-express';
-
+import fastifyStatic from '@fastify/static';
+import fastifyView from '@fastify/view';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { apiReference } from '@scalar/nestjs-api-reference';
+import handlebars from 'handlebars';
 import { join } from 'node:path';
 import * as client from 'prom-client';
 
@@ -37,8 +39,10 @@ const httpRequestDuration = new client.Histogram({
 });
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    cors: { origin: '*' }
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+
+  app.enableCors({
+    origin: '*'
   });
 
   app.use((req, res, next) => {
@@ -143,8 +147,17 @@ async function bootstrap() {
     })
   );
 
-  app.setBaseViewsDir(join(__dirname, 'static/views'));
-  app.setViewEngine('hbs');
+  await app.register(fastifyView, {
+    engine: {
+      handlebars
+    },
+    root: join(__dirname, 'static/views')
+  });
+
+  await app.register(fastifyStatic, {
+    root: join(__dirname, 'static'),
+    prefix: withBaseUrl('/static/')
+  });
 
   const port = process.env.PORT ?? 3000;
   await app.listen(port);
