@@ -25,7 +25,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/battlefield-2042__screenshot-1.jpg',
       '/static/images/games/battlefield-2042__screenshot-2.jpg',
-      '/static/images/games/battlefield-2042__screenshot-3.jpg'
+      '/static/images/games/battlefield-2042__screenshot-3.jpg',
+      '/static/images/games/battlefield-2042__screenshot-4.jpg',
+      '/static/images/games/battlefield-2042__screenshot-5.jpg',
+      '/static/images/games/battlefield-2042__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Battlefield 2042',
@@ -97,7 +100,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/titanfall-2__screenshot-1.jpg',
       '/static/images/games/titanfall-2__screenshot-2.jpg',
-      '/static/images/games/titanfall-2__screenshot-3.jpg'
+      '/static/images/games/titanfall-2__screenshot-3.jpg',
+      '/static/images/games/titanfall-2__screenshot-4.jpg',
+      '/static/images/games/titanfall-2__screenshot-5.jpg',
+      '/static/images/games/titanfall-2__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Titanfall 2',
@@ -168,7 +174,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/sea-of-thieves__screenshot-1.jpg',
       '/static/images/games/sea-of-thieves__screenshot-2.jpg',
-      '/static/images/games/sea-of-thieves__screenshot-3.jpg'
+      '/static/images/games/sea-of-thieves__screenshot-3.jpg',
+      '/static/images/games/sea-of-thieves__screenshot-4.jpg',
+      '/static/images/games/sea-of-thieves__screenshot-5.jpg',
+      '/static/images/games/sea-of-thieves__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Sea of Thieves',
@@ -239,7 +248,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/mortal-kombat-1__screenshot-1.jpg',
       '/static/images/games/mortal-kombat-1__screenshot-2.jpg',
-      '/static/images/games/mortal-kombat-1__screenshot-3.jpg'
+      '/static/images/games/mortal-kombat-1__screenshot-3.jpg',
+      '/static/images/games/mortal-kombat-1__screenshot-4.jpg',
+      '/static/images/games/mortal-kombat-1__screenshot-5.jpg',
+      '/static/images/games/mortal-kombat-1__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Mortal Kombat 1',
@@ -310,7 +322,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/remnant-2__screenshot-1.jpg',
       '/static/images/games/remnant-2__screenshot-2.jpg',
-      '/static/images/games/remnant-2__screenshot-3.jpg'
+      '/static/images/games/remnant-2__screenshot-3.jpg',
+      '/static/images/games/remnant-2__screenshot-4.jpg',
+      '/static/images/games/remnant-2__screenshot-5.jpg',
+      '/static/images/games/remnant-2__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'REMNANT II',
@@ -381,7 +396,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/baldurs-gate-3__screenshot-1.jpg',
       '/static/images/games/baldurs-gate-3__screenshot-2.jpg',
-      '/static/images/games/baldurs-gate-3__screenshot-3.jpg'
+      '/static/images/games/baldurs-gate-3__screenshot-3.jpg',
+      '/static/images/games/baldurs-gate-3__screenshot-4.jpg',
+      '/static/images/games/baldurs-gate-3__screenshot-5.jpg',
+      '/static/images/games/baldurs-gate-3__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: "Baldur's Gate 3",
@@ -452,7 +470,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/battlebit-remastered__screenshot-1.jpg',
       '/static/images/games/battlebit-remastered__screenshot-2.jpg',
-      '/static/images/games/battlebit-remastered__screenshot-3.jpg'
+      '/static/images/games/battlebit-remastered__screenshot-3.jpg',
+      '/static/images/games/battlebit-remastered__screenshot-4.jpg',
+      '/static/images/games/battlebit-remastered__screenshot-5.jpg',
+      '/static/images/games/battlebit-remastered__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'BattleBit Remastered',
@@ -522,7 +543,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/terraria__screenshot-1.jpg',
       '/static/images/games/terraria__screenshot-2.jpg',
-      '/static/images/games/terraria__screenshot-3.jpg'
+      '/static/images/games/terraria__screenshot-3.jpg',
+      '/static/images/games/terraria__screenshot-4.jpg',
+      '/static/images/games/terraria__screenshot-5.jpg',
+      '/static/images/games/terraria__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Terraria',
@@ -602,7 +626,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-1.jpg',
       '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-2.jpg',
-      '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-3.jpg'
+      '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-3.jpg',
+      '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-4.jpg',
+      '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-5.jpg',
+      '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__screenshot-6.jpg'
     ],
     slug: 'cyberpunk-2077-prizrachnaya-svoboda',
     isPopular: true,
@@ -651,7 +678,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/garrys-mod__screenshot-1.jpg',
       '/static/images/games/garrys-mod__screenshot-2.jpg',
-      '/static/images/games/garrys-mod__screenshot-3.jpg'
+      '/static/images/games/garrys-mod__screenshot-3.jpg',
+      '/static/images/games/garrys-mod__screenshot-4.jpg',
+      '/static/images/games/garrys-mod__screenshot-5.jpg',
+      '/static/images/games/garrys-mod__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: "Garry's Mod",
@@ -721,7 +751,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/red-dead-redemption-2__screenshot-1.jpg',
       '/static/images/games/red-dead-redemption-2__screenshot-2.jpg',
-      '/static/images/games/red-dead-redemption-2__screenshot-3.jpg'
+      '/static/images/games/red-dead-redemption-2__screenshot-3.jpg',
+      '/static/images/games/red-dead-redemption-2__screenshot-4.jpg',
+      '/static/images/games/red-dead-redemption-2__screenshot-5.jpg',
+      '/static/images/games/red-dead-redemption-2__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Red Dead Redemption 2',
@@ -792,7 +825,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/cyberpunk-2077__screenshot-1.jpg',
       '/static/images/games/cyberpunk-2077__screenshot-2.jpg',
-      '/static/images/games/cyberpunk-2077__screenshot-3.jpg'
+      '/static/images/games/cyberpunk-2077__screenshot-3.jpg',
+      '/static/images/games/cyberpunk-2077__screenshot-4.jpg',
+      '/static/images/games/cyberpunk-2077__screenshot-5.jpg',
+      '/static/images/games/cyberpunk-2077__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Cyberpunk 2077',
@@ -863,7 +899,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/elden-ring__screenshot-1.jpg',
       '/static/images/games/elden-ring__screenshot-2.jpg',
-      '/static/images/games/elden-ring__screenshot-3.jpg'
+      '/static/images/games/elden-ring__screenshot-3.jpg',
+      '/static/images/games/elden-ring__screenshot-4.jpg',
+      '/static/images/games/elden-ring__screenshot-5.jpg',
+      '/static/images/games/elden-ring__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Elden Ring',
@@ -934,7 +973,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/helldivers-2__screenshot-1.jpg',
       '/static/images/games/helldivers-2__screenshot-2.jpg',
-      '/static/images/games/helldivers-2__screenshot-3.jpg'
+      '/static/images/games/helldivers-2__screenshot-3.jpg',
+      '/static/images/games/helldivers-2__screenshot-4.jpg',
+      '/static/images/games/helldivers-2__screenshot-5.jpg',
+      '/static/images/games/helldivers-2__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Helldivers 2',
@@ -1004,7 +1046,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/palworld__screenshot-1.jpg',
       '/static/images/games/palworld__screenshot-2.jpg',
-      '/static/images/games/palworld__screenshot-3.jpg'
+      '/static/images/games/palworld__screenshot-3.jpg',
+      '/static/images/games/palworld__screenshot-4.jpg',
+      '/static/images/games/palworld__screenshot-5.jpg',
+      '/static/images/games/palworld__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Palworld',
@@ -1074,7 +1119,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/black-myth-wukong__screenshot-1.jpg',
       '/static/images/games/black-myth-wukong__screenshot-2.jpg',
-      '/static/images/games/black-myth-wukong__screenshot-3.jpg'
+      '/static/images/games/black-myth-wukong__screenshot-3.jpg',
+      '/static/images/games/black-myth-wukong__screenshot-4.jpg',
+      '/static/images/games/black-myth-wukong__screenshot-5.jpg',
+      '/static/images/games/black-myth-wukong__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Black Myth: Wukong',
@@ -1144,7 +1192,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/hades-2__screenshot-1.jpg',
       '/static/images/games/hades-2__screenshot-2.jpg',
-      '/static/images/games/hades-2__screenshot-3.jpg'
+      '/static/images/games/hades-2__screenshot-3.jpg',
+      '/static/images/games/hades-2__screenshot-4.jpg',
+      '/static/images/games/hades-2__screenshot-5.jpg',
+      '/static/images/games/hades-2__screenshot-6.jpg'
     ],
 
     type: GameType.GAME,
@@ -1215,7 +1266,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/stardew-valley__screenshot-1.jpg',
       '/static/images/games/stardew-valley__screenshot-2.jpg',
-      '/static/images/games/stardew-valley__screenshot-3.jpg'
+      '/static/images/games/stardew-valley__screenshot-3.jpg',
+      '/static/images/games/stardew-valley__screenshot-4.jpg',
+      '/static/images/games/stardew-valley__screenshot-5.jpg',
+      '/static/images/games/stardew-valley__screenshot-6.jpg'
     ],
 
     type: GameType.GAME,
@@ -1286,7 +1340,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/hogwarts-legacy__screenshot-1.jpg',
       '/static/images/games/hogwarts-legacy__screenshot-2.jpg',
-      '/static/images/games/hogwarts-legacy__screenshot-3.jpg'
+      '/static/images/games/hogwarts-legacy__screenshot-3.jpg',
+      '/static/images/games/hogwarts-legacy__screenshot-4.jpg',
+      '/static/images/games/hogwarts-legacy__screenshot-5.jpg',
+      '/static/images/games/hogwarts-legacy__screenshot-6.jpg'
     ],
 
     type: GameType.GAME,
@@ -1358,7 +1415,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/lethal-company__screenshot-1.jpg',
       '/static/images/games/lethal-company__screenshot-2.jpg',
-      '/static/images/games/lethal-company__screenshot-3.jpg'
+      '/static/images/games/lethal-company__screenshot-3.jpg',
+      '/static/images/games/lethal-company__screenshot-4.jpg',
+      '/static/images/games/lethal-company__screenshot-5.jpg',
+      '/static/images/games/lethal-company__screenshot-6.jpg'
     ],
 
     type: GameType.GAME,
@@ -1429,7 +1489,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/the-finals__screenshot-1.jpg',
       '/static/images/games/the-finals__screenshot-2.jpg',
-      '/static/images/games/the-finals__screenshot-3.jpg'
+      '/static/images/games/the-finals__screenshot-3.jpg',
+      '/static/images/games/the-finals__screenshot-4.jpg',
+      '/static/images/games/the-finals__screenshot-5.jpg',
+      '/static/images/games/the-finals__screenshot-6.jpg'
     ],
 
     type: GameType.GAME,
@@ -1500,7 +1563,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/ea-sports-fc-25__screenshot-1.jpg',
       '/static/images/games/ea-sports-fc-25__screenshot-2.jpg',
-      '/static/images/games/ea-sports-fc-25__screenshot-3.jpg'
+      '/static/images/games/ea-sports-fc-25__screenshot-3.jpg',
+      '/static/images/games/ea-sports-fc-25__screenshot-4.jpg',
+      '/static/images/games/ea-sports-fc-25__screenshot-5.jpg',
+      '/static/images/games/ea-sports-fc-25__screenshot-6.jpg'
     ],
 
     type: GameType.GAME,
@@ -1572,7 +1638,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/forza-horizon-5__screenshot-1.jpg',
       '/static/images/games/forza-horizon-5__screenshot-2.jpg',
-      '/static/images/games/forza-horizon-5__screenshot-3.jpg'
+      '/static/images/games/forza-horizon-5__screenshot-3.jpg',
+      '/static/images/games/forza-horizon-5__screenshot-4.jpg',
+      '/static/images/games/forza-horizon-5__screenshot-5.jpg',
+      '/static/images/games/forza-horizon-5__screenshot-6.jpg'
     ],
 
     type: GameType.GAME,
@@ -1644,7 +1713,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/assassins-creed-shadows__screenshot-1.jpg',
       '/static/images/games/assassins-creed-shadows__screenshot-2.jpg',
-      '/static/images/games/assassins-creed-shadows__screenshot-3.jpg'
+      '/static/images/games/assassins-creed-shadows__screenshot-3.jpg',
+      '/static/images/games/assassins-creed-shadows__screenshot-4.jpg',
+      '/static/images/games/assassins-creed-shadows__screenshot-5.jpg',
+      '/static/images/games/assassins-creed-shadows__screenshot-6.jpg'
     ],
 
     isPopular: false,
@@ -1716,7 +1788,10 @@ export const GAMES: Game[] = [
     screenshots: [
       '/static/images/games/gta-6__screenshot-1.jpg',
       '/static/images/games/gta-6__screenshot-2.jpg',
-      '/static/images/games/gta-6__screenshot-3.jpg'
+      '/static/images/games/gta-6__screenshot-3.jpg',
+      '/static/images/games/gta-6__screenshot-4.jpg',
+      '/static/images/games/gta-6__screenshot-5.jpg',
+      '/static/images/games/gta-6__screenshot-6.jpg'
     ],
 
     type: GameType.GAME,
@@ -1787,6 +1862,837 @@ export const GAMES: Game[] = [
         edition: 'Premium',
         price: 5499,
         region: Region.BY
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/counter-strike-2__screenshot-1.jpg',
+      '/static/images/games/counter-strike-2__screenshot-2.jpg',
+      '/static/images/games/counter-strike-2__screenshot-3.jpg',
+      '/static/images/games/counter-strike-2__screenshot-4.jpg',
+      '/static/images/games/counter-strike-2__screenshot-5.jpg',
+      '/static/images/games/counter-strike-2__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Counter-Strike 2',
+    slug: 'counter-strike-2',
+    externalId: '730',
+    releaseDate: 1695772800,
+    genres: [GameGenre.ACTION, GameGenre.SHOOTER],
+    description: 'Командный соревновательный шутер с матчмейкингом, картами и скинами.',
+    image: '/static/images/games/counter-strike-2__header.jpg',
+    developer: 'Valve',
+    publisher: 'Valve',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i5-750',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 970',
+      storage: '85 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i5-8400',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce GTX 1660',
+      storage: '85 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 0,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 0,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 0,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/dota-2__screenshot-1.jpg',
+      '/static/images/games/dota-2__screenshot-2.jpg',
+      '/static/images/games/dota-2__screenshot-3.jpg',
+      '/static/images/games/dota-2__screenshot-4.jpg',
+      '/static/images/games/dota-2__screenshot-5.jpg',
+      '/static/images/games/dota-2__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Dota 2',
+    slug: 'dota-2',
+    externalId: '570',
+    releaseDate: 1373328000,
+    genres: [GameGenre.STRATEGY, GameGenre.ACTION],
+    description: 'Культовая MOBA с героями, командными сражениями и киберспортивной сценой.',
+    image: '/static/images/games/dota-2__header.jpg',
+    developer: 'Valve',
+    publisher: 'Valve',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Dual core 2.8 GHz',
+      memory: '4 GB',
+      graphics: 'NVIDIA GeForce 8600 GT',
+      storage: '60 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i5-8400',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 1050 Ti',
+      storage: '60 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 0,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 0,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 0,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/the-binding-of-isaac-rebirth__screenshot-1.jpg',
+      '/static/images/games/the-binding-of-isaac-rebirth__screenshot-2.jpg',
+      '/static/images/games/the-binding-of-isaac-rebirth__screenshot-3.jpg',
+      '/static/images/games/the-binding-of-isaac-rebirth__screenshot-4.jpg',
+      '/static/images/games/the-binding-of-isaac-rebirth__screenshot-5.jpg',
+      '/static/images/games/the-binding-of-isaac-rebirth__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'The Binding of Isaac: Rebirth',
+    slug: 'the-binding-of-isaac-rebirth',
+    externalId: '250900',
+    releaseDate: 1415059200,
+    genres: [GameGenre.ACTION, GameGenre.INDIE],
+    description: 'Мрачный roguelike с процедурными комнатами, предметами и безумными билдами.',
+    image: '/static/images/games/the-binding-of-isaac-rebirth__header.jpg',
+    developer: 'Nicalis, Inc.',
+    publisher: 'Nicalis, Inc.',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 7',
+      processor: 'Intel Core 2 Duo',
+      memory: '2 GB',
+      graphics: 'Integrated Graphics',
+      storage: '1 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: 'Intel Core i3',
+      memory: '4 GB',
+      graphics: 'Dedicated GPU',
+      storage: '1 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 599,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 499,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 459,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/rust__screenshot-1.jpg',
+      '/static/images/games/rust__screenshot-2.jpg',
+      '/static/images/games/rust__screenshot-3.jpg',
+      '/static/images/games/rust__screenshot-4.jpg',
+      '/static/images/games/rust__screenshot-5.jpg',
+      '/static/images/games/rust__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Rust',
+    slug: 'rust',
+    externalId: '252490',
+    releaseDate: 1518048000,
+    genres: [GameGenre.SURVIVAL, GameGenre.ACTION],
+    description: 'Онлайн-выживание с крафтом, базами, рейдами и постоянной борьбой за ресурсы.',
+    image: '/static/images/games/rust__header.jpg',
+    developer: 'Facepunch Studios',
+    publisher: 'Facepunch Studios',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i7-3770',
+      memory: '10 GB',
+      graphics: 'NVIDIA GeForce GTX 670',
+      storage: '35 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i7-4790K',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce GTX 980',
+      storage: '35 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 1499,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 1299,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 1199,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/factorio__screenshot-1.jpg',
+      '/static/images/games/factorio__screenshot-2.jpg',
+      '/static/images/games/factorio__screenshot-3.jpg',
+      '/static/images/games/factorio__screenshot-4.jpg',
+      '/static/images/games/factorio__screenshot-5.jpg',
+      '/static/images/games/factorio__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Factorio',
+    slug: 'factorio',
+    externalId: '427520',
+    releaseDate: 1597363200,
+    genres: [GameGenre.STRATEGY, GameGenre.SIMULATION],
+    description:
+      'Инженерная песочница про автоматизацию заводов, логистику и бесконечную оптимизацию.',
+    image: '/static/images/games/factorio__header.jpg',
+    developer: 'Wube Software LTD.',
+    publisher: 'Wube Software LTD.',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Dual core 3 GHz',
+      memory: '4 GB',
+      graphics: 'Integrated Graphics',
+      storage: '3 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Quad core 3 GHz',
+      memory: '8 GB',
+      graphics: 'Dedicated GPU',
+      storage: '3 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 1999,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 1799,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 1699,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/hollow-knight__screenshot-1.jpg',
+      '/static/images/games/hollow-knight__screenshot-2.jpg',
+      '/static/images/games/hollow-knight__screenshot-3.jpg',
+      '/static/images/games/hollow-knight__screenshot-4.jpg',
+      '/static/images/games/hollow-knight__screenshot-5.jpg',
+      '/static/images/games/hollow-knight__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Hollow Knight',
+    slug: 'hollow-knight',
+    externalId: '367520',
+    releaseDate: 1487894400,
+    genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.INDIE],
+    description:
+      'Атмосферная метроидвания с исследованием подземного королевства и сложными боссами.',
+    image: '/static/images/games/hollow-knight__header.jpg',
+    developer: 'Team Cherry',
+    publisher: 'Team Cherry',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 7',
+      processor: 'Intel Core 2 Duo E5200',
+      memory: '4 GB',
+      graphics: 'NVIDIA GeForce 9800 GTX',
+      storage: '9 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: 'Intel Core i5',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 560',
+      storage: '9 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 699,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 599,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 549,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/dead-cells__screenshot-1.jpg',
+      '/static/images/games/dead-cells__screenshot-2.jpg',
+      '/static/images/games/dead-cells__screenshot-3.jpg',
+      '/static/images/games/dead-cells__screenshot-4.jpg',
+      '/static/images/games/dead-cells__screenshot-5.jpg',
+      '/static/images/games/dead-cells__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Dead Cells',
+    slug: 'dead-cells',
+    externalId: '588650',
+    releaseDate: 1533600000,
+    genres: [GameGenre.ACTION, GameGenre.INDIE],
+    description: 'Roguelite-метроидвания с быстрыми боями, оружием и постоянной прокачкой навыка.',
+    image: '/static/images/games/dead-cells__header.jpg',
+    developer: 'Motion Twin',
+    publisher: 'Motion Twin',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 7',
+      processor: 'Intel i5',
+      memory: '2 GB',
+      graphics: 'NVIDIA 450 GTS',
+      storage: '1 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: 'Intel i5',
+      memory: '4 GB',
+      graphics: 'NVIDIA GTX 460',
+      storage: '1 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 899,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 799,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 749,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/among-us__screenshot-1.jpg',
+      '/static/images/games/among-us__screenshot-2.jpg',
+      '/static/images/games/among-us__screenshot-3.jpg',
+      '/static/images/games/among-us__screenshot-4.jpg',
+      '/static/images/games/among-us__screenshot-5.jpg',
+      '/static/images/games/among-us__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Among Us',
+    slug: 'among-us',
+    externalId: '945360',
+    releaseDate: 1542326400,
+    genres: [GameGenre.INDIE],
+    description: 'Социальная дедукция про экипаж, предателей и подозрительные аварии на корабле.',
+    image: '/static/images/games/among-us__header.jpg',
+    developer: 'Innersloth',
+    publisher: 'Innersloth',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10',
+      processor: 'Intel Pentium 4',
+      memory: '1 GB',
+      graphics: 'Integrated Graphics',
+      storage: '1 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: 'Intel Core i3',
+      memory: '2 GB',
+      graphics: 'Integrated Graphics',
+      storage: '1 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 199,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 149,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 129,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/valheim__screenshot-1.jpg',
+      '/static/images/games/valheim__screenshot-2.jpg',
+      '/static/images/games/valheim__screenshot-3.jpg',
+      '/static/images/games/valheim__screenshot-4.jpg',
+      '/static/images/games/valheim__screenshot-5.jpg',
+      '/static/images/games/valheim__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Valheim',
+    slug: 'valheim',
+    externalId: '892970',
+    releaseDate: 1612224000,
+    genres: [GameGenre.SURVIVAL, GameGenre.ADVENTURE],
+    description: 'Кооперативное выживание в мире викингов с крафтом, строительством и боссами.',
+    image: '/static/images/games/valheim__header.jpg',
+    developer: 'Iron Gate AB',
+    publisher: 'Coffee Stain Publishing',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: '2.6 GHz Dual Core',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 950',
+      storage: '1 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i5 3 GHz',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce GTX 1060',
+      storage: '1 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 899,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 799,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 749,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/project-zomboid__screenshot-1.jpg',
+      '/static/images/games/project-zomboid__screenshot-2.jpg',
+      '/static/images/games/project-zomboid__screenshot-3.jpg',
+      '/static/images/games/project-zomboid__screenshot-4.jpg',
+      '/static/images/games/project-zomboid__screenshot-5.jpg',
+      '/static/images/games/project-zomboid__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Project Zomboid',
+    slug: 'project-zomboid',
+    externalId: '108600',
+    releaseDate: 1383868800,
+    genres: [GameGenre.SURVIVAL, GameGenre.SIMULATION],
+    description: 'Хардкорная песочница про выживание в зомби-апокалипсисе с глубокой симуляцией.',
+    image: '/static/images/games/project-zomboid__header.jpg',
+    developer: 'The Indie Stone',
+    publisher: 'The Indie Stone',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel 2.77 GHz Quad-core',
+      memory: '8 GB',
+      graphics: 'Dedicated GPU',
+      storage: '5 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i5',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce GTX 970',
+      storage: '5 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 799,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 699,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 649,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/dont-starve-together__screenshot-1.jpg',
+      '/static/images/games/dont-starve-together__screenshot-2.jpg',
+      '/static/images/games/dont-starve-together__screenshot-3.jpg',
+      '/static/images/games/dont-starve-together__screenshot-4.jpg',
+      '/static/images/games/dont-starve-together__screenshot-5.jpg',
+      '/static/images/games/dont-starve-together__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: "Don't Starve Together",
+    slug: 'dont-starve-together',
+    externalId: '322330',
+    releaseDate: 1461196800,
+    genres: [GameGenre.SURVIVAL, GameGenre.INDIE],
+    description:
+      'Кооперативное выживание в странном мире с крафтом, голодом и постоянной опасностью.',
+    image: '/static/images/games/dont-starve-together__header.jpg',
+    developer: 'Klei Entertainment',
+    publisher: 'Klei Entertainment',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 7',
+      processor: '1.7 GHz Dual Core',
+      memory: '1 GB',
+      graphics: 'Radeon HD5450',
+      storage: '3 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: 'Intel Core i3',
+      memory: '4 GB',
+      graphics: 'Dedicated GPU',
+      storage: '3 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 499,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 399,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 349,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/phasmophobia__screenshot-1.jpg',
+      '/static/images/games/phasmophobia__screenshot-2.jpg',
+      '/static/images/games/phasmophobia__screenshot-3.jpg',
+      '/static/images/games/phasmophobia__screenshot-4.jpg',
+      '/static/images/games/phasmophobia__screenshot-5.jpg',
+      '/static/images/games/phasmophobia__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Phasmophobia',
+    slug: 'phasmophobia',
+    externalId: '739630',
+    releaseDate: 1600387200,
+    genres: [GameGenre.HORROR, GameGenre.INDIE],
+    description: 'Кооперативный хоррор про охоту на призраков с уликами, голосом и напряжением.',
+    image: '/static/images/games/phasmophobia__header.jpg',
+    developer: 'Kinetic Games',
+    publisher: 'Kinetic Games',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i5-4590',
+      memory: '8 GB',
+      graphics: 'NVIDIA GTX 970',
+      storage: '21 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i5-10600',
+      memory: '16 GB',
+      graphics: 'NVIDIA RTX 2060',
+      storage: '21 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 699,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 599,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 549,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/hades__screenshot-1.jpg',
+      '/static/images/games/hades__screenshot-2.jpg',
+      '/static/images/games/hades__screenshot-3.jpg',
+      '/static/images/games/hades__screenshot-4.jpg',
+      '/static/images/games/hades__screenshot-5.jpg',
+      '/static/images/games/hades__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Hades',
+    slug: 'hades',
+    externalId: '1145360',
+    releaseDate: 1600300800,
+    genres: [GameGenre.ACTION, GameGenre.INDIE, GameGenre.RPG],
+    description:
+      'Динамичный roguelike про побег из подземного царства с сильным сюжетом и боевой системой.',
+    image: '/static/images/games/hades__header.jpg',
+    developer: 'Supergiant Games',
+    publisher: 'Supergiant Games',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 7',
+      processor: 'Dual Core 2.4 GHz',
+      memory: '4 GB',
+      graphics: 'Intel HD 5000',
+      storage: '15 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: 'Dual Core 3.0 GHz',
+      memory: '8 GB',
+      graphics: 'NVIDIA GTX 750',
+      storage: '15 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 999,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 899,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 849,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/slay-the-spire__screenshot-1.jpg',
+      '/static/images/games/slay-the-spire__screenshot-2.jpg',
+      '/static/images/games/slay-the-spire__screenshot-3.jpg',
+      '/static/images/games/slay-the-spire__screenshot-4.jpg',
+      '/static/images/games/slay-the-spire__screenshot-5.jpg',
+      '/static/images/games/slay-the-spire__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Slay the Spire',
+    slug: 'slay-the-spire',
+    externalId: '646570',
+    releaseDate: 1548201600,
+    genres: [GameGenre.STRATEGY, GameGenre.INDIE],
+    description:
+      'Карточный roguelike с построением колоды, маршрутами и постоянным поиском синергий.',
+    image: '/static/images/games/slay-the-spire__header.jpg',
+    developer: 'Mega Crit',
+    publisher: 'Mega Crit',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows XP/Vista/7/8/10',
+      processor: '2.0 GHz',
+      memory: '1 GB',
+      graphics: '1 GB Video Memory',
+      storage: '1 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: '2.0 GHz',
+      memory: '2 GB',
+      graphics: '1 GB Video Memory',
+      storage: '1 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 799,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 699,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 649,
+        region: Region.KZ
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/portal-2__screenshot-1.jpg',
+      '/static/images/games/portal-2__screenshot-2.jpg',
+      '/static/images/games/portal-2__screenshot-3.jpg',
+      '/static/images/games/portal-2__screenshot-4.jpg',
+      '/static/images/games/portal-2__screenshot-5.jpg',
+      '/static/images/games/portal-2__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Portal 2',
+    slug: 'portal-2',
+    externalId: '620',
+    releaseDate: 1303084800,
+    genres: [GameGenre.ACTION, GameGenre.ADVENTURE],
+    description:
+      'Головоломка от Valve про порталы, физику, кооператив и саркастичный искусственный интеллект.',
+    image: '/static/images/games/portal-2__header.jpg',
+    developer: 'Valve',
+    publisher: 'Valve',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 7',
+      processor: 'Dual Core 2.0 GHz',
+      memory: '2 GB',
+      graphics: 'DirectX 9 compatible',
+      storage: '8 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: 'Intel Core i3',
+      memory: '4 GB',
+      graphics: 'NVIDIA GeForce GTX 650',
+      storage: '8 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 399,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 299,
+        region: Region.RU
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Standard',
+        price: 249,
+        region: Region.KZ
       }
     ]
   }
