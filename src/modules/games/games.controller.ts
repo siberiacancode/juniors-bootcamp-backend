@@ -28,21 +28,21 @@ import { AuthService, BaseResolver } from '@/utils/services';
 import { DeliveryType, GameFilter, GameGenre, GameView, Region } from './constants';
 import {
   CreateGameOrderDto,
-  GetEditionsDto,
   GetGameDto,
   GetGameOrderDto,
   GetGamesDto,
+  GetPriceVariantsDto,
   GetRegionsDto,
   SearchGamesDto
 } from './dto';
 import {
   CreateGameOrderResponse,
-  EditionsResponse,
   GameOrderResponse,
   GameOrdersResponse,
   GameResponse,
   GameSearchResponse,
   GamesPaginatedResponse,
+  PriceVariantsResponse,
   RegionsResponse
 } from './games.model';
 import { GamesService } from './games.service';
@@ -127,7 +127,7 @@ export class GamesController extends BaseResolver {
   }
 
   @Get('/regions')
-  @ApiOperation({ summary: 'Получить регионы для способа получения' })
+  @ApiOperation({ summary: 'Получить регионы' })
   @ApiResponse({ status: 200, type: RegionsResponse })
   @ApiQuery({
     name: 'slug',
@@ -153,9 +153,9 @@ export class GamesController extends BaseResolver {
     return this.wrapSuccess({ regions });
   }
 
-  @Get('/editions')
-  @ApiOperation({ summary: 'Получить издания для региона' })
-  @ApiResponse({ status: 200, type: EditionsResponse })
+  @Get('/price-variants')
+  @ApiOperation({ summary: 'Получить варианты цен' })
+  @ApiResponse({ status: 200, type: PriceVariantsResponse })
   @ApiQuery({
     name: 'slug',
     required: true,
@@ -178,14 +178,14 @@ export class GamesController extends BaseResolver {
     enumName: 'Region',
     description: 'Регион'
   })
-  getEditions(@Query() getEditionsDto: GetEditionsDto): EditionsResponse {
-    const editions = this.gamesService.getEditions(getEditionsDto);
+  getPriceVariants(@Query() getPriceVariantsDto: GetPriceVariantsDto): PriceVariantsResponse {
+    const priceVariants = this.gamesService.getPriceVariant(getPriceVariantsDto);
 
-    if (!editions) {
-      throw new NotFoundException(this.wrapFail('Издания не найдены'));
+    if (!priceVariants) {
+      throw new NotFoundException(this.wrapFail('Варианты не найдены'));
     }
 
-    return this.wrapSuccess({ editions });
+    return this.wrapSuccess({ priceVariants });
   }
 
   @Post('/order')

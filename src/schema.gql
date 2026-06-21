@@ -493,12 +493,6 @@ enum Dough {
   THIN
 }
 
-type EditionsResponse {
-  editions: [String!]!
-  reason: String
-  success: Boolean!
-}
-
 type Film {
   actors: [FilmStaff!]!
   ageRating: Rating!
@@ -984,6 +978,12 @@ type PriceVariant {
   region: Region!
 }
 
+type PriceVariantsResponse {
+  priceVariants: [PriceVariant!]!
+  reason: String
+  success: Boolean!
+}
+
 enum Profession {
   ACTOR
   DIRECTOR
@@ -1017,7 +1017,7 @@ type Query {
   getDeliveryOrders: DeliveryOrdersResponse!
   getDeliveryPackageTypes: DeliveryPackageTypesResponse!
   getDeliveryPoints: DeliveryPointsResponse!
-  getEditions(deliveryType: DeliveryType!, region: Region!, slug: String!): EditionsResponse!
+  getEditions(deliveryType: DeliveryType!, region: Region!, slug: String!): PriceVariantsResponse!
   getFilm(filmId: String!): FilmResponse!
   getFilmSchedule(filmId: String!): ScheduleResponse!
   getGame(slug: String!): GameResponse!

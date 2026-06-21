@@ -5,7 +5,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { DeliveryType, Region } from '../constants';
 
 @ArgsType()
-export class GetEditionsDto {
+export class GetPriceVariantsDto {
   @IsString()
   @IsNotEmpty()
   @Field(() => String)

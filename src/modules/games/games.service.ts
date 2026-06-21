@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { GameFilter, GAMES, GameType, GameView } from './constants';
-import { GetEditionsDto, GetGamesDto, GetRegionsDto, SearchGamesDto } from './dto';
+import { GetGamesDto, GetPriceVariantsDto, GetRegionsDto, SearchGamesDto } from './dto';
 import { DetailedGame, FilteredGame, GamesPaginationMeta } from './entities';
 
 interface GetPaginationParams<Item> {
@@ -153,16 +153,13 @@ export class GamesService {
       .map((variant) => variant.region);
   }
 
-  getEditions(dto: GetEditionsDto) {
+  getPriceVariant(dto: GetPriceVariantsDto) {
     const game = this.findGame(dto.slug);
 
     if (!game) return undefined;
-
-    return game.priceVariants
-      .filter(
-        (variant) => variant.deliveryType === dto.deliveryType && variant.region === dto.region
-      )
-      .map((variant) => variant.edition);
+    return game.priceVariants.filter(
+      (variant) => variant.deliveryType === dto.deliveryType && variant.region === dto.region
+    );
   }
 
   getPagination<Item>({
