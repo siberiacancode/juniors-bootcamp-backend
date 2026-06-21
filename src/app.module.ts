@@ -16,6 +16,7 @@ import { DeliveryModule } from '@/modules/delivery/delivery.module';
 import { GamesModule } from '@/modules/games/games.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
 import { PizzaModule } from '@/modules/pizza/pizza.module';
+import { TesterModule } from '@/modules/tester';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
@@ -64,6 +65,7 @@ import { withBaseUrl } from './utils/helpers';
     CarsModule,
     GamesModule,
     PizzaModule,
+    TesterModule,
     CronModule
   ],
   providers: []

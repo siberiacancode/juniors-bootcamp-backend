@@ -2695,5 +2695,622 @@ export const GAMES: Game[] = [
         region: Region.KZ
       }
     ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/diablo-iv__screenshot-1.jpg',
+      '/static/images/games/diablo-iv__screenshot-2.jpg',
+      '/static/images/games/diablo-iv__screenshot-3.jpg',
+      '/static/images/games/diablo-iv__screenshot-4.jpg',
+      '/static/images/games/diablo-iv__screenshot-5.jpg',
+      '/static/images/games/diablo-iv__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Diablo IV',
+    slug: 'diablo-iv',
+    externalId: '2344520',
+    releaseDate: 1686009600,
+    genres: [GameGenre.ACTION, GameGenre.RPG],
+    description: 'Мрачная action-RPG про Санктуарий, демонов, лут и сезонные активности.',
+    image: '/static/images/games/diablo-iv__header.jpg',
+    developer: 'Blizzard Entertainment',
+    publisher: 'Blizzard Entertainment',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i5-2500K',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 660',
+      storage: '90 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11 64-bit',
+      processor: 'Intel Core i5-4670K',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce GTX 970',
+      storage: '90 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 3634,
+        oldPrice: 3907,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 4299,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 3499, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/gothic-1-remake__screenshot-1.jpg',
+      '/static/images/games/gothic-1-remake__screenshot-2.jpg',
+      '/static/images/games/gothic-1-remake__screenshot-3.jpg',
+      '/static/images/games/gothic-1-remake__screenshot-4.jpg',
+      '/static/images/games/gothic-1-remake__screenshot-5.jpg',
+      '/static/images/games/gothic-1-remake__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Gothic 1 Remake',
+    slug: 'gothic-1-remake',
+    externalId: '1297900',
+    releaseDate: 1780617600,
+    genres: [GameGenre.RPG, GameGenre.ADVENTURE],
+    description: 'Возвращение в Долину Рудников в современном ремейке классической RPG.',
+    image: '/static/images/games/gothic-1-remake__header.jpg',
+    developer: 'Alkimia Interactive',
+    publisher: 'THQ Nordic',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i5-8400',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce GTX 1060',
+      storage: '50 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i7-10700K',
+      memory: '32 GB',
+      graphics: 'NVIDIA GeForce RTX 2070',
+      storage: '50 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 2959,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 3999,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 2799, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/days-gone__screenshot-1.jpg',
+      '/static/images/games/days-gone__screenshot-2.jpg',
+      '/static/images/games/days-gone__screenshot-3.jpg',
+      '/static/images/games/days-gone__screenshot-4.jpg',
+      '/static/images/games/days-gone__screenshot-5.jpg',
+      '/static/images/games/days-gone__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Days Gone',
+    slug: 'days-gone',
+    externalId: '1259420',
+    releaseDate: 1621296000,
+    genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.SURVIVAL],
+    description: 'Постапокалиптический open-world экшен про байкера и выживание среди фрикеров.',
+    image: '/static/images/games/days-gone__header.jpg',
+    developer: 'Bend Studio',
+    publisher: 'PlayStation Publishing LLC',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i5-2500K',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 780',
+      storage: '70 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11 64-bit',
+      processor: 'Intel Core i7-4770K',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce GTX 1060',
+      storage: '70 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 1550,
+        oldPrice: 2540,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 2199,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 1499, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/cult-of-the-lamb__screenshot-1.jpg',
+      '/static/images/games/cult-of-the-lamb__screenshot-2.jpg',
+      '/static/images/games/cult-of-the-lamb__screenshot-3.jpg',
+      '/static/images/games/cult-of-the-lamb__screenshot-4.jpg',
+      '/static/images/games/cult-of-the-lamb__screenshot-5.jpg',
+      '/static/images/games/cult-of-the-lamb__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Cult of the Lamb',
+    slug: 'cult-of-the-lamb',
+    externalId: '1313140',
+    releaseDate: 1660176000,
+    genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.INDIE, GameGenre.STRATEGY],
+    description: 'Милый и мрачный roguelite про культ, последователей и походы за ресурсами.',
+    image: '/static/images/games/cult-of-the-lamb__header.jpg',
+    developer: 'Massive Monster',
+    publisher: 'Devolver Digital',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i3-3240',
+      memory: '4 GB',
+      graphics: 'NVIDIA GeForce GTX 560 Ti',
+      storage: '4 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11 64-bit',
+      processor: 'Intel Core i5-3470',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 1050',
+      storage: '4 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 842,
+        oldPrice: 2405,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 1299,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 799, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/skyrim-special-edition__screenshot-1.jpg',
+      '/static/images/games/skyrim-special-edition__screenshot-2.jpg',
+      '/static/images/games/skyrim-special-edition__screenshot-3.jpg',
+      '/static/images/games/skyrim-special-edition__screenshot-4.jpg',
+      '/static/images/games/skyrim-special-edition__screenshot-5.jpg',
+      '/static/images/games/skyrim-special-edition__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'The Elder Scrolls V: Skyrim Special Edition',
+    slug: 'skyrim-special-edition',
+    externalId: '489830',
+    releaseDate: 1477612800,
+    genres: [GameGenre.RPG, GameGenre.ADVENTURE],
+    description: 'Классическая RPG в открытом мире с драконами, фракциями и свободой прохождения.',
+    image: '/static/images/games/skyrim-special-edition__header.jpg',
+    developer: 'Bethesda Game Studios',
+    publisher: 'Bethesda Softworks',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 7/8.1/10 64-bit',
+      processor: 'Intel Core i5-750',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 470',
+      storage: '12 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11 64-bit',
+      processor: 'Intel Core i5-2400',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 780',
+      storage: '12 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Special Edition',
+        price: 629,
+        oldPrice: 1103,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Anniversary Edition',
+        price: 1499,
+        region: Region.EUROPE
+      },
+      {
+        deliveryType: DeliveryType.STEAM_GIFT,
+        edition: 'Special Edition',
+        price: 599,
+        region: Region.RU
+      }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/resident-evil-requiem__screenshot-1.jpg',
+      '/static/images/games/resident-evil-requiem__screenshot-2.jpg',
+      '/static/images/games/resident-evil-requiem__screenshot-3.jpg',
+      '/static/images/games/resident-evil-requiem__screenshot-4.jpg',
+      '/static/images/games/resident-evil-requiem__screenshot-5.jpg',
+      '/static/images/games/resident-evil-requiem__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Resident Evil Requiem',
+    slug: 'resident-evil-requiem',
+    externalId: '3764200',
+    releaseDate: 1771545600,
+    genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.HORROR],
+    description:
+      'Новая часть Resident Evil с мрачным survival horror и кинематографичным напряжением.',
+    image: '/static/images/games/resident-evil-requiem__header.jpg',
+    developer: 'CAPCOM Co., Ltd.',
+    publisher: 'CAPCOM Co., Ltd.',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i7-8700',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce GTX 1070',
+      storage: '70 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i7-10700K',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce RTX 2070',
+      storage: '70 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 3132,
+        oldPrice: 4067,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 4299,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 2999, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/arc-raiders__screenshot-1.jpg',
+      '/static/images/games/arc-raiders__screenshot-2.jpg',
+      '/static/images/games/arc-raiders__screenshot-3.jpg',
+      '/static/images/games/arc-raiders__screenshot-4.jpg',
+      '/static/images/games/arc-raiders__screenshot-5.jpg',
+      '/static/images/games/arc-raiders__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'ARC Raiders',
+    slug: 'arc-raiders',
+    externalId: '1808500',
+    releaseDate: 1761782400,
+    genres: [GameGenre.ACTION, GameGenre.SHOOTER, GameGenre.ADVENTURE],
+    description:
+      'Мультиплеерный extraction adventure про вылазки на опасную поверхность и сражения с ARC.',
+    image: '/static/images/games/arc-raiders__header.jpg',
+    developer: 'Embark Studios',
+    publisher: 'Embark Studios',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i5-6600K',
+      memory: '12 GB',
+      graphics: 'NVIDIA GeForce GTX 970',
+      storage: '50 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i7-9700K',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce RTX 2070',
+      storage: '50 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 2220,
+        oldPrice: 3699,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 3299,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 1999, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/max-payne__screenshot-1.jpg',
+      '/static/images/games/max-payne__screenshot-2.jpg',
+      '/static/images/games/max-payne__screenshot-3.jpg',
+      '/static/images/games/max-payne__screenshot-4.jpg',
+      '/static/images/games/max-payne__screenshot-5.jpg',
+      '/static/images/games/max-payne__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Max Payne',
+    slug: 'max-payne',
+    externalId: '12140',
+    releaseDate: 996624000,
+    genres: [GameGenre.ACTION, GameGenre.SHOOTER],
+    description: 'Культовый нуарный шутер с bullet time, мрачной историей и атмосферой Нью-Йорка.',
+    image: '/static/images/games/max-payne__header.jpg',
+    developer: 'Remedy Entertainment',
+    publisher: 'Rockstar Games',
+    isPopular: false,
+    minimumSystemRequirements: {
+      oc: 'Windows 7/10',
+      processor: 'Intel Pentium III',
+      memory: '512 MB',
+      graphics: 'DirectX-compatible GPU',
+      storage: '1 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11',
+      processor: 'Intel Core 2 Duo',
+      memory: '2 GB',
+      graphics: 'NVIDIA GeForce 8600',
+      storage: '1 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 288,
+        oldPrice: 862,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Bundle',
+        price: 499,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Classic', price: 399, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/half-life-alyx__screenshot-1.jpg',
+      '/static/images/games/half-life-alyx__screenshot-2.jpg',
+      '/static/images/games/half-life-alyx__screenshot-3.jpg',
+      '/static/images/games/half-life-alyx__screenshot-4.jpg',
+      '/static/images/games/half-life-alyx__screenshot-5.jpg',
+      '/static/images/games/half-life-alyx__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Half-Life: Alyx',
+    slug: 'half-life-alyx',
+    externalId: '546560',
+    releaseDate: 1584921600,
+    genres: [GameGenre.ACTION, GameGenre.SHOOTER, GameGenre.ADVENTURE],
+    description: 'VR-возвращение Half-Life с физикой, исследованием и борьбой против Альянса.',
+    image: '/static/images/games/half-life-alyx__header.jpg',
+    developer: 'Valve',
+    publisher: 'Valve',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i5-7500',
+      memory: '12 GB',
+      graphics: 'NVIDIA GeForce GTX 1060',
+      storage: '70 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11 64-bit',
+      processor: 'Intel Core i7-9700K',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce RTX 2070',
+      storage: '70 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 2413,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'VR Bundle',
+        price: 3499,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 2299, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/witchfire__screenshot-1.jpg',
+      '/static/images/games/witchfire__screenshot-2.jpg',
+      '/static/images/games/witchfire__screenshot-3.jpg',
+      '/static/images/games/witchfire__screenshot-4.jpg',
+      '/static/images/games/witchfire__screenshot-5.jpg',
+      '/static/images/games/witchfire__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'Witchfire',
+    slug: 'witchfire',
+    externalId: '3156770',
+    releaseDate: 1727049600,
+    genres: [GameGenre.ACTION, GameGenre.SHOOTER, GameGenre.RPG],
+    description:
+      'Тёмный фэнтези-шутер от первого лица с охотой на ведьм, магией и опасными вылазками.',
+    image: '/static/images/games/witchfire__header.jpg',
+    developer: 'The Astronauts',
+    publisher: 'The Astronauts',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i5-6600K',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 970',
+      storage: '40 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i7-9700K',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce RTX 2070',
+      storage: '40 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 1827,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 2499,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 1699, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/dark-souls-3__screenshot-1.jpg',
+      '/static/images/games/dark-souls-3__screenshot-2.jpg',
+      '/static/images/games/dark-souls-3__screenshot-3.jpg',
+      '/static/images/games/dark-souls-3__screenshot-4.jpg',
+      '/static/images/games/dark-souls-3__screenshot-5.jpg',
+      '/static/images/games/dark-souls-3__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'DARK SOULS III',
+    slug: 'dark-souls-3',
+    externalId: '374320',
+    releaseDate: 1460332800,
+    genres: [GameGenre.ACTION, GameGenre.RPG],
+    description: 'Мрачный soulslike с напряжёнными боями, боссами и исследованием гибнущего мира.',
+    image: '/static/images/games/dark-souls-3__header.jpg',
+    developer: 'FromSoftware, Inc.',
+    publisher: 'Bandai Namco Entertainment',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 7/8.1/10 64-bit',
+      processor: 'Intel Core i3-2100',
+      memory: '4 GB',
+      graphics: 'NVIDIA GeForce GTX 750 Ti',
+      storage: '25 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 10/11 64-bit',
+      processor: 'Intel Core i7-3770',
+      memory: '8 GB',
+      graphics: 'NVIDIA GeForce GTX 970',
+      storage: '25 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 2477,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 3499,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 2299, region: Region.RU }
+    ]
+  },
+  {
+    screenshots: [
+      '/static/images/games/doom-the-dark-ages__screenshot-1.jpg',
+      '/static/images/games/doom-the-dark-ages__screenshot-2.jpg',
+      '/static/images/games/doom-the-dark-ages__screenshot-3.jpg',
+      '/static/images/games/doom-the-dark-ages__screenshot-4.jpg',
+      '/static/images/games/doom-the-dark-ages__screenshot-5.jpg',
+      '/static/images/games/doom-the-dark-ages__screenshot-6.jpg'
+    ],
+    type: GameType.GAME,
+    name: 'DOOM: The Dark Ages',
+    slug: 'doom-the-dark-ages',
+    externalId: '3017860',
+    releaseDate: 1747267200,
+    genres: [GameGenre.ACTION, GameGenre.SHOOTER],
+    description:
+      'Средневековый приквел DOOM с тяжёлым оружием, демонами и новым образом Палача Рока.',
+    image: '/static/images/games/doom-the-dark-ages__header.jpg',
+    developer: 'id Software',
+    publisher: 'Bethesda Softworks',
+    isPopular: true,
+    minimumSystemRequirements: {
+      oc: 'Windows 10 64-bit',
+      processor: 'Intel Core i7-10700K',
+      memory: '16 GB',
+      graphics: 'NVIDIA GeForce RTX 2060',
+      storage: '100 GB'
+    },
+    recommendedSystemRequirements: {
+      oc: 'Windows 11 64-bit',
+      processor: 'Intel Core i7-12700K',
+      memory: '32 GB',
+      graphics: 'NVIDIA GeForce RTX 3080',
+      storage: '100 GB'
+    },
+    priceVariants: [
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Standard',
+        price: 1758,
+        oldPrice: 2197,
+        region: Region.ALL_WORLD
+      },
+      {
+        deliveryType: DeliveryType.STEAM_KEY,
+        edition: 'Deluxe',
+        price: 2999,
+        region: Region.EUROPE
+      },
+      { deliveryType: DeliveryType.STEAM_GIFT, edition: 'Standard', price: 1699, region: Region.RU }
+    ]
   }
 ];

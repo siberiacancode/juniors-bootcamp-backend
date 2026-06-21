@@ -13,6 +13,7 @@ import { DeliveryModule } from '@/modules/delivery/delivery.module';
 import { GamesModule } from '@/modules/games/games.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
 import { PizzaModule } from '@/modules/pizza/pizza.module';
+import { TesterModule } from '@/modules/tester';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppModule } from './app.module';
@@ -86,7 +87,8 @@ async function bootstrap() {
     { name: 'cinema', module: CinemaModule },
     { name: 'delivery', module: DeliveryModule },
     { name: 'games', module: GamesModule },
-    { name: 'pizza', module: PizzaModule }
+    { name: 'pizza', module: PizzaModule },
+    { name: 'tester', module: TesterModule }
   ] as const;
 
   const restConfig = new DocumentBuilder()
