@@ -13,10 +13,10 @@ import { DeliveryModule } from '@/modules/delivery/delivery.module';
 import { GamesModule } from '@/modules/games/games.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
 import { PizzaModule } from '@/modules/pizza/pizza.module';
-import { TesterModule } from '@/modules/tester';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppModule } from './app.module';
+import { TesterModule } from './modules/tester';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
 
 const register = new client.Registry();
@@ -82,13 +82,45 @@ async function bootstrap() {
     res.end(await register.metrics());
   });
 
+  const restTesterConfig = new DocumentBuilder()
+    .setTitle('juniors bootcamp backend 🧪')
+    .setDescription('Апи для задания по тестированию')
+    .setVersion('1.0')
+    .addServer(process.env.SERVER_URL)
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT'
+    })
+    .build();
+
+  const testerDocument = SwaggerModule.createDocument(app, restTesterConfig, {
+    include: [TesterModule]
+  });
+
+  app.use(withBaseUrl(`/rest/tester.json`), (_req, res) => {
+    res.json(testerDocument);
+  });
+
+  app.use(
+    withBaseUrl(`/rest/tester`),
+    apiReference({
+      content: testerDocument,
+      agent: {
+        disabled: true
+      },
+      mcp: {
+        disabled: true
+      }
+    })
+  );
+
   const moduleDocs = [
     { name: 'cars', module: CarsModule },
     { name: 'cinema', module: CinemaModule },
     { name: 'delivery', module: DeliveryModule },
     { name: 'games', module: GamesModule },
-    { name: 'pizza', module: PizzaModule },
-    { name: 'tester', module: TesterModule }
+    { name: 'pizza', module: PizzaModule }
   ] as const;
 
   const restConfig = new DocumentBuilder()
@@ -127,7 +159,9 @@ async function bootstrap() {
     );
   }
 
-  const document = SwaggerModule.createDocument(app, restConfig);
+  const document = SwaggerModule.createDocument(app, restConfig, {
+    include: [UsersModule, OtpsModule, ...moduleDocs.map((moduleDoc) => moduleDoc.module)]
+  });
   app.use(withBaseUrl('/rest.json'), (_req, res) => {
     res.json(document);
   });
