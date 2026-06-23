@@ -13,10 +13,10 @@ import { DeliveryModule } from '@/modules/delivery/delivery.module';
 import { GamesModule } from '@/modules/games/games.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
 import { PizzaModule } from '@/modules/pizza/pizza.module';
+import { TesterModule } from '@/modules/tester/tester.module';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppModule } from './app.module';
-import { TesterModule } from './modules/tester';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
 
 const register = new client.Registry();
