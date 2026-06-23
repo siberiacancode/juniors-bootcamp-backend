@@ -36,7 +36,8 @@ export const GAMES: Game[] = [
     externalId: '1517290',
     releaseDate: 1637280000,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
-    description: 'Масштабный мультиплеерный шутер с современными картами и техникой.',
+    description:
+      'РњР°СЃС€С‚Р°Р±РЅС‹Р№ РјСѓР»СЊС‚РёРїР»РµРµСЂРЅС‹Р№ С€СѓС‚РµСЂ СЃ СЃРѕРІСЂРµРјРµРЅРЅС‹РјРё РєР°СЂС‚Р°РјРё Рё С‚РµС…РЅРёРєРѕР№.',
     image: '/static/images/games/battlefield-2042__header.jpg',
     isPopular: true,
     developer: 'EA DICE',
@@ -102,8 +103,7 @@ export const GAMES: Game[] = [
       '/static/images/games/titanfall-2__screenshot-2.jpg',
       '/static/images/games/titanfall-2__screenshot-3.jpg',
       '/static/images/games/titanfall-2__screenshot-4.jpg',
-      '/static/images/games/titanfall-2__screenshot-5.jpg',
-      '/static/images/games/titanfall-2__screenshot-6.jpg'
+      '/static/images/games/titanfall-2__screenshot-5.jpg'
     ],
     type: GameType.GAME,
     name: 'Titanfall 2',
@@ -111,7 +111,8 @@ export const GAMES: Game[] = [
     externalId: '1237970',
     releaseDate: 1477612800,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
-    description: 'Динамичный sci-fi шутер с паркуром и боями титанов.',
+    description:
+      'Р”РёРЅР°РјРёС‡РЅС‹Р№ sci-fi С€СѓС‚РµСЂ СЃ РїР°СЂРєСѓСЂРѕРј Рё Р±РѕСЏРјРё С‚РёС‚Р°РЅРѕРІ.',
     image: '/static/images/games/titanfall-2__header.jpg',
     developer: 'Respawn Entertainment',
     publisher: 'Electronic Arts',
@@ -185,7 +186,8 @@ export const GAMES: Game[] = [
     externalId: '1172620',
     releaseDate: 1521504000,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE],
-    description: 'Кооперативное пиратское приключение в открытом мире.',
+    description:
+      'РљРѕРѕРїРµСЂР°С‚РёРІРЅРѕРµ РїРёСЂР°С‚СЃРєРѕРµ РїСЂРёРєР»СЋС‡РµРЅРёРµ РІ РѕС‚РєСЂС‹С‚РѕРј РјРёСЂРµ.',
     image: '/static/images/games/sea-of-thieves__header.jpg',
     developer: 'Rare',
     publisher: 'Microsoft',
@@ -259,7 +261,8 @@ export const GAMES: Game[] = [
     externalId: '1971870',
     releaseDate: 1695081600,
     genres: [GameGenre.ACTION],
-    description: 'Файтинг с обновленной вселенной и зрелищными добиваниями.',
+    description:
+      'Р¤Р°Р№С‚РёРЅРі СЃ РѕР±РЅРѕРІР»РµРЅРЅРѕР№ РІСЃРµР»РµРЅРЅРѕР№ Рё Р·СЂРµР»РёС‰РЅС‹РјРё РґРѕР±РёРІР°РЅРёСЏРјРё.',
     image: '/static/images/games/mortal-kombat-1__header.jpg',
     developer: 'NetherRealm Studios',
     publisher: 'Warner Bros. Games',
@@ -333,7 +336,8 @@ export const GAMES: Game[] = [
     externalId: '1282100',
     releaseDate: 1690243200,
     genres: [GameGenre.ACTION, GameGenre.RPG, GameGenre.SHOOTER],
-    description: 'Кооперативный экшен-RPG с процедурной генерацией миров.',
+    description:
+      'РљРѕРѕРїРµСЂР°С‚РёРІРЅС‹Р№ СЌРєС€РµРЅ-RPG СЃ РїСЂРѕС†РµРґСѓСЂРЅРѕР№ РіРµРЅРµСЂР°С†РёРµР№ РјРёСЂРѕРІ.',
     image: '/static/images/games/remnant-2__header.jpg',
     developer: 'Gunfire Games',
     publisher: 'Gunfire Games',
@@ -407,7 +411,8 @@ export const GAMES: Game[] = [
     externalId: '1086940',
     releaseDate: 1691020800,
     genres: [GameGenre.RPG, GameGenre.STRATEGY, GameGenre.ADVENTURE],
-    description: 'Партийная RPG с глубоким сюжетом и пошаговыми боями.',
+    description:
+      'РџР°СЂС‚РёР№РЅР°СЏ RPG СЃ РіР»СѓР±РѕРєРёРј СЃСЋР¶РµС‚РѕРј Рё РїРѕС€Р°РіРѕРІС‹РјРё Р±РѕСЏРјРё.',
     image: '/static/images/games/baldurs-gate-3__header.jpg',
     developer: 'Larian Studios',
     publisher: 'Larian Studios',
@@ -481,7 +486,7 @@ export const GAMES: Game[] = [
     externalId: '671860',
     releaseDate: 1686787200,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
-    description: 'Массовые PvP-сражения в low-poly стилистике.',
+    description: 'РњР°СЃСЃРѕРІС‹Рµ PvP-СЃСЂР°Р¶РµРЅРёСЏ РІ low-poly СЃС‚РёР»РёСЃС‚РёРєРµ.',
     image: '/static/images/games/battlebit-remastered__header.jpg',
     developer: 'StickyBomb Studio',
     publisher: 'StickyBomb Studio',
@@ -554,7 +559,8 @@ export const GAMES: Game[] = [
     externalId: '105600',
     releaseDate: 1305504000,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.INDIE, GameGenre.SURVIVAL],
-    description: 'Песочница с исследованием, строительством и боссами.',
+    description:
+      'РџРµСЃРѕС‡РЅРёС†Р° СЃ РёСЃСЃР»РµРґРѕРІР°РЅРёРµРј, СЃС‚СЂРѕРёС‚РµР»СЊСЃС‚РІРѕРј Рё Р±РѕСЃСЃР°РјРё.',
     image: '/static/images/games/terraria__header.jpg',
     developer: 'Re-Logic',
     publisher: '505 Games',
@@ -615,8 +621,9 @@ export const GAMES: Game[] = [
   },
   {
     type: GameType.DLC,
-    name: 'Cyberpunk 2077: Призрачная свобода',
-    description: '«Призрачная свобода» — это дополнение, добавляющее элементы шпионского триллера.',
+    name: 'Cyberpunk 2077: РџСЂРёР·СЂР°С‡РЅР°СЏ СЃРІРѕР±РѕРґР°',
+    description:
+      'В«РџСЂРёР·СЂР°С‡РЅР°СЏ СЃРІРѕР±РѕРґР°В» вЂ” СЌС‚Рѕ РґРѕРїРѕР»РЅРµРЅРёРµ, РґРѕР±Р°РІР»СЏСЋС‰РµРµ СЌР»РµРјРµРЅС‚С‹ С€РїРёРѕРЅСЃРєРѕРіРѕ С‚СЂРёР»Р»РµСЂР°.',
     developer: 'CD PROJEKT RED',
     publisher: 'CD PROJEKT RED',
     image: '/static/images/games/cyberpunk-2077-prizrachnaya-svoboda__header.jpg',
@@ -689,7 +696,8 @@ export const GAMES: Game[] = [
     externalId: '4000',
     releaseDate: 1164758400,
     genres: [GameGenre.INDIE, GameGenre.SIMULATION],
-    description: 'Песочница на Source для пользовательских режимов и модов.',
+    description:
+      'РџРµСЃРѕС‡РЅРёС†Р° РЅР° Source РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёС… СЂРµР¶РёРјРѕРІ Рё РјРѕРґРѕРІ.',
     image: '/static/images/games/garrys-mod__header.jpg',
     developer: 'Facepunch Studios',
     publisher: 'Facepunch Studios',
@@ -753,8 +761,7 @@ export const GAMES: Game[] = [
       '/static/images/games/red-dead-redemption-2__screenshot-2.jpg',
       '/static/images/games/red-dead-redemption-2__screenshot-3.jpg',
       '/static/images/games/red-dead-redemption-2__screenshot-4.jpg',
-      '/static/images/games/red-dead-redemption-2__screenshot-5.jpg',
-      '/static/images/games/red-dead-redemption-2__screenshot-6.jpg'
+      '/static/images/games/red-dead-redemption-2__screenshot-5.jpg'
     ],
     type: GameType.GAME,
     name: 'Red Dead Redemption 2',
@@ -762,7 +769,8 @@ export const GAMES: Game[] = [
     externalId: '1174180',
     releaseDate: 1540512000,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE],
-    description: 'История банды на Диком Западе в большом открытом мире.',
+    description:
+      'РСЃС‚РѕСЂРёСЏ Р±Р°РЅРґС‹ РЅР° Р”РёРєРѕРј Р—Р°РїР°РґРµ РІ Р±РѕР»СЊС€РѕРј РѕС‚РєСЂС‹С‚РѕРј РјРёСЂРµ.',
     image: '/static/images/games/red-dead-redemption-2__header.jpg',
     developer: 'Rockstar Games',
     publisher: 'Rockstar Games',
@@ -836,7 +844,8 @@ export const GAMES: Game[] = [
     externalId: '1091500',
     releaseDate: 1607558400,
     genres: [GameGenre.ACTION, GameGenre.RPG],
-    description: 'Ролевая игра в футуристическом Найт-Сити с нелинейными квестами.',
+    description:
+      'Р РѕР»РµРІР°СЏ РёРіСЂР° РІ С„СѓС‚СѓСЂРёСЃС‚РёС‡РµСЃРєРѕРј РќР°Р№С‚-РЎРёС‚Рё СЃ РЅРµР»РёРЅРµР№РЅС‹РјРё РєРІРµСЃС‚Р°РјРё.',
     image: '/static/images/games/cyberpunk-2077__header.jpg',
     developer: 'CD Projekt Red',
     publisher: 'CD Projekt Red',
@@ -910,7 +919,8 @@ export const GAMES: Game[] = [
     externalId: '1245620',
     releaseDate: 1645747200,
     genres: [GameGenre.ACTION, GameGenre.RPG],
-    description: 'Soulslike с открытым миром и насыщенным исследованием.',
+    description:
+      'Soulslike СЃ РѕС‚РєСЂС‹С‚С‹Рј РјРёСЂРѕРј Рё РЅР°СЃС‹С‰РµРЅРЅС‹Рј РёСЃСЃР»РµРґРѕРІР°РЅРёРµРј.',
     image: '/static/images/games/elden-ring__header.jpg',
     developer: 'FromSoftware',
     publisher: 'Bandai Namco Entertainment',
@@ -984,7 +994,8 @@ export const GAMES: Game[] = [
     externalId: '553850',
     releaseDate: 1707350400,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
-    description: 'Кооперативный PvE-шутер про межгалактическую демократию.',
+    description:
+      'РљРѕРѕРїРµСЂР°С‚РёРІРЅС‹Р№ PvE-С€СѓС‚РµСЂ РїСЂРѕ РјРµР¶РіР°Р»Р°РєС‚РёС‡РµСЃРєСѓСЋ РґРµРјРѕРєСЂР°С‚РёСЋ.',
     image: '/static/images/games/helldivers-2__header.jpg',
     developer: 'Arrowhead Game Studios',
     publisher: 'Sony Interactive Entertainment',
@@ -1057,7 +1068,8 @@ export const GAMES: Game[] = [
     externalId: '1623730',
     releaseDate: 1705622400,
     genres: [GameGenre.ADVENTURE, GameGenre.SURVIVAL],
-    description: 'Выживание, крафт и коллекционирование существ в открытом мире.',
+    description:
+      'Р’С‹Р¶РёРІР°РЅРёРµ, РєСЂР°С„С‚ Рё РєРѕР»Р»РµРєС†РёРѕРЅРёСЂРѕРІР°РЅРёРµ СЃСѓС‰РµСЃС‚РІ РІ РѕС‚РєСЂС‹С‚РѕРј РјРёСЂРµ.',
     image: '/static/images/games/palworld__header.jpg',
     developer: 'Pocketpair',
     publisher: 'Pocketpair',
@@ -1130,7 +1142,8 @@ export const GAMES: Game[] = [
     externalId: '2358720',
     releaseDate: 1724112000,
     genres: [GameGenre.ACTION, GameGenre.RPG],
-    description: 'Экшен по мотивам китайской мифологии с кинематографичными боями.',
+    description:
+      'Р­РєС€РµРЅ РїРѕ РјРѕС‚РёРІР°Рј РєРёС‚Р°Р№СЃРєРѕР№ РјРёС„РѕР»РѕРіРёРё СЃ РєРёРЅРµРјР°С‚РѕРіСЂР°С„РёС‡РЅС‹РјРё Р±РѕСЏРјРё.',
     image: '/static/images/games/black-myth-wukong__header.jpg',
     developer: 'Game Science',
     publisher: 'Game Science',
@@ -1204,7 +1217,8 @@ export const GAMES: Game[] = [
     externalId: '1145350',
     releaseDate: 1714953600,
     genres: [GameGenre.ACTION, GameGenre.INDIE],
-    description: 'Рогалик с быстрым боем, билдостроением и сильным нарративом.',
+    description:
+      'Р РѕРіР°Р»РёРє СЃ Р±С‹СЃС‚СЂС‹Рј Р±РѕРµРј, Р±РёР»РґРѕСЃС‚СЂРѕРµРЅРёРµРј Рё СЃРёР»СЊРЅС‹Рј РЅР°СЂСЂР°С‚РёРІРѕРј.',
     image: '/static/images/games/hades-2__header.jpg',
     developer: 'Supergiant Games',
     publisher: 'Supergiant Games',
@@ -1278,7 +1292,8 @@ export const GAMES: Game[] = [
     externalId: '413150',
     releaseDate: 1456444800,
     genres: [GameGenre.INDIE, GameGenre.SIMULATION, GameGenre.RPG],
-    description: 'Фермерский симулятор с прокачкой, отношениями и крафтом.',
+    description:
+      'Р¤РµСЂРјРµСЂСЃРєРёР№ СЃРёРјСѓР»СЏС‚РѕСЂ СЃ РїСЂРѕРєР°С‡РєРѕР№, РѕС‚РЅРѕС€РµРЅРёСЏРјРё Рё РєСЂР°С„С‚РѕРј.',
     image: '/static/images/games/stardew-valley__header.jpg',
     developer: 'ConcernedApe',
     publisher: 'ConcernedApe',
@@ -1342,8 +1357,7 @@ export const GAMES: Game[] = [
       '/static/images/games/hogwarts-legacy__screenshot-2.jpg',
       '/static/images/games/hogwarts-legacy__screenshot-3.jpg',
       '/static/images/games/hogwarts-legacy__screenshot-4.jpg',
-      '/static/images/games/hogwarts-legacy__screenshot-5.jpg',
-      '/static/images/games/hogwarts-legacy__screenshot-6.jpg'
+      '/static/images/games/hogwarts-legacy__screenshot-5.jpg'
     ],
 
     type: GameType.GAME,
@@ -1352,7 +1366,8 @@ export const GAMES: Game[] = [
     externalId: '990080',
     releaseDate: 1675987200,
     genres: [GameGenre.ACTION, GameGenre.RPG, GameGenre.ADVENTURE],
-    description: 'Открытый мир Хогвартса с магическими дуэлями и квестами.',
+    description:
+      'РћС‚РєСЂС‹С‚С‹Р№ РјРёСЂ РҐРѕРіРІР°СЂС‚СЃР° СЃ РјР°РіРёС‡РµСЃРєРёРјРё РґСѓСЌР»СЏРјРё Рё РєРІРµСЃС‚Р°РјРё.',
     image: '/static/images/games/hogwarts-legacy__header.jpg',
     developer: 'Avalanche Software',
     publisher: 'Warner Bros. Games',
@@ -1427,7 +1442,8 @@ export const GAMES: Game[] = [
     externalId: '1966720',
     releaseDate: 1698019200,
     genres: [GameGenre.HORROR, GameGenre.INDIE],
-    description: 'Кооперативный хоррор про сбор лута на опасных локациях.',
+    description:
+      'РљРѕРѕРїРµСЂР°С‚РёРІРЅС‹Р№ С…РѕСЂСЂРѕСЂ РїСЂРѕ СЃР±РѕСЂ Р»СѓС‚Р° РЅР° РѕРїР°СЃРЅС‹С… Р»РѕРєР°С†РёСЏС….',
     image: '/static/images/games/lethal-company__header.jpg',
     developer: 'Zeekerss',
     publisher: 'Zeekerss',
@@ -1491,8 +1507,7 @@ export const GAMES: Game[] = [
       '/static/images/games/the-finals__screenshot-2.jpg',
       '/static/images/games/the-finals__screenshot-3.jpg',
       '/static/images/games/the-finals__screenshot-4.jpg',
-      '/static/images/games/the-finals__screenshot-5.jpg',
-      '/static/images/games/the-finals__screenshot-6.jpg'
+      '/static/images/games/the-finals__screenshot-5.jpg'
     ],
 
     type: GameType.GAME,
@@ -1501,7 +1516,8 @@ export const GAMES: Game[] = [
     externalId: '2073850',
     releaseDate: 1701907200,
     genres: [GameGenre.SHOOTER, GameGenre.ACTION],
-    description: 'Соревновательный шутер с разрушаемым окружением.',
+    description:
+      'РЎРѕСЂРµРІРЅРѕРІР°С‚РµР»СЊРЅС‹Р№ С€СѓС‚РµСЂ СЃ СЂР°Р·СЂСѓС€Р°РµРјС‹Рј РѕРєСЂСѓР¶РµРЅРёРµРј.',
     image: '/static/images/games/the-finals__header.jpg',
     developer: 'Embark Studios',
     publisher: 'Embark Studios',
@@ -1575,7 +1591,8 @@ export const GAMES: Game[] = [
     externalId: '2669320',
     releaseDate: 1727395200,
     genres: [GameGenre.SPORTS, GameGenre.SIMULATION],
-    description: 'Футбольный симулятор с актуальными составами и онлайн-режимами.',
+    description:
+      'Р¤СѓС‚Р±РѕР»СЊРЅС‹Р№ СЃРёРјСѓР»СЏС‚РѕСЂ СЃ Р°РєС‚СѓР°Р»СЊРЅС‹РјРё СЃРѕСЃС‚Р°РІР°РјРё Рё РѕРЅР»Р°Р№РЅ-СЂРµР¶РёРјР°РјРё.',
     image: '/static/images/games/ea-sports-fc-25__header.jpg',
     developer: 'EA Sports',
     publisher: 'Electronic Arts',
@@ -1650,7 +1667,7 @@ export const GAMES: Game[] = [
     externalId: '1551360',
     releaseDate: 1636416000,
     genres: [GameGenre.RACING, GameGenre.SIMULATION],
-    description: 'Аркадные гонки в открытом мире Мексики.',
+    description: 'РђСЂРєР°РґРЅС‹Рµ РіРѕРЅРєРё РІ РѕС‚РєСЂС‹С‚РѕРј РјРёСЂРµ РњРµРєСЃРёРєРё.',
     image: '/static/images/games/forza-horizon-5__header.jpg',
     developer: 'Playground Games',
     publisher: 'Microsoft',
@@ -1721,12 +1738,13 @@ export const GAMES: Game[] = [
 
     isPopular: false,
     type: GameType.GAME,
-    name: 'Assassin’s Creed Shadows',
+    name: 'AssassinвЂ™s Creed Shadows',
     slug: 'assassins-creed-shadows',
     externalId: '3159330',
     releaseDate: 1742428800,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.RPG],
-    description: 'Стелс-экшен в феодальной Японии с двумя протагонистами.',
+    description:
+      'РЎС‚РµР»СЃ-СЌРєС€РµРЅ РІ С„РµРѕРґР°Р»СЊРЅРѕР№ РЇРїРѕРЅРёРё СЃ РґРІСѓРјСЏ РїСЂРѕС‚Р°РіРѕРЅРёСЃС‚Р°РјРё.',
     image: '/static/images/games/assassins-creed-shadows__header.jpg',
     developer: 'Ubisoft Montpellier',
     publisher: 'Ubisoft',
@@ -1786,87 +1804,6 @@ export const GAMES: Game[] = [
   },
   {
     screenshots: [
-      '/static/images/games/gta-6__screenshot-1.jpg',
-      '/static/images/games/gta-6__screenshot-2.jpg',
-      '/static/images/games/gta-6__screenshot-3.jpg',
-      '/static/images/games/gta-6__screenshot-4.jpg',
-      '/static/images/games/gta-6__screenshot-5.jpg',
-      '/static/images/games/gta-6__screenshot-6.jpg'
-    ],
-
-    type: GameType.GAME,
-    name: 'GTA VI',
-    slug: 'gta-6',
-    externalId: 'gta6',
-    releaseDate: 1795046400,
-    genres: [GameGenre.ACTION, GameGenre.ADVENTURE],
-    description: 'Криминальный open-world экшен нового поколения.',
-    image: '/static/images/games/gta-6__header.jpg',
-    developer: 'Rockstar Games',
-    publisher: 'Rockstar Games',
-    isPopular: true,
-    minimumSystemRequirements: {
-      oc: 'Windows 10/11 64-bit',
-      processor: 'Intel Core i7-12700K',
-      memory: '16 GB',
-      graphics: 'NVIDIA GeForce RTX 2080',
-      storage: '150 GB'
-    },
-    recommendedSystemRequirements: {
-      oc: 'Windows 11 64-bit',
-      processor: 'Intel Core i9-12900K',
-      memory: '32 GB',
-      graphics: 'NVIDIA GeForce RTX 4090',
-      storage: '150 GB'
-    },
-    priceVariants: [
-      {
-        deliveryType: DeliveryType.STEAM_KEY,
-        edition: 'Standard',
-        price: 3999,
-        region: Region.ALL_WORLD
-      },
-      {
-        deliveryType: DeliveryType.STEAM_KEY,
-        edition: 'Deluxe',
-        price: 4999,
-        oldPrice: 5999,
-        region: Region.EUROPE
-      },
-      {
-        deliveryType: DeliveryType.XBOX_KEY,
-        edition: 'Standard',
-        price: 4499,
-        region: Region.ALL_WORLD
-      },
-      {
-        deliveryType: DeliveryType.PLAYSTATION_KEY,
-        edition: 'Standard',
-        price: 4499,
-        region: Region.ALL_WORLD
-      },
-      {
-        deliveryType: DeliveryType.STEAM_GIFT,
-        edition: 'Standard',
-        price: 3499,
-        region: Region.RU
-      },
-      {
-        deliveryType: DeliveryType.STEAM_GIFT,
-        edition: 'Deluxe',
-        price: 3999,
-        region: Region.KZ
-      },
-      {
-        deliveryType: DeliveryType.STEAM_GIFT,
-        edition: 'Premium',
-        price: 5499,
-        region: Region.BY
-      }
-    ]
-  },
-  {
-    screenshots: [
       '/static/images/games/counter-strike-2__screenshot-1.jpg',
       '/static/images/games/counter-strike-2__screenshot-2.jpg',
       '/static/images/games/counter-strike-2__screenshot-3.jpg',
@@ -1880,7 +1817,8 @@ export const GAMES: Game[] = [
     externalId: '730',
     releaseDate: 1695772800,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
-    description: 'Командный соревновательный шутер с матчмейкингом, картами и скинами.',
+    description:
+      'РљРѕРјР°РЅРґРЅС‹Р№ СЃРѕСЂРµРІРЅРѕРІР°С‚РµР»СЊРЅС‹Р№ С€СѓС‚РµСЂ СЃ РјР°С‚С‡РјРµР№РєРёРЅРіРѕРј, РєР°СЂС‚Р°РјРё Рё СЃРєРёРЅР°РјРё.',
     image: '/static/images/games/counter-strike-2__header.jpg',
     developer: 'Valve',
     publisher: 'Valve',
@@ -1935,7 +1873,8 @@ export const GAMES: Game[] = [
     externalId: '570',
     releaseDate: 1373328000,
     genres: [GameGenre.STRATEGY, GameGenre.ACTION],
-    description: 'Культовая MOBA с героями, командными сражениями и киберспортивной сценой.',
+    description:
+      'РљСѓР»СЊС‚РѕРІР°СЏ MOBA СЃ РіРµСЂРѕСЏРјРё, РєРѕРјР°РЅРґРЅС‹РјРё СЃСЂР°Р¶РµРЅРёСЏРјРё Рё РєРёР±РµСЂСЃРїРѕСЂС‚РёРІРЅРѕР№ СЃС†РµРЅРѕР№.',
     image: '/static/images/games/dota-2__header.jpg',
     developer: 'Valve',
     publisher: 'Valve',
@@ -1990,7 +1929,8 @@ export const GAMES: Game[] = [
     externalId: '250900',
     releaseDate: 1415059200,
     genres: [GameGenre.ACTION, GameGenre.INDIE],
-    description: 'Мрачный roguelike с процедурными комнатами, предметами и безумными билдами.',
+    description:
+      'РњСЂР°С‡РЅС‹Р№ roguelike СЃ РїСЂРѕС†РµРґСѓСЂРЅС‹РјРё РєРѕРјРЅР°С‚Р°РјРё, РїСЂРµРґРјРµС‚Р°РјРё Рё Р±РµР·СѓРјРЅС‹РјРё Р±РёР»РґР°РјРё.',
     image: '/static/images/games/the-binding-of-isaac-rebirth__header.jpg',
     developer: 'Nicalis, Inc.',
     publisher: 'Nicalis, Inc.',
@@ -2045,7 +1985,8 @@ export const GAMES: Game[] = [
     externalId: '252490',
     releaseDate: 1518048000,
     genres: [GameGenre.SURVIVAL, GameGenre.ACTION],
-    description: 'Онлайн-выживание с крафтом, базами, рейдами и постоянной борьбой за ресурсы.',
+    description:
+      'РћРЅР»Р°Р№РЅ-РІС‹Р¶РёРІР°РЅРёРµ СЃ РєСЂР°С„С‚РѕРј, Р±Р°Р·Р°РјРё, СЂРµР№РґР°РјРё Рё РїРѕСЃС‚РѕСЏРЅРЅРѕР№ Р±РѕСЂСЊР±РѕР№ Р·Р° СЂРµСЃСѓСЂСЃС‹.',
     image: '/static/images/games/rust__header.jpg',
     developer: 'Facepunch Studios',
     publisher: 'Facepunch Studios',
@@ -2101,7 +2042,7 @@ export const GAMES: Game[] = [
     releaseDate: 1597363200,
     genres: [GameGenre.STRATEGY, GameGenre.SIMULATION],
     description:
-      'Инженерная песочница про автоматизацию заводов, логистику и бесконечную оптимизацию.',
+      'РРЅР¶РµРЅРµСЂРЅР°СЏ РїРµСЃРѕС‡РЅРёС†Р° РїСЂРѕ Р°РІС‚РѕРјР°С‚РёР·Р°С†РёСЋ Р·Р°РІРѕРґРѕРІ, Р»РѕРіРёСЃС‚РёРєСѓ Рё Р±РµСЃРєРѕРЅРµС‡РЅСѓСЋ РѕРїС‚РёРјРёР·Р°С†РёСЋ.',
     image: '/static/images/games/factorio__header.jpg',
     developer: 'Wube Software LTD.',
     publisher: 'Wube Software LTD.',
@@ -2157,7 +2098,7 @@ export const GAMES: Game[] = [
     releaseDate: 1487894400,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.INDIE],
     description:
-      'Атмосферная метроидвания с исследованием подземного королевства и сложными боссами.',
+      'РђС‚РјРѕСЃС„РµСЂРЅР°СЏ РјРµС‚СЂРѕРёРґРІР°РЅРёСЏ СЃ РёСЃСЃР»РµРґРѕРІР°РЅРёРµРј РїРѕРґР·РµРјРЅРѕРіРѕ РєРѕСЂРѕР»РµРІСЃС‚РІР° Рё СЃР»РѕР¶РЅС‹РјРё Р±РѕСЃСЃР°РјРё.',
     image: '/static/images/games/hollow-knight__header.jpg',
     developer: 'Team Cherry',
     publisher: 'Team Cherry',
@@ -2212,7 +2153,8 @@ export const GAMES: Game[] = [
     externalId: '588650',
     releaseDate: 1533600000,
     genres: [GameGenre.ACTION, GameGenre.INDIE],
-    description: 'Roguelite-метроидвания с быстрыми боями, оружием и постоянной прокачкой навыка.',
+    description:
+      'Roguelite-РјРµС‚СЂРѕРёРґРІР°РЅРёСЏ СЃ Р±С‹СЃС‚СЂС‹РјРё Р±РѕСЏРјРё, РѕСЂСѓР¶РёРµРј Рё РїРѕСЃС‚РѕСЏРЅРЅРѕР№ РїСЂРѕРєР°С‡РєРѕР№ РЅР°РІС‹РєР°.',
     image: '/static/images/games/dead-cells__header.jpg',
     developer: 'Motion Twin',
     publisher: 'Motion Twin',
@@ -2267,7 +2209,8 @@ export const GAMES: Game[] = [
     externalId: '945360',
     releaseDate: 1542326400,
     genres: [GameGenre.INDIE],
-    description: 'Социальная дедукция про экипаж, предателей и подозрительные аварии на корабле.',
+    description:
+      'РЎРѕС†РёР°Р»СЊРЅР°СЏ РґРµРґСѓРєС†РёСЏ РїСЂРѕ СЌРєРёРїР°Р¶, РїСЂРµРґР°С‚РµР»РµР№ Рё РїРѕРґРѕР·СЂРёС‚РµР»СЊРЅС‹Рµ Р°РІР°СЂРёРё РЅР° РєРѕСЂР°Р±Р»Рµ.',
     image: '/static/images/games/among-us__header.jpg',
     developer: 'Innersloth',
     publisher: 'Innersloth',
@@ -2322,7 +2265,8 @@ export const GAMES: Game[] = [
     externalId: '892970',
     releaseDate: 1612224000,
     genres: [GameGenre.SURVIVAL, GameGenre.ADVENTURE],
-    description: 'Кооперативное выживание в мире викингов с крафтом, строительством и боссами.',
+    description:
+      'РљРѕРѕРїРµСЂР°С‚РёРІРЅРѕРµ РІС‹Р¶РёРІР°РЅРёРµ РІ РјРёСЂРµ РІРёРєРёРЅРіРѕРІ СЃ РєСЂР°С„С‚РѕРј, СЃС‚СЂРѕРёС‚РµР»СЊСЃС‚РІРѕРј Рё Р±РѕСЃСЃР°РјРё.',
     image: '/static/images/games/valheim__header.jpg',
     developer: 'Iron Gate AB',
     publisher: 'Coffee Stain Publishing',
@@ -2377,7 +2321,8 @@ export const GAMES: Game[] = [
     externalId: '108600',
     releaseDate: 1383868800,
     genres: [GameGenre.SURVIVAL, GameGenre.SIMULATION],
-    description: 'Хардкорная песочница про выживание в зомби-апокалипсисе с глубокой симуляцией.',
+    description:
+      'РҐР°СЂРґРєРѕСЂРЅР°СЏ РїРµСЃРѕС‡РЅРёС†Р° РїСЂРѕ РІС‹Р¶РёРІР°РЅРёРµ РІ Р·РѕРјР±Рё-Р°РїРѕРєР°Р»РёРїСЃРёСЃРµ СЃ РіР»СѓР±РѕРєРѕР№ СЃРёРјСѓР»СЏС†РёРµР№.',
     image: '/static/images/games/project-zomboid__header.jpg',
     developer: 'The Indie Stone',
     publisher: 'The Indie Stone',
@@ -2433,7 +2378,7 @@ export const GAMES: Game[] = [
     releaseDate: 1461196800,
     genres: [GameGenre.SURVIVAL, GameGenre.INDIE],
     description:
-      'Кооперативное выживание в странном мире с крафтом, голодом и постоянной опасностью.',
+      'РљРѕРѕРїРµСЂР°С‚РёРІРЅРѕРµ РІС‹Р¶РёРІР°РЅРёРµ РІ СЃС‚СЂР°РЅРЅРѕРј РјРёСЂРµ СЃ РєСЂР°С„С‚РѕРј, РіРѕР»РѕРґРѕРј Рё РїРѕСЃС‚РѕСЏРЅРЅРѕР№ РѕРїР°СЃРЅРѕСЃС‚СЊСЋ.',
     image: '/static/images/games/dont-starve-together__header.jpg',
     developer: 'Klei Entertainment',
     publisher: 'Klei Entertainment',
@@ -2488,7 +2433,8 @@ export const GAMES: Game[] = [
     externalId: '739630',
     releaseDate: 1600387200,
     genres: [GameGenre.HORROR, GameGenre.INDIE],
-    description: 'Кооперативный хоррор про охоту на призраков с уликами, голосом и напряжением.',
+    description:
+      'РљРѕРѕРїРµСЂР°С‚РёРІРЅС‹Р№ С…РѕСЂСЂРѕСЂ РїСЂРѕ РѕС…РѕС‚Сѓ РЅР° РїСЂРёР·СЂР°РєРѕРІ СЃ СѓР»РёРєР°РјРё, РіРѕР»РѕСЃРѕРј Рё РЅР°РїСЂСЏР¶РµРЅРёРµРј.',
     image: '/static/images/games/phasmophobia__header.jpg',
     developer: 'Kinetic Games',
     publisher: 'Kinetic Games',
@@ -2544,7 +2490,7 @@ export const GAMES: Game[] = [
     releaseDate: 1600300800,
     genres: [GameGenre.ACTION, GameGenre.INDIE, GameGenre.RPG],
     description:
-      'Динамичный roguelike про побег из подземного царства с сильным сюжетом и боевой системой.',
+      'Р”РёРЅР°РјРёС‡РЅС‹Р№ roguelike РїСЂРѕ РїРѕР±РµРі РёР· РїРѕРґР·РµРјРЅРѕРіРѕ С†Р°СЂСЃС‚РІР° СЃ СЃРёР»СЊРЅС‹Рј СЃСЋР¶РµС‚РѕРј Рё Р±РѕРµРІРѕР№ СЃРёСЃС‚РµРјРѕР№.',
     image: '/static/images/games/hades__header.jpg',
     developer: 'Supergiant Games',
     publisher: 'Supergiant Games',
@@ -2600,7 +2546,7 @@ export const GAMES: Game[] = [
     releaseDate: 1548201600,
     genres: [GameGenre.STRATEGY, GameGenre.INDIE],
     description:
-      'Карточный roguelike с построением колоды, маршрутами и постоянным поиском синергий.',
+      'РљР°СЂС‚РѕС‡РЅС‹Р№ roguelike СЃ РїРѕСЃС‚СЂРѕРµРЅРёРµРј РєРѕР»РѕРґС‹, РјР°СЂС€СЂСѓС‚Р°РјРё Рё РїРѕСЃС‚РѕСЏРЅРЅС‹Рј РїРѕРёСЃРєРѕРј СЃРёРЅРµСЂРіРёР№.',
     image: '/static/images/games/slay-the-spire__header.jpg',
     developer: 'Mega Crit',
     publisher: 'Mega Crit',
@@ -2656,7 +2602,7 @@ export const GAMES: Game[] = [
     releaseDate: 1303084800,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE],
     description:
-      'Головоломка от Valve про порталы, физику, кооператив и саркастичный искусственный интеллект.',
+      'Р“РѕР»РѕРІРѕР»РѕРјРєР° РѕС‚ Valve РїСЂРѕ РїРѕСЂС‚Р°Р»С‹, С„РёР·РёРєСѓ, РєРѕРѕРїРµСЂР°С‚РёРІ Рё СЃР°СЂРєР°СЃС‚РёС‡РЅС‹Р№ РёСЃРєСѓСЃСЃС‚РІРµРЅРЅС‹Р№ РёРЅС‚РµР»Р»РµРєС‚.',
     image: '/static/images/games/portal-2__header.jpg',
     developer: 'Valve',
     publisher: 'Valve',
@@ -2711,7 +2657,8 @@ export const GAMES: Game[] = [
     externalId: '2344520',
     releaseDate: 1686009600,
     genres: [GameGenre.ACTION, GameGenre.RPG],
-    description: 'Мрачная action-RPG про Санктуарий, демонов, лут и сезонные активности.',
+    description:
+      'РњСЂР°С‡РЅР°СЏ action-RPG РїСЂРѕ РЎР°РЅРєС‚СѓР°СЂРёР№, РґРµРјРѕРЅРѕРІ, Р»СѓС‚ Рё СЃРµР·РѕРЅРЅС‹Рµ Р°РєС‚РёРІРЅРѕСЃС‚Рё.',
     image: '/static/images/games/diablo-iv__header.jpg',
     developer: 'Blizzard Entertainment',
     publisher: 'Blizzard Entertainment',
@@ -2762,7 +2709,8 @@ export const GAMES: Game[] = [
     externalId: '1297900',
     releaseDate: 1780617600,
     genres: [GameGenre.RPG, GameGenre.ADVENTURE],
-    description: 'Возвращение в Долину Рудников в современном ремейке классической RPG.',
+    description:
+      'Р’РѕР·РІСЂР°С‰РµРЅРёРµ РІ Р”РѕР»РёРЅСѓ Р СѓРґРЅРёРєРѕРІ РІ СЃРѕРІСЂРµРјРµРЅРЅРѕРј СЂРµРјРµР№РєРµ РєР»Р°СЃСЃРёС‡РµСЃРєРѕР№ RPG.',
     image: '/static/images/games/gothic-1-remake__header.jpg',
     developer: 'Alkimia Interactive',
     publisher: 'THQ Nordic',
@@ -2812,7 +2760,8 @@ export const GAMES: Game[] = [
     externalId: '1259420',
     releaseDate: 1621296000,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.SURVIVAL],
-    description: 'Постапокалиптический open-world экшен про байкера и выживание среди фрикеров.',
+    description:
+      'РџРѕСЃС‚Р°РїРѕРєР°Р»РёРїС‚РёС‡РµСЃРєРёР№ open-world СЌРєС€РµРЅ РїСЂРѕ Р±Р°Р№РєРµСЂР° Рё РІС‹Р¶РёРІР°РЅРёРµ СЃСЂРµРґРё С„СЂРёРєРµСЂРѕРІ.',
     image: '/static/images/games/days-gone__header.jpg',
     developer: 'Bend Studio',
     publisher: 'PlayStation Publishing LLC',
@@ -2863,7 +2812,8 @@ export const GAMES: Game[] = [
     externalId: '1313140',
     releaseDate: 1660176000,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.INDIE, GameGenre.STRATEGY],
-    description: 'Милый и мрачный roguelite про культ, последователей и походы за ресурсами.',
+    description:
+      'РњРёР»С‹Р№ Рё РјСЂР°С‡РЅС‹Р№ roguelite РїСЂРѕ РєСѓР»СЊС‚, РїРѕСЃР»РµРґРѕРІР°С‚РµР»РµР№ Рё РїРѕС…РѕРґС‹ Р·Р° СЂРµСЃСѓСЂСЃР°РјРё.',
     image: '/static/images/games/cult-of-the-lamb__header.jpg',
     developer: 'Massive Monster',
     publisher: 'Devolver Digital',
@@ -2914,7 +2864,8 @@ export const GAMES: Game[] = [
     externalId: '489830',
     releaseDate: 1477612800,
     genres: [GameGenre.RPG, GameGenre.ADVENTURE],
-    description: 'Классическая RPG в открытом мире с драконами, фракциями и свободой прохождения.',
+    description:
+      'РљР»Р°СЃСЃРёС‡РµСЃРєР°СЏ RPG РІ РѕС‚РєСЂС‹С‚РѕРј РјРёСЂРµ СЃ РґСЂР°РєРѕРЅР°РјРё, С„СЂР°РєС†РёСЏРјРё Рё СЃРІРѕР±РѕРґРѕР№ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ.',
     image: '/static/images/games/skyrim-special-edition__header.jpg',
     developer: 'Bethesda Game Studios',
     publisher: 'Bethesda Softworks',
@@ -2971,7 +2922,7 @@ export const GAMES: Game[] = [
     releaseDate: 1771545600,
     genres: [GameGenre.ACTION, GameGenre.ADVENTURE, GameGenre.HORROR],
     description:
-      'Новая часть Resident Evil с мрачным survival horror и кинематографичным напряжением.',
+      'РќРѕРІР°СЏ С‡Р°СЃС‚СЊ Resident Evil СЃ РјСЂР°С‡РЅС‹Рј survival horror Рё РєРёРЅРµРјР°С‚РѕРіСЂР°С„РёС‡РЅС‹Рј РЅР°РїСЂСЏР¶РµРЅРёРµРј.',
     image: '/static/images/games/resident-evil-requiem__header.jpg',
     developer: 'CAPCOM Co., Ltd.',
     publisher: 'CAPCOM Co., Ltd.',
@@ -3023,7 +2974,7 @@ export const GAMES: Game[] = [
     releaseDate: 1761782400,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER, GameGenre.ADVENTURE],
     description:
-      'Мультиплеерный extraction adventure про вылазки на опасную поверхность и сражения с ARC.',
+      'РњСѓР»СЊС‚РёРїР»РµРµСЂРЅС‹Р№ extraction adventure РїСЂРѕ РІС‹Р»Р°Р·РєРё РЅР° РѕРїР°СЃРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ Рё СЃСЂР°Р¶РµРЅРёСЏ СЃ ARC.',
     image: '/static/images/games/arc-raiders__header.jpg',
     developer: 'Embark Studios',
     publisher: 'Embark Studios',
@@ -3061,12 +3012,12 @@ export const GAMES: Game[] = [
   },
   {
     screenshots: [
-      '/static/images/games/max-payne__screenshot-1.jpg',
-      '/static/images/games/max-payne__screenshot-2.jpg',
-      '/static/images/games/max-payne__screenshot-3.jpg',
-      '/static/images/games/max-payne__screenshot-4.jpg',
-      '/static/images/games/max-payne__screenshot-5.jpg',
-      '/static/images/games/max-payne__screenshot-6.jpg'
+      '/static/images/games/max-payne-3__screenshot-1.jpg',
+      '/static/images/games/max-payne-3__screenshot-2.jpg',
+      '/static/images/games/max-payne-3__screenshot-3.jpg',
+      '/static/images/games/max-payne-3__screenshot-4.jpg',
+      '/static/images/games/max-payne-3__screenshot-5.jpg',
+      '/static/images/games/max-payne-3__screenshot-6.jpg'
     ],
     type: GameType.GAME,
     name: 'Max Payne',
@@ -3074,8 +3025,9 @@ export const GAMES: Game[] = [
     externalId: '12140',
     releaseDate: 996624000,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
-    description: 'Культовый нуарный шутер с bullet time, мрачной историей и атмосферой Нью-Йорка.',
-    image: '/static/images/games/max-payne__header.jpg',
+    description:
+      'РљСѓР»СЊС‚РѕРІС‹Р№ РЅСѓР°СЂРЅС‹Р№ С€СѓС‚РµСЂ СЃ bullet time, РјСЂР°С‡РЅРѕР№ РёСЃС‚РѕСЂРёРµР№ Рё Р°С‚РјРѕСЃС„РµСЂРѕР№ РќСЊСЋ-Р™РѕСЂРєР°.',
+    image: '/static/images/games/max-payne-3__header.jpg',
     developer: 'Remedy Entertainment',
     publisher: 'Rockstar Games',
     isPopular: false,
@@ -3125,7 +3077,8 @@ export const GAMES: Game[] = [
     externalId: '546560',
     releaseDate: 1584921600,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER, GameGenre.ADVENTURE],
-    description: 'VR-возвращение Half-Life с физикой, исследованием и борьбой против Альянса.',
+    description:
+      'VR-РІРѕР·РІСЂР°С‰РµРЅРёРµ Half-Life СЃ С„РёР·РёРєРѕР№, РёСЃСЃР»РµРґРѕРІР°РЅРёРµРј Рё Р±РѕСЂСЊР±РѕР№ РїСЂРѕС‚РёРІ РђР»СЊСЏРЅСЃР°.',
     image: '/static/images/games/half-life-alyx__header.jpg',
     developer: 'Valve',
     publisher: 'Valve',
@@ -3176,7 +3129,7 @@ export const GAMES: Game[] = [
     releaseDate: 1727049600,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER, GameGenre.RPG],
     description:
-      'Тёмный фэнтези-шутер от первого лица с охотой на ведьм, магией и опасными вылазками.',
+      'РўС‘РјРЅС‹Р№ С„СЌРЅС‚РµР·Рё-С€СѓС‚РµСЂ РѕС‚ РїРµСЂРІРѕРіРѕ Р»РёС†Р° СЃ РѕС…РѕС‚РѕР№ РЅР° РІРµРґСЊРј, РјР°РіРёРµР№ Рё РѕРїР°СЃРЅС‹РјРё РІС‹Р»Р°Р·РєР°РјРё.',
     image: '/static/images/games/witchfire__header.jpg',
     developer: 'The Astronauts',
     publisher: 'The Astronauts',
@@ -3226,7 +3179,8 @@ export const GAMES: Game[] = [
     externalId: '374320',
     releaseDate: 1460332800,
     genres: [GameGenre.ACTION, GameGenre.RPG],
-    description: 'Мрачный soulslike с напряжёнными боями, боссами и исследованием гибнущего мира.',
+    description:
+      'РњСЂР°С‡РЅС‹Р№ soulslike СЃ РЅР°РїСЂСЏР¶С‘РЅРЅС‹РјРё Р±РѕСЏРјРё, Р±РѕСЃСЃР°РјРё Рё РёСЃСЃР»РµРґРѕРІР°РЅРёРµРј РіРёР±РЅСѓС‰РµРіРѕ РјРёСЂР°.',
     image: '/static/images/games/dark-souls-3__header.jpg',
     developer: 'FromSoftware, Inc.',
     publisher: 'Bandai Namco Entertainment',
@@ -3277,7 +3231,7 @@ export const GAMES: Game[] = [
     releaseDate: 1747267200,
     genres: [GameGenre.ACTION, GameGenre.SHOOTER],
     description:
-      'Средневековый приквел DOOM с тяжёлым оружием, демонами и новым образом Палача Рока.',
+      'РЎСЂРµРґРЅРµРІРµРєРѕРІС‹Р№ РїСЂРёРєРІРµР» DOOM СЃ С‚СЏР¶С‘Р»С‹Рј РѕСЂСѓР¶РёРµРј, РґРµРјРѕРЅР°РјРё Рё РЅРѕРІС‹Рј РѕР±СЂР°Р·РѕРј РџР°Р»Р°С‡Р° Р РѕРєР°.',
     image: '/static/images/games/doom-the-dark-ages__header.jpg',
     developer: 'id Software',
     publisher: 'Bethesda Softworks',
