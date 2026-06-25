@@ -160,7 +160,12 @@ async function bootstrap() {
   }
 
   const document = SwaggerModule.createDocument(app, restConfig, {
-    include: [UsersModule, OtpsModule, ...moduleDocs.map((moduleDoc) => moduleDoc.module)]
+    include: [
+      AppModule,
+      UsersModule,
+      OtpsModule,
+      ...moduleDocs.map((moduleDoc) => moduleDoc.module)
+    ]
   });
   app.use(withBaseUrl('/rest.json'), (_req, res) => {
     res.json(document);
