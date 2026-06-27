@@ -1,4 +1,4 @@
-import type { Request } from 'express';
+import type { FastifyRequest } from 'fastify';
 
 import { BadRequestException } from '@nestjs/common';
 import { Args, Context, Query, Resolver } from '@nestjs/graphql';
@@ -33,7 +33,7 @@ export class PizzaQuery extends BaseResolver {
 
   @GqlAuthorizedOnly()
   @Query(() => PizzaOrdersResponse)
-  async getPizzaOrders(@Context() context: { req: Request }): Promise<PizzaOrdersResponse> {
+  async getPizzaOrders(@Context() context: { req: FastifyRequest }): Promise<PizzaOrdersResponse> {
     const token = context.req.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -52,7 +52,7 @@ export class PizzaQuery extends BaseResolver {
   @Query(() => PizzaOrderResponse)
   async getPizzaOrder(
     @Args() getPizzaOrderDto: GetPizzaOrderDto,
-    @Context() context: { req: Request }
+    @Context() context: { req: FastifyRequest }
   ): Promise<PizzaOrderResponse> {
     const token = context.req.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;

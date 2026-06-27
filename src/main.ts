@@ -1,4 +1,3 @@
-import fastifyStatic from '@fastify/static';
 import fastifyView from '@fastify/view';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
@@ -115,7 +114,8 @@ async function bootstrap() {
       },
       mcp: {
         disabled: true
-      }
+      },
+      withFastify: true
     })
   );
 
@@ -158,7 +158,8 @@ async function bootstrap() {
         },
         mcp: {
           disabled: true
-        }
+        },
+        withFastify: true
       })
     );
   }
@@ -184,7 +185,8 @@ async function bootstrap() {
       },
       mcp: {
         disabled: true
-      }
+      },
+      withFastify: true
     })
   );
 
@@ -193,11 +195,6 @@ async function bootstrap() {
       handlebars
     },
     root: join(__dirname, 'static/views')
-  });
-
-  await app.register(fastifyStatic, {
-    root: join(__dirname, 'static'),
-    prefix: withBaseUrl('/static/')
   });
 
   const port = process.env.PORT ?? 3000;

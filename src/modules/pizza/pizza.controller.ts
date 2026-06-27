@@ -1,7 +1,8 @@
+import type { FastifyRequest } from 'fastify';
+
 import { BadRequestException, Body, Controller, Get, Param, Post, Put, Req } from '@nestjs/common';
 import { Args } from '@nestjs/graphql';
-import { ApiBearerAuth, ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Request } from 'express';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import type { User } from '@/modules/users';
 
@@ -119,11 +120,8 @@ export class PizzaController extends BaseResolver {
     description: 'orders',
     type: PizzaOrdersResponse
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
-  async getPizzaOrders(@Req() request: Request): Promise<PizzaOrdersResponse> {
+  async getPizzaOrders(@Req() request: FastifyRequest): Promise<PizzaOrdersResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -146,13 +144,10 @@ export class PizzaController extends BaseResolver {
     description: 'order',
     type: PizzaOrderResponse
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
   async getPizzaOrder(
     @Param() getPizzaOrderDto: GetPizzaOrderDto,
-    @Req() request: Request
+    @Req() request: FastifyRequest
   ): Promise<PizzaOrderResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
@@ -180,9 +175,6 @@ export class PizzaController extends BaseResolver {
     status: 200,
     description: 'order cancel',
     type: BaseResponse
-  })
-  @ApiHeader({
-    name: 'authorization'
   })
   @ApiBearerAuth()
   async cancelPizzaOrder(@Body() cancelPizzaOrderDto: CancelPizzaOrderDto): Promise<BaseResponse> {

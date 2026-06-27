@@ -1,4 +1,4 @@
-import type { Request } from 'express';
+import type { FastifyRequest } from 'fastify';
 
 import { Context, Query, Resolver } from '@nestjs/graphql';
 import { GraphQLError } from 'graphql';
@@ -24,7 +24,7 @@ export class UsersQuery extends BaseResolver {
   }
 
   @Query(() => SessionResponse)
-  async session(@Context() context: { req: Request }): Promise<SessionResponse> {
+  async session(@Context() context: { req: FastifyRequest }): Promise<SessionResponse> {
     const token = context.req.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 

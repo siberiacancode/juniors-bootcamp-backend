@@ -27,7 +27,7 @@ export class OtpsController extends BaseResolver {
 
     if (existingOtp) {
       const { retryDelay, created } = existingOtp;
-      const now = new Date().getTime();
+      const now = Date.now();
 
       if (new Date(created).getTime() + retryDelay > now) {
         return this.wrapSuccess({ retryDelay: RETRY_DELAY - (now - new Date(created).getTime()) });

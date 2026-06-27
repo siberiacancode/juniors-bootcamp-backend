@@ -1,3 +1,5 @@
+import type { FastifyRequest } from 'fastify';
+
 import {
   BadRequestException,
   Body,
@@ -9,15 +11,7 @@ import {
   Query,
   Req
 } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiHeader,
-  ApiOperation,
-  ApiQuery,
-  ApiResponse,
-  ApiTags
-} from '@nestjs/swagger';
-import { Request } from 'express';
+import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { ApiAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver, BaseResponse } from '@/utils/services';
@@ -252,11 +246,8 @@ export class CarsController extends BaseResolver {
     description: 'rents',
     type: CarRentsResponse
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
-  async getCarRents(@Req() request: Request): Promise<CarRentsResponse> {
+  async getCarRents(@Req() request: FastifyRequest): Promise<CarRentsResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -279,11 +270,11 @@ export class CarsController extends BaseResolver {
     description: 'rent',
     type: CarRent
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
-  async getCarRent(@Param() params: GetCarRentDto, @Req() request: Request): Promise<CarRent> {
+  async getCarRent(
+    @Param() params: GetCarRentDto,
+    @Req() request: FastifyRequest
+  ): Promise<CarRent> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -308,9 +299,6 @@ export class CarsController extends BaseResolver {
     status: 200,
     description: 'rent cancel',
     type: BaseResponse
-  })
-  @ApiHeader({
-    name: 'authorization'
   })
   @ApiBearerAuth()
   async cancelCarRent(@Body() cancelCarRentDto: CancelCarRentDto): Promise<BaseResponse> {

@@ -1,6 +1,7 @@
+import type { FastifyRequest } from 'fastify';
+
 import { BadRequestException } from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
-import { Request } from 'express';
 
 import { GqlAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver, BaseResponse } from '@/utils/services';
@@ -112,7 +113,7 @@ export class CarsMutation extends BaseResolver {
   @Mutation(() => BaseResponse)
   async cancelCarRent(
     @Args() cancelCarRentDto: CancelCarRentDto,
-    @Context() context: { req: Request }
+    @Context() context: { req: FastifyRequest }
   ): Promise<BaseResponse> {
     const token = context.req.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;

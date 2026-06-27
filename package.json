@@ -55,7 +55,6 @@
     "@nestjs/schematics": "^11.0.10",
     "@siberiacancode/eslint": "^2.16.12",
     "@siberiacancode/prettier": "^1.6.1",
-    "@types/express": "^4.17.21",
     "@types/node": "25.5.0",
     "@types/passport-jwt": "^4.0.1",
     "husky": "^9.1.7",

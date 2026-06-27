@@ -1,3 +1,5 @@
+import type { FastifyRequest } from 'fastify';
+
 import {
   BadRequestException,
   Body,
@@ -10,15 +12,7 @@ import {
   Query,
   Req
 } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiHeader,
-  ApiOperation,
-  ApiQuery,
-  ApiResponse,
-  ApiTags
-} from '@nestjs/swagger';
-import { Request } from 'express';
+import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import type { User } from '@/modules/users';
 
@@ -138,9 +132,6 @@ export class TesterController extends BaseResolver {
     description: 'update profile',
     type: UpdateProfileResponse
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
   async updateProfile(@Body() updateProfileDto: UpdateProfileDto): Promise<UpdateProfileResponse> {
     if (Math.random() < 0.3) {
@@ -179,11 +170,8 @@ export class TesterController extends BaseResolver {
     description: 'session',
     type: SessionResponse
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
-  async session(@Req() request: Request): Promise<SessionResponse> {
+  async session(@Req() request: FastifyRequest): Promise<SessionResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -398,9 +386,8 @@ export class TesterController extends BaseResolver {
   @Get('/games/orders')
   @ApiOperation({ summary: 'Получить все заказы игр для tester' })
   @ApiResponse({ status: 200, type: GameOrdersResponse })
-  @ApiHeader({ name: 'authorization' })
   @ApiBearerAuth()
-  async getGameOrders(@Req() request: Request): Promise<GameOrdersResponse> {
+  async getGameOrders(@Req() request: FastifyRequest): Promise<GameOrdersResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -419,11 +406,10 @@ export class TesterController extends BaseResolver {
   @Get('/games/orders/:orderId')
   @ApiOperation({ summary: 'Получить заказ игры для tester' })
   @ApiResponse({ status: 200, type: GameOrderResponse })
-  @ApiHeader({ name: 'authorization' })
   @ApiBearerAuth()
   async getGameOrder(
     @Param() getGameOrderDto: GetGameOrderDto,
-    @Req() request: Request
+    @Req() request: FastifyRequest
   ): Promise<GameOrderResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;

@@ -1,6 +1,7 @@
+import type { FastifyRequest } from 'fastify';
+
 import { BadRequestException, Body, Controller, Get, Param, Post, Put, Req } from '@nestjs/common';
-import { ApiBearerAuth, ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Request } from 'express';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { randomUUID } from 'node:crypto';
 
 import { ApiAuthorizedOnly } from '@/utils/guards';
@@ -176,11 +177,8 @@ export class DeliveryController extends BaseResolver {
     description: 'orders',
     type: DeliveryOrdersResponse
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
-  async getDeliveries(@Req() request: Request): Promise<DeliveryOrdersResponse> {
+  async getDeliveries(@Req() request: FastifyRequest): Promise<DeliveryOrdersResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -206,13 +204,10 @@ export class DeliveryController extends BaseResolver {
     description: 'order',
     type: DeliveryOrderResponse
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
   async getDelivery(
     @Param() getDeliveryOrderDto: GetDeliveryOrderDto,
-    @Req() request: Request
+    @Req() request: FastifyRequest
   ): Promise<DeliveryOrderResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
@@ -243,9 +238,6 @@ export class DeliveryController extends BaseResolver {
     status: 200,
     description: 'order cancel',
     type: BaseResponse
-  })
-  @ApiHeader({
-    name: 'authorization'
   })
   @ApiBearerAuth()
   async cancelDeliveryOrder(

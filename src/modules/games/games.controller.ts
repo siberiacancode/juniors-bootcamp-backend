@@ -1,3 +1,5 @@
+import type { FastifyRequest } from 'fastify';
+
 import {
   BadRequestException,
   Body,
@@ -9,15 +11,7 @@ import {
   Query,
   Req
 } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiHeader,
-  ApiOperation,
-  ApiQuery,
-  ApiResponse,
-  ApiTags
-} from '@nestjs/swagger';
-import { Request } from 'express';
+import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import type { User } from '@/modules/users';
 
@@ -260,9 +254,8 @@ export class GamesController extends BaseResolver {
   @Get('/orders')
   @ApiOperation({ summary: 'Получить все заказы игр' })
   @ApiResponse({ status: 200, type: GameOrdersResponse })
-  @ApiHeader({ name: 'authorization' })
   @ApiBearerAuth()
-  async getGameOrders(@Req() request: Request): Promise<GameOrdersResponse> {
+  async getGameOrders(@Req() request: FastifyRequest): Promise<GameOrdersResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -281,11 +274,10 @@ export class GamesController extends BaseResolver {
   @Get('/orders/:orderId')
   @ApiOperation({ summary: 'Получить заказ игры' })
   @ApiResponse({ status: 200, type: GameOrderResponse })
-  @ApiHeader({ name: 'authorization' })
   @ApiBearerAuth()
   async getGameOrder(
     @Param() getGameOrderDto: GetGameOrderDto,
-    @Req() request: Request
+    @Req() request: FastifyRequest
   ): Promise<GameOrderResponse> {
     const token = request.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;

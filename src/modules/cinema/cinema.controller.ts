@@ -1,7 +1,8 @@
+import type { FastifyRequest } from 'fastify';
+
 import { BadRequestException, Body, Controller, Get, Param, Post, Put, Req } from '@nestjs/common';
 import { Args } from '@nestjs/graphql';
-import { ApiBearerAuth, ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Request } from 'express';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { ApiAuthorizedOnly } from '@/utils/guards';
 import { getDDMMYYFormatDate } from '@/utils/helpers';
@@ -222,11 +223,8 @@ export class CinemaController extends BaseResolver {
     description: 'orders',
     type: CinemaOrdersResponse
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
   @ApiBearerAuth()
-  async getCinemaOrders(@Req() req: Request): Promise<CinemaOrdersResponse> {
+  async getCinemaOrders(@Req() req: FastifyRequest): Promise<CinemaOrdersResponse> {
     const token = req.headers.authorization?.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -248,9 +246,6 @@ export class CinemaController extends BaseResolver {
     status: 200,
     description: 'order cancel',
     type: BaseResponse
-  })
-  @ApiHeader({
-    name: 'authorization'
   })
   @ApiBearerAuth()
   async cancelCinemaOrder(

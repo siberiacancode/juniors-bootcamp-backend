@@ -1,4 +1,4 @@
-import type { Request } from 'express';
+import type { FastifyRequest } from 'fastify';
 
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Args, Context, Query, Resolver } from '@nestjs/graphql';
@@ -92,7 +92,7 @@ export class GamesQuery extends BaseResolver {
 
   @GqlAuthorizedOnly()
   @Query(() => GameOrdersResponse)
-  async getGameOrders(@Context() context: { req: Request }): Promise<GameOrdersResponse> {
+  async getGameOrders(@Context() context: { req: FastifyRequest }): Promise<GameOrdersResponse> {
     const token = context.req.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -111,7 +111,7 @@ export class GamesQuery extends BaseResolver {
   @Query(() => GameOrderResponse)
   async getGameOrder(
     @Args() getGameOrderDto: GetGameOrderDto,
-    @Context() context: { req: Request }
+    @Context() context: { req: FastifyRequest }
   ): Promise<GameOrderResponse> {
     const token = context.req.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;

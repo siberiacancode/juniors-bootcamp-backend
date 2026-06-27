@@ -1,6 +1,7 @@
+import type { FastifyRequest } from 'fastify';
+
 import { BadRequestException } from '@nestjs/common';
 import { Args, Context, Query, Resolver } from '@nestjs/graphql';
-import { Request } from 'express';
 
 import { GqlAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver } from '@/utils/services';
@@ -61,7 +62,7 @@ export class CarsQuery extends BaseResolver {
 
   @GqlAuthorizedOnly()
   @Query(() => CarRentsResponse)
-  async getCarRents(@Context() context: { req: Request }): Promise<CarRentsResponse> {
+  async getCarRents(@Context() context: { req: FastifyRequest }): Promise<CarRentsResponse> {
     const token = context.req.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 
@@ -78,7 +79,10 @@ export class CarsQuery extends BaseResolver {
 
   @GqlAuthorizedOnly()
   @Query(() => CarResponse)
-  async getCarRent(@Args() getCarRentDto: GetCarRentDto, @Context() context: { req: Request }) {
+  async getCarRent(
+    @Args() getCarRentDto: GetCarRentDto,
+    @Context() context: { req: FastifyRequest }
+  ) {
     const token = context.req.headers.authorization.split(' ')[1];
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
 

@@ -1,6 +1,7 @@
+import type { FastifyRequest } from 'fastify';
+
 import { BadRequestException, Body, Controller, Get, Patch, Post, Req } from '@nestjs/common';
 import { ApiBearerAuth, ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Request } from 'express';
 
 import { OtpsService } from '@/modules/otps';
 import { ApiAuthorizedOnly } from '@/utils/guards';
@@ -98,7 +99,7 @@ export class UsersController extends BaseResolver {
     name: 'authorization'
   })
   @ApiBearerAuth()
-  async session(@Req() request: Request): Promise<SessionResponse> {
+  async session(@Req() request: FastifyRequest): Promise<SessionResponse> {
     const token = request.headers.authorization.split(' ')[1];
 
     const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
