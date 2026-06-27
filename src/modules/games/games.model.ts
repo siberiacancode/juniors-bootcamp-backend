@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { BaseResponse } from '@/utils/services';
 
 import { Region } from './constants';
-import { DetailedGame, FilteredGame, GamesPaginationMeta } from './entities';
+import { DetailedGame, FilteredGame, GamesPaginationMeta, PriceVariant } from './entities';
 import { GameOrder } from './modules';
 
 @ObjectType()
@@ -45,10 +45,10 @@ export class RegionsResponse extends BaseResponse {
 }
 
 @ObjectType()
-export class EditionsResponse extends BaseResponse {
-  @Field(() => [String])
-  @ApiProperty({ description: 'Доступные издания', type: [String], isArray: true })
-  editions: string[];
+export class PriceVariantsResponse extends BaseResponse {
+  @Field(() => [PriceVariant])
+  @ApiProperty({ description: 'Варианты цен для изданий', type: [PriceVariant] })
+  priceVariants: PriceVariant[];
 }
 
 @ObjectType()

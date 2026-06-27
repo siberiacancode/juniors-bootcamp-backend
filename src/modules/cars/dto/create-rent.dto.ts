@@ -5,7 +5,6 @@ import {
   IsEmail,
   IsNumber,
   IsOptional,
-  IsPhoneNumber,
   IsString,
   Validate,
   ValidationArguments,
@@ -90,9 +89,9 @@ export class CreateRentDto {
   @IsEmail()
   email: string;
 
+  @IsString()
   @Field(() => String)
   @ApiProperty({ example: '79876543210', description: 'Телефон арендатора в формате 7XXXXXXXXXX' })
-  @IsPhoneNumber('RU')
   phone: string;
 
   @Field(() => String, { nullable: true })

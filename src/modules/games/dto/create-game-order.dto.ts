@@ -1,20 +1,13 @@
 import { ArgsType, Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsOptional,
-  IsPhoneNumber,
-  IsString,
-  ValidateNested
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 
 import { DeliveryType, Region } from '../constants';
 
 @InputType('CreateGameOrderPersonDto')
 export class CreateGameOrderPersonDto {
-  @IsPhoneNumber('RU')
+  @IsString()
   @Field(() => String)
   @ApiProperty({ example: '79990001122', description: 'Телефон пользователя' })
   phone: string;

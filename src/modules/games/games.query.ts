@@ -9,20 +9,20 @@ import { GqlAuthorizedOnly } from '@/utils/guards';
 import { AuthService, BaseResolver } from '@/utils/services';
 
 import {
-  GetEditionsDto,
   GetGameDto,
   GetGameOrderDto,
   GetGamesDto,
+  GetPriceVariantsDto,
   GetRegionsDto,
   SearchGamesDto
 } from './dto';
 import {
-  EditionsResponse,
   GameOrderResponse,
   GameOrdersResponse,
   GameResponse,
   GameSearchResponse,
   GamesPaginatedResponse,
+  PriceVariantsResponse,
   RegionsResponse
 } from './games.model';
 import { GamesService } from './games.service';
@@ -79,15 +79,15 @@ export class GamesQuery extends BaseResolver {
     return this.wrapSuccess({ regions });
   }
 
-  @Query(() => EditionsResponse)
-  getEditions(@Args() getEditionsDto: GetEditionsDto): EditionsResponse {
-    const editions = this.gamesService.getEditions(getEditionsDto);
+  @Query(() => PriceVariantsResponse)
+  getEditions(@Args() getPriceVariantsDto: GetPriceVariantsDto): PriceVariantsResponse {
+    const priceVariants = this.gamesService.getPriceVariant(getPriceVariantsDto);
 
-    if (!editions) {
-      throw new NotFoundException(this.wrapFail('Издания не найдены'));
+    if (!priceVariants) {
+      throw new NotFoundException(this.wrapFail('Варианты не найдены'));
     }
 
-    return this.wrapSuccess({ editions });
+    return this.wrapSuccess({ priceVariants });
   }
 
   @GqlAuthorizedOnly()
