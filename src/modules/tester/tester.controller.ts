@@ -104,7 +104,7 @@ export class TesterController extends BaseResolver {
     return this.wrapSuccess({ retryDelay });
   }
 
-  @Post('/signin')
+  @Post('/users/signin')
   @ApiOperation({ summary: 'Авторизация для tester' })
   @ApiResponse({
     status: 200,
@@ -131,7 +131,7 @@ export class TesterController extends BaseResolver {
   }
 
   @ApiAuthorizedOnly()
-  @Patch('/profile')
+  @Patch('/users/profile')
   @ApiOperation({ summary: 'Обновить профиль пользователя для tester' })
   @ApiResponse({
     status: 200,
@@ -172,7 +172,7 @@ export class TesterController extends BaseResolver {
   }
 
   @ApiAuthorizedOnly()
-  @Get('/session')
+  @Get('/users/session')
   @ApiOperation({ summary: 'Получить сессию пользователя для tester' })
   @ApiResponse({
     status: 200,
