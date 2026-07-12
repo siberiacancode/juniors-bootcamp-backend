@@ -1,7 +1,8 @@
-import { Field } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-export abstract class BaseResponse {
+@ObjectType()
+export class BaseResponse {
   @ApiProperty({ description: 'Статус запроса' })
   @Field(() => Boolean)
   success: boolean;

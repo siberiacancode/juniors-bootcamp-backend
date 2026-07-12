@@ -1,25 +1,38 @@
 import {
+  applyDecorators,
   BadRequestException,
   CanActivate,
   ExecutionContext,
   Injectable,
-  UnauthorizedException,
-  UseGuards
+  SetMetadata,
+  UnauthorizedException
 } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { ApiBearerAuth, ApiCookieAuth } from '@nestjs/swagger';
 import { FastifyRequest } from 'fastify';
 
 import { SessionsService } from '@/modules/sessions';
 import { UsersService } from '@/modules/users';
 import { getRequest, Result } from '@/utils/helpers';
 
+const AUTHORIZED_ONLY_KEY = 'authorized-only';
+
 @Injectable()
 export class AuthorizedOnlyGuard implements CanActivate {
   constructor(
     private readonly sessionsService: SessionsService,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly reflector: Reflector
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    const isAuthorizedOnly = this.reflector.getAllAndOverride<boolean>(AUTHORIZED_ONLY_KEY, [
+      context.getHandler(),
+      context.getClass()
+    ]);
+
+    if (!isAuthorizedOnly) return true;
+
     const request = getRequest(context);
 
     const token = this.extractToken(request);
@@ -61,4 +74,9 @@ export class AuthorizedOnlyGuard implements CanActivate {
   }
 }
 
-export const AuthorizedOnly = () => UseGuards(AuthorizedOnlyGuard);
+export const AuthorizedOnly = () =>
+  applyDecorators(
+    SetMetadata(AUTHORIZED_ONLY_KEY, true),
+    ApiBearerAuth('mobile-auth'),
+    ApiCookieAuth('web-auth')
+  );

@@ -17,6 +17,12 @@ export class Otp {
   })
   createdAt: Date;
 
+  @ApiProperty({ type: Date, description: 'Дата истечения OTP кода' })
+  @Field(() => GraphQLISODateTime, {
+    description: 'Дата истечения OTP кода'
+  })
+  expiresAt: Date;
+
   @ApiProperty({ description: 'Задержка до повторной отправки OTP кода' })
   @Field(() => Number, {
     description: 'Задержка до повторной отправки OTP кода'

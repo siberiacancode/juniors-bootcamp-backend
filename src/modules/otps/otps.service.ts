@@ -7,7 +7,7 @@ import { Result } from '@/utils/helpers';
 
 import { CreateOtpDto } from './dto';
 import { OtpEntitySchema } from './otp.schema';
-import { RETRY_DELAY } from './otps.constants';
+import { OTP_EXPIRED_TIME, RETRY_DELAY } from './otps.constants';
 import { CreateOtpResponse } from './responses';
 
 @Injectable()
@@ -37,7 +37,8 @@ export class OtpsService extends BaseService<OtpEntitySchema> {
     await this.create({
       phone,
       code,
-      retryDelay: RETRY_DELAY
+      retryDelay: RETRY_DELAY,
+      expiresAt: new Date(Date.now() + OTP_EXPIRED_TIME)
     });
 
     return Result.success({ retryDelay: RETRY_DELAY });

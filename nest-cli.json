@@ -5,6 +5,9 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "plugins": ["@nestjs/graphql"],
-    "assets": [{ "include": "static/**/*", "watchAssets": true }]
+    "assets": [
+      { "include": "static/**/*", "watchAssets": true },
+      { "include": "views/**/*", "watchAssets": true }
+    ]
   }
 }

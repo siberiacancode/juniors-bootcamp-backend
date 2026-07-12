@@ -1,7 +1,6 @@
 import type { FastifyReply } from 'fastify';
 
-import { Res } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
 import { ClientType, Session, SessionsService } from '@/modules/sessions';
 import { BaseResponse } from '@/utils/base';
@@ -12,6 +11,8 @@ import { Result } from '@/utils/helpers';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto';
 import { SignInResponse } from './responses';
+
+// TODO fix context
 
 @Resolver('Auth')
 export class AuthResolver {
@@ -24,15 +25,12 @@ export class AuthResolver {
   async signIn(
     @Args() signInDto: SignInDto,
     @Client() clientType: ClientType,
-    @Res({
-      passthrough: true
-    })
-    reply: FastifyReply
+    @Context('reply') reply: FastifyReply
   ): Promise<SignInResponse> {
-    const response = await this.authService.signIn(signInDto, clientType);
+    const { token, user } = await this.authService.createSessionToken(signInDto);
 
-    if (response.token) {
-      reply.setCookie('session_token', response.token, {
+    if (clientType === ClientType.WEB) {
+      reply.setCookie('session_token', token, {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
@@ -41,18 +39,26 @@ export class AuthResolver {
       });
     }
 
-    return response;
+    return Result.success({
+      user,
+      ...(clientType === ClientType.MOBILE && { token })
+    });
   }
 
-  @Mutation(() => SignInResponse)
+  @Mutation(() => BaseResponse)
   @AuthorizedOnly()
   async signOut(
     @CurrentSession() session: Session,
-    @Res({ passthrough: true }) reply: FastifyReply
+    @Client() clientType: ClientType,
+    @Context('reply') reply: FastifyReply
   ): Promise<BaseResponse> {
     await this.sessionsService.deleteById(session._id);
 
-    reply.clearCookie('session_token');
+    if (clientType === ClientType.WEB) {
+      reply.clearCookie('session_token', {
+        path: '/'
+      });
+    }
 
     return Result.success();
   }

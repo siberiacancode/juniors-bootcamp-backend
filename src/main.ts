@@ -1,14 +1,13 @@
 import fastifyCookie from '@fastify/cookie';
-import fastifyView from '@fastify/view';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { apiReference } from '@scalar/nestjs-api-reference';
 import handlebars from 'handlebars';
 import { join } from 'node:path';
 import * as client from 'prom-client';
 
-// import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-// import { apiReference } from '@scalar/nestjs-api-reference';
 // import { CarsModule } from '@/modules/cars/cars.module';
 // import { CinemaModule } from '@/modules/cinema/cinema.module';
 // import { DeliveryModule } from '@/modules/delivery/delivery.module';
@@ -18,6 +17,9 @@ import * as client from 'prom-client';
 // import { TesterModule } from '@/modules/tester/tester.module';
 // import { UsersModule } from '@/modules/users/users.module';
 import { AppModule } from './app.module';
+import { AuthModule } from './modules/auth';
+import { OtpsModule } from './modules/otps';
+import { UsersModule } from './modules/users';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
 
 const register = new client.Registry();
@@ -43,11 +45,16 @@ async function bootstrap() {
 
   await app.register(fastifyCookie);
 
-  await app.register(fastifyView, {
+  app.useStaticAssets({
+    root: join(__dirname, '..', 'static'),
+    prefix: '/static/'
+  });
+
+  app.setViewEngine({
     engine: {
       handlebars
     },
-    root: join(__dirname, 'static/views')
+    templates: join(__dirname, '..', 'views')
   });
 
   app.enableCors({
@@ -95,7 +102,7 @@ async function bootstrap() {
     res.end(await register.metrics());
   });
 
-  // useOpenApi(app);
+  useOpenApi(app);
 
   const port = process.env.PORT ?? 3000;
 
@@ -106,107 +113,121 @@ async function bootstrap() {
 
 bootstrap();
 
-// function useOpenApi(app: NestFastifyApplication) {
-//   const testerConfig = new DocumentBuilder()
-//     .setTitle('juniors bootcamp backend 🧪')
-//     .setDescription('Апи для задания по тестированию')
-//     .setVersion('1.0')
-//     .addBearerAuth({
-//       type: 'http',
-//       scheme: 'bearer',
-//       bearerFormat: 'JWT'
-//     })
-//     .build();
+function useOpenApi(app: NestFastifyApplication) {
+  // const testerConfig = new DocumentBuilder()
+  //   .setTitle('juniors bootcamp backend 🧪')
+  //   .setDescription('Апи для задания по тестированию')
+  //   .setVersion('1.0')
+  //   .addBearerAuth({
+  //     type: 'http',
+  //     scheme: 'bearer',
+  //     bearerFormat: 'JWT'
+  //   })
+  //   .build();
 
-//   const testerDocument = SwaggerModule.createDocument(app, testerConfig, {
-//     include: [TesterModule]
-//   });
+  // const testerDocument = SwaggerModule.createDocument(app, testerConfig, {
+  //   include: [TesterModule]
+  // });
 
-//   app.use(withBaseUrl('/rest/tester.json'), (_req, res) => {
-//     res.json(testerDocument);
-//   });
+  // app.use(withBaseUrl('/rest/tester.json'), (_req, res) => {
+  //   res.json(testerDocument);
+  // });
 
-//   app.use(
-//     withBaseUrl('/rest/tester'),
-//     apiReference({
-//       content: testerDocument,
-//       agent: {
-//         disabled: true
-//       },
-//       mcp: {
-//         disabled: true
-//       },
-//       withFastify: true
-//     })
-//   );
+  // app.use(
+  //   withBaseUrl('/rest/tester'),
+  //   apiReference({
+  //     content: testerDocument,
+  //     agent: {
+  //       disabled: true
+  //     },
+  //     mcp: {
+  //       disabled: true
+  //     },
+  //     withFastify: true
+  //   })
+  // );
 
-//   const moduleDocs = [
-//     { name: 'cars', module: CarsModule },
-//     { name: 'cinema', module: CinemaModule },
-//     { name: 'delivery', module: DeliveryModule },
-//     { name: 'games', module: GamesModule },
-//     { name: 'pizza', module: PizzaModule }
-//   ] as const;
+  // const moduleDocs = [
+  //   { name: 'cars', module: CarsModule },
+  //   { name: 'cinema', module: CinemaModule },
+  //   { name: 'delivery', module: DeliveryModule },
+  //   { name: 'games', module: GamesModule },
+  //   { name: 'pizza', module: PizzaModule }
+  // ] as const;
 
-//   const config = new DocumentBuilder()
-//     .setTitle('juniors bootcamp backend 🔥')
-//     .setDescription('Апи для выполнения индивидуальных заданий')
-//     .setVersion('1.0')
-//     .addBearerAuth({
-//       type: 'http',
-//       scheme: 'bearer',
-//       bearerFormat: 'JWT'
-//     })
-//     .build();
+  const config = new DocumentBuilder()
+    .setTitle('juniors bootcamp backend 🔥')
+    .setDescription('Апи для выполнения индивидуальных заданий')
+    .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'Session  token',
+        description: 'Для x-application: mobile'
+      },
+      'mobile-auth'
+    )
+    .addCookieAuth(
+      'session_token',
+      {
+        type: 'apiKey',
+        in: 'cookie',
+        description: 'Для x-application: web'
+      },
+      'web-auth'
+    )
+    .build();
 
-//   for (const moduleDoc of moduleDocs) {
-//     const includeModules = [UsersModule, OtpsModule, moduleDoc.module];
-//     const moduleDocument = SwaggerModule.createDocument(app, config, {
-//       include: includeModules
-//     });
+  // for (const moduleDoc of moduleDocs) {
+  //   const includeModules = [UsersModule, OtpsModule, moduleDoc.module];
+  //   const moduleDocument = SwaggerModule.createDocument(app, config, {
+  //     include: includeModules
+  //   });
 
-//     app.use(withBaseUrl(`/rest/${moduleDoc.name}.json`), (_req, res) => {
-//       res.json(moduleDocument);
-//     });
+  //   app.use(withBaseUrl(`/rest/${moduleDoc.name}.json`), (_req, res) => {
+  //     res.json(moduleDocument);
+  //   });
 
-//     app.use(
-//       withBaseUrl(`/rest/${moduleDoc.name}`),
-//       apiReference({
-//         content: moduleDocument,
-//         agent: {
-//           disabled: true
-//         },
-//         mcp: {
-//           disabled: true
-//         },
-//         withFastify: true
-//       })
-//     );
-//   }
+  //   app.use(
+  //     withBaseUrl(`/rest/${moduleDoc.name}`),
+  //     apiReference({
+  //       content: moduleDocument,
+  //       agent: {
+  //         disabled: true
+  //       },
+  //       mcp: {
+  //         disabled: true
+  //       },
+  //       withFastify: true
+  //     })
+  //   );
+  // }
 
-//   const document = SwaggerModule.createDocument(app, config, {
-//     include: [
-//       AppModule,
-//       UsersModule,
-//       OtpsModule,
-//       ...moduleDocs.map((moduleDoc) => moduleDoc.module)
-//     ]
-//   });
-//   app.use(withBaseUrl('/rest.json'), (_req, res) => {
-//     res.json(document);
-//   });
+  const document = SwaggerModule.createDocument(app, config, {
+    include: [
+      AppModule,
+      OtpsModule,
+      AuthModule,
+      UsersModule
+      // ...moduleDocs.map((moduleDoc) => moduleDoc.module)
+    ]
+  });
+  app.use(withBaseUrl('/rest.json'), (_req, res) => {
+    res.json(document);
+  });
 
-//   app.use(
-//     withBaseUrl('/rest'),
-//     apiReference({
-//       content: document,
-//       agent: {
-//         disabled: true
-//       },
-//       mcp: {
-//         disabled: true
-//       },
-//       withFastify: true
-//     })
-//   );
-// }
+  app.use(
+    withBaseUrl('/rest'),
+    apiReference({
+      content: document,
+      agent: {
+        disabled: true
+      },
+      mcp: {
+        disabled: true
+      },
+      withFastify: true
+    })
+  );
+}

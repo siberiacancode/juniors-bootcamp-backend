@@ -8,7 +8,17 @@ import { HydratedDocument } from 'mongoose';
 export class OtpEntitySchema {
   createdAt: Date;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    index: {
+      expires: 0
+    }
+  })
+  expiresAt: Date;
+
+  @Prop({
+    required: true
+  })
   retryDelay: number;
 
   @Prop({ required: true })

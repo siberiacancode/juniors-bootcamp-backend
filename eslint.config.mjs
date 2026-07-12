@@ -4,7 +4,7 @@ export default eslint(
   {
     typescript: true,
     node: true,
-    ignores: ['**/*.gql']
+    ignores: ['**/*.gql', '_disabled']
   },
   {
     name: 'juniorsbootcamp/rewrite',

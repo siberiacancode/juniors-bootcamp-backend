@@ -1,7 +1,7 @@
 import type { FastifyReply } from 'fastify';
 
 import { Body, Controller, Post, Res } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Session, SessionsService } from '@/modules/sessions';
 import { BaseResponse } from '@/utils/base';
@@ -23,6 +23,12 @@ export class AuthController {
     private readonly sessionsService: SessionsService
   ) {}
 
+  @ApiHeader({
+    example: ClientType.WEB,
+    enum: ClientType,
+    required: false,
+    name: 'x-application'
+  })
   @ApiOperation({ summary: 'Войти' })
   @ApiResponse({
     type: SignInResponse,
@@ -38,10 +44,10 @@ export class AuthController {
     })
     reply: FastifyReply
   ): Promise<SignInResponse> {
-    const response = await this.authService.signIn(signInDto, clientType);
+    const { token, user } = await this.authService.createSessionToken(signInDto);
 
-    if (response.token) {
-      reply.setCookie('session_token', response.token, {
+    if (clientType === ClientType.WEB) {
+      reply.setCookie('session_token', token, {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
@@ -50,9 +56,18 @@ export class AuthController {
       });
     }
 
-    return response;
+    return Result.success({
+      user,
+      ...(clientType === ClientType.MOBILE && { token })
+    });
   }
 
+  @ApiHeader({
+    example: ClientType.WEB,
+    enum: ClientType,
+    required: false,
+    name: 'x-application'
+  })
   @ApiOperation({ summary: 'Выйти' })
   @ApiResponse({
     type: BaseResponse,
@@ -67,7 +82,7 @@ export class AuthController {
   ): Promise<BaseResponse> {
     await this.sessionsService.deleteById(session._id);
 
-    reply.clearCookie('session_token');
+    reply.clearCookie('session_token', {});
 
     return Result.success();
   }

@@ -2,8 +2,6 @@ import { Field, GraphQLISODateTime, ID, InputType, ObjectType } from '@nestjs/gr
 import { ApiProperty } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
-import { ClientType } from './sessions.enums';
-
 @InputType('SessionInput')
 @ObjectType({ description: 'Сессия' })
 export class Session {
@@ -33,10 +31,4 @@ export class Session {
     description: 'ID пользователя'
   })
   userId: Types.ObjectId;
-
-  @ApiProperty({ description: 'Тип клиента', enum: ClientType })
-  @Field(() => ClientType, {
-    description: 'Тип клиента'
-  })
-  clientType: ClientType;
 }

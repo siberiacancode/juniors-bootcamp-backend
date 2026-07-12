@@ -3,10 +3,9 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Result } from '@/utils/helpers';
 
 import { OtpsService } from '../otps';
-import { ClientType, SessionsService } from '../sessions';
+import { SessionsService } from '../sessions';
 import { UsersService } from '../users';
 import { SignInDto } from './dto';
-import { SignInResponse } from './responses';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +15,7 @@ export class AuthService {
     private readonly usersService: UsersService
   ) {}
 
-  async signIn(signInDto: SignInDto, clientType: ClientType): Promise<SignInResponse> {
+  async createSessionToken(signInDto: SignInDto) {
     let user = await this.usersService.findByPhone(signInDto.phone);
 
     if (!user) {
@@ -33,15 +32,14 @@ export class AuthService {
 
     const session = await this.sessionsService.create({
       userId: user._id,
-      clientType,
       expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
     });
 
     const sessionToken = session._id.toString();
 
-    return Result.success({
+    return {
       user,
-      ...(clientType === ClientType.MOBILE && { token: sessionToken })
-    });
+      token: sessionToken
+    };
   }
 }
