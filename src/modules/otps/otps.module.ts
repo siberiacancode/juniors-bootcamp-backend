@@ -1,19 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ScheduleModule } from '@nestjs/schedule';
 
-import { Otp, OtpSchema } from './entities';
+import { OtpEntitySchema, OtpSchema } from './otp.schema';
 import { OtpsController } from './otps.controller';
-import { OtpsMutation } from './otps.mutation';
+import { OtpsResolver } from './otps.resolver';
 import { OtpsService } from './otps.service';
 
 @Module({
   controllers: [OtpsController],
-  imports: [
-    ScheduleModule.forRoot(),
-    MongooseModule.forFeature([{ name: Otp.name, schema: OtpSchema }])
-  ],
-  providers: [OtpsService, OtpsMutation],
-  exports: [OtpsService]
+  exports: [OtpsService],
+  imports: [MongooseModule.forFeature([{ name: OtpEntitySchema.name, schema: OtpSchema }])],
+  providers: [OtpsService, OtpsResolver]
 })
 export class OtpsModule {}

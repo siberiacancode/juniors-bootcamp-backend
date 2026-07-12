@@ -1,48 +1,23 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { BaseResolver } from '@/utils/services';
-
-import { RETRY_DELAY } from './constants';
+import { OtpsService } from '../otps';
 import { CreateOtpDto } from './dto';
-import { OtpResponse } from './otps.model';
-import { OtpsService } from './otps.service';
+import { CreateOtpResponse } from './responses';
 
-@ApiTags('☄️ otps')
-@Controller()
-export class OtpsController extends BaseResolver {
-  constructor(private readonly otpsService: OtpsService) {
-    super();
-  }
+@ApiTags('🔑 otps')
+@Controller('otps')
+export class OtpsController {
+  constructor(private readonly otpsService: OtpsService) {}
 
-  @Post('/auth/otp')
   @ApiOperation({ summary: 'Создание отп кода' })
   @ApiResponse({
-    status: 200,
+    type: CreateOtpResponse,
     description: 'create otp',
-    type: OtpResponse
+    status: 200
   })
-  async createOtp(@Body() createOtpDto: CreateOtpDto): Promise<OtpResponse> {
-    const existingOtp = await this.otpsService.findOne({ phone: createOtpDto.phone });
-
-    if (existingOtp) {
-      const { retryDelay, created } = existingOtp;
-      const now = Date.now();
-
-      if (new Date(created).getTime() + retryDelay > now) {
-        return this.wrapSuccess({ retryDelay: RETRY_DELAY - (now - new Date(created).getTime()) });
-      }
-
-      await this.otpsService.delete({ phone: createOtpDto.phone });
-    }
-
-    const code = Math.floor(100000 + Math.random() * 900000);
-    await this.otpsService.create({
-      phone: createOtpDto.phone,
-      code,
-      retryDelay: RETRY_DELAY
-    });
-
-    return this.wrapSuccess({ retryDelay: RETRY_DELAY });
+  @Post('/otp')
+  async createOtp(@Body() createOtpDto: CreateOtpDto): Promise<CreateOtpResponse> {
+    return this.otpsService.createOtp(createOtpDto);
   }
 }

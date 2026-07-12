@@ -1,52 +1,36 @@
-import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 @InputType()
-class UpdateProfileProfileDto {
-  @IsString()
-  @IsOptional()
+export class UpdateProfileDto {
+  @ApiProperty({ description: 'Имя', example: 'Иван', required: false })
   @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'firstname', description: 'Имя', required: false })
+  @IsOptional()
+  @IsString()
   firstname?: string;
 
-  @IsString()
-  @IsOptional()
+  @ApiProperty({ description: 'Отчество', example: 'Иванович', required: false })
   @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'middlename', description: 'Отчество', required: false })
+  @IsOptional()
+  @IsString()
   middlename?: string;
 
-  @IsString()
-  @IsOptional()
+  @ApiProperty({ description: 'Фамилия', example: 'Иванов', required: false })
   @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'lastname', description: 'Фамилия', required: false })
+  @IsOptional()
+  @IsString()
   lastname?: string;
 
-  @IsString()
-  @IsOptional()
+  @ApiProperty({ description: 'Почта', example: 'example.email@gmail.com', required: false })
   @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'email@gmail.com', description: 'Почта', required: false })
+  @IsOptional()
+  @IsString()
   email?: string;
 
-  @IsString()
-  @IsOptional()
+  @ApiProperty({ description: 'Город', example: 'Москва', required: false })
   @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'city', description: 'Город', required: false })
-  city?: string;
-}
-
-@ArgsType()
-export class UpdateProfileDto {
-  @ValidateNested()
-  @Field(() => UpdateProfileProfileDto)
-  @ApiProperty({ description: 'Данные пользователя', type: UpdateProfileProfileDto })
-  @Type(() => UpdateProfileProfileDto)
-  profile: UpdateProfileProfileDto;
-
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  @Field(() => String)
-  @ApiProperty({ example: '89990009999', description: 'Номер телефона' })
-  phone: string;
+  city?: string;
 }

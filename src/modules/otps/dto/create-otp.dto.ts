@@ -4,9 +4,9 @@ import { IsNotEmpty, IsString } from 'class-validator';
 
 @ArgsType()
 export class CreateOtpDto {
-  @IsString()
-  @IsNotEmpty()
+  @ApiProperty({ description: 'Номер телефона', example: '89990009999' })
   @Field(() => String)
-  @ApiProperty({ example: '89990009999' })
+  @IsNotEmpty()
+  @IsString()
   phone: string;
 }

@@ -2,9 +2,10 @@ import { eslint } from '@siberiacancode/eslint';
 
 export default eslint(
   {
-    typescript: true
+    typescript: true,
+    node: true,
+    ignores: ['**/*.gql']
   },
-
   {
     name: 'juniorsbootcamp/rewrite',
     rules: {
@@ -22,33 +23,12 @@ export default eslint(
           customGroups: [
             {
               groupName: 'nest-structural',
-              elementNamePattern: [
-                '^Module$',
-                '^Controller$',
-                '^Injectable$',
-                '^Catch$',
-                '^Scope$',
-                '^SetMetadata$'
-              ]
+              elementNamePattern: '^(Module|Controller|Injectable|Catch|Scope|SetMetadata)$'
             },
             {
               groupName: 'nest-http',
-              elementNamePattern: [
-                '^Get$',
-                '^Post$',
-                '^Put$',
-                '^Delete$',
-                '^Patch$',
-                '^Options$',
-                '^Head$',
-                '^All$',
-                '^HttpCode$',
-                '^Redirect$',
-                '^Header$',
-                '^Version$',
-                '^Render$',
-                '^Sse$'
-              ]
+              elementNamePattern:
+                '^(Get|Post|Put|Delete|Patch|Options|Head|All|HttpCode|Redirect|Header|Version|Render|Sse)$'
             },
             {
               groupName: 'swagger',
@@ -56,77 +36,40 @@ export default eslint(
             },
             {
               groupName: 'graphql-type',
-              elementNamePattern: ['^ObjectType$', '^InputType$', '^ArgsType$', '^InterfaceType$']
+              elementNamePattern: '^(ObjectType|InputType|ArgsType|InterfaceType)$'
             },
             {
               groupName: 'graphql-resolver',
-              elementNamePattern: [
-                '^Field$',
-                '^ResolveField$',
-                '^Query$',
-                '^Mutation$',
-                '^Subscription$',
-                '^Directive$',
-                '^Extensions$',
-                '^Parent$',
-                '^Args$',
-                '^Info$',
-                '^Context$',
-                '^Root$'
-              ]
+              elementNamePattern:
+                '^(Field|ResolveField|Query|Mutation|Subscription|Directive|Extensions|Parent|Args|Info|Context|Root)$'
             },
             {
               groupName: 'mongoose',
-              elementNamePattern: ['^Schema$', '^Prop$']
+              elementNamePattern: '^(Schema|Prop)$'
             },
             {
               groupName: 'nest-middleware',
-              elementNamePattern: ['^UseGuards$', '^UseInterceptors$', '^UseFilters$', '^UsePipes$']
+              elementNamePattern: '.*(?:Guard|Interceptor|Filter|Pipe)s?$'
             },
             {
               groupName: 'nest-params',
-              elementNamePattern: [
-                '^Body$',
-                '^Param$',
-                '^Query$',
-                '^Headers$',
-                '^Ip$',
-                '^HostParam$',
-                '^Session$',
-                '^Req$',
-                '^Res$',
-                '^Next$',
-                '^Inject$',
-                '^Optional$'
-              ]
+              elementNamePattern:
+                '^(Body|Param|Query|Headers|Ip|HostParam|Session|Req|Res|Next|Inject|Optional)$'
             },
             {
               groupName: 'class-transformer',
-              elementNamePattern: ['^Type$', '^Expose$', '^Exclude$', '^Transform$']
+              elementNamePattern: '^(Type|Expose|Exclude|Transform)$'
             },
             {
               groupName: 'class-validator',
-              elementNamePattern: [
-                '^Is',
-                '^Min$',
-                '^Max$',
-                '^MinLength$',
-                '^MaxLength$',
-                '^Matches$',
-                '^Length$',
-                '^Equals$',
-                '^NotEquals$',
-                '^Contains$',
-                '^NotContains$',
-                '^Validate',
-                '^Allow$'
-              ]
+              elementNamePattern:
+                '^(Is|Validate|Min|Max|MinLength|MaxLength|Matches|Length|Equals|NotEquals|Contains|NotContains|Allow)'
             }
           ],
           groups: [
+            'swagger',
             'nest-structural',
             'nest-http',
-            'swagger',
             'graphql-type',
             'graphql-resolver',
             'mongoose',
@@ -148,27 +91,27 @@ export default eslint(
           customGroups: [
             {
               groupName: 'type',
-              elementNamePattern: ['^type$']
+              elementNamePattern: '^type$'
             },
             {
               groupName: 'description',
-              elementNamePattern: ['^description$']
+              elementNamePattern: '^description$'
             },
             {
               groupName: 'example',
-              elementNamePattern: ['^example$', '^examples$']
+              elementNamePattern: '^(example|examples)$'
             },
             {
               groupName: 'enum',
-              elementNamePattern: ['^enum$']
+              elementNamePattern: '^enum$'
             },
             {
               groupName: 'required',
-              elementNamePattern: ['^required$', '^nullable$', '^isArray$', '^optional$']
+              elementNamePattern: '^(required|nullable|isArray|optional)$'
             },
             {
               groupName: 'default',
-              elementNamePattern: ['^default$']
+              elementNamePattern: '^default$'
             }
           ],
           groups: ['type', 'description', 'example', 'enum', 'required', 'default', 'unknown']

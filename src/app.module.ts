@@ -10,17 +10,12 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import * as path from 'node:path';
 
-import { CarsModule } from '@/modules/cars/cars.module';
-import { CinemaModule } from '@/modules/cinema/cinema.module';
-import { DeliveryModule } from '@/modules/delivery/delivery.module';
-import { GamesModule } from '@/modules/games/games.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
-import { PizzaModule } from '@/modules/pizza/pizza.module';
-import { TesterModule } from '@/modules/tester';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
-import { CronModule } from './modules/cron';
+import { AuthModule } from './modules/auth';
+import { SessionsModule } from './modules/sessions';
 import { withBaseUrl } from './utils/helpers';
 
 @Module({
@@ -35,12 +30,11 @@ import { withBaseUrl } from './utils/helpers';
       },
       resolvers: [{ use: QueryResolver, options: ['lang'] }, AcceptLanguageResolver]
     }),
-    MongooseModule.forRoot(process.env.DATABASE_URL, { dbName: 'juniors-bootcamp' }),
+    MongooseModule.forRoot(process.env.DATABASE_URL!, { dbName: 'juniors-bootcamp' }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-      playground: false,
       useGlobalPrefix: true,
       introspection: true,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
@@ -52,21 +46,26 @@ import { withBaseUrl } from './utils/helpers';
         };
         return graphQLFormattedError;
       },
-      context: ({ req, res }) => ({ req, res })
+      context: ({ req, reply }) => ({
+        req,
+        reply
+      })
     }),
     ServeStaticModule.forRoot({
       serveRoot: withBaseUrl('/static'),
       rootPath: path.join(__dirname, '/static')
     }),
+    AuthModule,
     OtpsModule,
     UsersModule,
-    CinemaModule,
-    DeliveryModule,
-    CarsModule,
-    GamesModule,
-    PizzaModule,
-    TesterModule,
-    CronModule
+    SessionsModule
+    // CinemaModule,
+    // DeliveryModule,
+    // CarsModule,
+    // GamesModule,
+    // PizzaModule,
+    // TesterModule,
+    // CronModule
   ],
   providers: []
 })
