@@ -5,7 +5,7 @@
 ## Структура модуля
 
 - module
-- repository
+- schema
 - service
 - controller
 - resolver
