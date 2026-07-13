@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
   async createSessionToken(signInDto: SignInDto) {
-    let user = await this.usersService.findByPhone(signInDto.phone);
+    let user = await this.usersService.findOne({ phone: signInDto.phone });
 
     if (!user) {
       user = await this.usersService.create({ phone: signInDto.phone });

@@ -27,8 +27,4 @@ export class UsersService extends BaseService<UserEntitySchema> {
 
     return Result.success({ user: updatedUser });
   }
-
-  async findByPhone(phone: string) {
-    return this.findOne({ phone });
-  }
 }
