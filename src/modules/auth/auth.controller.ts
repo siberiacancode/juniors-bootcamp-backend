@@ -14,7 +14,7 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto';
 import { SignInResponse } from './responses';
 
-@ApiTags('🔐 auth')
+@ApiTags('🔒 auth')
 @Controller('auth')
 export class AuthController {
   constructor(

@@ -10,7 +10,7 @@ export class OtpsResolver {
   constructor(private readonly otpsService: OtpsService) {}
 
   @Mutation(() => CreateOtpResponse)
-  async createOtp(@Args() args: CreateOtpDto): Promise<CreateOtpResponse> {
-    return this.otpsService.createOtp(args);
+  async createOtp(@Args() сreateOtpDto: CreateOtpDto): Promise<CreateOtpResponse> {
+    return this.otpsService.createOtp(сreateOtpDto);
   }
 }

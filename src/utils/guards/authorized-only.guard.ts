@@ -25,7 +25,7 @@ export class AuthorizedOnlyGuard implements CanActivate {
     private readonly reflector: Reflector
   ) {}
 
-  async canActivate(context: ExecutionContext): Promise<boolean> {
+  async canActivate(context: ExecutionContext) {
     const isAuthorizedOnly = this.reflector.getAllAndOverride<boolean>(AUTHORIZED_ONLY_KEY, [
       context.getHandler(),
       context.getClass()
@@ -59,7 +59,7 @@ export class AuthorizedOnlyGuard implements CanActivate {
     return true;
   }
 
-  private extractToken(request: FastifyRequest): string | null {
+  private extractToken(request: FastifyRequest) {
     const cookieToken = request.cookies?.session_token;
     if (cookieToken) return cookieToken;
 
