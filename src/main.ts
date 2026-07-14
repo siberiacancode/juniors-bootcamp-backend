@@ -18,7 +18,9 @@ import * as client from 'prom-client';
 // import { UsersModule } from '@/modules/users/users.module';
 import { AppModule } from './app.module';
 import { AuthModule } from './modules/auth';
+import { CardsModule } from './modules/cards';
 import { OtpsModule } from './modules/otps';
+import { TransactionsModule } from './modules/transactions';
 import { UsersModule } from './modules/users';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
 
@@ -209,7 +211,9 @@ function useOpenApi(app: NestFastifyApplication) {
       AppModule,
       OtpsModule,
       AuthModule,
-      UsersModule
+      UsersModule,
+      CardsModule,
+      TransactionsModule
       // ...moduleDocs.map((moduleDoc) => moduleDoc.module)
     ]
   });

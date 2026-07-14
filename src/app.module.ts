@@ -9,7 +9,9 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'node:path';
 
+import { CardsModule } from '@/modules/cards/cards.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
+import { TransactionsModule } from '@/modules/transactions/transactions.module';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
@@ -56,6 +58,8 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     AuthModule,
     OtpsModule,
     UsersModule,
+    CardsModule,
+    TransactionsModule,
     SessionsModule,
     CronModule
     // CinemaModule,
