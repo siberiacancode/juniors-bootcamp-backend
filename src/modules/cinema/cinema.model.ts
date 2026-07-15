@@ -22,10 +22,10 @@ export class FilmsResponse extends BaseResponse {
 
 @ObjectType()
 export class ScheduleResponse extends BaseResponse {
-  @Field(() => FilmSchedule)
+  @Field(() => [FilmSchedule])
   @ApiProperty({
     description: 'Расписание',
-    type: FilmSchedule
+    type: [FilmSchedule]
   })
   schedules: FilmSchedule[];
 }

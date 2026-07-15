@@ -33,7 +33,6 @@ export class FilmHallCell {
   })
   type: FilmHallCellType;
 
-  @ApiProperty()
   @Field(() => Number)
   @ApiProperty({ example: 100, description: 'Цена места в зале' })
   price: number;
