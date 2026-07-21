@@ -14,19 +14,7 @@ export class CronController {
   // ) {
   //   super();
   // }
-  // @Cron('*/20 * * * *')
-  // async handlePizzaCron() {
-  //   const orders = await this.pizzaOrderService.find({
-  //     $and: [{ status: { $ne: PizzaStatus.SUCCESS } }, { status: { $ne: PizzaStatus.CANCELED } }]
-  //   });
-  //   const randomOrders = orders.filter(() => Math.random() < 0.3);
-  //   if (!randomOrders.length) return;
-  //   const updatedResult = await this.pizzaOrderService.updateMany(
-  //     { _id: { $in: randomOrders.map((order) => order._id) } },
-  //     { $inc: { status: 1 }, $set: { cancellable: false } }
-  //   );
-  //   console.log('PIZZA CRON:', new Date(), 'updated', updatedResult.modifiedCount);
-  // }
+
   // @Cron('*/20 * * * *')
   // async handleDeliveryCron() {
   //   const deliveries = await this.deliveryOrderService.find({

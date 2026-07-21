@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from '@nestjs/schedule';
 import { join } from 'node:path';
 
 import { OtpsModule } from '@/modules/otps/otps.module';
@@ -14,7 +15,6 @@ import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth';
-import { CronModule } from './modules/cron';
 import { PizzasModule } from './modules/pizzas';
 import { SessionsModule } from './modules/sessions';
 import { AuthorizedOnlyGuard } from './utils/guards';
@@ -31,6 +31,7 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     //   },
     //   resolvers: [{ use: QueryResolver, options: ['lang'] }, AcceptLanguageResolver]
     // }),
+    ScheduleModule.forRoot(),
     MongooseModule.forRoot(process.env.DATABASE_URL!, {
       dbName: 'juniors-bootcamp',
       connectionFactory: (connection) => {
@@ -67,7 +68,6 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     OtpsModule,
     UsersModule,
     SessionsModule,
-    CronModule,
     PizzasModule
     // CinemaModule,
     // DeliveryModule,
