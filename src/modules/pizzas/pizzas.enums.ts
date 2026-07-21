@@ -5,6 +5,11 @@ export enum Dough {
   THICK = 'thick'
 }
 
+registerEnumType(Dough, {
+  name: 'Dough',
+  description: 'Тесто'
+});
+
 export enum Ingredient {
   PINEAPPLE = 'pineapple',
   MOZZARELLA = 'mozzarella',
@@ -26,6 +31,11 @@ export enum Ingredient {
   MEATBALLS = 'meatballs'
 }
 
+registerEnumType(Ingredient, {
+  name: 'Ingredient',
+  description: 'Ингредиенты'
+});
+
 export enum Size {
   SMALL = 'small',
   MEDIUM = 'medium',
@@ -33,13 +43,6 @@ export enum Size {
 }
 
 registerEnumType(Size, {
-  name: 'Size'
-});
-
-registerEnumType(Ingredient, {
-  name: 'Ingredient'
-});
-
-registerEnumType(Dough, {
-  name: 'Dough'
+  name: 'Size',
+  description: 'Размер пиццы'
 });

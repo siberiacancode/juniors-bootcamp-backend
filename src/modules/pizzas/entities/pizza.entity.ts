@@ -1,5 +1,6 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
+import { Types } from 'mongoose';
 
 import { PizzaDough } from './pizza-dough.entity';
 import { PizzaIngredient } from './pizza-ingredient.entity';
@@ -8,9 +9,9 @@ import { PizzaSize } from './pizza-size.entity';
 @InputType('PizzaInput')
 @ObjectType()
 export class Pizza {
-  @ApiProperty({ description: 'Идентификатор пиццы', example: '1' })
-  @Field(() => String)
-  id: string;
+  @ApiProperty({ type: String, description: 'ID пиццы' })
+  @Field(() => ID)
+  _id: Types.ObjectId;
 
   @ApiProperty({ description: 'Название пиццы' })
   @Field(() => String)
@@ -19,10 +20,6 @@ export class Pizza {
   @ApiProperty({ type: [PizzaIngredient], description: 'Ингредиенты' })
   @Field(() => [PizzaIngredient])
   ingredients: PizzaIngredient[];
-
-  @ApiProperty({ type: [PizzaIngredient], description: 'Топпинги' })
-  @Field(() => [PizzaIngredient])
-  toppings: PizzaIngredient[];
 
   @ApiProperty({ description: 'Описание пиццы' })
   @Field(() => String)
@@ -70,7 +67,7 @@ export class Pizza {
 
   @ApiProperty({ description: 'Новинка' })
   @Field(() => Boolean)
-  isNew: boolean;
+  isNovelty: boolean;
 
   @ApiProperty({ description: 'Хит' })
   @Field(() => Boolean)

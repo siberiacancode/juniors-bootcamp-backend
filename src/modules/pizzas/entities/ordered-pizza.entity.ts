@@ -1,17 +1,18 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { Types } from 'mongoose';
 
-import { Dough, Ingredient, Size } from '../constants';
+import { Dough, Ingredient, Size } from '../pizzas.enums';
 
 @InputType('OrderedPizzaInput')
 @ObjectType()
 export class OrderedPizza {
-  @ApiProperty({ description: 'Идентификатор пиццы', example: '1' })
-  @Field(() => String)
+  @ApiProperty({ description: 'Идентификатор пиццы' })
+  @Field(() => ID)
   @IsNotEmpty()
   @IsString()
-  id: string;
+  _id: Types.ObjectId;
 
   @ApiProperty({
     type: [Ingredient],

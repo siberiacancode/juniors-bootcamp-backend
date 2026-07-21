@@ -1,34 +1,8 @@
-import type { Pizza } from '../entities';
+import { PizzaEntitySchema } from '../pizza.schema';
+import { Dough, Ingredient, Size } from '../pizzas.enums';
 
-import { Dough, Ingredient, Size } from './enums';
-
-export const TOPPINGS = [
-  { type: Ingredient.PINEAPPLE, price: 80, img: '/static/images/ingredient/pineapple.png' },
-  { type: Ingredient.GREEN_PEPPER, price: 60, img: '/static/images/ingredient/green_pepper.png' },
-  { type: Ingredient.MUSHROOMS, price: 80, img: '/static/images/ingredient/mushrooms.png' },
-  { type: Ingredient.BACON, price: 80, img: '/static/images/ingredient/bacon.png' },
-  { type: Ingredient.SHRIMP, price: 80, img: '/static/images/ingredient/shrimps.png' },
-  { type: Ingredient.HAM, price: 80, img: '/static/images/ingredient/ham.png' },
-  { type: Ingredient.MOZZARELLA, price: 70, img: '/static/images/ingredient/mozzarella.png' },
-  { type: Ingredient.PEPPERONI, price: 120, img: '/static/images/ingredient/peperoni.png' },
+export const PIZZAS: PizzaEntitySchema[] = [
   {
-    type: Ingredient.CHICKEN_FILLET,
-    price: 80,
-    img: '/static/images/ingredient/chicken_fillet.png'
-  },
-  { type: Ingredient.ONION, price: 80, img: '/static/images/ingredient/onion.png' },
-  { type: Ingredient.BASIL, price: 80, img: '/static/images/ingredient/basil.png' },
-  { type: Ingredient.CHILE, price: 80, img: '/static/images/ingredient/chile.png' },
-  { type: Ingredient.CHEDDAR, price: 80, img: '/static/images/ingredient/cheddar.png' },
-  { type: Ingredient.MEATBALLS, price: 80, img: '/static/images/ingredient/meatballs.png' },
-  { type: Ingredient.PICKLE, price: 80, img: '/static/images/ingredient/pickle.png' },
-  { type: Ingredient.TOMATO, price: 80, img: '/static/images/ingredient/tomato.png' },
-  { type: Ingredient.FETA, price: 80, img: '/static/images/ingredient/feta.png' }
-];
-
-export const PIZZAS: Pizza[] = [
-  {
-    id: '1',
     name: 'ШИФТ Суприм',
     ingredients: [
       {
@@ -54,7 +28,6 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/mushrooms.png'
       }
     ],
-    toppings: TOPPINGS,
     description:
       'Шифт пицца с пепперони, колбасой, зеленым перцем, луком, оливками и шампиньонами.',
     sizes: [
@@ -74,12 +47,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница', 'соевые бобы'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: true,
     img: '/static/images/pizza/1.webp'
   },
   {
-    id: '2',
     name: 'Маргарита',
     ingredients: [
       {
@@ -93,7 +65,6 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/basil.png'
       }
     ],
-    toppings: TOPPINGS,
     description: 'Классическая пицца с томатным соусом, моцареллой и листьями базилика.',
     sizes: [
       { type: Size.SMALL, price: 449 },
@@ -112,12 +83,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: true,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/2.webp'
   },
   {
-    id: '3',
     name: 'Четыре Сыра',
     ingredients: [
       {
@@ -136,7 +106,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/green_pepper.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с миксом моцареллы, чеддера, пармезана и феты.',
     sizes: [
       { type: Size.SMALL, price: 549 },
@@ -155,12 +125,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: true,
     isGlutenFree: false,
-    isNew: true,
+    isNovelty: true,
     isHit: false,
     img: '/static/images/pizza/3.webp'
   },
   {
-    id: '4',
     name: 'Гавайская',
     ingredients: [
       {
@@ -179,7 +148,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/pineapple.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с ветчиной и ананасом.',
     sizes: [
       { type: Size.SMALL, price: 549 },
@@ -198,12 +167,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/4.webp'
   },
   {
-    id: '5',
     name: 'Пепперони',
     ingredients: [
       {
@@ -217,7 +185,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/peperoni.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Классическая пицца с пепперони.',
     sizes: [
       { type: Size.SMALL, price: 499 },
@@ -236,12 +204,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/5.webp'
   },
   {
-    id: '6',
     name: 'Вегетарианская',
     ingredients: [
       {
@@ -265,7 +232,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/green_pepper.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с овощами: помидорами, шампиньонами, зеленым перцем и красным луком.',
     sizes: [
       { type: Size.SMALL, price: 549 },
@@ -284,12 +251,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: true,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/6.webp'
   },
   {
-    id: '7',
     name: 'Мясная',
     ingredients: [
       {
@@ -308,7 +274,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/shrimps.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с ассорти мяса: говядиной, салями и беконом.',
     sizes: [
       { type: Size.SMALL, price: 599 },
@@ -327,12 +293,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/7.webp'
   },
   {
-    id: '8',
     name: 'Мексиканская',
     ingredients: [
       {
@@ -353,7 +318,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/onion.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description:
       'Пицца с мексиканскими пряностями: говядиной, перцем чили, перцем халапеньо, кукурузой и луком.',
     sizes: [
@@ -373,12 +338,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/8.webp'
   },
   {
-    id: '9',
     name: 'Кальцоне',
     ingredients: [
       {
@@ -397,7 +361,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/mushrooms.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Запеченная пицца-кальцоне с моцареллой, ветчиной, грибами и яйцом.',
     sizes: [
       { type: Size.SMALL, price: 599 },
@@ -416,12 +380,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница', 'яйцо'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/9.webp'
   },
   {
-    id: '10',
     name: 'Мясоед',
     ingredients: [
       {
@@ -441,7 +404,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/ham.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца для любителей мяса с салями, беконом и ветчиной.',
     sizes: [
       { type: Size.SMALL, price: 649 },
@@ -460,12 +423,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/10.webp'
   },
   {
-    id: '11',
     name: 'Морская',
     ingredients: [
       {
@@ -479,7 +441,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/shrimps.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с морепродуктами: креветками, мидиями, кальмарами и маслинами.',
     sizes: [
       { type: Size.SMALL, price: 649 },
@@ -498,12 +460,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница', 'морепродукты'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/11.webp'
   },
   {
-    id: '12',
     name: 'Четыре Сыра с грибами',
     ingredients: [
       {
@@ -528,7 +489,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/mushrooms.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с миксом моцареллы, чеддера, пармезана, феты и шампиньонами.',
     sizes: [
       { type: Size.SMALL, price: 649 },
@@ -547,12 +508,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: true,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/12.webp'
   },
   {
-    id: '13',
     name: 'Маринара',
     ingredients: [
       {
@@ -561,7 +521,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/mozzarella.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Простая пицца с томатным соусом, чесноком, оливковым маслом и орегано.',
     sizes: [
       { type: Size.SMALL, price: 449 },
@@ -580,12 +540,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: true,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/13.webp'
   },
   {
-    id: '14',
     name: 'Фруктовая',
     ingredients: [
       {
@@ -599,7 +558,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/pineapple.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с фруктами: ананасом, бананом и персиком.',
     sizes: [
       { type: Size.SMALL, price: 499 },
@@ -618,12 +577,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: true,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/14.webp'
   },
   {
-    id: '15',
     name: 'Барбекю Чикен',
     ingredients: [
       {
@@ -642,7 +600,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/onion.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с куриной грудкой, луком и барбекю соусом.',
     sizes: [
       { type: Size.SMALL, price: 549 },
@@ -661,12 +619,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/15.webp'
   },
   {
-    id: '16',
     name: 'Филадельфия',
     ingredients: [
       {
@@ -680,7 +637,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/onion.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с лососем, сыром филадельфия, авокадо и зеленым луком.',
     sizes: [
       { type: Size.SMALL, price: 649 },
@@ -699,12 +656,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/16.webp'
   },
   {
-    id: '17',
     name: 'Пикантная Мексиканская',
     ingredients: [
       {
@@ -728,7 +684,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/cheddar.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description:
       'Острая пицца с говядиной, перцем чили, перцем халапеньо, кукурузой, луком и топленным сыром.',
     sizes: [
@@ -748,12 +704,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/17.webp'
   },
   {
-    id: '18',
     name: 'Карбонара',
     ingredients: [
       {
@@ -772,7 +727,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/green_pepper.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с беконом, сыром пармезан и яйцом в сливочном соусе.',
     sizes: [
       { type: Size.SMALL, price: 649 },
@@ -791,12 +746,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница', 'яйцо'],
     isVegetarian: false,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/18.webp'
   },
   {
-    id: '19',
     name: 'Греческая',
     ingredients: [
       {
@@ -816,7 +770,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/green_pepper.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description:
       'Пицца с томатным соусом, моцареллой, помидорами, оливками, перцем, фетой и орегано.',
     sizes: [
@@ -836,12 +790,11 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: true,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/19.webp'
   },
   {
-    id: '20',
     name: 'Шпинатная',
     ingredients: [
       {
@@ -860,7 +813,7 @@ export const PIZZAS: Pizza[] = [
         img: '/static/images/ingredient/green_pepper.png'
       }
     ],
-    toppings: TOPPINGS,
+
     description: 'Пицца с томатным соусом, моцареллой, шпинатом, фетой, чесноком и орегано.',
     sizes: [
       { type: Size.SMALL, price: 549 },
@@ -879,7 +832,7 @@ export const PIZZAS: Pizza[] = [
     allergens: ['молоко', 'пшеница'],
     isVegetarian: true,
     isGlutenFree: false,
-    isNew: false,
+    isNovelty: false,
     isHit: false,
     img: '/static/images/pizza/20.webp'
   }

@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNumber } from 'class-validator';
 
-import { Size } from '../constants/enums';
+import { Size } from '../pizzas.enums';
 
 @InputType('PizzaSizeInput')
 @ObjectType()

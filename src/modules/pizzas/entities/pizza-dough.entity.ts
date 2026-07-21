@@ -2,13 +2,13 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 
-import { Dough } from '../constants';
+import { Dough } from '../pizzas.enums';
 
 @InputType('PizzaDoughInput')
 @ObjectType()
 export class PizzaDough {
   @ApiProperty({
-    description: 'Идентификатор типа теста',
+    description: 'Тип теста',
     example: Dough.THIN,
     enum: Dough,
     enumName: 'Dough'

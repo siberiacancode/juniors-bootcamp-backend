@@ -1,7 +1,7 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { Ingredient } from '../constants/enums';
+import { Ingredient } from '../pizzas.enums';
 
 @InputType('PizzaIngredientInput')
 @ObjectType()
