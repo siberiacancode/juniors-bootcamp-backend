@@ -3,11 +3,10 @@ import type { FastifyReply } from 'fastify';
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { Session, SessionsService } from '@/modules/sessions';
+import { Session } from '@/modules/sessions';
 import { BaseResponse } from '@/utils/base';
 import { Client, CurrentSession } from '@/utils/decorators';
 import { AuthorizedOnly } from '@/utils/guards';
-import { Result } from '@/utils/helpers';
 
 import { ClientType } from '../sessions';
 import { AuthService } from './auth.service';
@@ -17,11 +16,7 @@ import { SignInResponse } from './responses';
 @ApiTags('🔒 auth')
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-
-    private readonly sessionsService: SessionsService
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @ApiHeader({
     example: ClientType.WEB,
@@ -44,22 +39,7 @@ export class AuthController {
     })
     reply: FastifyReply
   ): Promise<SignInResponse> {
-    const { token, user } = await this.authService.createSessionToken(signInDto);
-
-    if (clientType === ClientType.WEB) {
-      reply.setCookie('session_token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        maxAge: 60 * 60 * 24 * 7,
-        path: '/'
-      });
-    }
-
-    return Result.success({
-      user,
-      ...(clientType === ClientType.MOBILE && { token })
-    });
+    return this.authService.signIn(signInDto, reply, clientType);
   }
 
   @ApiHeader({
@@ -78,12 +58,9 @@ export class AuthController {
   @AuthorizedOnly()
   async signOut(
     @CurrentSession() session: Session,
-    @Res({ passthrough: true }) reply: FastifyReply
+    @Res({ passthrough: true }) reply: FastifyReply,
+    @Client() clientType: ClientType
   ): Promise<BaseResponse> {
-    await this.sessionsService.deleteById(session._id);
-
-    reply.clearCookie('session_token', {});
-
-    return Result.success();
+    return this.authService.signOut(session._id, reply, clientType);
   }
 }

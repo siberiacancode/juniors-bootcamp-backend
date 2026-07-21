@@ -15,6 +15,7 @@ import { UsersModule } from '@/modules/users/users.module';
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth';
 import { CronModule } from './modules/cron';
+import { PizzasModule } from './modules/pizzas';
 import { SessionsModule } from './modules/sessions';
 import { AuthorizedOnlyGuard } from './utils/guards';
 
@@ -30,7 +31,16 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     //   },
     //   resolvers: [{ use: QueryResolver, options: ['lang'] }, AcceptLanguageResolver]
     // }),
-    MongooseModule.forRoot(process.env.DATABASE_URL!, { dbName: 'juniors-bootcamp' }),
+    MongooseModule.forRoot(process.env.DATABASE_URL!, {
+      dbName: 'juniors-bootcamp',
+      connectionFactory: (connection) => {
+        connection.plugin((schema) => {
+          schema.set('versionKey', false);
+        });
+
+        return connection;
+      }
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
@@ -40,15 +50,15 @@ import { AuthorizedOnlyGuard } from './utils/guards';
       introspection: true,
       graphiql: false,
       playground: false,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()]
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
       // TODO GqlExceptionFilter or formatError
       // formatError: (formattedError, error) => formattedError
-      // TODO: fix context
-      // context: async ({ req, reply }) => ({
-      //   req,
-      //   reply
-      // })
+      context: async (request, reply) => ({
+        req: request,
+        reply
+      })
     }),
+    // ServeStaticModule для SPA, для статики достаточно useStaticAssets и setViewEngine в main
     // ServeStaticModule.forRoot({
     //   serveRoot: withBaseUrl('/static'),
     //   rootPath: join(__dirname, 'src/static')
@@ -57,12 +67,12 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     OtpsModule,
     UsersModule,
     SessionsModule,
-    CronModule
+    CronModule,
+    PizzasModule
     // CinemaModule,
     // DeliveryModule,
     // CarsModule,
     // GamesModule,
-    // PizzaModule,
     // TesterModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: AuthorizedOnlyGuard }]

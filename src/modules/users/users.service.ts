@@ -27,4 +27,14 @@ export class UsersService extends BaseService<UserEntitySchema> {
 
     return Result.success({ user: updatedUser });
   }
+
+  async findOrCreateUser(phone: string) {
+    let user = await this.findOne({ phone });
+
+    if (!user) {
+      user = await this.create({ phone });
+    }
+
+    return user;
+  }
 }

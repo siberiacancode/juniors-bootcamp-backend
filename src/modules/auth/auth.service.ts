@@ -1,9 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { FastifyReply } from 'fastify';
+import { Types } from 'mongoose';
 
 import { Result } from '@/utils/helpers';
 
 import { OtpsService } from '../otps';
-import { SessionsService } from '../sessions';
+import { ClientType, SessionsService } from '../sessions';
 import { UsersService } from '../users';
 import { SignInDto } from './dto';
 
@@ -15,12 +17,8 @@ export class AuthService {
     private readonly usersService: UsersService
   ) {}
 
-  async createSessionToken(signInDto: SignInDto) {
-    let user = await this.usersService.findOne({ phone: signInDto.phone });
-
-    if (!user) {
-      user = await this.usersService.create({ phone: signInDto.phone });
-    }
+  async signIn(signInDto: SignInDto, reply: FastifyReply, clientType: ClientType) {
+    const user = await this.usersService.findOrCreateUser(signInDto.phone);
 
     const otp = await this.otpsService.findOne({ phone: signInDto.phone, code: signInDto.code });
 
@@ -35,11 +33,33 @@ export class AuthService {
       expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
     });
 
-    const sessionToken = session._id.toString();
+    const token = session._id.toString();
 
-    return {
+    if (clientType === ClientType.WEB) {
+      reply.setCookie('session_token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/'
+      });
+    }
+
+    return Result.success({
       user,
-      token: sessionToken
-    };
+      ...(clientType === ClientType.MOBILE && { token })
+    });
+  }
+
+  async signOut(sessionId: Types.ObjectId, reply: FastifyReply, clientType: ClientType) {
+    await this.sessionsService.deleteById(sessionId);
+
+    if (clientType === ClientType.WEB) {
+      reply.clearCookie('session_token', {
+        path: '/'
+      });
+    }
+
+    return Result.success();
   }
 }
