@@ -13,20 +13,250 @@ type CreateOtpResponse {
   success: Boolean!
 }
 
+input CreatePizzaPaymentAddressDto {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+input CreatePizzaPaymentDebitCardDto {
+  cvv: String!
+  expireDate: String!
+  pan: String!
+}
+
+input CreatePizzaPaymentPersonDto {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+type CreatePizzaPaymentResponse {
+  order: PizzaOrder!
+  reason: String
+  success: Boolean!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""Тесто"""
+enum Dough {
+  THICK
+  THIN
+}
+
+type GetPizzaCatalogResponse {
+  catalog: [Pizza!]!
+  reason: String
+  success: Boolean!
+}
+
+type GetPizzaOrderResponse {
+  order: PizzaOrder!
+  reason: String
+  success: Boolean!
+}
+
+type GetPizzaOrdersResponse {
+  orders: [PizzaOrder!]!
+  reason: String
+  success: Boolean!
+}
+
 type GetProfileResponse {
   reason: String
   success: Boolean!
   user: User!
 }
 
+"""Ингредиенты"""
+enum Ingredient {
+  BACON
+  BASIL
+  CHEDDAR
+  CHICKEN_FILLET
+  CHILE
+  FETA
+  GREEN_PEPPER
+  HAM
+  MEATBALLS
+  MOZZARELLA
+  MUSHROOMS
+  ONION
+  PARMESAN
+  PEPPERONI
+  PICKLE
+  PINEAPPLE
+  SHRIMP
+  TOMATO
+}
+
 type Mutation {
+  """Отменить заказ"""
+  cancelPizzaOrder(orderId: String!): BaseResponse!
   createOtp(phone: String!): CreateOtpResponse!
+
+  """Оплатить корзину"""
+  createPizzaPayment(debitCard: CreatePizzaPaymentDebitCardDto!, person: CreatePizzaPaymentPersonDto!, pizzas: [OrderedPizzaInput!]!, receiverAddress: CreatePizzaPaymentAddressDto!): CreatePizzaPaymentResponse!
   signIn(code: Float!, phone: String!): SignInResponse!
   signOut: BaseResponse!
   updateProfile(input: UpdateProfileDto!): UpdateProfileResponse!
 }
 
+input OrderedPizzaInput {
+  _id: ID!
+  dough: Dough!
+  size: Size!
+  toppings: [Ingredient!]!
+}
+
+type Pizza {
+  _id: ID!
+  allergens: [String!]!
+  calories: Float!
+  carbohydrates: String!
+  description: String!
+  doughs: [PizzaDough!]!
+  img: String!
+  ingredients: [PizzaIngredient!]!
+  isGlutenFree: Boolean!
+  isHit: Boolean!
+  isNovelty: Boolean!
+  isVegetarian: Boolean!
+  name: String!
+  protein: String!
+  sizes: [PizzaSize!]!
+  sodium: String!
+  totalFat: String!
+}
+
+type PizzaAddress {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+input PizzaAddressInput {
+  apartment: String!
+  comment: String
+  house: String!
+  street: String!
+}
+
+type PizzaDough {
+  price: Float!
+  type: Dough!
+}
+
+input PizzaDoughInput {
+  price: Float!
+  type: Dough!
+}
+
+type PizzaIngredient {
+  img: String!
+  price: Float!
+  type: Ingredient!
+}
+
+input PizzaIngredientInput {
+  img: String!
+  price: Float!
+  type: Ingredient!
+}
+
+input PizzaInput {
+  _id: ID!
+  allergens: [String!]!
+  calories: Float!
+  carbohydrates: String!
+  description: String!
+  doughs: [PizzaDoughInput!]!
+  img: String!
+  ingredients: [PizzaIngredientInput!]!
+  isGlutenFree: Boolean!
+  isHit: Boolean!
+  isNovelty: Boolean!
+  isVegetarian: Boolean!
+  name: String!
+  protein: String!
+  sizes: [PizzaSizeInput!]!
+  sodium: String!
+  totalFat: String!
+}
+
+type PizzaOrder {
+  _id: String!
+  cancellable: Boolean!
+  createdAt: DateTime!
+  person: PizzaPerson!
+  pizzas: [Pizza!]!
+  receiverAddress: PizzaAddress!
+  status: PizzaStatus!
+  totalPrice: Float!
+  updatedAt: DateTime!
+}
+
+input PizzaOrderInput {
+  _id: String!
+  cancellable: Boolean!
+  createdAt: DateTime!
+  person: PizzaPersonInput!
+  pizzas: [PizzaInput!]!
+  receiverAddress: PizzaAddressInput!
+  status: PizzaStatus!
+  totalPrice: Float!
+  updatedAt: DateTime!
+}
+
+type PizzaPerson {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+input PizzaPersonInput {
+  firstname: String!
+  lastname: String!
+  middlename: String
+  phone: String!
+}
+
+type PizzaSize {
+  price: Float!
+  type: Size!
+}
+
+input PizzaSizeInput {
+  price: Float!
+  type: Size!
+}
+
+"""Статус заказа"""
+enum PizzaStatus {
+  CANCELED
+  IN_PROCESSING
+  ON_MY_WAY
+  SUCCESS
+  WAITING_COURIER
+}
+
 type Query {
+  """Получить каталог"""
+  getCatalog: GetPizzaCatalogResponse!
+
+  """Получить заказ"""
+  getPizzaOrder(orderId: String!): GetPizzaOrderResponse!
+
+  """Получить все заказы"""
+  getPizzaOrders: GetPizzaOrdersResponse!
   getProfile: GetProfileResponse!
 }
 
@@ -35,6 +265,13 @@ type SignInResponse {
   success: Boolean!
   token: String!
   user: User!
+}
+
+"""Размер пиццы"""
+enum Size {
+  LARGE
+  MEDIUM
+  SMALL
 }
 
 input UpdateProfileDto {

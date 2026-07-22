@@ -13,7 +13,8 @@
     "lint-inspector": "npx @eslint/config-inspector",
     "format": "prettier --write \"**/*.(ts|js)\"",
     "pretty": "yarn format && yarn lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "seed": "ts-node --files -r tsconfig-paths/register src/seed.ts"
   },
   "dependencies": {
     "@apollo/server": "^5.5.1",
@@ -56,6 +57,7 @@
     "husky": "^9.1.7",
     "nano-staged": "^1.0.2",
     "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
     "typescript": "~5.9.3"
   },
   "nano-staged": {

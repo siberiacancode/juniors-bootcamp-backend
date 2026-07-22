@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from '@nestjs/schedule';
 import { join } from 'node:path';
 
 import { CardsModule } from '@/modules/cards/cards.module';
@@ -16,7 +17,7 @@ import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth';
-import { CronModule } from './modules/cron';
+import { PizzasModule } from './modules/pizzas';
 import { SessionsModule } from './modules/sessions';
 import { AuthorizedOnlyGuard } from './utils/guards';
 
@@ -32,7 +33,17 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     //   },
     //   resolvers: [{ use: QueryResolver, options: ['lang'] }, AcceptLanguageResolver]
     // }),
-    MongooseModule.forRoot(process.env.DATABASE_URL!, { dbName: 'juniors-bootcamp' }),
+    ScheduleModule.forRoot(),
+    MongooseModule.forRoot(process.env.DATABASE_URL!, {
+      dbName: 'juniors-bootcamp',
+      connectionFactory: (connection) => {
+        connection.plugin((schema) => {
+          schema.set('versionKey', false);
+        });
+
+        return connection;
+      }
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
@@ -42,15 +53,15 @@ import { AuthorizedOnlyGuard } from './utils/guards';
       introspection: true,
       graphiql: false,
       playground: false,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()]
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
       // TODO GqlExceptionFilter or formatError
       // formatError: (formattedError, error) => formattedError
-      // TODO: fix context
-      // context: async ({ req, reply }) => ({
-      //   req,
-      //   reply
-      // })
+      context: async (request, reply) => ({
+        req: request,
+        reply
+      })
     }),
+    // ServeStaticModule для SPA, для статики достаточно useStaticAssets и setViewEngine в main
     // ServeStaticModule.forRoot({
     //   serveRoot: withBaseUrl('/static'),
     //   rootPath: join(__dirname, 'src/static')
@@ -61,12 +72,11 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     CardsModule,
     TransactionsModule,
     SessionsModule,
-    CronModule
+    PizzasModule
     // CinemaModule,
     // DeliveryModule,
     // CarsModule,
     // GamesModule,
-    // PizzaModule,
     // TesterModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: AuthorizedOnlyGuard }]

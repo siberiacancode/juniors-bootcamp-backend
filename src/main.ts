@@ -20,6 +20,7 @@ import { AppModule } from './app.module';
 import { AuthModule } from './modules/auth';
 import { CardsModule } from './modules/cards';
 import { OtpsModule } from './modules/otps';
+import { PizzasModule } from './modules/pizzas';
 import { TransactionsModule } from './modules/transactions';
 import { UsersModule } from './modules/users';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
@@ -213,7 +214,8 @@ function useOpenApi(app: NestFastifyApplication) {
       AuthModule,
       UsersModule,
       CardsModule,
-      TransactionsModule
+      TransactionsModule,
+      PizzasModule
       // ...moduleDocs.map((moduleDoc) => moduleDoc.module)
     ]
   });
