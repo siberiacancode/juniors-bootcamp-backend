@@ -19,7 +19,7 @@ export class PizzaOrderEntitySchema {
   @Prop({ required: true, default: 0 })
   itemsPrice: number;
 
-  @Prop({ required: true, type: Object })
+  @Prop({ type: Object, required: true })
   commission: PizzaCommission;
 
   @Prop({ required: true })

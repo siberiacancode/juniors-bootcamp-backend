@@ -1,10 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
+import { Result } from '@/utils/helpers';
+
 import { GetTransactionDto, PayTransactionDto } from './dto';
 import { GetTransactionResponse, PayTransactionResponse } from './responses';
 import { Transaction } from './transaction.entity';
 import { TransactionsService } from './transactions.service';
-import { Result } from '@/utils/helpers';
 
 @Resolver(() => Transaction)
 export class TransactionsResolver {
