@@ -1,15 +1,15 @@
-import { Field, GraphQLISODateTime, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, GraphQLISODateTime, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
-import { Pizza, PizzaAddress, PizzaPerson } from '../../entities';
+import { PizzaAddress, PizzaCommission, PizzaOrderedItem, PizzaPerson } from '../../entities';
 import { PizzaStatus } from './pizza-orders.enums';
 
 @InputType('PizzaOrderInput')
 @ObjectType()
 export class PizzaOrder {
   @ApiProperty({ type: String, description: 'ID заказа' })
-  @Field(() => String)
+  @Field(() => ID)
   _id: Types.ObjectId;
 
   @ApiProperty({ type: Date, description: 'Дата создания заказа' })
@@ -20,11 +20,19 @@ export class PizzaOrder {
   @Field(() => GraphQLISODateTime)
   updatedAt: Date;
 
-  @ApiProperty({ type: [Pizza], description: 'Пиццы' })
-  @Field(() => [Pizza])
-  pizzas: Pizza[];
+  @ApiProperty({ type: [PizzaOrderedItem], description: 'Позиции заказа' })
+  @Field(() => [PizzaOrderedItem])
+  items: PizzaOrderedItem[];
 
-  @ApiProperty({ type: Number, description: 'Сумма заказа' })
+  @ApiProperty({ type: Number, description: 'Сумма позиций без доставки' })
+  @Field(() => Number)
+  itemsPrice: number;
+
+  @ApiProperty({ type: PizzaCommission, description: 'Комиссия за доставку (0 — бесплатно)' })
+  @Field(() => PizzaCommission)
+  commission: PizzaCommission;
+
+  @ApiProperty({ type: Number, description: 'Итоговая сумма (позиции + доставка)' })
   @Field(() => Number)
   totalPrice: number;
 
@@ -37,15 +45,19 @@ export class PizzaOrder {
   receiverAddress: PizzaAddress;
 
   @ApiProperty({
-    description: 'Статус доставки',
-    example: PizzaStatus.IN_PROCESSING,
+    description: 'Статус заказа',
+    example: PizzaStatus.AWAITING_PAYMENT,
     enum: PizzaStatus,
     enumName: 'PizzaStatus'
   })
   @Field(() => PizzaStatus)
   status: PizzaStatus;
 
-  @ApiProperty({ type: Boolean, description: 'Статус отмены' })
+  @ApiProperty({ type: Boolean, description: 'Можно ли отменить заказ' })
   @Field(() => Boolean)
   cancellable: boolean;
+
+  @ApiProperty({ type: String, description: 'ID связанной транзакции', nullable: true })
+  @Field(() => String, { nullable: true })
+  transactionId?: string | null;
 }

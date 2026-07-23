@@ -1,93 +1,169 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
+import { TransactionOrderType, TransactionsService } from '@/modules/transactions';
 import { BaseService } from '@/utils/base';
 import { Result } from '@/utils/helpers';
 
-import { UsersService } from '../users';
-import { CreatePizzaPaymentDto } from './dto';
+import { CalculatePizzaOrderDto, CreatePizzaPaymentDto, GetPizzaCatalogDto } from './dto';
+import { PizzaIngredient, PizzaOption, PizzaOrderedItem } from './entities';
 import { PizzaOrdersService, PizzaStatus } from './modules/pizza-orders';
 import { PizzaEntitySchema } from './pizza.schema';
 import { TOPPINGS } from './pizzas.constants';
-import { CreatePizzaPaymentResponse, GetPizzaCatalogResponse } from './responses';
+import { Category, Size } from './pizzas.enums';
+
+const FREE_DELIVERY_THRESHOLD = 1000;
+const CURRENCY = 'RUB';
+
+interface PricedItem {
+  category: Category;
+  img: string;
+  name: string;
+  option?: PizzaOption;
+  productId: Types.ObjectId;
+  quantity: number;
+  size?: Size;
+  toppings?: PizzaIngredient[];
+  totalPrice: number;
+  unitPrice: number;
+}
 
 @Injectable()
 export class PizzasService extends BaseService<PizzaEntitySchema> {
   constructor(
     @InjectModel(PizzaEntitySchema.name) private readonly pizzaModel: Model<PizzaEntitySchema>,
     private readonly pizzaOrdersService: PizzaOrdersService,
-    private readonly usersService: UsersService
+    private readonly transactionsService: TransactionsService
   ) {
     super(pizzaModel);
   }
 
-  async getCatalog(): Promise<GetPizzaCatalogResponse> {
-    const pizzas = await this.findMany();
-    return Result.success({ catalog: pizzas });
-  }
+  private async priceItems(items: PizzaOrderedItem[]) {
+    return Promise.all(
+      items.map(async (item) => {
+        const product = await this.pizzaModel.findById(item._id);
 
-  async createPizzaPayment(
-    createPizzaPaymentDto: CreatePizzaPaymentDto
-  ): Promise<CreatePizzaPaymentResponse> {
-    const { person, receiverAddress } = createPizzaPaymentDto;
+        if (!product) {
+          throw new BadRequestException(Result.fail(`Продукт ${item._id} не найден`));
+        }
 
-    const pizzas = await Promise.all(
-      createPizzaPaymentDto.pizzas.map(async (orderedPizza) => {
-        const pizza = await this.pizzaModel.findById(orderedPizza._id);
+        const selectedSize = item.size
+          ? (product.sizes ?? []).find(({ type }) => type === item.size)
+          : undefined;
+        if (item.size && !selectedSize) {
+          throw new BadRequestException(
+            Result.fail(`Размер ${item.size} недоступен для продукта ${item._id}`)
+          );
+        }
+        const sizePrice = selectedSize?.price ?? 0;
 
-        if (!pizza)
-          throw new BadRequestException(Result.fail(`Пицца ${orderedPizza._id} не найдена`));
+        const selectedOption = item.option
+          ? (product.options ?? []).find(({ type }) => type === item.option)
+          : undefined;
+        if (item.option && !selectedOption) {
+          throw new BadRequestException(
+            Result.fail(`Опция ${item.option} недоступна для продукта ${item._id}`)
+          );
+        }
+        const optionPrice = selectedOption?.price ?? 0;
 
-        const filteredPizza = {
-          ...pizza,
-          toppings: TOPPINGS.filter((topping) => orderedPizza.toppings.includes(topping.type)),
-          doughs: pizza.doughs.filter((dough) => dough.type === orderedPizza.dough),
-          sizes: pizza.sizes.filter((size) => size.type === orderedPizza.size)
-        };
+        const selectedToppings = (item.toppings ?? [])
+          .map((type) => TOPPINGS.find((topping) => topping.type === type))
+          .filter((topping): topping is (typeof TOPPINGS)[number] => Boolean(topping));
+        const toppingsPrice = selectedToppings.reduce((acc, topping) => acc + topping.price, 0);
 
-        const toppingPrice = filteredPizza.toppings.reduce(
-          (acc, topping) => acc + topping.price,
-          0
-        );
-        const doughPrice = filteredPizza.doughs[0].price;
-        const sizePrice = filteredPizza.sizes[0].price;
-        const totalPrice = toppingPrice + doughPrice + sizePrice;
+        const quantity = item.quantity ?? 1;
+        const unitPrice = sizePrice + optionPrice + toppingsPrice;
+        const totalPrice = unitPrice * quantity;
 
-        return { ...filteredPizza, totalPrice };
+        return {
+          productId: product._id,
+          category: product.category,
+          name: product.name,
+          img: product.img,
+          quantity,
+          size: selectedSize,
+          option: selectedOption,
+          toppings: selectedToppings,
+          unitPrice,
+          totalPrice
+        } as PricedItem;
       })
     );
+  }
 
-    const totalPrice = pizzas.reduce((acc, pizza) => acc + pizza.totalPrice, 0);
+  private summarize(priced: PricedItem[]) {
+    const itemsPrice = priced.reduce((acc, product) => acc + product.totalPrice, 0);
+    const commissionAmount =
+      itemsPrice >= FREE_DELIVERY_THRESHOLD ? 0 : FREE_DELIVERY_THRESHOLD - itemsPrice;
+    const commission = { amount: commissionAmount, currency: CURRENCY };
+    const totalPrice = itemsPrice + commissionAmount;
+
+    return { itemsPrice, commission, totalPrice };
+  }
+
+  async getPizzaCatalog(getPizzaCatalogDto?: GetPizzaCatalogDto) {
+    const catalog = await this.findMany({
+      ...(getPizzaCatalogDto?.category && { category: getPizzaCatalogDto.category })
+    });
+    return Result.success({ catalog });
+  }
+
+  async calculatePizzaOrder(calculatePizzaOrderDto: CalculatePizzaOrderDto) {
+    const priced = await this.priceItems(calculatePizzaOrderDto.items);
+    const { itemsPrice, commission, totalPrice } = this.summarize(priced);
+
+    const items = priced.map((price) => ({
+      productId: price.productId,
+      name: price.name,
+      quantity: price.quantity,
+      unitPrice: price.unitPrice,
+      totalPrice: price.totalPrice
+    }));
+
+    return Result.success({ items, itemsPrice, commission, totalPrice });
+  }
+
+  async createPizzaPayment(createPizzaPaymentDto: CreatePizzaPaymentDto) {
+    const { person, receiverAddress, items } = createPizzaPaymentDto;
+
+    const priced = await this.priceItems(items);
+    const { itemsPrice, commission, totalPrice } = this.summarize(priced);
 
     const order = await this.pizzaOrdersService.create({
-      pizzas,
+      items,
+      itemsPrice,
+      commission,
+      totalPrice,
       person,
       receiverAddress,
-      status: PizzaStatus.IN_PROCESSING,
+      status: PizzaStatus.AWAITING_PAYMENT,
       cancellable: true,
-      totalPrice
+      transactionId: null
     });
 
-    const user = await this.usersService.findOrCreateUser(person.phone);
+    const transaction = await this.transactionsService.createTransaction({
+      phone: person.phone,
+      orderId: String(order._id),
+      orderType: TransactionOrderType.PIZZA,
+      amount: totalPrice,
+      currency: 'RUB'
+    });
 
-    await this.usersService.updateOne(
-      { phone: user.phone },
-      {
-        $set: {
-          firstname: person.firstname,
-          lastname: person.lastname,
-          middlename: person.middlename
-        }
-      }
-    );
+    await this.pizzaOrdersService.updateById(String(order._id), {
+      $set: { transactionId: String(transaction._id) }
+    });
 
-    return Result.success({ order });
+    return Result.success({
+      order: { ...order, transactionId: String(transaction._id) }
+    });
   }
 
   async getPizzaOrders(phone: string) {
     const orders = await this.pizzaOrdersService.findMany({
-      'person.phone': phone
+      'person.phone': phone,
+      status: { $ne: PizzaStatus.AWAITING_PAYMENT }
     });
 
     return Result.success({ orders });
@@ -96,7 +172,7 @@ export class PizzasService extends BaseService<PizzaEntitySchema> {
   async getPizzaOrder(orderId: string, phone: string) {
     const order = await this.pizzaOrdersService.findById(orderId);
 
-    if (!order || order.person.phone !== phone) {
+    if (!order || order.person.phone !== phone || order.status === PizzaStatus.AWAITING_PAYMENT) {
       throw new BadRequestException(Result.fail(`Заказ ${orderId} не найден`));
     }
 
@@ -110,13 +186,13 @@ export class PizzasService extends BaseService<PizzaEntitySchema> {
       throw new BadRequestException(Result.fail(`Заказ ${orderId} не найден`));
     }
 
-    if (order.status > PizzaStatus.IN_PROCESSING) {
+    if (![PizzaStatus.AWAITING_PAYMENT, PizzaStatus.IN_PROCESSING].includes(order.status)) {
       throw new BadRequestException(Result.fail('Заказ нельзя отменить'));
     }
 
-    const updatedOrder = await this.pizzaOrdersService.updateById(orderId, {
-      $set: { status: PizzaStatus.CANCELED }
-    });
+    const updatedOrder = (await this.pizzaOrdersService.updateById(orderId, {
+      $set: { status: PizzaStatus.CANCELED, cancellable: false }
+    }))!;
 
     return Result.success({ order: updatedOrder });
   }

@@ -8,14 +8,18 @@ import { TransactionOrderType, TransactionStatus } from './transactions.enums';
 @Schema({
   collection: 'transactions',
   minimize: false,
+  timestamps: true,
   versionKey: false
 })
 export class TransactionEntitySchema {
+  createdAt: Date;
+  updatedAt: Date;
+
   @Prop({ required: true, index: true })
   phone: string;
 
-  @Prop({ required: false, default: null, index: true })
-  orderId?: string | null;
+  @Prop({ required: true, index: true })
+  orderId: string;
 
   @Prop({
     enum: Object.values(TransactionOrderType),
@@ -32,12 +36,13 @@ export class TransactionEntitySchema {
   @Prop({
     enum: Object.values(TransactionStatus),
     required: true,
-    default: TransactionStatus.PENDING
+    default: TransactionStatus.PENDING,
+    index: true
   })
   status: TransactionStatus;
 
-  @Prop({ required: true, index: true, unique: true })
-  payLinkToken: string;
+  @Prop({ required: true, index: true })
+  expiresAt: Date;
 
   @Prop({ required: false, default: null })
   cardCryptoPacket?: string | null;

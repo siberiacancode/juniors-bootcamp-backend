@@ -23,3 +23,14 @@ registerEnumType(TransactionOrderType, {
   name: 'TransactionOrderType',
   description: 'Тип заказа'
 });
+
+export enum TransactionPayMethod {
+  NEW_CARD = 'new_card',
+  SAVED_CARD = 'saved_card',
+  QR = 'qr'
+}
+
+registerEnumType(TransactionPayMethod, {
+  name: 'TransactionPayMethod',
+  description: 'Способ оплаты транзакции'
+});

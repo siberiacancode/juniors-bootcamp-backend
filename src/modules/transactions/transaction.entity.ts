@@ -44,9 +44,13 @@ export class Transaction {
   @Field(() => TransactionStatus)
   status: TransactionStatus;
 
-  @ApiProperty({ description: 'Токен платежной ссылки', example: 'pay_link_token_value' })
-  @Field(() => String)
-  payLinkToken: string;
+  @ApiProperty({ type: Date, description: 'Время истечения транзакции (createdAt + 10 мин)' })
+  @Field(() => GraphQLISODateTime)
+  expiresAt: Date;
+
+  @ApiProperty({ type: Date, description: 'Дата создания', required: false })
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  createdAt?: Date;
 
   @ApiProperty({
     type: String,

@@ -1,9 +1,10 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { GetTransactionDto } from './dto';
-import { GetTransactionResponse } from './responses';
+import { GetTransactionDto, PayTransactionDto } from './dto';
+import { GetTransactionResponse, PayTransactionResponse } from './responses';
 import { Transaction } from './transaction.entity';
 import { TransactionsService } from './transactions.service';
+import { Result } from '@/utils/helpers';
 
 @Resolver(() => Transaction)
 export class TransactionsResolver {
@@ -13,6 +14,20 @@ export class TransactionsResolver {
   async getTransaction(
     @Args() getTransactionDto: GetTransactionDto
   ): Promise<GetTransactionResponse> {
-    return this.transactionsService.getTransaction(getTransactionDto.transactionId);
+    const transaction = await this.transactionsService.getTransaction(
+      getTransactionDto.transactionId
+    );
+    return Result.success({
+      transaction
+    });
+  }
+
+  @Mutation(() => PayTransactionResponse, {
+    description: 'Оплатить транзакцию: новая карта / сохранённая карта / QR'
+  })
+  async payTransaction(
+    @Args() payTransactionDto: PayTransactionDto
+  ): Promise<PayTransactionResponse> {
+    return this.transactionsService.payTransaction(payTransactionDto);
   }
 }

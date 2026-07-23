@@ -1,3 +1,4 @@
+export * from './pizza-order.schema';
 export * from './pizza-order.entity';
 export * from './pizza-orders.enums';
 export * from './pizza-orders.module';

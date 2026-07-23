@@ -16,13 +16,10 @@ export class CardEntitySchema {
   panMasked: string;
 
   @Prop({ required: true })
-  panToken: string;
-
-  @Prop({ required: true })
   expiry: string;
 
-  @Prop({ required: true })
-  holder: string;
+  @Prop({ required: false })
+  cryptoPacket: string;
 }
 
 export type CardDocument = HydratedDocument<CardEntitySchema>;

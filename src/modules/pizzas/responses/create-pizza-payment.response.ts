@@ -7,7 +7,7 @@ import { PizzaOrder } from '../modules/pizza-orders';
 
 @ObjectType()
 export class CreatePizzaPaymentResponse extends BaseResponse {
-  @ApiProperty({ type: PizzaOrder, description: 'Доставка' })
+  @ApiProperty({ type: PizzaOrder, description: 'Созданный заказ' })
   @Field(() => PizzaOrder)
   order: PizzaOrder;
 }

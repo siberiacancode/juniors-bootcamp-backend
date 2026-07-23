@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
+import { TransactionsModule } from '@/modules/transactions';
 import { UsersModule } from '@/modules/users';
 
 import { PizzaOrdersModule } from './modules/pizza-orders';
@@ -16,6 +17,7 @@ import { PizzasSeeder } from './seed';
   imports: [
     PizzaOrdersModule,
     UsersModule,
+    TransactionsModule,
     MongooseModule.forFeature([{ name: PizzaEntitySchema.name, schema: PizzaSchema }])
   ],
   providers: [PizzasResolver, PizzasService, PizzasSeeder]
