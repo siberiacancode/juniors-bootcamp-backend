@@ -13,7 +13,7 @@ import {
   GetPizzaCatalogDto,
   GetPizzaOrderDto
 } from './dto';
-import { Category } from './pizzas.enums';
+import { PizzaCategory } from './pizzas.enums';
 import { PizzasService } from './pizzas.service';
 import {
   CalculateOrderResponse,
@@ -32,9 +32,9 @@ export class PizzasController {
   @ApiOperation({ summary: 'Получить каталог' })
   @ApiQuery({
     description: 'Фильтр по категории',
-    enum: Category,
+    enum: PizzaCategory,
     required: false,
-    enumName: 'Category',
+    enumName: 'PizzaCategory',
     name: 'category'
   })
   @ApiResponse({ type: GetPizzaCatalogResponse, description: 'catalog', status: 200 })

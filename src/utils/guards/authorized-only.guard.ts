@@ -11,8 +11,8 @@ import { Reflector } from '@nestjs/core';
 import { ApiBearerAuth, ApiCookieAuth } from '@nestjs/swagger';
 import { FastifyRequest } from 'fastify';
 
-import { SessionsService } from '@/modules/sessions';
-import { UsersService } from '@/modules/users';
+import { SessionsService } from '@/modules/sessions/sessions.service';
+import { UsersService } from '@/modules/users/users.service';
 import { getRequest, Result } from '@/utils/helpers';
 
 const AUTHORIZED_ONLY_KEY = 'authorized-only';

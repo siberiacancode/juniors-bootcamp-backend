@@ -2,17 +2,17 @@ import { ArgsType, Field } from '@nestjs/graphql';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsEnum, IsOptional } from 'class-validator';
 
-import { Category } from '../pizzas.enums';
+import { PizzaCategory } from '../pizzas.enums';
 
 @ArgsType()
 export class GetPizzaCatalogDto {
   @ApiPropertyOptional({
     description: 'Фильтр по категории. Если не передан — вернётся весь каталог',
-    enum: Category,
-    enumName: 'Category'
+    enum: PizzaCategory,
+    enumName: 'PizzaCategory'
   })
-  @Field(() => Category, { nullable: true })
-  @IsEnum(Category)
+  @Field(() => PizzaCategory, { nullable: true })
+  @IsEnum(PizzaCategory)
   @IsOptional()
-  category?: Category;
+  category?: PizzaCategory;
 }

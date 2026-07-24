@@ -1,58 +1,58 @@
 import { PizzaEntitySchema } from '../pizza.schema';
-import { Category, Ingredient, Option, Size } from '../pizzas.enums';
+import { PizzaCategory, PizzaIngredientType, PizzaOptionType, PizzaSize } from '../pizzas.enums';
 
 const CRUST_OPTIONS = [
-  { type: Option.CRUST_THIN, price: 0 },
-  { type: Option.CRUST_THICK, price: 50 },
-  { type: Option.CRUST_CHEESE, price: 120 }
+  { type: PizzaOptionType.CRUST_THIN, price: 0 },
+  { type: PizzaOptionType.CRUST_THICK, price: 50 },
+  { type: PizzaOptionType.CRUST_CHEESE, price: 120 }
 ];
 
 const CREAM_OPTIONS = [
-  { type: Option.CREAM_WITHOUT, price: 0 },
-  { type: Option.CREAM_WITH, price: 40 }
+  { type: PizzaOptionType.CREAM_WITHOUT, price: 0 },
+  { type: PizzaOptionType.CREAM_WITH, price: 40 }
 ];
 
 const PIZZA_SIZES = (small: number, medium: number, large: number) => [
-  { type: Size.SMALL, price: small, volume: 25 },
-  { type: Size.MEDIUM, price: medium, volume: 30 },
-  { type: Size.LARGE, price: large, volume: 35 }
+  { type: PizzaSize.SMALL, price: small, volume: 25 },
+  { type: PizzaSize.MEDIUM, price: medium, volume: 30 },
+  { type: PizzaSize.LARGE, price: large, volume: 35 }
 ];
 
 const WINGS_SIZES = [
-  { type: Size.SMALL, price: 199, volume: 3 },
-  { type: Size.MEDIUM, price: 499, volume: 9 },
-  { type: Size.LARGE, price: 629, volume: 12 }
+  { type: PizzaSize.SMALL, price: 199, volume: 3 },
+  { type: PizzaSize.MEDIUM, price: 499, volume: 9 },
+  { type: PizzaSize.LARGE, price: 629, volume: 12 }
 ];
 
 const MILKSHAKE_SIZES = [
-  { type: Size.SMALL, price: 199, volume: 0.4 },
-  { type: Size.MEDIUM, price: 259, volume: 0.6 }
+  { type: PizzaSize.SMALL, price: 199, volume: 0.4 },
+  { type: PizzaSize.MEDIUM, price: 259, volume: 0.6 }
 ];
 
 export const PIZZAS: PizzaEntitySchema[] = [
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'ШИФТ Суприм',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.PEPPERONI,
+        type: PizzaIngredientType.PEPPERONI,
         price: 120,
         img: '/static/images/ingredient/peperoni.png'
       },
 
       {
-        type: Ingredient.GREEN_PEPPER,
+        type: PizzaIngredientType.GREEN_PEPPER,
         price: 60,
         img: '/static/images/ingredient/green_pepper.png'
       },
 
       {
-        type: Ingredient.MUSHROOMS,
+        type: PizzaIngredientType.MUSHROOMS,
         price: 80,
         img: '/static/images/ingredient/mushrooms.png'
       }
@@ -74,16 +74,16 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/1.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Маргарита',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.BASIL,
+        type: PizzaIngredientType.BASIL,
         price: 40,
         img: '/static/images/ingredient/basil.png'
       }
@@ -104,21 +104,21 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/2.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Четыре Сыра',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.CHEDDAR,
+        type: PizzaIngredientType.CHEDDAR,
         price: 90,
         img: '/static/images/ingredient/cheddar.png'
       },
       {
-        type: Ingredient.PARMESAN,
+        type: PizzaIngredientType.PARMESAN,
         price: 90,
         img: '/static/images/ingredient/green_pepper.png'
       }
@@ -140,21 +140,21 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/3.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Гавайская',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.HAM,
+        type: PizzaIngredientType.HAM,
         price: 150,
         img: '/static/images/ingredient/ham.png'
       },
       {
-        type: Ingredient.PINEAPPLE,
+        type: PizzaIngredientType.PINEAPPLE,
         price: 100,
         img: '/static/images/ingredient/pineapple.png'
       }
@@ -176,16 +176,16 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/4.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Пепперони',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.PEPPERONI,
+        type: PizzaIngredientType.PEPPERONI,
         price: 120,
         img: '/static/images/ingredient/peperoni.png'
       }
@@ -207,26 +207,26 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/5.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Вегетарианская',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.TOMATO,
+        type: PizzaIngredientType.TOMATO,
         price: 60,
         img: '/static/images/ingredient/tomato.png'
       },
       {
-        type: Ingredient.MUSHROOMS,
+        type: PizzaIngredientType.MUSHROOMS,
         price: 80,
         img: '/static/images/ingredient/mushrooms.png'
       },
       {
-        type: Ingredient.GREEN_PEPPER,
+        type: PizzaIngredientType.GREEN_PEPPER,
         price: 60,
         img: '/static/images/ingredient/green_pepper.png'
       }
@@ -248,21 +248,21 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/6.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Мясная',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.BACON,
+        type: PizzaIngredientType.BACON,
         price: 160,
         img: '/static/images/ingredient/bacon.png'
       },
       {
-        type: Ingredient.SHRIMP,
+        type: PizzaIngredientType.SHRIMP,
         price: 120,
         img: '/static/images/ingredient/shrimps.png'
       }
@@ -284,23 +284,23 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/7.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Мексиканская',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
 
       {
-        type: Ingredient.CHILE,
+        type: PizzaIngredientType.CHILE,
         price: 80,
         img: '/static/images/ingredient/green_pepper.png'
       },
 
       {
-        type: Ingredient.ONION,
+        type: PizzaIngredientType.ONION,
         price: 60,
         img: '/static/images/ingredient/onion.png'
       }
@@ -323,21 +323,21 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/8.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Кальцоне',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.HAM,
+        type: PizzaIngredientType.HAM,
         price: 120,
         img: '/static/images/ingredient/ham.png'
       },
       {
-        type: Ingredient.MUSHROOMS,
+        type: PizzaIngredientType.MUSHROOMS,
         price: 80,
         img: '/static/images/ingredient/mushrooms.png'
       }
@@ -359,22 +359,22 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/9.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Мясоед',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
 
       {
-        type: Ingredient.BACON,
+        type: PizzaIngredientType.BACON,
         price: 160,
         img: '/static/images/ingredient/bacon.png'
       },
       {
-        type: Ingredient.HAM,
+        type: PizzaIngredientType.HAM,
         price: 140,
         img: '/static/images/ingredient/ham.png'
       }
@@ -396,16 +396,16 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/10.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Морская',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.SHRIMP,
+        type: PizzaIngredientType.SHRIMP,
         price: 180,
         img: '/static/images/ingredient/shrimps.png'
       }
@@ -427,27 +427,27 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/11.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Четыре Сыра с грибами',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.CHEDDAR,
+        type: PizzaIngredientType.CHEDDAR,
         price: 90,
         img: '/static/images/ingredient/cheddar.png'
       },
       {
-        type: Ingredient.PARMESAN,
+        type: PizzaIngredientType.PARMESAN,
         price: 90,
         img: '/static/images/ingredient/green_pepper.png'
       },
 
       {
-        type: Ingredient.MUSHROOMS,
+        type: PizzaIngredientType.MUSHROOMS,
         price: 80,
         img: '/static/images/ingredient/mushrooms.png'
       }
@@ -469,11 +469,11 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/12.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Маринара',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       }
@@ -495,16 +495,16 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/13.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Фруктовая',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.PINEAPPLE,
+        type: PizzaIngredientType.PINEAPPLE,
         price: 100,
         img: '/static/images/ingredient/pineapple.png'
       }
@@ -526,21 +526,21 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/14.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Барбекю Чикен',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.CHICKEN_FILLET,
+        type: PizzaIngredientType.CHICKEN_FILLET,
         price: 150,
         img: '/static/images/ingredient/chicken_fillet.png'
       },
       {
-        type: Ingredient.ONION,
+        type: PizzaIngredientType.ONION,
         price: 60,
         img: '/static/images/ingredient/onion.png'
       }
@@ -562,16 +562,16 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/15.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Филадельфия',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.ONION,
+        type: PizzaIngredientType.ONION,
         price: 50,
         img: '/static/images/ingredient/onion.png'
       }
@@ -593,26 +593,26 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/16.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Пикантная Мексиканская',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.CHILE,
+        type: PizzaIngredientType.CHILE,
         price: 80,
         img: '/static/images/ingredient/green_pepper.png'
       },
       {
-        type: Ingredient.ONION,
+        type: PizzaIngredientType.ONION,
         price: 60,
         img: '/static/images/ingredient/onion.png'
       },
       {
-        type: Ingredient.CHEDDAR,
+        type: PizzaIngredientType.CHEDDAR,
         price: 90,
         img: '/static/images/ingredient/cheddar.png'
       }
@@ -635,21 +635,21 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/17.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Карбонара',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.BACON,
+        type: PizzaIngredientType.BACON,
         price: 160,
         img: '/static/images/ingredient/bacon.png'
       },
       {
-        type: Ingredient.PARMESAN,
+        type: PizzaIngredientType.PARMESAN,
         price: 100,
         img: '/static/images/ingredient/green_pepper.png'
       }
@@ -671,22 +671,22 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/18.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Греческая',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.TOMATO,
+        type: PizzaIngredientType.TOMATO,
         price: 60,
         img: '/static/images/ingredient/tomato.png'
       },
 
       {
-        type: Ingredient.GREEN_PEPPER,
+        type: PizzaIngredientType.GREEN_PEPPER,
         price: 60,
         img: '/static/images/ingredient/green_pepper.png'
       }
@@ -709,21 +709,21 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/pizza/19.webp'
   },
   {
-    category: Category.PIZZA,
+    category: PizzaCategory.PIZZA,
     name: 'Шпинатная',
     ingredients: [
       {
-        type: Ingredient.MOZZARELLA,
+        type: PizzaIngredientType.MOZZARELLA,
         price: 70,
         img: '/static/images/ingredient/mozzarella.png'
       },
       {
-        type: Ingredient.PINEAPPLE,
+        type: PizzaIngredientType.PINEAPPLE,
         price: 100,
         img: '/static/images/ingredient/pineapple.png'
       },
       {
-        type: Ingredient.PARMESAN,
+        type: PizzaIngredientType.PARMESAN,
         price: 100,
         img: '/static/images/ingredient/green_pepper.png'
       }
@@ -746,11 +746,11 @@ export const PIZZAS: PizzaEntitySchema[] = [
   },
 
   {
-    category: Category.BREAKFAST,
+    category: PizzaCategory.BREAKFAST,
     name: 'Хашбрауны',
     ingredients: [],
     description: 'Хрустящие картофельные оладьи. Идеальный завтрак.',
-    sizes: [{ type: Size.SMALL, price: 220, volume: 1 }],
+    sizes: [{ type: PizzaSize.SMALL, price: 220, volume: 1 }],
     options: [],
     calories: 260,
     protein: '4г',
@@ -765,14 +765,18 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/breakfast/hashbrowns.webp'
   },
   {
-    category: Category.BREAKFAST,
+    category: PizzaCategory.BREAKFAST,
     name: 'Омлет с ветчиной и грибами',
     ingredients: [
-      { type: Ingredient.HAM, price: 80, img: '/static/images/ingredient/ham.png' },
-      { type: Ingredient.MUSHROOMS, price: 80, img: '/static/images/ingredient/mushrooms.png' }
+      { type: PizzaIngredientType.HAM, price: 80, img: '/static/images/ingredient/ham.png' },
+      {
+        type: PizzaIngredientType.MUSHROOMS,
+        price: 80,
+        img: '/static/images/ingredient/mushrooms.png'
+      }
     ],
     description: 'Пышный омлет с ветчиной и шампиньонами.',
-    sizes: [{ type: Size.SMALL, price: 260, volume: 1 }],
+    sizes: [{ type: PizzaSize.SMALL, price: 260, volume: 1 }],
     options: [],
     calories: 310,
     protein: '20г',
@@ -787,7 +791,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/breakfast/omelette_ham.webp'
   },
   {
-    category: Category.WINGS,
+    category: PizzaCategory.WINGS,
     name: 'Острые крылышки',
     ingredients: [],
     description: 'Куриные крылышки в остром соусе.',
@@ -806,7 +810,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/wings/spicy.webp'
   },
   {
-    category: Category.WINGS,
+    category: PizzaCategory.WINGS,
     name: 'Оригинальные крылышки',
     ingredients: [],
     description: 'Классические куриные крылышки.',
@@ -825,7 +829,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/wings/original.webp'
   },
   {
-    category: Category.MILKSHAKE,
+    category: PizzaCategory.MILKSHAKE,
     name: 'Милкшейк Ваниль',
     ingredients: [],
     description: 'Классический ванильный милкшейк.',
@@ -844,7 +848,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/milkshake/vanilla.webp'
   },
   {
-    category: Category.MILKSHAKE,
+    category: PizzaCategory.MILKSHAKE,
     name: 'Милкшейк Клубника',
     ingredients: [],
     description: 'Милкшейк с клубникой.',
@@ -863,7 +867,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     img: '/static/images/milkshake/strawberry.webp'
   },
   {
-    category: Category.MILKSHAKE,
+    category: PizzaCategory.MILKSHAKE,
     name: 'Милкшейк Шоколад',
     ingredients: [],
     description: 'Шоколадный милкшейк.',

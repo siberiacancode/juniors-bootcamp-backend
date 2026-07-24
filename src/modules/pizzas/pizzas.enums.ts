@@ -1,6 +1,6 @@
 import { registerEnumType } from '@nestjs/graphql';
 
-export enum Ingredient {
+export enum PizzaIngredientType {
   PINEAPPLE = 'pineapple',
   MOZZARELLA = 'mozzarella',
   PEPPERONI = 'pepperoni',
@@ -21,35 +21,35 @@ export enum Ingredient {
   MEATBALLS = 'meatballs'
 }
 
-registerEnumType(Ingredient, {
-  name: 'Ingredient',
+registerEnumType(PizzaIngredientType, {
+  name: 'PizzaIngredientType',
   description: 'Ингредиенты'
 });
 
-export enum Size {
+export enum PizzaSize {
   SMALL = 'small',
   MEDIUM = 'medium',
   LARGE = 'large'
 }
 
-registerEnumType(Size, {
-  name: 'Size',
+registerEnumType(PizzaSize, {
+  name: 'PizzaSize',
   description: 'Размер продукта'
 });
 
-export enum Category {
+export enum PizzaCategory {
   PIZZA = 'pizza',
   BREAKFAST = 'breakfast',
   WINGS = 'wings',
   MILKSHAKE = 'milkshake'
 }
 
-registerEnumType(Category, {
-  name: 'Category',
+registerEnumType(PizzaCategory, {
+  name: 'PizzaCategory',
   description: 'Категория продукта'
 });
 
-export enum Option {
+export enum PizzaOptionType {
   CRUST_THIN = 'crust_thin',
   CRUST_THICK = 'crust_thick',
   CRUST_CHEESE = 'crust_cheese',
@@ -57,7 +57,7 @@ export enum Option {
   CREAM_WITHOUT = 'cream_without'
 }
 
-registerEnumType(Option, {
-  name: 'Option',
+registerEnumType(PizzaOptionType, {
+  name: 'PizzaOptionType',
   description: 'Доп-опции продукта'
 });

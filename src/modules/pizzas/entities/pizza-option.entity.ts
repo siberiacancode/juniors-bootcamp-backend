@@ -1,19 +1,19 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { Option } from '../pizzas.enums';
+import { PizzaOptionType } from '../pizzas.enums';
 
 @InputType('PizzaOptionInput')
 @ObjectType()
 export class PizzaOption {
   @ApiProperty({
     description: 'Идентификатор опции',
-    example: Option.CRUST_THIN,
-    enum: Option,
-    enumName: 'Option'
+    example: PizzaOptionType.CRUST_THIN,
+    enum: PizzaOptionType,
+    enumName: 'PizzaOptionType'
   })
-  @Field(() => Option)
-  type: Option;
+  @Field(() => PizzaOptionType)
+  type: PizzaOptionType;
 
   @ApiProperty({ description: 'Цена опции' })
   @Field(() => Number)

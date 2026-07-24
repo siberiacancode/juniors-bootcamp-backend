@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 
 import { CardsService } from '@/modules/cards';
-import { PizzaOrdersService, PizzaStatus } from '@/modules/pizzas/modules/pizza-orders';
 import { BaseService } from '@/utils/base';
 import { Result } from '@/utils/helpers';
 
@@ -14,6 +14,7 @@ import {
   TransactionPayMethod,
   TransactionStatus
 } from './transactions.enums';
+import { TRANSACTION_EVENTS, TransactionPaidEvent } from './transactions.events';
 
 const TRANSACTION_TTL_MS = 10 * 60 * 1000;
 
@@ -33,7 +34,7 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
     @InjectModel(TransactionEntitySchema.name)
     private readonly transactionModel: Model<TransactionEntitySchema>,
     private readonly cardsService: CardsService,
-    private readonly pizzaOrdersService: PizzaOrdersService
+    private readonly eventEmitter: EventEmitter2
   ) {
     super(transactionModel);
   }
@@ -76,19 +77,27 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
     }
 
     if (transaction.expiresAt && transaction.expiresAt.getTime() < Date.now()) {
-      await this.updateById(transactionId, { $set: { status: TransactionStatus.FAILED } });
+      await this.updateById(transactionId, { status: TransactionStatus.FAILED });
       throw new BadRequestException(Result.fail('Срок действия транзакции истёк'));
     }
 
     const updated = await this.updateById(transactionId, {
-      $set: {
-        status: TransactionStatus.PAID,
-        paidAt: new Date(),
-        cardCryptoPacket: cardCryptoPacket ?? transaction.cardCryptoPacket ?? null
-      }
+      status: TransactionStatus.PAID,
+      paidAt: new Date(),
+      cardCryptoPacket: cardCryptoPacket ?? transaction.cardCryptoPacket ?? null
     });
 
     return updated;
+  }
+
+  async deleteTransactions(transactionIds: string[]) {
+    if (!transactionIds.length) return 0;
+
+    const { deletedCount } = await this.transactionModel.deleteMany({
+      _id: { $in: transactionIds }
+    });
+
+    return deletedCount ?? 0;
   }
 
   async payTransaction(payTransactionDto: PayTransactionDto) {
@@ -100,7 +109,7 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
 
     if (transaction.expiresAt && transaction.expiresAt.getTime() < Date.now()) {
       await this.updateById(payTransactionDto.transactionId, {
-        $set: { status: TransactionStatus.FAILED }
+        status: TransactionStatus.FAILED
       });
       throw new BadRequestException(Result.fail('Срок действия транзакции истёк'));
     }
@@ -165,10 +174,12 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
       throw new BadRequestException(Result.fail('Не смогли изменить транзакцию'));
     }
 
-    if (updatedTransaction.orderType === TransactionOrderType.PIZZA) {
-      await this.pizzaOrdersService.updateById(updatedTransaction.orderId, {
-        $set: { status: PizzaStatus.IN_PROCESSING, cancellable: true }
-      });
+    if (updatedTransaction.orderId) {
+      await this.eventEmitter.emitAsync(TRANSACTION_EVENTS.PAID, {
+        orderId: updatedTransaction.orderId,
+        orderType: updatedTransaction.orderType,
+        transactionId: String(updatedTransaction._id)
+      } satisfies TransactionPaidEvent);
     }
 
     return Result.success({

@@ -3,6 +3,7 @@ import { getConnectionToken } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
 
 import { AppModule } from './app.module';
+import { GamesSeeder } from './modules/games/seed';
 import { PizzasSeeder } from './modules/pizzas/seed';
 
 async function bootstrap() {
@@ -15,6 +16,7 @@ async function bootstrap() {
   console.log('🗑️ Database dropped');
 
   await app.get(PizzasSeeder).seed();
+  await app.get(GamesSeeder).seed();
 
   await app.close();
 }

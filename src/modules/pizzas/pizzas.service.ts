@@ -11,19 +11,19 @@ import { PizzaIngredient, PizzaOption, PizzaOrderedItem } from './entities';
 import { PizzaOrdersService, PizzaStatus } from './modules/pizza-orders';
 import { PizzaEntitySchema } from './pizza.schema';
 import { TOPPINGS } from './pizzas.constants';
-import { Category, Size } from './pizzas.enums';
+import { PizzaCategory, PizzaSize } from './pizzas.enums';
 
 const FREE_DELIVERY_THRESHOLD = 1000;
 const CURRENCY = 'RUB';
 
 interface PricedItem {
-  category: Category;
+  category: PizzaCategory;
   img: string;
   name: string;
   option?: PizzaOption;
   productId: Types.ObjectId;
   quantity: number;
-  size?: Size;
+  size?: PizzaSize;
   toppings?: PizzaIngredient[];
   totalPrice: number;
   unitPrice: number;

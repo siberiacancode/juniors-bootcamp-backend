@@ -44,11 +44,11 @@ export class TransactionEntitySchema {
   @Prop({ required: true, index: true })
   expiresAt: Date;
 
-  @Prop({ required: false, default: null })
-  cardCryptoPacket?: string | null;
+  @Prop({ required: false, default: undefined })
+  cardCryptoPacket?: string;
 
-  @Prop({ required: false, default: null })
-  paidAt?: Date | null;
+  @Prop({ required: false, default: undefined })
+  paidAt?: Date;
 }
 
 export type TransactionDocument = HydratedDocument<TransactionEntitySchema>;

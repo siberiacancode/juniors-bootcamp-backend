@@ -11,7 +11,6 @@ import * as client from 'prom-client';
 // import { CarsModule } from '@/modules/cars/cars.module';
 // import { CinemaModule } from '@/modules/cinema/cinema.module';
 // import { DeliveryModule } from '@/modules/delivery/delivery.module';
-// import { GamesModule } from '@/modules/games/games.module';
 // import { OtpsModule } from '@/modules/otps/otps.module';
 // import { PizzaModule } from '@/modules/pizza/pizza.module';
 // import { TesterModule } from '@/modules/tester/tester.module';
@@ -19,6 +18,7 @@ import * as client from 'prom-client';
 import { AppModule } from './app.module';
 import { AuthModule } from './modules/auth';
 import { CardsModule } from './modules/cards';
+import { GamesModule } from './modules/games';
 import { OtpsModule } from './modules/otps';
 import { PizzasModule } from './modules/pizzas';
 import { TransactionsModule } from './modules/transactions';
@@ -150,13 +150,10 @@ function useOpenApi(app: NestFastifyApplication) {
   //   })
   // );
 
-  // const moduleDocs = [
-  //   { name: 'cars', module: CarsModule },
-  //   { name: 'cinema', module: CinemaModule },
-  //   { name: 'delivery', module: DeliveryModule },
-  //   { name: 'games', module: GamesModule },
-  //   { name: 'pizza', module: PizzaModule }
-  // ] as const;
+  const moduleDocs = [
+    { name: 'pizza', module: PizzasModule },
+    { name: 'games', module: GamesModule }
+  ] as const;
 
   const config = new DocumentBuilder()
     .setTitle('juniors bootcamp backend 🔥')
@@ -182,30 +179,29 @@ function useOpenApi(app: NestFastifyApplication) {
     )
     .build();
 
-  // for (const moduleDoc of moduleDocs) {
-  //   const includeModules = [UsersModule, OtpsModule, moduleDoc.module];
-  //   const moduleDocument = SwaggerModule.createDocument(app, config, {
-  //     include: includeModules
-  //   });
+  for (const moduleDoc of moduleDocs) {
+    const moduleDocument = SwaggerModule.createDocument(app, config, {
+      include: [AuthModule, OtpsModule, UsersModule, TransactionsModule, moduleDoc.module]
+    });
 
-  //   app.use(withBaseUrl(`/rest/${moduleDoc.name}.json`), (_req, res) => {
-  //     res.json(moduleDocument);
-  //   });
+    app.use(withBaseUrl(`/rest/${moduleDoc.name}.json`), (_req, res) => {
+      res.json(moduleDocument);
+    });
 
-  //   app.use(
-  //     withBaseUrl(`/rest/${moduleDoc.name}`),
-  //     apiReference({
-  //       content: moduleDocument,
-  //       agent: {
-  //         disabled: true
-  //       },
-  //       mcp: {
-  //         disabled: true
-  //       },
-  //       withFastify: true
-  //     })
-  //   );
-  // }
+    app.use(
+      withBaseUrl(`/rest/${moduleDoc.name}`),
+      apiReference({
+        content: moduleDocument,
+        agent: {
+          disabled: true
+        },
+        mcp: {
+          disabled: true
+        },
+        withFastify: true
+      })
+    );
+  }
 
   const document = SwaggerModule.createDocument(app, config, {
     include: [
@@ -215,8 +211,8 @@ function useOpenApi(app: NestFastifyApplication) {
       UsersModule,
       CardsModule,
       TransactionsModule,
-      PizzasModule
-      // ...moduleDocs.map((moduleDoc) => moduleDoc.module)
+      PizzasModule,
+      GamesModule
     ]
   });
   app.use(withBaseUrl('/rest.json'), (_req, res) => {

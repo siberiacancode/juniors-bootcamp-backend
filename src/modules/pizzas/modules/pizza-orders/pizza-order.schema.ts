@@ -42,8 +42,8 @@ export class PizzaOrderEntitySchema {
   @Prop({ required: true, default: true })
   cancellable: boolean;
 
-  @Prop({ required: false, default: null, index: true })
-  transactionId?: string | null;
+  @Prop({ required: false, default: undefined, index: true })
+  transactionId?: string;
 }
 
 export type PizzaOrderDocument = HydratedDocument<PizzaOrderEntitySchema>;

@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 import { PizzaIngredient, PizzaItemSize, PizzaOption } from './entities';
-import { Category } from './pizzas.enums';
+import { PizzaCategory } from './pizzas.enums';
 
 @ObjectType({ description: 'Продукт каталога' })
 @Schema({
@@ -11,12 +11,12 @@ import { Category } from './pizzas.enums';
 })
 export class PizzaEntitySchema {
   @Prop({
-    enum: Object.values(Category),
+    enum: Object.values(PizzaCategory),
     required: true,
-    default: Category.PIZZA,
+    default: PizzaCategory.PIZZA,
     index: true
   })
-  category: Category;
+  category: PizzaCategory;
 
   @Prop({ required: true })
   name: string;

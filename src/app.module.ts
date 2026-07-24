@@ -17,6 +17,7 @@ import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth';
+import { GamesModule } from './modules/games';
 import { PizzasModule } from './modules/pizzas';
 import { SessionsModule } from './modules/sessions';
 import { AuthorizedOnlyGuard } from './utils/guards';
@@ -72,11 +73,11 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     CardsModule,
     TransactionsModule,
     SessionsModule,
-    PizzasModule
+    PizzasModule,
+    GamesModule
     // CinemaModule,
     // DeliveryModule,
     // CarsModule,
-    // GamesModule,
     // TesterModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: AuthorizedOnlyGuard }]

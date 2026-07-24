@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { PizzaIngredient, PizzaItemSize, PizzaOption } from './entities';
-import { Category } from './pizzas.enums';
+import { PizzaCategory } from './pizzas.enums';
 
 @InputType('PizzaProductInput')
 @ObjectType()
@@ -14,12 +14,12 @@ export class PizzaProduct {
 
   @ApiProperty({
     description: 'Категория продукта',
-    example: Category.PIZZA,
-    enum: Category,
-    enumName: 'Category'
+    example: PizzaCategory.PIZZA,
+    enum: PizzaCategory,
+    enumName: 'PizzaCategory'
   })
-  @Field(() => Category)
-  category: Category;
+  @Field(() => PizzaCategory)
+  category: PizzaCategory;
 
   @ApiProperty({ description: 'Название', example: 'Двойной цыпленок' })
   @Field(() => String)

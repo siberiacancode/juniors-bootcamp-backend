@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
 import { Types } from 'mongoose';
 
-import { Category, Ingredient, Option, Size } from '../pizzas.enums';
+import { PizzaCategory, PizzaIngredientType, PizzaOptionType, PizzaSize } from '../pizzas.enums';
 
 @InputType('PizzaOrderedItemInput')
 @ObjectType()
@@ -16,13 +16,13 @@ export class PizzaOrderedItem {
 
   @ApiProperty({
     description: 'Категория продукта',
-    example: Category.PIZZA,
-    enum: Category,
-    enumName: 'Category'
+    example: PizzaCategory.PIZZA,
+    enum: PizzaCategory,
+    enumName: 'PizzaCategory'
   })
-  @Field(() => Category)
-  @IsEnum(Category)
-  category: Category;
+  @Field(() => PizzaCategory)
+  @IsEnum(PizzaCategory)
+  category: PizzaCategory;
 
   @ApiProperty({ description: 'Количество одинаковых позиций', example: 1, default: 1 })
   @Field(() => Int, { defaultValue: 1 })
@@ -32,38 +32,38 @@ export class PizzaOrderedItem {
 
   @ApiProperty({
     description: 'Размер',
-    example: Size.SMALL,
-    enum: Size,
+    example: PizzaSize.SMALL,
+    enum: PizzaSize,
     required: false,
-    enumName: 'Size'
+    enumName: 'PizzaSize'
   })
-  @Field(() => Size, { nullable: true })
-  @IsEnum(Size)
+  @Field(() => PizzaSize, { nullable: true })
+  @IsEnum(PizzaSize)
   @IsOptional()
-  size?: Size;
+  size?: PizzaSize;
 
   @ApiProperty({
     description: 'Выбранная доп-опция: корка, сливки и т.д.',
-    example: Option.CRUST_THIN,
-    enum: Option,
+    example: PizzaOptionType.CRUST_THIN,
+    enum: PizzaOptionType,
     required: false,
-    enumName: 'ProductOption'
+    enumName: 'PizzaOptionType'
   })
-  @Field(() => Option, { nullable: true })
-  @IsEnum(Option)
+  @Field(() => PizzaOptionType, { nullable: true })
+  @IsEnum(PizzaOptionType)
   @IsOptional()
-  option?: Option;
+  option?: PizzaOptionType;
 
   @ApiProperty({
-    type: [Ingredient],
+    type: [PizzaIngredientType],
     description: 'Доп-ингредиенты',
-    enum: Ingredient,
+    enum: PizzaIngredientType,
     required: false,
-    enumName: 'Ingredient'
+    enumName: 'PizzaIngredientType'
   })
-  @Field(() => [Ingredient], { nullable: true })
+  @Field(() => [PizzaIngredientType], { nullable: true })
   @IsArray()
-  @IsEnum(Ingredient, { each: true })
+  @IsEnum(PizzaIngredientType, { each: true })
   @IsOptional()
-  toppings?: Ingredient[];
+  toppings?: PizzaIngredientType[];
 }
