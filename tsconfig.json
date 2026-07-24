@@ -4,7 +4,6 @@
     "target": "ES2023",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "paths": {
@@ -13,6 +12,7 @@
     "resolvePackageJsonExports": true,
     "strictBindCallApply": false,
     "strictNullChecks": true,
+    "strictPropertyInitialization": false,
     "noFallthroughCasesInSwitch": false,
     "noImplicitAny": false,
     "declaration": true,

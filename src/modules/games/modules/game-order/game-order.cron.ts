@@ -1,4 +1,4 @@
-import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 import { TransactionsService, TransactionStatus } from '@/modules/transactions';
