@@ -27,14 +27,25 @@ export class TransactionsController {
   }
 
   @ApiBody({ type: PayTransactionDto })
-  @ApiOperation({ summary: 'Оплатить (закрыть) транзакцию по ID' })
+  @ApiOperation({ summary: 'Оплатить (закрыть) транзакцию картой' })
   @ApiResponse({
     type: PayTransactionResponse,
-    description: 'Оплата транзакции: новая карта / сохранённая карта / QR',
+    description: 'Оплата транзакции: новая карта / сохранённая карта',
     status: 200
   })
   @Post('/transactions/pay')
   async payTransaction(@Body() body: PayTransactionDto): Promise<PayTransactionResponse> {
     return this.transactionsService.payTransaction(body);
+  }
+
+  @ApiOperation({ summary: 'Оплатить транзакцию по QR' })
+  @ApiResponse({
+    type: PayTransactionResponse,
+    description: 'Оплата транзакции по QR',
+    status: 200
+  })
+  @Post('/transactions/:id/pay/qr')
+  async payTransactionByQr(@Param('id') transactionId: string): Promise<PayTransactionResponse> {
+    return this.transactionsService.payTransactionByQr(transactionId);
   }
 }

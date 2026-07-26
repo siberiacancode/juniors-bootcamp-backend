@@ -24,11 +24,20 @@ export class TransactionsResolver {
   }
 
   @Mutation(() => PayTransactionResponse, {
-    description: 'Оплатить транзакцию: новая карта / сохранённая карта / QR'
+    description: 'Оплатить транзакцию: новая карта / сохранённая карта'
   })
   async payTransaction(
     @Args() payTransactionDto: PayTransactionDto
   ): Promise<PayTransactionResponse> {
     return this.transactionsService.payTransaction(payTransactionDto);
+  }
+
+  @Mutation(() => PayTransactionResponse, {
+    description: 'Оплатить транзакцию по QR'
+  })
+  async payTransactionByQr(
+    @Args('transactionId') transactionId: string
+  ): Promise<PayTransactionResponse> {
+    return this.transactionsService.payTransactionByQr(transactionId);
   }
 }

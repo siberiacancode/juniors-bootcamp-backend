@@ -104,19 +104,23 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
     return deletedCount ?? 0;
   }
 
-  async payTransaction(payTransactionDto: PayTransactionDto) {
-    const transaction = await this.getTransaction(payTransactionDto.transactionId);
+  private async assertPayable(transactionId: string) {
+    const transaction = await this.getTransaction(transactionId);
 
     if (transaction.status !== TransactionStatus.PENDING) {
       throw new BadRequestException(Result.fail('Транзакция уже обработана'));
     }
 
     if (transaction.expiresAt && transaction.expiresAt.getTime() < Date.now()) {
-      await this.updateById(payTransactionDto.transactionId, {
-        status: TransactionStatus.FAILED
-      });
+      await this.updateById(transactionId, { status: TransactionStatus.FAILED });
       throw new BadRequestException(Result.fail('Срок действия транзакции истёк'));
     }
+
+    return transaction;
+  }
+
+  async payTransaction(payTransactionDto: PayTransactionDto) {
+    const transaction = await this.assertPayable(payTransactionDto.transactionId);
 
     let cardCryptoPacket: string | null = null;
 
@@ -159,19 +163,27 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
         break;
       }
 
-      case TransactionPayMethod.QR: {
-        cardCryptoPacket = null;
-        break;
-      }
-
       default:
         throw new BadRequestException(Result.fail('Неизвестный способ оплаты'));
     }
 
-    const updatedTransaction = await this.updateById(payTransactionDto.transactionId, {
+    return this.finalizePaid(transaction, cardCryptoPacket);
+  }
+
+  async payTransactionByQr(transactionId: string) {
+    const transaction = await this.assertPayable(transactionId);
+
+    return this.finalizePaid(transaction, null);
+  }
+
+  private async finalizePaid(
+    transaction: Awaited<ReturnType<TransactionsService['getTransaction']>>,
+    cardCryptoPacket: string | null
+  ) {
+    const updatedTransaction = await this.updateById(String(transaction._id), {
       status: TransactionStatus.PAID,
       paidAt: new Date(),
-      cardCryptoPacket: cardCryptoPacket ?? transaction.cardCryptoPacket ?? null
+      cardCryptoPacket: cardCryptoPacket ?? null
     });
 
     if (!updatedTransaction) {
@@ -186,8 +198,6 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
       } satisfies TransactionPaidEvent);
     }
 
-    return Result.success({
-      transaction: updatedTransaction
-    });
+    return Result.success({ transaction: updatedTransaction });
   }
 }
