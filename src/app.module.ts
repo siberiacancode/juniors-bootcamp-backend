@@ -5,6 +5,7 @@ import { ApolloDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
@@ -25,6 +26,7 @@ import { AuthorizedOnlyGuard } from './utils/guards';
 @Module({
   controllers: [AppController],
   imports: [
+    EventEmitterModule.forRoot(),
     ConfigModule.forRoot(),
     // I18nModule.forRoot({
     //   fallbackLanguage: 'en',

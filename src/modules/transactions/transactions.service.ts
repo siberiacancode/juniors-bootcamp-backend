@@ -50,6 +50,10 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
       throw new BadRequestException(Result.fail('Транзакция не найдена'));
     }
 
+    if (transaction.status === TransactionStatus.PAID) {
+      throw new BadRequestException(Result.fail('Транзакция уже оплачена'));
+    }
+
     return transaction;
   }
 

@@ -38,13 +38,13 @@ export class CinemaQuery extends BaseResolver {
   }
 
   @Query(() => FilmResponse)
-  getFilm(@Args() getFilmDto: GetFilmDto): FilmResponse {
+  getFilm(@Args('input') getFilmDto: GetFilmDto): FilmResponse {
     const film = this.cinemaService.getFilm(getFilmDto.filmId);
     return this.wrapSuccess({ film });
   }
 
   @Query(() => ScheduleResponse)
-  async getFilmSchedule(@Args() getScheduleDto: GetScheduleDto): Promise<ScheduleResponse> {
+  async getFilmSchedule(@Args('input') getScheduleDto: GetScheduleDto): Promise<ScheduleResponse> {
     const filmSchedule = this.cinemaService.getFilmSchedule(getScheduleDto.filmId);
     const tickets = await this.cinemaTicketService.find({ filmId: getScheduleDto.filmId });
 

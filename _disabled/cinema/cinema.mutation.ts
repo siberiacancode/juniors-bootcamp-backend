@@ -32,7 +32,7 @@ export class CinemaMutation extends BaseResolver {
   @Mutation(() => BaseResponse)
   @AuthorizedOnly()
   async cancelCinemaOrder(
-    @Args() cancelCinemaOrderDto: CancelCinemaOrderDto
+    @Args('input') cancelCinemaOrderDto: CancelCinemaOrderDto
   ): Promise<BaseResponse> {
     const order = await this.cinemaOrderService.findOne({ _id: cancelCinemaOrderDto.orderId });
 
@@ -63,7 +63,7 @@ export class CinemaMutation extends BaseResolver {
 
   @Mutation(() => PaymentResponse)
   async createCinemaPayment(
-    @Args() createCinemaPaymentDto: CreateCinemaPaymentDto
+    @Args('input') createCinemaPaymentDto: CreateCinemaPaymentDto
   ): Promise<PaymentResponse> {
     const { person } = createCinemaPaymentDto;
 

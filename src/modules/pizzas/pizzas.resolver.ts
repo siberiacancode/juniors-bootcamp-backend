@@ -35,7 +35,7 @@ export class PizzasResolver {
 
   @Query(() => CalculateOrderResponse, { description: 'Рассчитать стоимость корзины' })
   async calculatePizzaOrder(
-    @Args() calculatePizzaOrderDto: CalculatePizzaOrderDto
+    @Args('input') calculatePizzaOrderDto: CalculatePizzaOrderDto
   ): Promise<CalculateOrderResponse> {
     return this.pizzaService.calculatePizzaOrder(calculatePizzaOrderDto);
   }
@@ -44,7 +44,7 @@ export class PizzasResolver {
     description: 'Создать заказ и транзакцию для оплаты'
   })
   async createPizzaPayment(
-    @Args() createPizzaPaymentDto: CreatePizzaPaymentDto
+    @Args('input') createPizzaPaymentDto: CreatePizzaPaymentDto
   ): Promise<CreatePizzaPaymentResponse> {
     return this.pizzaService.createPizzaPayment(createPizzaPaymentDto);
   }

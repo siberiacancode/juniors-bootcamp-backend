@@ -1,4 +1,4 @@
-import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
@@ -48,7 +48,7 @@ export class CreatePizzaPaymentAddressDto {
   comment?: string;
 }
 
-@ArgsType()
+@InputType()
 export class CreatePizzaPaymentDto {
   @ApiProperty({ type: CreatePizzaPaymentAddressDto, description: 'Адрес доставки' })
   @Field(() => CreatePizzaPaymentAddressDto)

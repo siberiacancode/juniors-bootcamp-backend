@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Result } from '@/utils/helpers';
 
@@ -7,7 +7,7 @@ import { PayTransactionDto } from './dto';
 import { GetTransactionResponse, PayTransactionResponse } from './responses';
 import { TransactionsService } from './transactions.service';
 
-@ApiTags('transactions')
+@ApiTags('💸 transactions')
 @Controller()
 export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
@@ -26,17 +26,15 @@ export class TransactionsController {
     });
   }
 
+  @ApiBody({ type: PayTransactionDto })
   @ApiOperation({ summary: 'Оплатить (закрыть) транзакцию по ID' })
   @ApiResponse({
     type: PayTransactionResponse,
     description: 'Оплата транзакции: новая карта / сохранённая карта / QR',
     status: 200
   })
-  @Post('/transactions/:id/pay')
-  async payTransaction(
-    @Param('id') transactionId: string,
-    @Body() body: Omit<PayTransactionDto, 'transactionId'>
-  ): Promise<PayTransactionResponse> {
-    return this.transactionsService.payTransaction({ ...body, transactionId });
+  @Post('/transactions/pay')
+  async payTransaction(@Body() body: PayTransactionDto): Promise<PayTransactionResponse> {
+    return this.transactionsService.payTransaction(body);
   }
 }

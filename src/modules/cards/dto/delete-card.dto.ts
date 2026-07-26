@@ -1,8 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-@InputType()
+@ArgsType()
 export class DeleteCardDto {
   @ApiProperty({ description: 'ID карты', example: '6875fd1f77a29189d6f4f145' })
   @Field(() => String)

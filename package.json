@@ -8,7 +8,7 @@
     "build": "npx @nestjs/cli build",
     "docker-compose": "docker compose -p juniors-bootcamp-backend up --build",
     "dev-debug": "nest start --debug --watch",
-    "prod": "node dist/main",
+    "prod": "node dist/src/main",
     "lint": "eslint . --fix",
     "lint-inspector": "npx @eslint/config-inspector",
     "format": "prettier --write \"**/*.(ts|js)\"",
@@ -17,6 +17,7 @@
     "seed": "ts-node --files -r tsconfig-paths/register src/seed.ts"
   },
   "dependencies": {
+    "@nestjs/cli": "^11.0.24",
     "@apollo/server": "^5.5.1",
     "@as-integrations/fastify": "^3.1.0",
     "@fastify/cookie": "^11.1.1",
@@ -50,7 +51,6 @@
     "uuid": "^14.0.1"
   },
   "devDependencies": {
-    "@nestjs/cli": "^11.0.24",
     "@nestjs/schematics": "^11.1.0",
     "@siberiacancode/eslint": "^2.18.0",
     "@siberiacancode/prettier": "^1.8.0",

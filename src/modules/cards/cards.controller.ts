@@ -8,7 +8,7 @@ import { User } from '../users';
 import { CardsService } from './cards.service';
 import { DeleteCardResponse, GetCardsResponse } from './responses';
 
-@ApiTags('cards')
+@ApiTags('💳 cards')
 @Controller('users')
 export class CardsController {
   constructor(private readonly cardsService: CardsService) {}

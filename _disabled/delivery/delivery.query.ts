@@ -65,7 +65,7 @@ export class DeliveryQuery extends BaseResolver {
   @Query(() => DeliveryOrderResponse)
   @AuthorizedOnly()
   async getDeliveryOrder(
-    @Args() getDeliveryOrderDto: GetDeliveryOrderDto,
+    @Args('input') getDeliveryOrderDto: GetDeliveryOrderDto,
     @Context() context: { req: FastifyRequest }
   ): Promise<DeliveryOrderResponse> {
     const token = context.req.headers.authorization.split(' ')[1];

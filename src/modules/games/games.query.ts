@@ -29,7 +29,9 @@ export class GamesQuery {
   constructor(private readonly gamesService: GamesService) {}
 
   @Query(() => GamesPaginatedResponse)
-  async getGames(@Args() getGamesSearchDto: GetGamesSearchDto): Promise<GamesPaginatedResponse> {
+  async getGames(
+    @Args() getGamesSearchDto: GetGamesSearchDto
+  ): Promise<GamesPaginatedResponse> {
     return this.gamesService.getGames(getGamesSearchDto);
   }
 
@@ -44,7 +46,9 @@ export class GamesQuery {
   }
 
   @Query(() => GameRegionsResponse)
-  async getGameRegions(@Args() getGameRegionsDto: GetGameRegionsDto): Promise<GameRegionsResponse> {
+  async getGameRegions(
+    @Args() getGameRegionsDto: GetGameRegionsDto
+  ): Promise<GameRegionsResponse> {
     return this.gamesService.getGameRegions(getGameRegionsDto);
   }
 

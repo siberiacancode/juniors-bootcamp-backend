@@ -109,7 +109,7 @@ async function bootstrap() {
 
   const port = process.env.PORT ?? 3000;
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 
   console.log(`Application is running on: ${await app.getUrl()}/${BASE_URL}`);
 }
@@ -216,7 +216,8 @@ function useOpenApi(app: NestFastifyApplication) {
     ]
   });
   app.use(withBaseUrl('/rest.json'), (_req, res) => {
-    res.json(document);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(document));
   });
 
   app.use(

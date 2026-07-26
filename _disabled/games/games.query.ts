@@ -40,7 +40,7 @@ export class GamesQuery extends BaseResolver {
   }
 
   @Query(() => GamesPaginatedResponse)
-  getGames(@Args() getGamesSearchDto: GetGamesDto): GamesPaginatedResponse {
+  getGames(@Args('input') getGamesSearchDto: GetGamesDto): GamesPaginatedResponse {
     const games = this.gamesService.getFilteredGames(getGamesSearchDto);
     const paginatedGames = this.gamesService.getPagination({
       items: games,
@@ -52,13 +52,13 @@ export class GamesQuery extends BaseResolver {
   }
 
   @Query(() => GameSearchResponse)
-  searchGames(@Args() searchGamesDto: SearchGamesDto): GameSearchResponse {
+  searchGames(@Args('input') searchGamesDto: SearchGamesDto): GameSearchResponse {
     const games = this.gamesService.searchAutocomplete(searchGamesDto);
     return this.wrapSuccess({ games });
   }
 
   @Query(() => GameResponse)
-  getGame(@Args() getGameDto: GetGameDto): GameResponse {
+  getGame(@Args('input') getGameDto: GetGameDto): GameResponse {
     const game = this.gamesService.getGame(getGameDto.slug);
 
     if (!game) {
@@ -69,7 +69,7 @@ export class GamesQuery extends BaseResolver {
   }
 
   @Query(() => RegionsResponse)
-  getRegions(@Args() getRegionsDto: GetRegionsDto): RegionsResponse {
+  getRegions(@Args('input') getRegionsDto: GetRegionsDto): RegionsResponse {
     const regions = this.gamesService.getRegions(getRegionsDto);
 
     if (!regions) {
@@ -80,7 +80,7 @@ export class GamesQuery extends BaseResolver {
   }
 
   @Query(() => PriceVariantsResponse)
-  getEditions(@Args() getPriceVariantsDto: GetPriceVariantsDto): PriceVariantsResponse {
+  getEditions(@Args('input') getPriceVariantsDto: GetPriceVariantsDto): PriceVariantsResponse {
     const priceVariants = this.gamesService.getPriceVariant(getPriceVariantsDto);
 
     if (!priceVariants) {
@@ -110,7 +110,7 @@ export class GamesQuery extends BaseResolver {
   @Query(() => GameOrderResponse)
   @AuthorizedOnly()
   async getGameOrder(
-    @Args() getGameOrderDto: GetGameOrderDto,
+    @Args('input') getGameOrderDto: GetGameOrderDto,
     @Context() context: { req: FastifyRequest }
   ): Promise<GameOrderResponse> {
     const token = context.req.headers.authorization.split(' ')[1];

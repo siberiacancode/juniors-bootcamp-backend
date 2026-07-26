@@ -1,4 +1,4 @@
-import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
@@ -27,7 +27,7 @@ export class CreateGameOrderPersonDto {
   inviteLink?: string;
 }
 
-@ArgsType()
+@InputType()
 export class CreateGameOrderDto {
   @ApiProperty({ description: 'Slug игры', example: 'battlefield-2042' })
   @Field(() => String)

@@ -12,7 +12,7 @@ export class GamesMutation {
     description: 'Создать заказ игры и транзакцию для оплаты'
   })
   async createGameOrder(
-    @Args() createGameOrderDto: CreateGameOrderDto
+    @Args('input') createGameOrderDto: CreateGameOrderDto
   ): Promise<CreateGameOrderResponse> {
     return this.gamesService.createGameOrder(createGameOrderDto);
   }
