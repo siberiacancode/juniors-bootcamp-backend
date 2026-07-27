@@ -13,7 +13,6 @@ import * as client from 'prom-client';
 // import { DeliveryModule } from '@/modules/delivery/delivery.module';
 // import { OtpsModule } from '@/modules/otps/otps.module';
 // import { PizzaModule } from '@/modules/pizza/pizza.module';
-// import { TesterModule } from '@/modules/tester/tester.module';
 // import { UsersModule } from '@/modules/users/users.module';
 import { AppModule } from './app.module';
 import { AuthModule } from './modules/auth';
@@ -21,6 +20,7 @@ import { CardsModule } from './modules/cards';
 import { GamesModule } from './modules/games';
 import { OtpsModule } from './modules/otps';
 import { PizzasModule } from './modules/pizzas';
+import { TesterModule } from './modules/tester';
 import { TransactionsModule } from './modules/transactions';
 import { UsersModule } from './modules/users';
 import { BASE_URL, withBaseUrl } from './utils/helpers';
@@ -50,7 +50,7 @@ async function bootstrap() {
 
   app.useStaticAssets({
     root: join(__dirname, '..', 'static'),
-    prefix: '/static/'
+    prefix: withBaseUrl('/static/')
   });
 
   app.setViewEngine({
@@ -97,11 +97,12 @@ async function bootstrap() {
   );
 
   app.use(withBaseUrl('/health'), (_req, res) => {
-    res.json({ status: true });
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ status: true }));
   });
 
   app.use(withBaseUrl('/metrics'), async (_req, res) => {
-    res.set('Content-Type', register.contentType);
+    res.setHeader('Content-Type', register.contentType);
     res.end(await register.metrics());
   });
 
@@ -152,7 +153,8 @@ function useOpenApi(app: NestFastifyApplication) {
 
   const moduleDocs = [
     { name: 'pizza', module: PizzasModule },
-    { name: 'games', module: GamesModule }
+    { name: 'games', module: GamesModule },
+    { name: 'tester', module: TesterModule }
   ] as const;
 
   const config = new DocumentBuilder()
@@ -185,7 +187,8 @@ function useOpenApi(app: NestFastifyApplication) {
     });
 
     app.use(withBaseUrl(`/rest/${moduleDoc.name}.json`), (_req, res) => {
-      res.json(moduleDocument);
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(moduleDocument));
     });
 
     app.use(
@@ -212,7 +215,8 @@ function useOpenApi(app: NestFastifyApplication) {
       CardsModule,
       TransactionsModule,
       PizzasModule,
-      GamesModule
+      GamesModule,
+      TesterModule
     ]
   });
   app.use(withBaseUrl('/rest.json'), (_req, res) => {

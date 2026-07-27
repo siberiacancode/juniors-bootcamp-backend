@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { randomBytes } from 'node:crypto';
 
 import { CardsService } from '@/modules/cards';
 import { BaseService } from '@/utils/base';
@@ -17,6 +18,7 @@ import {
 import { TRANSACTION_EVENTS, TransactionPaidEvent } from './transactions.events';
 
 const TRANSACTION_TTL_MS = 10 * 60 * 1000;
+const ORDER_ACCESS_TOKEN_BYTES = 32;
 
 export interface CreateTransactionParams {
   amount: number;
@@ -176,14 +178,45 @@ export class TransactionsService extends BaseService<TransactionEntitySchema> {
     return this.finalizePaid(transaction, null);
   }
 
+  async consumeOrderAccessToken(accessToken: string, orderType: TransactionOrderType) {
+    if (!accessToken) {
+      throw new BadRequestException(Result.fail('Не указан токен доступа'));
+    }
+
+    const transaction = await this.transactionModel
+      .findOneAndUpdate(
+        {
+          accessToken,
+          orderType
+        },
+        {
+          $set: {
+            accessToken: null
+          }
+        },
+        { returnDocument: 'after' }
+      )
+      .lean()
+      .exec();
+
+    if (!transaction) {
+      throw new BadRequestException(Result.fail('Недействительный токен доступа'));
+    }
+
+    return transaction;
+  }
+
   private async finalizePaid(
     transaction: Awaited<ReturnType<TransactionsService['getTransaction']>>,
     cardCryptoPacket: string | null
   ) {
+    const accessToken = randomBytes(ORDER_ACCESS_TOKEN_BYTES).toString('hex');
+
     const updatedTransaction = await this.updateById(String(transaction._id), {
       status: TransactionStatus.PAID,
       paidAt: new Date(),
-      cardCryptoPacket: cardCryptoPacket ?? null
+      cardCryptoPacket: cardCryptoPacket ?? null,
+      accessToken
     });
 
     if (!updatedTransaction) {

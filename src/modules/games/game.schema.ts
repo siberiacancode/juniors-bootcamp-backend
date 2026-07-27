@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 import { GameGenre, GameType } from './constants';
-import { GamePriceVariant, GameSystemRequirements } from './entities';
+import { GamePriceVariant, GameSystemRequirements } from './game.entity';
 
 @ObjectType({ description: 'Игра каталога' })
 @Schema({

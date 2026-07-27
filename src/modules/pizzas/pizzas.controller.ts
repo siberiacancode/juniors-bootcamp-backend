@@ -11,7 +11,8 @@ import {
   CancelPizzaOrderDto,
   CreatePizzaPaymentDto,
   GetPizzaCatalogDto,
-  GetPizzaOrderDto
+  GetPizzaOrderDto,
+  GetPizzaPaidOrderDto
 } from './dto';
 import { PizzaCategory } from './pizzas.enums';
 import { PizzasService } from './pizzas.service';
@@ -69,6 +70,22 @@ export class PizzasController {
   @AuthorizedOnly()
   async getPizzaOrders(@CurrentUser() user: User): Promise<GetPizzaOrdersResponse> {
     return this.pizzaService.getPizzaOrders(user.phone);
+  }
+
+  @ApiOperation({ summary: 'Получить оплаченный заказ по одноразовому токену' })
+  @ApiQuery({
+    type: String,
+    description: 'Одноразовый токен доступа',
+    example: '1f2e3d4c5b6a7980abcdef1234567890abcdef1234567890abcdef1234567890',
+    required: true,
+    name: 'token'
+  })
+  @ApiResponse({ type: GetPizzaOrderResponse, description: 'order', status: 200 })
+  @Get('/orders/paid')
+  async getPizzaPaidOrder(
+    @Query() getPizzaPaidOrderDto: GetPizzaPaidOrderDto
+  ): Promise<GetPizzaOrderResponse> {
+    return this.pizzaService.getPizzaPaidOrder(getPizzaPaidOrderDto);
   }
 
   @ApiOperation({ summary: 'Получить заказ' })

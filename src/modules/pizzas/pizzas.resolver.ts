@@ -9,7 +9,8 @@ import {
   CancelPizzaOrderDto,
   CreatePizzaPaymentDto,
   GetPizzaCatalogDto,
-  GetPizzaOrderDto
+  GetPizzaOrderDto,
+  GetPizzaPaidOrderDto
 } from './dto';
 import { PizzaProduct } from './pizza.entity';
 import { PizzasService } from './pizzas.service';
@@ -62,6 +63,15 @@ export class PizzasResolver {
     @CurrentUser() user: User
   ): Promise<GetPizzaOrderResponse> {
     return this.pizzaService.getPizzaOrder(getPizzaOrderDto.orderId, user.phone);
+  }
+
+  @Query(() => GetPizzaOrderResponse, {
+    description: 'Получить оплаченный заказ по одноразовому токену'
+  })
+  async getPizzaPaidOrder(
+    @Args() getPizzaPaidOrderDto: GetPizzaPaidOrderDto
+  ): Promise<GetPizzaOrderResponse> {
+    return this.pizzaService.getPizzaPaidOrder(getPizzaPaidOrderDto);
   }
 
   @Mutation(() => CancelPizzaOrderResponse, { description: 'Отменить заказ' })

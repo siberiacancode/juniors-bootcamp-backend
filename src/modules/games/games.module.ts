@@ -6,8 +6,7 @@ import { UsersModule } from '@/modules/users';
 
 import { GameEntitySchema, GameSchema } from './game.schema';
 import { GamesController } from './games.controller';
-import { GamesMutation } from './games.mutation';
-import { GamesQuery } from './games.query';
+import { GamesResolver } from './games.resolver';
 import { GamesService } from './games.service';
 import { GameOrderModule } from './modules';
 import { GamesSeeder } from './seed';
@@ -21,6 +20,6 @@ import { GamesSeeder } from './seed';
     GameOrderModule,
     MongooseModule.forFeature([{ name: GameEntitySchema.name, schema: GameSchema }])
   ],
-  providers: [GamesService, GamesQuery, GamesMutation, GamesSeeder]
+  providers: [GamesService, GamesResolver, GamesSeeder]
 })
 export class GamesModule {}

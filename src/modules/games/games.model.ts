@@ -5,7 +5,7 @@ import { Transaction } from '@/modules/transactions';
 import { BaseResponse } from '@/utils/base';
 
 import { GameRegion } from './constants';
-import { GameDetailed, GameFiltered, GamePaginationMeta, GamePriceVariant } from './entities';
+import { GameDetailed, GameFiltered, GamePaginationMeta, GamePriceVariant } from './game.entity';
 import { GameOrder } from './modules';
 
 @ObjectType()

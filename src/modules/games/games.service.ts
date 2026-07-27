@@ -11,12 +11,13 @@ import { GameDeliveryType, GameFilter, GameType, GameView } from './constants';
 import {
   CreateGameOrderDto,
   GetGameDto,
+  GetGamePaidOrderDto,
   GetGamePriceVariantsDto,
   GetGameRegionsDto,
   GetGamesSearchDto,
   SearchGamesDto
 } from './dto';
-import { GameDetailed, GameFiltered, GamePaginationMeta, GamePriceVariant } from './entities';
+import { GameDetailed, GameFiltered, GamePaginationMeta, GamePriceVariant } from './game.entity';
 import { GameEntitySchema } from './game.schema';
 import { GameOrderService, GameOrderStatus } from './modules';
 
@@ -303,6 +304,21 @@ export class GamesService extends BaseService<GameEntitySchema> {
       order.person.phone !== phone ||
       order.status === GameOrderStatus.AWAITING_PAYMENT
     ) {
+      throw new NotFoundException(Result.fail('Заказ не найден'));
+    }
+
+    return Result.success({ order });
+  }
+
+  async getGamePaidOrder({ token }: GetGamePaidOrderDto) {
+    const transaction = await this.transactionsService.consumeOrderAccessToken(
+      token,
+      TransactionOrderType.GAME
+    );
+
+    const order = await this.gameOrderService.findById(transaction.orderId);
+
+    if (!order || order.status === GameOrderStatus.AWAITING_PAYMENT) {
       throw new NotFoundException(Result.fail('Заказ не найден'));
     }
 

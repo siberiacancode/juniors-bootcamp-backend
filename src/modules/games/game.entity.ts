@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { GameDeliveryType, GameGenre, GameRegion, GameType } from '../constants';
+import { GameDeliveryType, GameGenre, GameRegion, GameType } from './constants';
 
 @ObjectType('GamePaginationMeta')
 export class GamePaginationMeta {

@@ -6,7 +6,12 @@ import { TransactionOrderType, TransactionsService } from '@/modules/transaction
 import { BaseService } from '@/utils/base';
 import { Result } from '@/utils/helpers';
 
-import { CalculatePizzaOrderDto, CreatePizzaPaymentDto, GetPizzaCatalogDto } from './dto';
+import {
+  CalculatePizzaOrderDto,
+  CreatePizzaPaymentDto,
+  GetPizzaCatalogDto,
+  GetPizzaPaidOrderDto
+} from './dto';
 import { PizzaIngredient, PizzaOption, PizzaOrderedItem } from './entities';
 import { PizzaOrdersService, PizzaStatus } from './modules/pizza-orders';
 import { PizzaEntitySchema } from './pizza.schema';
@@ -174,6 +179,21 @@ export class PizzasService extends BaseService<PizzaEntitySchema> {
 
     if (!order || order.person.phone !== phone || order.status === PizzaStatus.AWAITING_PAYMENT) {
       throw new BadRequestException(Result.fail(`Заказ ${orderId} не найден`));
+    }
+
+    return Result.success({ order });
+  }
+
+  async getPizzaPaidOrder({ token }: GetPizzaPaidOrderDto) {
+    const transaction = await this.transactionsService.consumeOrderAccessToken(
+      token,
+      TransactionOrderType.PIZZA
+    );
+
+    const order = await this.pizzaOrdersService.findById(transaction.orderId);
+
+    if (!order || order.status === PizzaStatus.AWAITING_PAYMENT) {
+      throw new BadRequestException(Result.fail(`Заказ ${transaction.orderId} не найден`));
     }
 
     return Result.success({ order });

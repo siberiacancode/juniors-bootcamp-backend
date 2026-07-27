@@ -49,6 +49,9 @@ export class TransactionEntitySchema {
 
   @Prop({ required: false, default: undefined })
   paidAt?: Date;
+
+  @Prop({ required: false, default: null, index: true })
+  accessToken?: string;
 }
 
 export type TransactionDocument = HydratedDocument<TransactionEntitySchema>;

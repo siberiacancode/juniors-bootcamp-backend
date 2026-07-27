@@ -11,6 +11,7 @@ import {
   CreateGameOrderDto,
   GetGameDto,
   GetGameOrderDto,
+  GetGamePaidOrderDto,
   GetGamePriceVariantsDto,
   GetGameRegionsDto,
   GetGamesSearchDto,
@@ -144,6 +145,22 @@ export class GamesController {
   @AuthorizedOnly()
   async getGameOrders(@CurrentUser() user: User): Promise<GameOrdersResponse> {
     return this.gamesService.getGameOrders(user.phone);
+  }
+
+  @ApiOperation({ summary: 'Получить оплаченный заказ игры по одноразовому токену' })
+  @ApiQuery({
+    type: String,
+    description: 'Одноразовый токен доступа',
+    example: '1f2e3d4c5b6a7980abcdef1234567890abcdef1234567890abcdef1234567890',
+    required: true,
+    name: 'token'
+  })
+  @ApiResponse({ type: GameOrderResponse, status: 200 })
+  @Get('/orders/paid')
+  async getGamePaidOrder(
+    @Query() getGamePaidOrderDto: GetGamePaidOrderDto
+  ): Promise<GameOrderResponse> {
+    return this.gamesService.getGamePaidOrder(getGamePaidOrderDto);
   }
 
   @ApiBearerAuth()

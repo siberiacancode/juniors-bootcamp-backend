@@ -64,4 +64,13 @@ export class Transaction {
   @ApiProperty({ type: Date, description: 'Дата оплаты', nullable: true, required: false })
   @Field(() => GraphQLISODateTime, { nullable: true })
   paidAt?: Date | null;
+
+  @ApiProperty({
+    type: String,
+    description: 'Токен доступа к транзакции',
+    nullable: true,
+    required: false
+  })
+  @Field(() => String, { nullable: true })
+  accessToken?: string | null;
 }
