@@ -54,7 +54,10 @@ export class TesterService {
     return this.authService.signIn(signInDto, reply, ClientType.MOBILE);
   }
 
-  async updateProfile(user: User, updateProfileDto: UpdateProfileDto): Promise<UpdateProfileResponse> {
+  async updateProfile(
+    user: User,
+    updateProfileDto: UpdateProfileDto
+  ): Promise<UpdateProfileResponse> {
     if (Math.random() < 0.3) {
       throw new BadRequestException(Result.fail('Произошла ошибка'));
     }
