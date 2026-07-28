@@ -17,9 +17,9 @@ import * as client from 'prom-client';
 import { AppModule } from './app.module';
 import { AuthModule } from './modules/auth';
 import { CardsModule } from './modules/cards';
-import { GamesModule } from './modules/games';
+import { GamesModule, GamesSeeder } from './modules/games';
 import { OtpsModule } from './modules/otps';
-import { PizzasModule } from './modules/pizzas';
+import { PizzasModule, PizzasSeeder } from './modules/pizzas';
 import { TesterModule } from './modules/tester';
 import { TransactionsModule } from './modules/transactions';
 import { UsersModule } from './modules/users';
@@ -107,6 +107,9 @@ async function bootstrap() {
   });
 
   useOpenApi(app);
+
+  await app.get(PizzasSeeder).seed();
+  await app.get(GamesSeeder).seed();
 
   const port = process.env.PORT ?? 3000;
 
