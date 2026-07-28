@@ -1,73 +1,78 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { BaseResponse } from '@/utils/services';
+import { Transaction } from '@/modules/transactions';
+import { BaseResponse } from '@/utils/base';
 
-import { Region } from './constants';
-import { DetailedGame, FilteredGame, GamesPaginationMeta, PriceVariant } from './entities';
+import { GameRegion } from './constants';
+import { GameDetailed, GameFiltered, GamePaginationMeta, GamePriceVariant } from './game.entity';
 import { GameOrder } from './modules';
 
 @ObjectType()
 export class GamesPaginatedResponse extends BaseResponse {
-  @Field(() => [FilteredGame])
-  @ApiProperty({ description: 'Список игр', type: [FilteredGame] })
-  games: FilteredGame[];
+  @ApiProperty({ type: [GameFiltered], description: 'Список игр' })
+  @Field(() => [GameFiltered])
+  games: GameFiltered[];
 
-  @Field(() => GamesPaginationMeta)
-  @ApiProperty({ description: 'Пагинация', type: GamesPaginationMeta })
-  meta: GamesPaginationMeta;
+  @ApiProperty({ type: GamePaginationMeta, description: 'Пагинация' })
+  @Field(() => GamePaginationMeta)
+  meta: GamePaginationMeta;
 }
 
 @ObjectType()
 export class GameResponse extends BaseResponse {
-  @Field(() => DetailedGame)
-  @ApiProperty({ description: 'Игра', type: DetailedGame })
-  game: DetailedGame;
+  @ApiProperty({ type: GameDetailed, description: 'Игра' })
+  @Field(() => GameDetailed)
+  game: GameDetailed;
 }
 
 @ObjectType()
 export class GameSearchResponse extends BaseResponse {
-  @Field(() => [FilteredGame])
-  @ApiProperty({ description: 'Результаты поиска игр', type: [FilteredGame] })
-  games: FilteredGame[];
+  @ApiProperty({ type: [GameFiltered], description: 'Результаты поиска игр' })
+  @Field(() => [GameFiltered])
+  games: GameFiltered[];
 }
 
 @ObjectType()
-export class RegionsResponse extends BaseResponse {
-  @Field(() => [Region])
+export class GameRegionsResponse extends BaseResponse {
   @ApiProperty({
     description: 'Доступные регионы',
-    enumName: 'Region',
-    enum: Region,
-    isArray: true
+    enum: GameRegion,
+    isArray: true,
+    enumName: 'GameRegion'
   })
-  regions: Region[];
+  @Field(() => [GameRegion])
+  regions: GameRegion[];
 }
 
 @ObjectType()
-export class PriceVariantsResponse extends BaseResponse {
-  @Field(() => [PriceVariant])
-  @ApiProperty({ description: 'Варианты цен для изданий', type: [PriceVariant] })
-  priceVariants: PriceVariant[];
+export class GamePriceVariantsResponse extends BaseResponse {
+  @ApiProperty({ type: [GamePriceVariant], description: 'Варианты цен для изданий' })
+  @Field(() => [GamePriceVariant])
+  priceVariants: GamePriceVariant[];
 }
 
 @ObjectType()
 export class CreateGameOrderResponse extends BaseResponse {
+  @ApiProperty({ type: GameOrder, description: 'Заказ на игру (ожидает оплаты)' })
   @Field(() => GameOrder)
-  @ApiProperty({ description: 'Заказ на игру', type: GameOrder })
   order: GameOrder;
+
+  @ApiProperty({ type: Transaction, description: 'Транзакция для оплаты' })
+  @Field(() => Transaction)
+  transaction: Transaction;
 }
 
 @ObjectType()
 export class GameOrdersResponse extends BaseResponse {
+  @ApiProperty({ type: [GameOrder], description: 'Заказы пользователя' })
   @Field(() => [GameOrder])
-  @ApiProperty({ description: 'Заказы пользователя', type: [GameOrder] })
   orders: GameOrder[];
 }
 
 @ObjectType()
 export class GameOrderResponse extends BaseResponse {
+  @ApiProperty({ type: GameOrder, description: 'Заказ' })
   @Field(() => GameOrder)
-  @ApiProperty({ description: 'Заказ', type: GameOrder })
   order: GameOrder;
 }

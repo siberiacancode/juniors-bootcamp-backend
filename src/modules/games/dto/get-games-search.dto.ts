@@ -8,60 +8,60 @@ import { transformSearchParam } from '@/utils/helpers';
 import { GameFilter, GameGenre, GameView } from '../constants';
 
 @ArgsType()
-export class GetGamesDto {
-  @IsOptional()
+export class GetGamesSearchDto {
+  @ApiProperty({
+    description: 'Дополнительные фильтры',
+    example: [GameFilter.DISCOUNT, GameFilter.DLC],
+    enum: GameFilter,
+    isArray: true,
+    required: false,
+    enumName: 'GameFilter'
+  })
+  @Field(() => [GameFilter], { nullable: true })
   @Transform(transformSearchParam)
   @IsArray()
+  @IsOptional()
   @IsString({ each: true })
-  @Field(() => [GameFilter], { nullable: true })
-  @ApiProperty({
-    required: false,
-    enum: GameFilter,
-    example: [GameFilter.DISCOUNT, GameFilter.DLC],
-    enumName: 'GameFilter',
-    isArray: true,
-    description: 'Дополнительные фильтры'
-  })
   filter?: GameFilter[];
 
+  @ApiProperty({
+    description: 'Предустановленный вид выборки',
+    example: GameView.POPULAR,
+    enum: GameView,
+    required: false,
+    enumName: 'GameView'
+  })
+  @Field(() => GameView, { nullable: true })
   @IsOptional()
   @IsString()
-  @Field(() => GameView, { nullable: true })
-  @ApiProperty({
-    required: false,
-    enum: GameView,
-    example: GameView.POPULAR,
-    enumName: 'GameView',
-    description: 'Предустановленный вид выборки'
-  })
   view?: GameView;
 
-  @IsOptional()
+  @ApiProperty({
+    description: 'Фильтр по жанрам',
+    example: [GameGenre.ACTION, GameGenre.RPG],
+    enum: GameGenre,
+    isArray: true,
+    required: false,
+    enumName: 'GameGenre'
+  })
+  @Field(() => [GameGenre], { nullable: true })
   @Transform(transformSearchParam)
   @IsArray()
+  @IsOptional()
   @IsString({ each: true })
-  @Field(() => [GameGenre], { nullable: true })
-  @ApiProperty({
-    required: false,
-    enum: GameGenre,
-    example: [GameGenre.ACTION, GameGenre.RPG],
-    enumName: 'GameGenre',
-    isArray: true,
-    description: 'Фильтр по жанрам'
-  })
   genre?: GameGenre[];
 
-  @IsOptional()
+  @ApiProperty({ description: 'Страница', example: 1, required: false })
+  @Field(() => Number, { nullable: true })
   @Transform(({ value }) => Number.parseInt(value, 10))
   @IsNumber()
-  @Field(() => Number, { nullable: true })
-  @ApiProperty({ required: false, example: 1, description: 'Страница' })
+  @IsOptional()
   page?: number;
 
-  @IsOptional()
+  @ApiProperty({ description: 'Лимит', example: 10, required: false })
+  @Field(() => Number, { nullable: true })
   @Transform(({ value }) => Number.parseInt(value, 10))
   @IsNumber()
-  @Field(() => Number, { nullable: true })
-  @ApiProperty({ required: false, example: 10, description: 'Лимит' })
+  @IsOptional()
   limit?: number;
 }

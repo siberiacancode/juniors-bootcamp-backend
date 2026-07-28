@@ -1,101 +1,97 @@
-import type { Document } from 'mongoose';
-
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Field, GraphQLISODateTime, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
-import { DeliveryType, Region } from '../../constants';
+import { GameDeliveryType, GameRegion } from '../../constants';
+import { GameOrderStatus } from './game-order.enums';
 
 @InputType('GameOrderPersonInput')
 @ObjectType()
 export class GameOrderPerson {
+  @ApiProperty({ description: 'Телефон', example: '79990001122' })
   @Field(() => String)
-  @ApiProperty({ example: '79990001122', description: 'Телефон' })
   phone: string;
 
+  @ApiProperty({ description: 'Email', example: 'user@mail.com' })
   @Field(() => String)
-  @ApiProperty({ example: 'user@mail.com', description: 'Email' })
   email: string;
 
-  @Field(() => String, { nullable: true })
   @ApiProperty({
-    required: false,
+    description: 'Ссылка на приглашение',
     example: 'https://example.com/invite',
-    description: 'Ссылка на приглашение'
+    required: false
   })
+  @Field(() => String, { nullable: true })
   inviteLink?: string;
-}
-
-@InputType('GameOrderSnapshotInput')
-@ObjectType()
-export class GameOrderSnapshot {
-  @Field(() => String)
-  @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
-  slug: string;
-
-  @Field(() => String)
-  @ApiProperty({ example: 'Battlefield 2042', description: 'Название игры' })
-  name: string;
-
-  @Field(() => String)
-  @ApiProperty({ example: '/static/images/pizza/1.webp', description: 'Картинка игры' })
-  image: string;
-
-  @Field(() => Region)
-  @ApiProperty({ enum: Region, enumName: 'Region', example: Region.EUROPE, description: 'Регион' })
-  region: Region;
-
-  @Field(() => Number)
-  @ApiProperty({ example: 968, description: 'Текущая цена' })
-  price: number;
-
-  @Field(() => DeliveryType)
-  @ApiProperty({
-    enum: DeliveryType,
-    enumName: 'DeliveryType',
-    example: DeliveryType.STEAM_KEY,
-    description: 'Способ получения'
-  })
-  deliveryType: DeliveryType;
-
-  @Field(() => String)
-  @ApiProperty({ example: 'Deluxe', description: 'Издание' })
-  edition: string;
 }
 
 @InputType('GameOrderInput')
 @ObjectType()
-@Schema({
-  collection: 'games/order',
-  versionKey: false,
-  minimize: false,
-  timestamps: { createdAt: 'created', updatedAt: 'updated' }
-})
 export class GameOrder {
-  @Field(() => String)
-  @ApiProperty({ description: 'ID заказа', type: String })
+  @ApiProperty({ type: String, description: 'ID заказа' })
+  @Field(() => ID)
   _id: Types.ObjectId;
 
+  @ApiProperty({ type: Date, description: 'Дата создания заказа' })
+  @Field(() => GraphQLISODateTime)
+  createdAt: Date;
+
+  @ApiProperty({ type: Date, description: 'Дата обновления заказа' })
+  @Field(() => GraphQLISODateTime)
+  updatedAt: Date;
+
+  @ApiProperty({ type: GameOrderPerson, description: 'Данные покупателя' })
   @Field(() => GameOrderPerson)
-  @Prop({ required: true })
-  @ApiProperty({ description: 'Данные покупателя', type: GameOrderPerson })
   person: GameOrderPerson;
 
-  @Field(() => GameOrderSnapshot)
-  @Prop({ required: true })
-  @ApiProperty({ description: 'Снимок игры на момент заказа', type: GameOrderSnapshot })
-  gameSnapshot: GameOrderSnapshot;
+  @ApiProperty({ description: 'Slug игры', example: 'battlefield-2042' })
+  @Field(() => String)
+  gameSlug: string;
 
-  @Field(() => String, { nullable: true })
-  @Prop({ required: false })
   @ApiProperty({
+    description: 'Регион',
+    example: GameRegion.EUROPE,
+    enum: GameRegion,
+    enumName: 'GameRegion'
+  })
+  @Field(() => GameRegion)
+  region: GameRegion;
+
+  @ApiProperty({ description: 'Цена заказа', example: 968 })
+  @Field(() => Number)
+  price: number;
+
+  @ApiProperty({
+    description: 'Способ получения',
+    example: GameDeliveryType.STEAM_KEY,
+    enum: GameDeliveryType,
+    enumName: 'GameDeliveryType'
+  })
+  @Field(() => GameDeliveryType)
+  deliveryType: GameDeliveryType;
+
+  @ApiProperty({ description: 'Издание', example: 'Deluxe' })
+  @Field(() => String)
+  edition: string;
+
+  @ApiProperty({
+    description: 'Статус заказа',
+    example: GameOrderStatus.AWAITING_PAYMENT,
+    enum: GameOrderStatus,
+    enumName: 'GameOrderStatus'
+  })
+  @Field(() => GameOrderStatus)
+  status: GameOrderStatus;
+
+  @ApiProperty({
+    description: 'Сгенерированный игровой ключ (выдаётся после оплаты)',
     example: 'XXXX-YYYY-ZZZZ',
-    description: 'Сгенерированный игровой ключ',
     required: false
   })
-  gameKey?: string;
-}
+  @Field(() => String, { nullable: true })
+  gameKey?: string | null;
 
-export type GameOrderDocument = GameOrder & Document;
-export const GameOrderSchema = SchemaFactory.createForClass(GameOrder);
+  @ApiProperty({ type: String, description: 'ID связанной транзакции', nullable: true })
+  @Field(() => String, { nullable: true })
+  transactionId?: string | null;
+}

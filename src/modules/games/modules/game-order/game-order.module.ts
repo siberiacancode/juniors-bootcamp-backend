@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { GameOrder, GameOrderSchema } from './game-order.entity';
+import { GameOrderListener } from './game-order.listener';
+import { GameOrderEntitySchema, GameOrderSchema } from './game-order.schema';
 import { GameOrderService } from './game-order.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: GameOrder.name, schema: GameOrderSchema }])],
-  providers: [GameOrderService],
-  exports: [GameOrderService]
+  exports: [GameOrderService],
+  imports: [
+    MongooseModule.forFeature([{ name: GameOrderEntitySchema.name, schema: GameOrderSchema }])
+  ],
+  providers: [GameOrderListener, GameOrderService]
 })
 export class GameOrderModule {}

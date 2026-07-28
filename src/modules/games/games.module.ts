@@ -1,18 +1,25 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
+import { TransactionsModule } from '@/modules/transactions';
 import { UsersModule } from '@/modules/users';
-import { AuthModule } from '@/utils/services';
 
+import { GameEntitySchema, GameSchema } from './game.schema';
 import { GamesController } from './games.controller';
-import { GamesMutation } from './games.mutation';
-import { GamesQuery } from './games.query';
+import { GamesResolver } from './games.resolver';
 import { GamesService } from './games.service';
 import { GameOrderModule } from './modules';
+import { GamesSeeder } from './seed';
 
 @Module({
   controllers: [GamesController],
-  imports: [AuthModule, UsersModule, GameOrderModule],
-  providers: [GamesService, GamesQuery, GamesMutation],
-  exports: []
+  exports: [GamesService],
+  imports: [
+    UsersModule,
+    TransactionsModule,
+    GameOrderModule,
+    MongooseModule.forFeature([{ name: GameEntitySchema.name, schema: GameSchema }])
+  ],
+  providers: [GamesService, GamesResolver, GamesSeeder]
 })
 export class GamesModule {}

@@ -1,446 +1,242 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Get,
-  NotFoundException,
-  Param,
-  Patch,
-  Post,
-  Query,
-  Req
-} from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiHeader,
-  ApiOperation,
-  ApiQuery,
-  ApiResponse,
-  ApiTags
-} from '@nestjs/swagger';
-import { Request } from 'express';
+import type { FastifyReply } from 'fastify';
+
+import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
+import { ApiHeader, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import type { User } from '@/modules/users';
 
-import { OtpsService, RETRY_DELAY } from '@/modules/otps';
+import { SignInDto } from '@/modules/auth/dto';
+import { SignInResponse } from '@/modules/auth/responses';
 import { CreateOtpDto } from '@/modules/otps/dto';
-import { OtpResponse } from '@/modules/otps/otps.model';
-import { SignInDto, UpdateProfileDto } from '@/modules/users/dto';
-import {
-  SessionResponse,
-  SignInResponse,
-  UpdateProfileResponse
-} from '@/modules/users/users.model';
-import { UsersService } from '@/modules/users/users.service';
-import { ApiAuthorizedOnly } from '@/utils/guards';
-import { AuthService, BaseResolver } from '@/utils/services';
+import { CreateOtpResponse } from '@/modules/otps/responses';
+import { ClientType } from '@/modules/sessions';
+import { UpdateProfileDto } from '@/modules/users/dto';
+import { GetProfileResponse, UpdateProfileResponse } from '@/modules/users/responses';
+import { CurrentUser } from '@/utils/decorators';
+import { AuthorizedOnly } from '@/utils/guards';
 
-import { DeliveryType, GameFilter, GameGenre, GameView, Region } from '../games/constants';
+import { GameDeliveryType, GameFilter, GameGenre, GameRegion, GameView } from '../games/constants';
 import {
   CreateGameOrderDto,
   GetGameDto,
   GetGameOrderDto,
-  GetGamesDto,
-  GetPriceVariantsDto,
-  GetRegionsDto,
+  GetGamePaidOrderDto,
+  GetGamePriceVariantsDto,
+  GetGameRegionsDto,
+  GetGamesSearchDto,
   SearchGamesDto
 } from '../games/dto';
 import {
   CreateGameOrderResponse,
   GameOrderResponse,
   GameOrdersResponse,
+  GamePriceVariantsResponse,
+  GameRegionsResponse,
   GameResponse,
   GameSearchResponse,
-  GamesPaginatedResponse,
-  PriceVariantsResponse,
-  RegionsResponse
+  GamesPaginatedResponse
 } from '../games/games.model';
-import { GamesService } from '../games/games.service';
-import { GameOrderService } from '../games/modules';
+import { TesterService } from './tester.service';
 
 @ApiTags('🧪 tester')
-@Controller('/tester')
-export class TesterController extends BaseResolver {
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly otpsService: OtpsService,
-    private readonly authService: AuthService,
-    private readonly gamesService: GamesService,
-    private readonly gameOrderService: GameOrderService
-  ) {
-    super();
-  }
+@Controller('tester')
+export class TesterController {
+  constructor(private readonly testerService: TesterService) {}
 
-  @Post('/auth/otp')
-  @ApiOperation({ summary: 'Создание otp кода для tester' })
+  @ApiOperation({ summary: 'Создание отп кода для tester' })
   @ApiResponse({
-    status: 200,
+    type: CreateOtpResponse,
     description: 'create otp',
-    type: OtpResponse
+    status: 200
   })
-  async createOtp(@Body() createOtpDto: CreateOtpDto): Promise<OtpResponse> {
-    const existingOtp = await this.otpsService.findOne({ phone: createOtpDto.phone });
-
-    if (existingOtp) {
-      const { retryDelay, created } = existingOtp;
-      const now = Date.now();
-
-      if (new Date(created).getTime() + retryDelay > now) {
-        return this.wrapSuccess({ retryDelay: RETRY_DELAY - (now - new Date(created).getTime()) });
-      }
-
-      await this.otpsService.delete({ phone: createOtpDto.phone });
-    }
-
-    const code = Math.floor(100000 + Math.random() * 900000);
-    const retryDelay = Math.random() > 0.5 ? RETRY_DELAY * 10 : RETRY_DELAY;
-
-    await this.otpsService.create({
-      phone: createOtpDto.phone,
-      code,
-      retryDelay
-    });
-
-    return this.wrapSuccess({ retryDelay });
+  @Post('/auth/otp')
+  async createOtp(@Body() createOtpDto: CreateOtpDto): Promise<CreateOtpResponse> {
+    return this.testerService.createOtp(createOtpDto);
   }
 
-  @Post('/users/signin')
+  @ApiHeader({
+    example: ClientType.MOBILE,
+    enum: ClientType,
+    required: false,
+    name: 'x-application'
+  })
   @ApiOperation({ summary: 'Авторизация для tester' })
   @ApiResponse({
-    status: 200,
-    description: 'signin',
-    type: SignInResponse
+    type: SignInResponse,
+    description: 'sign-in',
+    status: 200
   })
-  async signin(@Body() signInDto: SignInDto): Promise<SignInResponse> {
-    let user = await this.usersService.findOne({ phone: signInDto.phone });
-
-    if (!user) {
-      user = await this.usersService.create({ phone: signInDto.phone });
-    }
-
-    const otp = await this.otpsService.findOne({ phone: signInDto.phone, code: signInDto.code });
-
-    if (!otp) {
-      throw new BadRequestException(this.wrapFail('Неправильный otp код'));
-    }
-
-    await this.otpsService.delete({ _id: otp._id });
-    const { token } = await this.authService.login(user);
-
-    return this.wrapSuccess({ user, token });
+  @Post('/users/signin')
+  async signIn(
+    @Body() signInDto: SignInDto,
+    @Res({ passthrough: true }) reply: FastifyReply
+  ): Promise<SignInResponse> {
+    return this.testerService.signIn(signInDto, reply);
   }
 
-  @ApiAuthorizedOnly()
-  @Patch('/users/profile')
   @ApiOperation({ summary: 'Обновить профиль пользователя для tester' })
   @ApiResponse({
-    status: 200,
+    type: UpdateProfileResponse,
     description: 'update profile',
-    type: UpdateProfileResponse
+    status: 200
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
-  @ApiBearerAuth()
-  async updateProfile(@Body() updateProfileDto: UpdateProfileDto): Promise<UpdateProfileResponse> {
-    if (Math.random() < 0.3) {
-      throw new BadRequestException(this.wrapFail('Произошла ошибка'));
-    }
-
-    const user = await this.usersService.findOne({ phone: updateProfileDto.phone });
-
-    if (!user) {
-      throw new BadRequestException(this.wrapFail('Пользователь не существует'));
-    }
-
-    await this.usersService.findOneAndUpdate(
-      { phone: user.phone },
-      {
-        $set: {
-          firstname: updateProfileDto.profile.firstname,
-          lastname: updateProfileDto.profile.lastname,
-          middlename: updateProfileDto.profile.middlename,
-          email: updateProfileDto.profile.email,
-          city: updateProfileDto.profile.city
-        }
-      }
-    );
-
-    const returnedUser = await this.usersService.findOne({ phone: user.phone });
-
-    return this.wrapSuccess({ user: returnedUser });
+  @Patch('/users/profile')
+  @AuthorizedOnly()
+  async updateProfile(
+    @Body() updateProfileDto: UpdateProfileDto,
+    @CurrentUser() user: User
+  ): Promise<UpdateProfileResponse> {
+    return this.testerService.updateProfile(user, updateProfileDto);
   }
 
-  @ApiAuthorizedOnly()
-  @Get('/users/session')
   @ApiOperation({ summary: 'Получить сессию пользователя для tester' })
   @ApiResponse({
-    status: 200,
+    type: GetProfileResponse,
     description: 'session',
-    type: SessionResponse
+    status: 200
   })
-  @ApiHeader({
-    name: 'authorization'
-  })
-  @ApiBearerAuth()
-  async session(@Req() request: Request): Promise<SessionResponse> {
-    const token = request.headers.authorization.split(' ')[1];
-    const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
-
-    const user = await this.usersService.findOne({
-      phone: decodedJwtAccessToken.phone
-    });
-
-    if (!user) {
-      throw new BadRequestException(this.wrapFail('Пользователь не найден'));
-    }
-
-    return this.wrapSuccess({ user });
+  @Get('/users/session')
+  @AuthorizedOnly()
+  getSession(@CurrentUser() user: User): GetProfileResponse {
+    return this.testerService.getSession(user);
   }
 
-  @Get('/games/info')
   @ApiOperation({ summary: 'Получить игры для tester' })
-  @ApiResponse({ status: 200, type: GamesPaginatedResponse })
   @ApiQuery({
-    name: 'filter',
-    required: false,
-    enum: GameFilter,
-    enumName: 'GameFilter',
-    isArray: true,
+    description: 'Дополнительные фильтры',
     example: [GameFilter.DISCOUNT, GameFilter.DLC],
-    description: 'Дополнительные фильтры'
-  })
-  @ApiQuery({
-    required: false,
-    name: 'view',
-    enum: GameView,
-    example: GameView.POPULAR,
-    enumName: 'GameView',
-    description: 'Предустановленный вид выборки'
-  })
-  @ApiQuery({
-    name: 'genre',
-    required: false,
-    enum: GameGenre,
-    enumName: 'GameGenre',
+    enum: GameFilter,
     isArray: true,
+    required: false,
+    enumName: 'GameFilter',
+    name: 'filter'
+  })
+  @ApiQuery({
+    description: 'Предустановленный вид выборки',
+    example: GameView.POPULAR,
+    enum: GameView,
+    required: false,
+    enumName: 'GameView',
+    name: 'view'
+  })
+  @ApiQuery({
+    description: 'Жанр',
     example: [GameGenre.ACTION, GameGenre.RPG],
-    description: 'Жанр'
+    enum: GameGenre,
+    isArray: true,
+    required: false,
+    enumName: 'GameGenre',
+    name: 'genre'
   })
-  @ApiQuery({ name: 'page', required: false, type: Number, description: 'Страница' })
-  @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Лимит' })
-  getGames(@Query() getGamesSearchDto: GetGamesDto): GamesPaginatedResponse {
-    const games = this.gamesService.getFilteredGames(getGamesSearchDto);
-
-    const paginatedGames = this.gamesService.getPagination({
-      items: games,
-      page: getGamesSearchDto.page,
-      limit: getGamesSearchDto.limit
-    });
-
-    return this.wrapSuccess(paginatedGames);
+  @ApiQuery({ type: Number, description: 'Страница', required: false, name: 'page' })
+  @ApiQuery({ type: Number, description: 'Лимит', required: false, name: 'limit' })
+  @ApiResponse({ type: GamesPaginatedResponse, status: 200 })
+  @Get('/games/info')
+  async getGames(@Query() getGamesSearchDto: GetGamesSearchDto): Promise<GamesPaginatedResponse> {
+    return this.testerService.getGames(getGamesSearchDto);
   }
 
-  @Get('/games/search')
   @ApiOperation({ summary: 'Поиск по играм для tester' })
-  @ApiResponse({ status: 200, type: GameSearchResponse })
-  @ApiQuery({ name: 'search', required: true, type: String, description: 'Строка поиска' })
-  @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Лимит' })
-  searchGames(@Query() searchGamesDto: SearchGamesDto): GameSearchResponse {
-    const games = this.gamesService.searchAutocomplete(searchGamesDto);
-    return this.wrapSuccess({ games });
+  @ApiQuery({ type: String, description: 'Строка поиска', required: true, name: 'search' })
+  @ApiQuery({ type: Number, description: 'Лимит', required: false, name: 'limit' })
+  @ApiResponse({ type: GameSearchResponse, status: 200 })
+  @Get('/games/search')
+  async searchGames(@Query() searchGamesDto: SearchGamesDto): Promise<GameSearchResponse> {
+    return this.testerService.searchGames(searchGamesDto);
   }
 
-  @Get('/games/info/:slug')
   @ApiOperation({ summary: 'Получить игру для tester' })
-  @ApiResponse({ status: 200, type: GameResponse })
-  getGame(@Param() getGameDto: GetGameDto): GameResponse {
-    const game = this.gamesService.getGame(getGameDto.slug);
-
-    if (!game) {
-      throw new NotFoundException(this.wrapFail('Игра не найдена'));
-    }
-
-    return this.wrapSuccess({ game });
+  @ApiResponse({ type: GameResponse, status: 200 })
+  @Get('/games/info/:slug')
+  async getGame(@Param() getGameDto: GetGameDto): Promise<GameResponse> {
+    return this.testerService.getGame(getGameDto);
   }
 
-  @Get('/games/regions')
   @ApiOperation({ summary: 'Получить регионы для tester' })
-  @ApiResponse({ status: 200, type: RegionsResponse })
+  @ApiQuery({ type: String, description: 'Slug игры', required: true, name: 'slug' })
   @ApiQuery({
-    name: 'slug',
+    description: 'Тип доставки',
+    example: GameDeliveryType.STEAM_GIFT,
+    enum: GameDeliveryType,
     required: true,
-    type: String,
-    description: 'Slug игры'
+    enumName: 'GameDeliveryType',
+    name: 'deliveryType'
   })
-  @ApiQuery({
-    name: 'deliveryType',
-    required: true,
-    enum: DeliveryType,
-    example: DeliveryType.STEAM_GIFT,
-    enumName: 'DeliveryType',
-    description: 'Тип доставки'
-  })
-  getRegions(@Query() getRegionsDto: GetRegionsDto): RegionsResponse {
-    const regions = this.gamesService.getRegions(getRegionsDto);
-
-    if (!regions) {
-      throw new NotFoundException(this.wrapFail('Регионы не найдены'));
-    }
-
-    return this.wrapSuccess({ regions });
+  @ApiResponse({ type: GameRegionsResponse, status: 200 })
+  @Get('/games/regions')
+  async getGameRegions(
+    @Query() getGameRegionsDto: GetGameRegionsDto
+  ): Promise<GameRegionsResponse> {
+    return this.testerService.getGameRegions(getGameRegionsDto);
   }
 
-  @Get('/games/price-variants')
   @ApiOperation({ summary: 'Получить варианты цен для tester' })
-  @ApiResponse({ status: 200, type: PriceVariantsResponse })
+  @ApiQuery({ type: String, description: 'Slug игры', required: true, name: 'slug' })
   @ApiQuery({
-    name: 'slug',
+    description: 'Тип доставки',
+    example: GameDeliveryType.STEAM_GIFT,
+    enum: GameDeliveryType,
     required: true,
-    type: String,
-    description: 'Slug игры'
+    enumName: 'GameDeliveryType',
+    name: 'deliveryType'
   })
   @ApiQuery({
-    name: 'deliveryType',
+    description: 'Регион',
+    example: GameRegion.RU,
+    enum: GameRegion,
     required: true,
-    enum: DeliveryType,
-    example: DeliveryType.STEAM_GIFT,
-    enumName: 'DeliveryType',
-    description: 'Тип доставки'
+    enumName: 'GameRegion',
+    name: 'region'
   })
-  @ApiQuery({
-    name: 'region',
-    required: true,
-    enum: Region,
-    example: Region.RU,
-    enumName: 'Region',
-    description: 'Регион'
-  })
-  getPriceVariants(@Query() getPriceVariantsDto: GetPriceVariantsDto): PriceVariantsResponse {
-    const priceVariants = this.gamesService.getPriceVariant(getPriceVariantsDto);
-
-    if (!priceVariants) {
-      throw new NotFoundException(this.wrapFail('Варианты не найдены'));
-    }
-
-    return this.wrapSuccess({ priceVariants });
+  @ApiResponse({ type: GamePriceVariantsResponse, status: 200 })
+  @Get('/games/price-variants')
+  async getGamePriceVariants(
+    @Query() getGamePriceVariantsDto: GetGamePriceVariantsDto
+  ): Promise<GamePriceVariantsResponse> {
+    return this.testerService.getGamePriceVariants(getGamePriceVariantsDto);
   }
 
+  @ApiOperation({ summary: 'Создать заказ игры и транзакцию для оплаты для tester' })
+  @ApiResponse({ type: CreateGameOrderResponse, status: 200 })
   @Post('/games/order')
-  @ApiOperation({ summary: 'Купить игру и получить ключ для tester' })
-  @ApiResponse({ status: 200, type: CreateGameOrderResponse })
   async createGameOrder(
     @Body() createGameOrderDto: CreateGameOrderDto
   ): Promise<CreateGameOrderResponse> {
-    const game = this.gamesService.findGame(createGameOrderDto.gameSlug);
-
-    if (!game) {
-      throw new NotFoundException(this.wrapFail('Игра не найдена'));
-    }
-
-    let user = await this.usersService.findOne({ phone: createGameOrderDto.person.phone });
-
-    if (!user) {
-      user = await this.usersService.create({
-        phone: createGameOrderDto.person.phone
-      });
-    }
-
-    await this.usersService.findOneAndUpdate(
-      { phone: user.phone },
-      {
-        $set: {
-          email: createGameOrderDto.person.email
-        }
-      }
-    );
-
-    const priceVariant = game.priceVariants.find(
-      (variant) =>
-        createGameOrderDto.deliveryType === variant.deliveryType &&
-        createGameOrderDto.edition === variant.edition &&
-        createGameOrderDto.region === variant.region
-    );
-
-    if (
-      priceVariant?.deliveryType === DeliveryType.STEAM_GIFT &&
-      !createGameOrderDto.person.inviteLink
-    ) {
-      throw new BadRequestException(
-        this.wrapFail('При заказе Steam Gift необходимо указать ссылку приглашения')
-      );
-    }
-
-    if (!priceVariant) {
-      throw new NotFoundException(this.wrapFail('Вариант цены не найден'));
-    }
-
-    const order = await this.gameOrderService.create({
-      person: createGameOrderDto.person,
-      gameSnapshot: {
-        deliveryType: priceVariant.deliveryType,
-        edition: priceVariant.edition,
-        price: priceVariant.price,
-        region: priceVariant.region,
-        slug: game.slug,
-        name: game.name,
-        image: game.image
-      },
-      ...(priceVariant.deliveryType !== DeliveryType.STEAM_GIFT && {
-        gameKey: this.gameOrderService.generateGameKey()
-      })
-    });
-
-    return this.wrapSuccess({ order });
+    return this.testerService.createGameOrder(createGameOrderDto);
   }
 
-  @ApiAuthorizedOnly()
-  @Get('/games/orders')
   @ApiOperation({ summary: 'Получить все заказы игр для tester' })
-  @ApiResponse({ status: 200, type: GameOrdersResponse })
-  @ApiHeader({ name: 'authorization' })
-  @ApiBearerAuth()
-  async getGameOrders(@Req() request: Request): Promise<GameOrdersResponse> {
-    const token = request.headers.authorization.split(' ')[1];
-    const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
-
-    if (!decodedJwtAccessToken) {
-      throw new BadRequestException(this.wrapFail('Некорректный токен авторизации'));
-    }
-
-    const orders = await this.gameOrderService.find({
-      $or: [{ 'person.phone': decodedJwtAccessToken.phone }]
-    });
-
-    return this.wrapSuccess({ orders });
+  @ApiResponse({ type: GameOrdersResponse, status: 200 })
+  @Get('/games/orders')
+  @AuthorizedOnly()
+  async getGameOrders(@CurrentUser() user: User): Promise<GameOrdersResponse> {
+    return this.testerService.getGameOrders(user);
   }
 
-  @ApiAuthorizedOnly()
-  @Get('/games/orders/:orderId')
+  @ApiOperation({ summary: 'Получить оплаченный заказ игры для tester' })
+  @ApiQuery({
+    type: String,
+    description: 'Одноразовый токен доступа',
+    example: '1f2e3d4c5b6a7980abcdef1234567890abcdef1234567890abcdef1234567890',
+    required: true,
+    name: 'token'
+  })
+  @ApiResponse({ type: GameOrderResponse, status: 200 })
+  @Get('/games/orders/paid')
+  async getGamePaidOrder(
+    @Query() getGamePaidOrderDto: GetGamePaidOrderDto
+  ): Promise<GameOrderResponse> {
+    return this.testerService.getGamePaidOrder(getGamePaidOrderDto);
+  }
+
   @ApiOperation({ summary: 'Получить заказ игры для tester' })
-  @ApiResponse({ status: 200, type: GameOrderResponse })
-  @ApiHeader({ name: 'authorization' })
-  @ApiBearerAuth()
+  @ApiResponse({ type: GameOrderResponse, status: 200 })
+  @Get('/games/orders/:orderId')
+  @AuthorizedOnly()
   async getGameOrder(
     @Param() getGameOrderDto: GetGameOrderDto,
-    @Req() request: Request
+    @CurrentUser() user: User
   ): Promise<GameOrderResponse> {
-    const token = request.headers.authorization.split(' ')[1];
-    const decodedJwtAccessToken = (await this.authService.decode(token)) as User;
-
-    if (!decodedJwtAccessToken) {
-      throw new BadRequestException(this.wrapFail('Некорректный токен авторизации'));
-    }
-
-    const order = await this.gameOrderService.findOne({
-      _id: getGameOrderDto.orderId,
-      $or: [{ 'person.phone': decodedJwtAccessToken.phone }]
-    });
-
-    if (!order) {
-      throw new NotFoundException(this.wrapFail('Заказ не найден'));
-    }
-
-    return this.wrapSuccess({ order });
+    return this.testerService.getGameOrder(getGameOrderDto, user);
   }
 }

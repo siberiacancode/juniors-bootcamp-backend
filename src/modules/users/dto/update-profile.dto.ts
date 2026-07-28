@@ -1,52 +1,36 @@
-import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
-
-@InputType()
-class UpdateProfileProfileDto {
-  @IsString()
-  @IsOptional()
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'firstname', description: 'Имя', required: false })
-  firstname?: string;
-
-  @IsString()
-  @IsOptional()
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'middlename', description: 'Отчество', required: false })
-  middlename?: string;
-
-  @IsString()
-  @IsOptional()
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'lastname', description: 'Фамилия', required: false })
-  lastname?: string;
-
-  @IsString()
-  @IsOptional()
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'email@gmail.com', description: 'Почта', required: false })
-  email?: string;
-
-  @IsString()
-  @IsOptional()
-  @Field(() => String, { nullable: true })
-  @ApiProperty({ example: 'city', description: 'Город', required: false })
-  city?: string;
-}
+import { IsOptional, IsString } from 'class-validator';
 
 @ArgsType()
 export class UpdateProfileDto {
-  @ValidateNested()
-  @Field(() => UpdateProfileProfileDto)
-  @ApiProperty({ description: 'Данные пользователя', type: UpdateProfileProfileDto })
-  @Type(() => UpdateProfileProfileDto)
-  profile: UpdateProfileProfileDto;
-
+  @ApiProperty({ description: 'Имя', example: 'Иван', required: false })
+  @Field(() => String, { nullable: true })
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  @Field(() => String)
-  @ApiProperty({ example: '89990009999', description: 'Номер телефона' })
-  phone: string;
+  firstname?: string;
+
+  @ApiProperty({ description: 'Отчество', example: 'Иванович', required: false })
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  middlename?: string;
+
+  @ApiProperty({ description: 'Фамилия', example: 'Иванов', required: false })
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  lastname?: string;
+
+  @ApiProperty({ description: 'Почта', example: 'example.email@gmail.com', required: false })
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  email?: string;
+
+  @ApiProperty({ description: 'Город', example: 'Москва', required: false })
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  city?: string;
 }

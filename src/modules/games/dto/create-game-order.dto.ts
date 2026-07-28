@@ -1,72 +1,71 @@
-import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 
-import { DeliveryType, Region } from '../constants';
+import { GameDeliveryType, GameRegion } from '../constants';
 
 @InputType('CreateGameOrderPersonDto')
 export class CreateGameOrderPersonDto {
-  @IsString()
+  @ApiProperty({ description: 'Телефон пользователя', example: '79990001122' })
   @Field(() => String)
-  @ApiProperty({ example: '79990001122', description: 'Телефон пользователя' })
+  @IsString()
   phone: string;
 
-  @IsEmail()
+  @ApiProperty({ description: 'Email пользователя', example: 'example@mail.com' })
   @Field(() => String)
-  @ApiProperty({ example: 'example@mail.com', description: 'Email пользователя' })
+  @IsEmail()
   email: string;
 
-  @IsOptional()
-  @Field(() => String, { nullable: true })
   @ApiProperty({
-    required: false,
+    description: 'Ссылка на приглашение',
     example: 'https://s.team/p/',
-    description: 'Ссылка на приглашение'
+    required: false
   })
+  @Field(() => String, { nullable: true })
+  @IsOptional()
   inviteLink?: string;
 }
 
-@ArgsType()
+@InputType()
 export class CreateGameOrderDto {
-  @IsString()
-  @IsNotEmpty()
+  @ApiProperty({ description: 'Slug игры', example: 'battlefield-2042' })
   @Field(() => String)
-  @ApiProperty({ example: 'battlefield-2042', description: 'Slug игры' })
+  @IsNotEmpty()
+  @IsString()
   gameSlug: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @Field(() => DeliveryType)
   @ApiProperty({
     description: 'Тип доставки',
-    enum: DeliveryType,
-    example: DeliveryType.STEAM_GIFT,
-    enumName: 'DeliveryType'
+    example: GameDeliveryType.STEAM_GIFT,
+    enum: GameDeliveryType,
+    enumName: 'GameDeliveryType'
   })
-  deliveryType: DeliveryType;
-
-  @IsString()
+  @Field(() => GameDeliveryType)
   @IsNotEmpty()
-  @Field(() => Region)
-  @ApiProperty({ description: 'Регион', enum: Region, example: Region.RU, enumName: 'Region' })
-  region: Region;
-
   @IsString()
+  deliveryType: GameDeliveryType;
+
+  @ApiProperty({
+    description: 'Регион',
+    example: GameRegion.RU,
+    enum: GameRegion,
+    enumName: 'GameRegion'
+  })
+  @Field(() => GameRegion)
   @IsNotEmpty()
+  @IsString()
+  region: GameRegion;
+
+  @ApiProperty({ description: 'Издание', example: 'Deluxe' })
   @Field(() => String)
-  @ApiProperty({ example: 'Deluxe', description: 'Издание' })
+  @IsNotEmpty()
+  @IsString()
   edition: string;
 
-  @ValidateNested()
-  @Type(() => CreateGameOrderPersonDto)
+  @ApiProperty({ type: CreateGameOrderPersonDto, description: 'Данные покупателя' })
   @Field(() => CreateGameOrderPersonDto)
-  @ApiProperty({ description: 'Данные покупателя', type: CreateGameOrderPersonDto })
+  @Type(() => CreateGameOrderPersonDto)
+  @ValidateNested()
   person: CreateGameOrderPersonDto;
-
-  @IsString()
-  @IsNotEmpty()
-  @Field(() => String)
-  @ApiProperty({ example: '2202 2063 8908 5954', description: 'Дебетовая карта для оплаты' })
-  debitCard: string;
 }

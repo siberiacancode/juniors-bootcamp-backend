@@ -1,8 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
-import { GameFilter, GAMES, GameType, GameView } from './constants';
-import { GetGamesDto, GetPriceVariantsDto, GetRegionsDto, SearchGamesDto } from './dto';
-import { DetailedGame, FilteredGame, GamesPaginationMeta } from './entities';
+import { TransactionOrderType, TransactionsService } from '@/modules/transactions';
+import { UsersService } from '@/modules/users';
+import { BaseService } from '@/utils/base';
+import { Result } from '@/utils/helpers';
+
+import { GameDeliveryType, GameFilter, GameType, GameView } from './constants';
+import {
+  CreateGameOrderDto,
+  GetGameDto,
+  GetGamePaidOrderDto,
+  GetGamePriceVariantsDto,
+  GetGameRegionsDto,
+  GetGamesSearchDto,
+  SearchGamesDto
+} from './dto';
+import { GameDetailed, GameFiltered, GamePaginationMeta, GamePriceVariant } from './game.entity';
+import { GameEntitySchema } from './game.schema';
+import { GameOrderService, GameOrderStatus } from './modules';
 
 interface GetPaginationParams<Item> {
   items: Item[];
@@ -12,66 +29,91 @@ interface GetPaginationParams<Item> {
 
 interface PaginationResult<Item> {
   games: Item[];
-  meta: GamesPaginationMeta;
+  meta: GamePaginationMeta;
+  [key: string]: unknown;
 }
 
 const THREE_YEARS_IN_MS = 3 * 365.25 * 24 * 3600 * 1000;
 
+const CURRENCY = 'RUB';
+
 @Injectable()
-export class GamesService {
-  getGames() {
-    return GAMES;
+export class GamesService extends BaseService<GameEntitySchema> {
+  constructor(
+    @InjectModel(GameEntitySchema.name) private readonly gameModel: Model<GameEntitySchema>,
+    private readonly gameOrderService: GameOrderService,
+    private readonly usersService: UsersService,
+    private readonly transactionsService: TransactionsService
+  ) {
+    super(gameModel);
   }
 
-  findGame(slug: string) {
-    return this.getGames().find((game) => game.slug === slug);
+  private async findGames() {
+    return this.findMany();
   }
 
-  getGame(slug: string): DetailedGame {
-    const game = this.findGame(slug);
-
-    if (!game) return undefined;
-
-    const deliveryTypes = [...new Set(game.priceVariants.map((variant) => variant.deliveryType))];
-
-    return {
-      deliveryTypes,
-      description: game.description,
-      genres: game.genres,
-      image: game.image,
-      developer: game.developer,
-      externalId: game.externalId,
-      minimumSystemRequirements: game.minimumSystemRequirements,
-      name: game.name,
-      publisher: game.publisher,
-      recommendedSystemRequirements: game.recommendedSystemRequirements,
-      releaseDate: game.releaseDate,
-      screenshots: game.screenshots,
-      slug: game.slug,
-      type: game.type
-    };
+  async findGame(slug: string) {
+    return this.findOne({ slug });
   }
 
-  getFilteredGames(dto: GetGamesDto): FilteredGame[] {
-    const filteredGames = this.getGames().filter((game) => {
-      if (dto.filter?.length) {
+  private getGameDeliveryTypes(priceVariants: GamePriceVariant[]) {
+    return [...new Set(priceVariants.map((variant) => variant.deliveryType))];
+  }
+
+  async getGames(getGamesDto: GetGamesSearchDto) {
+    const games = await this.getFilteredGames(getGamesDto);
+    const paginatedGames = this.getPagination({
+      items: games,
+      page: getGamesDto.page,
+      limit: getGamesDto.limit
+    });
+
+    return Result.success(paginatedGames);
+  }
+
+  async getGame(getGameDto: GetGameDto) {
+    const game = await this.findGame(getGameDto.slug);
+
+    if (!game) {
+      throw new NotFoundException(Result.fail('Игра не найдена'));
+    }
+
+    return Result.success({
+      game: {
+        ...game,
+        deliveryTypes: this.getGameDeliveryTypes(game.priceVariants)
+      } as GameDetailed
+    });
+  }
+
+  private async getFilteredGames(getGamesDto: GetGamesSearchDto): Promise<GameFiltered[]> {
+    const games = await this.findGames();
+
+    const filteredGames = games.filter((game) => {
+      if (getGamesDto.filter?.length) {
         if (
-          dto.filter.includes(GameFilter.DISCOUNT) &&
+          getGamesDto.filter.includes(GameFilter.DISCOUNT) &&
           !game.priceVariants.some((variant) => variant.oldPrice)
         )
           return false;
 
-        if (dto.filter.includes(GameFilter.DLC) && game.type !== GameType.DLC) return false;
+        if (getGamesDto.filter.includes(GameFilter.DLC) && game.type !== GameType.DLC) return false;
       }
 
-      if (dto.view) {
-        if (dto.view === GameView.POPULAR && !game.isPopular) return false;
+      if (getGamesDto.view) {
+        if (getGamesDto.view === GameView.POPULAR && !game.isPopular) return false;
 
-        if (dto.view === GameView.NEW && game.releaseDate < (Date.now() - THREE_YEARS_IN_MS) / 1000)
+        if (
+          getGamesDto.view === GameView.NEW &&
+          game.releaseDate < (Date.now() - THREE_YEARS_IN_MS) / 1000
+        )
           return false;
       }
 
-      if (dto.genre?.length && !dto.genre.some((genre) => game.genres.includes(genre)))
+      if (
+        getGamesDto.genre?.length &&
+        !getGamesDto.genre.some((genre) => game.genres.includes(genre))
+      )
         return false;
 
       return true;
@@ -80,12 +122,12 @@ export class GamesService {
     return filteredGames.map((game) => {
       let priceVariants = game.priceVariants;
 
-      if (dto.filter?.includes(GameFilter.DISCOUNT)) {
+      if (getGamesDto.filter?.includes(GameFilter.DISCOUNT)) {
         priceVariants = game.priceVariants.filter((v) => v.oldPrice);
       }
 
       const priceVariant = priceVariants.reduce((min, current) => {
-        if (dto.filter?.includes(GameFilter.DISCOUNT)) {
+        if (getGamesDto.filter?.includes(GameFilter.DISCOUNT)) {
           if (current.oldPrice && !min.oldPrice) return current;
           if (!current.oldPrice && min.oldPrice) return min;
         }
@@ -103,13 +145,15 @@ export class GamesService {
     });
   }
 
-  searchAutocomplete(searchGamesDto: SearchGamesDto): FilteredGame[] {
+  async searchGames(searchGamesDto: SearchGamesDto) {
     const normalizedSearch = searchGamesDto.search.toLowerCase().trim();
     const limit = searchGamesDto.limit ?? 8;
 
-    if (!normalizedSearch) return [];
+    if (!normalizedSearch) return Result.success({ games: [] });
 
-    return this.getGames()
+    const games = await this.findGames();
+
+    const filteredGames = games
       .filter(
         (game) =>
           game.name.toLowerCase().includes(normalizedSearch) ||
@@ -141,28 +185,147 @@ export class GamesService {
 
         return a.name.localeCompare(b.name);
       });
+
+    return Result.success({ games: filteredGames });
   }
 
-  getRegions(dto: GetRegionsDto) {
-    const game = this.findGame(dto.slug);
+  async getGameRegions(getGameRegionsDto: GetGameRegionsDto) {
+    const game = await this.findGame(getGameRegionsDto.slug);
 
-    if (!game) return undefined;
+    if (!game) {
+      throw new NotFoundException(Result.fail('Регионы не найдены'));
+    }
 
-    return game.priceVariants
-      .filter((variant) => variant.deliveryType === dto.deliveryType)
+    const regions = game.priceVariants
+      .filter((variant) => variant.deliveryType === getGameRegionsDto.deliveryType)
       .map((variant) => variant.region);
+
+    return Result.success({ regions });
   }
 
-  getPriceVariant(dto: GetPriceVariantsDto) {
-    const game = this.findGame(dto.slug);
+  async getGamePriceVariants(getGamePriceVariantsDto: GetGamePriceVariantsDto) {
+    const game = await this.findGame(getGamePriceVariantsDto.slug);
 
-    if (!game) return undefined;
-    return game.priceVariants.filter(
-      (variant) => variant.deliveryType === dto.deliveryType && variant.region === dto.region
+    if (!game) {
+      throw new NotFoundException(Result.fail('Варианты не найдены'));
+    }
+
+    const priceVariants = game.priceVariants.filter(
+      (variant) =>
+        variant.deliveryType === getGamePriceVariantsDto.deliveryType &&
+        variant.region === getGamePriceVariantsDto.region
     );
+
+    return Result.success({ priceVariants });
   }
 
-  getPagination<Item>({
+  async createGameOrder(createGameOrderDto: CreateGameOrderDto) {
+    const game = await this.findGame(createGameOrderDto.gameSlug);
+
+    if (!game) {
+      throw new NotFoundException(Result.fail('Игра не найдена'));
+    }
+
+    const priceVariant = game.priceVariants.find(
+      (variant) =>
+        createGameOrderDto.deliveryType === variant.deliveryType &&
+        createGameOrderDto.edition === variant.edition &&
+        createGameOrderDto.region === variant.region
+    );
+
+    if (!priceVariant) {
+      throw new NotFoundException(Result.fail('Вариант цены не найден'));
+    }
+
+    if (
+      priceVariant.deliveryType === GameDeliveryType.STEAM_GIFT &&
+      !createGameOrderDto.person.inviteLink
+    ) {
+      throw new BadRequestException(
+        Result.fail('При заказе Steam Gift необходимо указать ссылку приглашения')
+      );
+    }
+
+    const user = await this.usersService.findOrCreateUser(createGameOrderDto.person.phone);
+
+    await this.usersService.updateOne(
+      { phone: user.phone },
+      { $set: { email: createGameOrderDto.person.email } }
+    );
+
+    const order = await this.gameOrderService.create({
+      person: createGameOrderDto.person,
+      gameSlug: game.slug,
+      deliveryType: priceVariant.deliveryType,
+      edition: priceVariant.edition,
+      price: priceVariant.price,
+      region: priceVariant.region,
+      status: GameOrderStatus.AWAITING_PAYMENT,
+      gameKey: null,
+      transactionId: null
+    });
+
+    const transaction = await this.transactionsService.createTransaction({
+      phone: createGameOrderDto.person.phone,
+      orderId: String(order._id),
+      orderType: TransactionOrderType.GAME,
+      amount: priceVariant.price,
+      currency: CURRENCY
+    });
+
+    const updatedOrder = await this.gameOrderService.updateById(String(order._id), {
+      transactionId: String(transaction._id)
+    });
+
+    if (!updatedOrder) {
+      throw new BadRequestException(Result.fail(`Заказ ${order._id} не найден`));
+    }
+
+    return Result.success({
+      order: updatedOrder,
+      transaction
+    });
+  }
+
+  async getGameOrders(phone: string) {
+    const orders = await this.gameOrderService.findMany({
+      'person.phone': phone,
+      status: { $ne: GameOrderStatus.AWAITING_PAYMENT }
+    });
+
+    return Result.success({ orders });
+  }
+
+  async getGameOrder(orderId: string, phone: string) {
+    const order = await this.gameOrderService.findById(orderId);
+
+    if (
+      !order ||
+      order.person.phone !== phone ||
+      order.status === GameOrderStatus.AWAITING_PAYMENT
+    ) {
+      throw new NotFoundException(Result.fail('Заказ не найден'));
+    }
+
+    return Result.success({ order });
+  }
+
+  async getGamePaidOrder({ token }: GetGamePaidOrderDto) {
+    const transaction = await this.transactionsService.consumeOrderAccessToken(
+      token,
+      TransactionOrderType.GAME
+    );
+
+    const order = await this.gameOrderService.findById(transaction.orderId);
+
+    if (!order || order.status === GameOrderStatus.AWAITING_PAYMENT) {
+      throw new NotFoundException(Result.fail('Заказ не найден'));
+    }
+
+    return Result.success({ order });
+  }
+
+  private getPagination<Item>({
     items,
     page = 1,
     limit = 10

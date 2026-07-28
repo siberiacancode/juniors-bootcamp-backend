@@ -18,7 +18,7 @@ registerEnumType(GameGenre, {
   name: 'GameGenre'
 });
 
-export enum DeliveryType {
+export enum GameDeliveryType {
   STEAM_KEY = 'steam_key',
   STEAM_GIFT = 'steam_gift',
   EPIC_KEY = 'epic_key',
@@ -27,11 +27,11 @@ export enum DeliveryType {
   PLAYSTATION_KEY = 'playstation_key'
 }
 
-registerEnumType(DeliveryType, {
-  name: 'DeliveryType'
+registerEnumType(GameDeliveryType, {
+  name: 'GameDeliveryType'
 });
 
-export enum Region {
+export enum GameRegion {
   RU = 'ru',
   KZ = 'kz',
   BY = 'by',
@@ -43,8 +43,8 @@ export enum Region {
   ASIA = 'asia'
 }
 
-registerEnumType(Region, {
-  name: 'Region'
+registerEnumType(GameRegion, {
+  name: 'GameRegion'
 });
 
 export enum GameView {
