@@ -1,52 +1,62 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { BaseResponse } from '@/utils/base';
 import { CurrentUser } from '@/utils/decorators';
 import { AuthorizedOnly } from '@/utils/guards';
 
 import { User } from '../users';
-import { CancelPizzaOrderDto, CreatePizzaPaymentDto, GetPizzaOrderDto } from './dto';
-import { Pizza } from './entities';
+import {
+  CalculatePizzaOrderDto,
+  CancelPizzaOrderDto,
+  CreatePizzaPaymentDto,
+  GetPizzaCatalogDto,
+  GetPizzaOrderDto,
+  GetPizzaPaidOrderDto
+} from './dto';
+import { PizzaProduct } from './pizza.entity';
 import { PizzasService } from './pizzas.service';
 import {
+  CalculateOrderResponse,
+  CancelPizzaOrderResponse,
   CreatePizzaPaymentResponse,
   GetPizzaCatalogResponse,
   GetPizzaOrderResponse,
   GetPizzaOrdersResponse
 } from './responses';
 
-@Resolver('🍕 pizzas')
-@Resolver(() => Pizza)
+@Resolver(() => PizzaProduct)
 export class PizzasResolver {
   constructor(private readonly pizzaService: PizzasService) {}
 
-  @Query(() => GetPizzaCatalogResponse, {
-    description: 'Получить каталог'
-  })
-  async getCatalog(): Promise<GetPizzaCatalogResponse> {
-    return this.pizzaService.getCatalog();
+  @Query(() => GetPizzaCatalogResponse, { description: 'Получить каталог' })
+  async getCatalog(
+    @Args() getPizzaCatalogDto: GetPizzaCatalogDto
+  ): Promise<GetPizzaCatalogResponse> {
+    return this.pizzaService.getPizzaCatalog(getPizzaCatalogDto);
+  }
+
+  @Query(() => CalculateOrderResponse, { description: 'Рассчитать стоимость корзины' })
+  async calculatePizzaOrder(
+    @Args('input') calculatePizzaOrderDto: CalculatePizzaOrderDto
+  ): Promise<CalculateOrderResponse> {
+    return this.pizzaService.calculatePizzaOrder(calculatePizzaOrderDto);
   }
 
   @Mutation(() => CreatePizzaPaymentResponse, {
-    description: 'Оплатить корзину'
+    description: 'Создать заказ и транзакцию для оплаты'
   })
   async createPizzaPayment(
-    @Args() createPizzaPaymentDto: CreatePizzaPaymentDto
+    @Args('input') createPizzaPaymentDto: CreatePizzaPaymentDto
   ): Promise<CreatePizzaPaymentResponse> {
     return this.pizzaService.createPizzaPayment(createPizzaPaymentDto);
   }
 
-  @Query(() => GetPizzaOrdersResponse, {
-    description: 'Получить все заказы'
-  })
+  @Query(() => GetPizzaOrdersResponse, { description: 'Получить все заказы' })
   @AuthorizedOnly()
   async getPizzaOrders(@CurrentUser() user: User): Promise<GetPizzaOrdersResponse> {
     return this.pizzaService.getPizzaOrders(user.phone);
   }
 
-  @Query(() => GetPizzaOrderResponse, {
-    description: 'Получить заказ'
-  })
+  @Query(() => GetPizzaOrderResponse, { description: 'Получить заказ' })
   @AuthorizedOnly()
   async getPizzaOrder(
     @Args() getPizzaOrderDto: GetPizzaOrderDto,
@@ -55,11 +65,20 @@ export class PizzasResolver {
     return this.pizzaService.getPizzaOrder(getPizzaOrderDto.orderId, user.phone);
   }
 
-  @Mutation(() => BaseResponse, {
-    description: 'Отменить заказ'
+  @Query(() => GetPizzaOrderResponse, {
+    description: 'Получить оплаченный заказ по одноразовому токену'
   })
+  async getPizzaPaidOrder(
+    @Args() getPizzaPaidOrderDto: GetPizzaPaidOrderDto
+  ): Promise<GetPizzaOrderResponse> {
+    return this.pizzaService.getPizzaPaidOrder(getPizzaPaidOrderDto);
+  }
+
+  @Mutation(() => CancelPizzaOrderResponse, { description: 'Отменить заказ' })
   @AuthorizedOnly()
-  async cancelPizzaOrder(@Args() cancelPizzaOrderDto: CancelPizzaOrderDto): Promise<BaseResponse> {
-    return this.cancelPizzaOrder(cancelPizzaOrderDto);
+  async cancelPizzaOrder(
+    @Args() cancelPizzaOrderDto: CancelPizzaOrderDto
+  ): Promise<CancelPizzaOrderResponse> {
+    return this.pizzaService.cancelPizzaOrder(cancelPizzaOrderDto.orderId);
   }
 }

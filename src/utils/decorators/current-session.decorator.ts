@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
-import { Session } from '@/modules/sessions';
+import type { Session } from '@/modules/sessions/session.entity';
 
 import { getRequest } from '../helpers';
 

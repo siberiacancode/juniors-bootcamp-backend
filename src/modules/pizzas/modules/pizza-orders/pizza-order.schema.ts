@@ -2,7 +2,7 @@ import type { HydratedDocument } from 'mongoose';
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { Pizza, PizzaAddress, PizzaPerson } from '../../entities';
+import { PizzaAddress, PizzaCommission, PizzaOrderedItem, PizzaPerson } from '../../entities';
 import { PizzaStatus } from './pizza-orders.enums';
 
 @Schema({
@@ -14,7 +14,13 @@ export class PizzaOrderEntitySchema {
   updatedAt: Date;
 
   @Prop({ required: true })
-  pizzas: Pizza[];
+  items: PizzaOrderedItem[];
+
+  @Prop({ required: true, default: 0 })
+  itemsPrice: number;
+
+  @Prop({ type: Object, required: true })
+  commission: PizzaCommission;
 
   @Prop({ required: true })
   totalPrice: number;
@@ -25,11 +31,19 @@ export class PizzaOrderEntitySchema {
   @Prop({ required: true })
   receiverAddress: PizzaAddress;
 
-  @Prop({ required: true, default: PizzaStatus.IN_PROCESSING })
+  @Prop({
+    enum: Object.values(PizzaStatus),
+    required: true,
+    default: PizzaStatus.AWAITING_PAYMENT,
+    index: true
+  })
   status: PizzaStatus;
 
   @Prop({ required: true, default: true })
   cancellable: boolean;
+
+  @Prop({ required: false, default: undefined, index: true })
+  transactionId?: string;
 }
 
 export type PizzaOrderDocument = HydratedDocument<PizzaOrderEntitySchema>;

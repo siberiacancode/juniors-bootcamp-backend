@@ -5,23 +5,29 @@ import { ApolloDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
 import { join } from 'node:path';
 
+import { CardsModule } from '@/modules/cards/cards.module';
 import { OtpsModule } from '@/modules/otps/otps.module';
+import { TransactionsModule } from '@/modules/transactions/transactions.module';
 import { UsersModule } from '@/modules/users/users.module';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth';
+import { GamesModule } from './modules/games';
 import { PizzasModule } from './modules/pizzas';
 import { SessionsModule } from './modules/sessions';
+import { TesterModule } from './modules/tester';
 import { AuthorizedOnlyGuard } from './utils/guards';
 
 @Module({
   controllers: [AppController],
   imports: [
+    EventEmitterModule.forRoot(),
     ConfigModule.forRoot(),
     // I18nModule.forRoot({
     //   fallbackLanguage: 'en',
@@ -67,13 +73,15 @@ import { AuthorizedOnlyGuard } from './utils/guards';
     AuthModule,
     OtpsModule,
     UsersModule,
+    CardsModule,
+    TransactionsModule,
     SessionsModule,
-    PizzasModule
+    PizzasModule,
+    GamesModule,
+    TesterModule
     // CinemaModule,
     // DeliveryModule,
     // CarsModule,
-    // GamesModule,
-    // TesterModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: AuthorizedOnlyGuard }]
 })

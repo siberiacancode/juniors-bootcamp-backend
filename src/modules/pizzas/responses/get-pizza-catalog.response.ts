@@ -3,11 +3,11 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { BaseResponse } from '@/utils/base';
 
-import { Pizza } from '../entities';
+import { PizzaProduct } from '../pizza.entity';
 
 @ObjectType()
 export class GetPizzaCatalogResponse extends BaseResponse {
-  @ApiProperty({ type: [Pizza], description: 'Каталог пицц' })
-  @Field(() => [Pizza])
-  catalog: Pizza[];
+  @ApiProperty({ type: [PizzaProduct], description: 'Каталог продуктов' })
+  @Field(() => [PizzaProduct])
+  catalog: PizzaProduct[];
 }

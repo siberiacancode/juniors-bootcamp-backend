@@ -121,7 +121,7 @@ export class CinemaController extends BaseResolver {
   })
   @Post('/payment')
   async createCinemaPayment(
-    @Args() createCinemaPaymentDto: CreateCinemaPaymentDto
+    @Args('input') createCinemaPaymentDto: CreateCinemaPaymentDto
   ): Promise<PaymentResponse> {
     const { person } = createCinemaPaymentDto;
 

@@ -1,8 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
-@InputType()
+@ArgsType()
 export class UpdateProfileDto {
   @ApiProperty({ description: 'Имя', example: 'Иван', required: false })
   @Field(() => String, { nullable: true })

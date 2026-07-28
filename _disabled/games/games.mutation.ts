@@ -23,7 +23,7 @@ export class GamesMutation extends BaseResolver {
 
   @Mutation(() => CreateGameOrderResponse)
   async createGameOrder(
-    @Args() createGameOrderDto: CreateGameOrderDto
+    @Args('input') createGameOrderDto: CreateGameOrderDto
   ): Promise<CreateGameOrderResponse> {
     const game = this.gamesService.findGame(createGameOrderDto.gameSlug);
 

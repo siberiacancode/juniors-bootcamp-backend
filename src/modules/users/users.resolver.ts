@@ -16,7 +16,7 @@ export class UsersResolver {
   @Mutation(() => UpdateProfileResponse)
   @AuthorizedOnly()
   async updateProfile(
-    @Args('input') updateProfileDto: UpdateProfileDto,
+    @Args() updateProfileDto: UpdateProfileDto,
     @CurrentUser() user: User
   ): Promise<UpdateProfileResponse> {
     return this.usersService.updateProfile(user._id, updateProfileDto);

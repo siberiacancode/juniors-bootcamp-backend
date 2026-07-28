@@ -26,7 +26,7 @@ export class CarsQuery extends BaseResolver {
   }
 
   @Query(() => CarsPaginatedResponse)
-  getCars(@Args() getCarsQuery: GetCarsSearchDto): CarsPaginatedResponse {
+  getCars(@Args('input') getCarsQuery: GetCarsSearchDto): CarsPaginatedResponse {
     const filteredCars = this.carsService.getFilteredCars({ filters: getCarsQuery });
     const paginatedCars = this.carsService.getPagination({
       items: filteredCars,
@@ -38,7 +38,7 @@ export class CarsQuery extends BaseResolver {
   }
 
   @Query(() => CarResponse)
-  async getCar(@Args() getCarDto: GetCarDto): Promise<CarResponse> {
+  async getCar(@Args('input') getCarDto: GetCarDto): Promise<CarResponse> {
     const car = this.carsService.getCar(getCarDto.carId);
 
     if (!car) {
@@ -80,7 +80,7 @@ export class CarsQuery extends BaseResolver {
   @Query(() => CarResponse)
   @AuthorizedOnly()
   async getCarRent(
-    @Args() getCarRentDto: GetCarRentDto,
+    @Args('input') getCarRentDto: GetCarRentDto,
     @Context() context: { req: FastifyRequest }
   ) {
     const token = context.req.headers.authorization.split(' ')[1];

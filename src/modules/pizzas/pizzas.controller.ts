@@ -1,15 +1,24 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import type { User } from '@/modules/users';
 
-import { BaseResponse } from '@/utils/base';
 import { CurrentUser } from '@/utils/decorators';
 import { AuthorizedOnly } from '@/utils/guards';
 
-import { CancelPizzaOrderDto, CreatePizzaPaymentDto, GetPizzaOrderDto } from './dto';
+import {
+  CalculatePizzaOrderDto,
+  CancelPizzaOrderDto,
+  CreatePizzaPaymentDto,
+  GetPizzaCatalogDto,
+  GetPizzaOrderDto,
+  GetPizzaPaidOrderDto
+} from './dto';
+import { PizzaCategory } from './pizzas.enums';
 import { PizzasService } from './pizzas.service';
 import {
+  CalculateOrderResponse,
+  CancelPizzaOrderResponse,
   CreatePizzaPaymentResponse,
   GetPizzaCatalogResponse,
   GetPizzaOrderResponse,
@@ -22,22 +31,32 @@ export class PizzasController {
   constructor(private readonly pizzaService: PizzasService) {}
 
   @ApiOperation({ summary: 'Получить каталог' })
-  @ApiResponse({
-    type: GetPizzaCatalogResponse,
-    description: 'catalog',
-    status: 200
+  @ApiQuery({
+    description: 'Фильтр по категории',
+    enum: PizzaCategory,
+    required: false,
+    enumName: 'PizzaCategory',
+    name: 'category'
   })
+  @ApiResponse({ type: GetPizzaCatalogResponse, description: 'catalog', status: 200 })
   @Get('/catalog')
-  async getCatalog(): Promise<GetPizzaCatalogResponse> {
-    return this.pizzaService.getCatalog();
+  async getPizzaCatalog(
+    @Query() getPizzaCatalog: GetPizzaCatalogDto
+  ): Promise<GetPizzaCatalogResponse> {
+    return this.pizzaService.getPizzaCatalog(getPizzaCatalog);
   }
 
-  @ApiOperation({ summary: 'Оплатить корзину' })
-  @ApiResponse({
-    type: CreatePizzaPaymentResponse,
-    description: 'payment',
-    status: 200
-  })
+  @ApiOperation({ summary: 'Рассчитать стоимость корзины и комиссию' })
+  @ApiResponse({ type: CalculateOrderResponse, description: 'calculate', status: 200 })
+  @Post('/calculate')
+  async calculatePizzaOrder(
+    @Body() calculateOrderDto: CalculatePizzaOrderDto
+  ): Promise<CalculateOrderResponse> {
+    return this.pizzaService.calculatePizzaOrder(calculateOrderDto);
+  }
+
+  @ApiOperation({ summary: 'Создать заказ и транзакцию для оплаты' })
+  @ApiResponse({ type: CreatePizzaPaymentResponse, description: 'payment', status: 200 })
   @Post('/payment')
   async createPizzaPayment(
     @Body() createPizzaPaymentDto: CreatePizzaPaymentDto
@@ -46,23 +65,31 @@ export class PizzasController {
   }
 
   @ApiOperation({ summary: 'Получить все заказы' })
-  @ApiResponse({
-    type: GetPizzaOrdersResponse,
-    description: 'orders',
-    status: 200
-  })
+  @ApiResponse({ type: GetPizzaOrdersResponse, description: 'orders', status: 200 })
   @Get('/orders')
   @AuthorizedOnly()
   async getPizzaOrders(@CurrentUser() user: User): Promise<GetPizzaOrdersResponse> {
     return this.pizzaService.getPizzaOrders(user.phone);
   }
 
-  @ApiOperation({ summary: 'Получить заказ' })
-  @ApiResponse({
-    type: GetPizzaOrderResponse,
-    description: 'order',
-    status: 200
+  @ApiOperation({ summary: 'Получить оплаченный заказ по одноразовому токену' })
+  @ApiQuery({
+    type: String,
+    description: 'Одноразовый токен доступа',
+    example: '1f2e3d4c5b6a7980abcdef1234567890abcdef1234567890abcdef1234567890',
+    required: true,
+    name: 'token'
   })
+  @ApiResponse({ type: GetPizzaOrderResponse, description: 'order', status: 200 })
+  @Get('/orders/paid')
+  async getPizzaPaidOrder(
+    @Query() getPizzaPaidOrderDto: GetPizzaPaidOrderDto
+  ): Promise<GetPizzaOrderResponse> {
+    return this.pizzaService.getPizzaPaidOrder(getPizzaPaidOrderDto);
+  }
+
+  @ApiOperation({ summary: 'Получить заказ' })
+  @ApiResponse({ type: GetPizzaOrderResponse, description: 'order', status: 200 })
   @Get('/orders/:orderId')
   @AuthorizedOnly()
   async getPizzaOrder(
@@ -73,14 +100,12 @@ export class PizzasController {
   }
 
   @ApiOperation({ summary: 'Отменить заказ' })
-  @ApiResponse({
-    type: BaseResponse,
-    description: 'order cancel',
-    status: 200
-  })
+  @ApiResponse({ type: CancelPizzaOrderResponse, description: 'order cancel', status: 200 })
   @Patch('/orders/:orderId/cancel')
   @AuthorizedOnly()
-  async cancelPizzaOrder(@Param() cancelPizzaOrderDto: CancelPizzaOrderDto): Promise<BaseResponse> {
-    return this.cancelPizzaOrder(cancelPizzaOrderDto);
+  async cancelPizzaOrder(
+    @Param() cancelPizzaOrderDto: CancelPizzaOrderDto
+  ): Promise<CancelPizzaOrderResponse> {
+    return this.pizzaService.cancelPizzaOrder(cancelPizzaOrderDto.orderId);
   }
 }

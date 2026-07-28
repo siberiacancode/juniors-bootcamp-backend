@@ -49,6 +49,10 @@ export abstract class BaseService<TEntitySchema extends object> {
       .exec();
   }
 
+  async deleteMany(filter: QueryFilter<TEntitySchema> = {}) {
+    return this.model.deleteMany(filter).lean().exec();
+  }
+
   async deleteById(id: Id) {
     return this.model.findByIdAndDelete(id, { returnDocument: 'after' }).lean().exec();
   }

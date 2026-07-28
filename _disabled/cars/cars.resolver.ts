@@ -27,7 +27,7 @@ export class CarsMutation extends BaseResolver {
   }
 
   @Query(() => CarsPaginatedResponse)
-  getCars(@Args() getCarsQuery: GetCarsSearchDto): CarsPaginatedResponse {
+  getCars(@Args('input') getCarsQuery: GetCarsSearchDto): CarsPaginatedResponse {
     const filteredCars = this.carsService.getFilteredCars({ filters: getCarsQuery });
     const paginatedCars = this.carsService.getPagination({
       items: filteredCars,
@@ -39,7 +39,7 @@ export class CarsMutation extends BaseResolver {
   }
 
   @Query(() => CarResponse)
-  async getCar(@Args() getCarDto: GetCarDto): Promise<CarResponse> {
+  async getCar(@Args('input') getCarDto: GetCarDto): Promise<CarResponse> {
     const car = this.carsService.getCar(getCarDto.carId);
 
     if (!car) {
@@ -81,7 +81,7 @@ export class CarsMutation extends BaseResolver {
   @Query(() => CarResponse)
   @AuthorizedOnly()
   async getCarRent(
-    @Args() getCarRentDto: GetCarRentDto,
+    @Args('input') getCarRentDto: GetCarRentDto,
     @Context() context: { req: FastifyRequest }
   ) {
     const token = context.req.headers.authorization.split(' ')[1];
@@ -103,7 +103,7 @@ export class CarsMutation extends BaseResolver {
   }
 
   @Mutation(() => CarRentResponse)
-  async createCarRent(@Args() createCarRentDto: CreateRentDto): Promise<CarRentResponse> {
+  async createCarRent(@Args('input') createCarRentDto: CreateRentDto): Promise<CarRentResponse> {
     const { phone } = createCarRentDto;
 
     const startDate = new Date(Number(createCarRentDto.startDate));
@@ -189,7 +189,7 @@ export class CarsMutation extends BaseResolver {
   @Mutation(() => BaseResponse)
   @AuthorizedOnly()
   async cancelCarRent(
-    @Args() cancelCarRentDto: CancelCarRentDto,
+    @Args('input') cancelCarRentDto: CancelCarRentDto,
     @Context() context: { req: FastifyRequest }
   ): Promise<BaseResponse> {
     const token = context.req.headers.authorization.split(' ')[1];

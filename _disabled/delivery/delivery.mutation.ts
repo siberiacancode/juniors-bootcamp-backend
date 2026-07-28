@@ -31,7 +31,7 @@ export class DeliveryMutation extends BaseResolver {
   @Mutation(() => BaseResponse)
   @AuthorizedOnly()
   async cancelDeliveryOrder(
-    @Args() cancelDeliveryOrderDto: CancelDeliveryOrderDto
+    @Args('input') cancelDeliveryOrderDto: CancelDeliveryOrderDto
   ): Promise<BaseResponse> {
     const order = await this.deliveryOrderService.findOne({ _id: cancelDeliveryOrderDto.orderId });
 
@@ -53,7 +53,7 @@ export class DeliveryMutation extends BaseResolver {
 
   @Mutation(() => DeliverResponse)
   async createDeliveryOrder(
-    @Args() createDeliveryOrderDto: CreateDeliveryOrderDto
+    @Args('input') createDeliveryOrderDto: CreateDeliveryOrderDto
   ): Promise<DeliverResponse> {
     const { sender, senderPointId, receiverPointId, receiver } = createDeliveryOrderDto;
 
@@ -110,7 +110,7 @@ export class DeliveryMutation extends BaseResolver {
 
   @Mutation(() => CalculateDeliveryResponse)
   async calculateDelivery(
-    @Args() calculateDeliveryDto: CalculateDeliveryDto
+    @Args('input') calculateDeliveryDto: CalculateDeliveryDto
   ): Promise<CalculateDeliveryResponse> {
     const price = calculateDelivery({
       senderPointCoordinates: calculateDeliveryDto.senderPoint,

@@ -2,91 +2,68 @@ import { ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
-import { PizzaDough, PizzaIngredient, PizzaSize } from './entities';
+import { PizzaIngredient, PizzaItemSize, PizzaOption } from './entities';
+import { PizzaCategory } from './pizzas.enums';
 
-@ObjectType({ description: 'Пицца' })
+@ObjectType({ description: 'Продукт каталога' })
 @Schema({
   collection: 'pizzas'
 })
 export class PizzaEntitySchema {
   @Prop({
-    required: true
+    enum: Object.values(PizzaCategory),
+    required: true,
+    default: PizzaCategory.PIZZA,
+    index: true
   })
+  category: PizzaCategory;
+
+  @Prop({ required: true })
   name: string;
 
-  @Prop({
-    required: true
-  })
-  ingredients: PizzaIngredient[];
+  @Prop({ required: false, default: [] })
+  ingredients?: PizzaIngredient[];
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   description: string;
 
-  @Prop({
-    required: true
-  })
-  sizes: PizzaSize[];
+  @Prop({ required: true })
+  sizes: PizzaItemSize[];
 
-  @Prop({
-    required: true
-  })
-  doughs: PizzaDough[];
+  @Prop({ type: Array, required: false, default: [] })
+  options?: PizzaOption[];
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   calories: number;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   protein: string;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   totalFat: string;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   carbohydrates: string;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   sodium: string;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   allergens: string[];
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   isVegetarian: boolean;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   isGlutenFree: boolean;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   isNovelty: boolean;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   isHit: boolean;
 
-  @Prop({
-    required: true
-  })
+  @Prop({ required: true })
   img: string;
 }
 

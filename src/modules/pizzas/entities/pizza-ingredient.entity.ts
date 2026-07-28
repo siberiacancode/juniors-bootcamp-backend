@@ -1,19 +1,19 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { Ingredient } from '../pizzas.enums';
+import { PizzaIngredientType } from '../pizzas.enums';
 
 @InputType('PizzaIngredientInput')
 @ObjectType()
 export class PizzaIngredient {
   @ApiProperty({
     description: 'Идентификатор ингредиента',
-    example: Ingredient.PINEAPPLE,
-    enum: Ingredient,
-    enumName: 'Ingredient'
+    example: PizzaIngredientType.PINEAPPLE,
+    enum: PizzaIngredientType,
+    enumName: 'PizzaIngredientType'
   })
-  @Field(() => Ingredient)
-  type: Ingredient;
+  @Field(() => PizzaIngredientType)
+  type: PizzaIngredientType;
 
   @ApiProperty({ description: 'Цена ингредиента' })
   @Field(() => Number)

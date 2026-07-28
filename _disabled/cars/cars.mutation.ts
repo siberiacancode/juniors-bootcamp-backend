@@ -26,7 +26,7 @@ export class CarsMutation extends BaseResolver {
   }
 
   @Mutation(() => CarRentResponse)
-  async createCarRent(@Args() createCarRentDto: CreateRentDto): Promise<CarRentResponse> {
+  async createCarRent(@Args('input') createCarRentDto: CreateRentDto): Promise<CarRentResponse> {
     const { phone } = createCarRentDto;
 
     const startDate = new Date(Number(createCarRentDto.startDate));
@@ -112,7 +112,7 @@ export class CarsMutation extends BaseResolver {
   @Mutation(() => BaseResponse)
   @AuthorizedOnly()
   async cancelCarRent(
-    @Args() cancelCarRentDto: CancelCarRentDto,
+    @Args('input') cancelCarRentDto: CancelCarRentDto,
     @Context() context: { req: FastifyRequest }
   ): Promise<BaseResponse> {
     const token = context.req.headers.authorization.split(' ')[1];
