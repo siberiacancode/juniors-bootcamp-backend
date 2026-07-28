@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Patch } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CurrentUser } from '@/utils/decorators';
 import { AuthorizedOnly } from '@/utils/guards';
@@ -15,7 +15,6 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Обновить профиль пользователя' })
   @ApiResponse({
     type: UpdateProfileResponse,
@@ -31,7 +30,6 @@ export class UsersController {
     return this.usersService.updateProfile(user._id, updateProfileDto);
   }
 
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Получить профиль пользователя' })
   @ApiResponse({
     type: GetProfileResponse,

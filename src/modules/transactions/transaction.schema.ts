@@ -34,7 +34,7 @@ export class TransactionEntitySchema {
   currency: string;
 
   @Prop({
-    enum: Object.values(TransactionStatus),
+    enum: TransactionStatus,
     required: true,
     default: TransactionStatus.PENDING,
     index: true

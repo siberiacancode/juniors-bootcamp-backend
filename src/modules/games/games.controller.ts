@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import type { User } from '@/modules/users';
 
@@ -138,7 +138,6 @@ export class GamesController {
     return this.gamesService.createGameOrder(createGameOrderDto);
   }
 
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Получить все заказы игр' })
   @ApiResponse({ type: GameOrdersResponse, status: 200 })
   @Get('/orders')
@@ -163,7 +162,6 @@ export class GamesController {
     return this.gamesService.getGamePaidOrder(getGamePaidOrderDto);
   }
 
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Получить заказ игры' })
   @ApiResponse({ type: GameOrderResponse, status: 200 })
   @Get('/orders/:orderId')

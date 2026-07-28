@@ -1,5 +1,5 @@
 import { Controller, Delete, Get, Param } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CurrentUser } from '@/utils/decorators';
 import { AuthorizedOnly } from '@/utils/guards';
@@ -9,11 +9,10 @@ import { CardsService } from './cards.service';
 import { DeleteCardResponse, GetCardsResponse } from './responses';
 
 @ApiTags('💳 cards')
-@Controller('users')
+@Controller('cards')
 export class CardsController {
   constructor(private readonly cardsService: CardsService) {}
 
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Получить список сохраненных карт пользователя' })
   @ApiResponse({
     type: GetCardsResponse,
@@ -26,7 +25,6 @@ export class CardsController {
     return this.cardsService.getCards(user.phone);
   }
 
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Удалить сохраненную карту пользователя' })
   @ApiResponse({
     type: DeleteCardResponse,
