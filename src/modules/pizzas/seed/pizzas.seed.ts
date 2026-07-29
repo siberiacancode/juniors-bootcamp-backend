@@ -32,7 +32,7 @@ const MILKSHAKE_SIZES = [
 export const PIZZAS: PizzaEntitySchema[] = [
   {
     category: PizzaCategory.PIZZA,
-    name: 'ШИФТ Суприм',
+    name: 'Джуни пицца',
     ingredients: [
       {
         type: PizzaIngredientType.MOZZARELLA,
@@ -58,7 +58,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
       }
     ],
     description:
-      'Шифт пицца с пепперони, колбасой, зеленым перцем, луком, оливками и шампиньонами.',
+      'Джуни пицца с пепперони, колбасой, зеленым перцем, луком, оливками и шампиньонами.',
     sizes: PIZZA_SIZES(499, 799, 1149),
     options: CRUST_OPTIONS,
     calories: 320,
@@ -71,7 +71,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: true,
-    img: '/static/images/pizza/1.webp'
+    img: '/static/images/pizza/dzhuni_picca.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -101,7 +101,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/2.webp'
+    img: '/static/images/pizza/margarita.png'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -137,7 +137,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: true,
     isHit: false,
-    img: '/static/images/pizza/3.webp'
+    img: '/static/images/pizza/chetyre_syra.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -173,7 +173,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/4.webp'
+    img: '/static/images/pizza/gavayskaya.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -204,7 +204,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/5.webp'
+    img: '/static/images/pizza/pepperoni.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -245,7 +245,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/6.webp'
+    img: '/static/images/pizza/vegetarianskaya.png'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -281,7 +281,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/7.webp'
+    img: '/static/images/pizza/myasnaya.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -320,7 +320,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/8.webp'
+    img: '/static/images/pizza/meksikanskaya.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -356,7 +356,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/9.webp'
+    img: '/static/images/pizza/kalcone.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -393,7 +393,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/10.webp'
+    img: '/static/images/pizza/myasoed.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -424,7 +424,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/11.webp'
+    img: '/static/images/pizza/morskaya.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -466,7 +466,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/12.webp'
+    img: '/static/images/pizza/chetyre_syra_s_gribami.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -492,7 +492,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/13.webp'
+    img: '/static/images/pizza/marinara.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -523,7 +523,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/14.webp'
+    img: '/static/images/pizza/fruktovaya.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -559,7 +559,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/15.webp'
+    img: '/static/images/pizza/barbekyu_chiken.png'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -590,7 +590,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/16.webp'
+    img: '/static/images/pizza/filadelfiya.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -632,7 +632,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/17.webp'
+    img: '/static/images/pizza/pikantnaya_meksikanskaya.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -668,7 +668,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/18.webp'
+    img: '/static/images/pizza/karbonara.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -706,7 +706,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/19.webp'
+    img: '/static/images/pizza/grecheskaya.webp'
   },
   {
     category: PizzaCategory.PIZZA,
@@ -742,7 +742,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/pizza/20.webp'
+    img: '/static/images/pizza/shpinatnaya.webp'
   },
 
   {
@@ -762,7 +762,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: false,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/breakfast/hashbrowns.webp'
+    img: '/static/images/breakfast/hashbrauny.png'
   },
   {
     category: PizzaCategory.BREAKFAST,
@@ -788,7 +788,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: true,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/breakfast/omelette_ham.webp'
+    img: '/static/images/breakfast/omlet_s_vetchinoy_i_gribami.png'
   },
   {
     category: PizzaCategory.WINGS,
@@ -807,7 +807,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: true,
     isNovelty: false,
     isHit: true,
-    img: '/static/images/wings/spicy.webp'
+    img: '/static/images/wings/ostrye_krylyshki.png'
   },
   {
     category: PizzaCategory.WINGS,
@@ -826,7 +826,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: true,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/wings/original.webp'
+    img: '/static/images/wings/originalnye_krylyshki.png'
   },
   {
     category: PizzaCategory.MILKSHAKE,
@@ -845,7 +845,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: true,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/milkshake/vanilla.webp'
+    img: '/static/images/milkshake/milksheyk_vanil.png'
   },
   {
     category: PizzaCategory.MILKSHAKE,
@@ -864,7 +864,7 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: true,
     isNovelty: true,
     isHit: false,
-    img: '/static/images/milkshake/strawberry.webp'
+    img: '/static/images/milkshake/milksheyk_klubnika.png'
   },
   {
     category: PizzaCategory.MILKSHAKE,
@@ -883,6 +883,6 @@ export const PIZZAS: PizzaEntitySchema[] = [
     isGlutenFree: true,
     isNovelty: false,
     isHit: false,
-    img: '/static/images/milkshake/chocolate.webp'
+    img: '/static/images/milkshake/milksheyk_shokolad.png'
   }
 ];
