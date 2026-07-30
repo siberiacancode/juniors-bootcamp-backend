@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         GITHUB_TOKEN    = credentials('github-container')
-        COOLIFY_WEBHOOK = credentials('coolify-juniors-backend-webhook') 
+        COOLIFY_WEBHOOK = credentials('coolify-webhook') 
         COOLIFY_TOKEN   = credentials('coolify-api-token')  
 
         IMAGE_NAME    = 'siberiacancode/juniors-bootcamp-backend'
