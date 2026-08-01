@@ -95,8 +95,10 @@ export class GameOrder {
   status: GameOrderStatus;
 
   @ApiProperty({
+    type: String,
     description: 'Сгенерированный игровой ключ (выдаётся после оплаты)',
     example: 'XXXX-YYYY-ZZZZ',
+    nullable: true,
     required: false
   })
   @Field(() => String, { nullable: true })
