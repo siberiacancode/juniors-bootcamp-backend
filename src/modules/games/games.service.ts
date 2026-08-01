@@ -256,6 +256,8 @@ export class GamesService extends BaseService<GameEntitySchema> {
     const order = await this.gameOrderService.create({
       person: createGameOrderDto.person,
       gameSlug: game.slug,
+      gameName: game.name,
+      gameImage: game.image,
       deliveryType: priceVariant.deliveryType,
       edition: priceVariant.edition,
       price: priceVariant.price,

@@ -21,6 +21,12 @@ export class GameOrderEntitySchema {
   @Prop({ required: true, index: true })
   gameSlug: string;
 
+  @Prop({ required: true })
+  gameName: string;
+
+  @Prop({ required: true })
+  gameImage: string;
+
   @Prop({ enum: Object.values(GameRegion), required: true })
   region: GameRegion;
 

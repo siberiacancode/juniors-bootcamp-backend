@@ -48,6 +48,17 @@ export class GameOrder {
   @Field(() => String)
   gameSlug: string;
 
+  @ApiProperty({ description: 'Название игры', example: 'Battlefield 2042' })
+  @Field(() => String)
+  gameName: string;
+
+  @ApiProperty({
+    description: 'Изображение игры',
+    example: '/games/battlefield-2042/cover.webp'
+  })
+  @Field(() => String)
+  gameImage: string;
+
   @ApiProperty({
     description: 'Регион',
     example: GameRegion.EUROPE,
